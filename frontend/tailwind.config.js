@@ -14,6 +14,15 @@ export default {
         "lg" : "1024px",
         "xl" : "1280px",
         "2xl" : "1536px"
+      },
+      colors : {
+        "primary" : "#5955B3",
+        "secondary" : "#FF5B8F",
+        "tertiary"  : "#BC6FF1",
+        "skyblue" : "#AAC4FF",
+        "honey" : "#FFD369",
+        "grass" : "#9DC08B",
+        "rustic" : "#E57853"
       }
     },
   },
