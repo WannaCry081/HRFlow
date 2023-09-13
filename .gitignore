@@ -1,0 +1,84 @@
+# .gitignore for ASP.NET WebAPI Core and React.js
+
+# Visual Studio Code files
+.vscode/
+
+# Node.js dependencies
+node_modules/
+
+# Compiled JavaScript files and TypeScript build output
+/dist/
+/out/
+/build/
+
+# ASP.NET Core build output
+**/bin/
+**/obj/
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+ScaffoldingReadMe.htm
+
+# User-specific Visual Studio files
+*.suo
+*.user
+*.sln.docstates
+
+# Windows image file caches
+Thumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# VS Code folders
+.vscode/
+
+# Mac folders
+.DS_Store
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# JetBrains Rider
+.idea/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# Windows image file caches
+Thumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# VS Code folders
+.vscode/
+.vs/
