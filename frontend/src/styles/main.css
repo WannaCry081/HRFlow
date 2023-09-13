@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@font-face {
+    font-family: "poppins";
+    src: url("../assets/fonts/Poppins.ttf");
+}
+
+@font-face {
+    font-family: "lato";
+    src: url("../assets/fonts/Lato.ttf");
+}
+
+@font-face {
+    font-family: "oswald";
+    src: url("../assets/fonts/Oswald.ttf");
+}
