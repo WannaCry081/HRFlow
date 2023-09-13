@@ -7,9 +7,9 @@ export default {
   darkMode : "class",
   theme: {
     fontFamily : {
-      oswald : ["oswald"],
-      lato : ["lato"],
-      poppins : ["poppins"]
+      oswald : ["oswald", "sans"],
+      lato : ["lato", "sans"],
+      poppins : ["poppins", "sans"]
     },
     extend: {
       screens : {
@@ -21,13 +21,35 @@ export default {
         "2xl" : "1536px"
       },
       colors : {
-        "primary" : "#5955B3",
-        "secondary" : "#FF5B8F",
-        "tertiary"  : "#BC6FF1",
-        "skyblue" : "#AAC4FF",
-        "honey" : "#FFD369",
-        "grass" : "#9DC08B",
-        "rustic" : "#E57853"
+        "primary" : {
+          "dark" : "#6E69D8",
+          "light" : "#5955B3"
+        },
+        "secondary" : {
+          "dark" : "#FF719E",
+          "light" : "#FF5B8F"
+        },
+        "tertiary"  : {
+          "dark" : "#CF89FF",
+          "light" : "#BC6FF1"
+        },
+        "skyblue" : {
+          "dark" : "#94D6FF",
+          "light" : "#AAC4FF"
+        },
+        "honey" : {
+          "dark" : "#FFE19A",
+          "light" : "#FFD369"
+        },
+        "grass" : {
+          "dark" : "#BEE0AC",
+          "light" : "#9DC08B"
+        },
+        "rustic" : {
+          "dark" : "#F29879",
+          "light" : "#E57853"
+        },
+        "jetblack" : "#20262E"
       }
     },
   },
