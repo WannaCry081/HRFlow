@@ -6,6 +6,11 @@ export default {
   ],
   darkMode : "class",
   theme: {
+    fontFamily : {
+      oswald : ["oswald"],
+      lato : ["lato"],
+      poppins : ["poppins"]
+    },
     extend: {
       screens : {
         "xs" : "360px",
