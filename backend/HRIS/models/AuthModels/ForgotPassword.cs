@@ -1,4 +1,4 @@
-﻿namespace HRIS.Models
+﻿namespace HRIS.Models.AuthModels
 {
     public class ForgotPassword
     {

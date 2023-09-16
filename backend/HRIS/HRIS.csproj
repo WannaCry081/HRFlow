@@ -19,9 +19,9 @@
 
   <ItemGroup>
     <Folder Include="Context\" />
-    <Folder Include="Models\" />
     <Folder Include="Dtos\" />
     <Folder Include="Mappings\" />
+    <Folder Include="Models\AuthModels\" />
     <Folder Include="Utils\" />
     <Folder Include="Repositories\" />
     <Folder Include="Services\" />
