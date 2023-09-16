@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HRIS.Services.AuthService;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HRIS.Controllers
 {
@@ -6,6 +7,13 @@ namespace HRIS.Controllers
     [Route("/api/auth")]
     public class AuthController : ControllerBase
     {
+        private readonly IAuthService _services;
+
+        public AuthController(IAuthService services) 
+        {
+            _services = services;
+        }
+
         [HttpPost]
         [Route("/register")]
         public IActionResult Register()
