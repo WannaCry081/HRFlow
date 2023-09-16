@@ -1,4 +1,5 @@
-﻿using HRIS.Services.AuthService;
+﻿using HRIS.Dtos;
+using HRIS.Services.AuthService;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HRIS.Controllers
@@ -30,9 +31,24 @@ namespace HRIS.Controllers
 
         [HttpPost]
         [Route("/forgot-password")]
-        public IActionResult ForgotPassword()
+        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDto request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                //DataContext with SQL
+                //if (user == null)
+                //{
+                //    return BadRequest("Invalid token.");
+                //}
+
+                var response = await _services.SendEmail(request);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return Problem("An error occured while attempting to verify the user.");
+            }
+
         }
     }
 }
