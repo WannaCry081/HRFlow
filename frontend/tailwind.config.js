@@ -49,6 +49,15 @@ export default {
           "dark" : "#F29879",
           "light" : "#E57853"
         },
+        "pastel": {
+          "primary": "#F0EEFA",
+          "secondary": "#F9F8F8",
+          "tertiary": "#F5EAFA",
+          "skyblue": "#F3F3FF",
+          "honey": "#FFFAEF",
+          "grass": "#EFFFE7",
+          "rustic": "#FFEAE3"
+        },
         "jetblack" : "#20262E"
       }
     },
