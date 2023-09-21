@@ -1,14 +1,14 @@
-﻿using MailKit.Security;
+﻿using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.EntityFrameworkCore;
+using MailKit.Security;
+using MailKit.Net.Smtp;
 using MimeKit.Text;
 using MimeKit;
-using MailKit.Net.Smtp;
 using HRIS.Models.AuthModels;
-using System.Security.Claims;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
 using HRIS.Models;
 using HRIS.Context;
-using Microsoft.EntityFrameworkCore;
 
 namespace HRIS.Repositories.AuthRepository
 {
