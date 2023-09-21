@@ -7,20 +7,18 @@ namespace HRIS.Services.AuthService
 {
     public class AuthService : IAuthService
     {
-        private readonly IAuthRepository _repository;
         private readonly IMapper _mapper;
+        private readonly IAuthRepository _authRepository;
 
-
-        public AuthService(IAuthRepository repository, IMapper mapper)
+        public AuthService(IMapper mapper, IAuthRepository authRepository)
         {
-            _repository = repository;
-            _mapper = mapper;
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _authRepository = authRepository ?? throw new ArgumentNullException(nameof(authRepository));
         }
 
         public async Task<string> SendEmail(ForgotPasswordDto request)
         {
-            var response = await _repository.SendEmail(_mapper.Map<ForgotPassword>(request));
-
+            var response = await _authRepository.SendEmail(_mapper.Map<ForgotPassword>(request));
             return response;
         }
     }
