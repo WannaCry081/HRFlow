@@ -10,6 +10,7 @@ namespace HRIS.Mappers
         public AuthMapper() 
         {
             CreateMap<User, RegisterUserDto>();
+            CreateMap<User, LoginUserDto>();
             CreateMap<ForgotPassword, ForgotPasswordDto>()
                 .ReverseMap();
         }
