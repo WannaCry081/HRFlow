@@ -23,9 +23,9 @@ const Services = forwardRef((props, ref) => {
             />
             <div className="w-full max-w-screen-xl mx-auto">
                 <div className="pt-2 pb-8">
-                    <img src={Thunder} className="h-16" />
+                    <img src={Thunder} className="h-12" />
                     <h1 className="leading-tight text-jetblack font-lato font-extrabold  text-3xl md:text-4xl pt-2 pb-2">
-                        Convenient and optimized 
+                        Convenient and optimized HR Processes
                     </h1>
                     <p className="leading-tight text-gray-700 font-poppins text-xs">
                         HR Flow offers variety of services for the ease of use of both HR professionals and employees
