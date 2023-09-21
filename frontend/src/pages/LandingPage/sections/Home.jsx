@@ -15,7 +15,7 @@ const Home = forwardRef((props, ref) => {
                     <img
                         src={SkyblueGradient}
                         className=" absolute -z-20 bottom-[4rem] -right-20 md:-bottom-28
-                        xl:-bottom-20 xl:right-20"
+                        xl:-bottom-10 xl:right-20"
                     />
                     <img
                         src={PinkGradient}
