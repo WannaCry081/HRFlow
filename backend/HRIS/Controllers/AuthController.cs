@@ -1,6 +1,6 @@
-﻿using HRIS.Dtos;
+﻿using Microsoft.AspNetCore.Mvc;
+using HRIS.Dtos;
 using HRIS.Services.AuthService;
-using Microsoft.AspNetCore.Mvc;
 
 namespace HRIS.Controllers
 {
@@ -8,11 +8,13 @@ namespace HRIS.Controllers
     [Route("/api/auth")]
     public class AuthController : ControllerBase
     {
-        private readonly IAuthService _services;
+        private readonly ILogger<AuthController> _logger;
+        private readonly IAuthService _authService;
 
-        public AuthController(IAuthService services) 
+        public AuthController(ILogger<AuthController> logger, IAuthService authService) 
         {
-            _services = services;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _authService = authService ?? throw new ArgumentNullException(nameof(authService));
         }
 
         [HttpPost]
@@ -34,19 +36,14 @@ namespace HRIS.Controllers
         public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDto request)
         {
             try
-            {
-                //DataContext with SQL
-                //if (user == null)
-                //{
-                //    return BadRequest("Invalid token.");
-                //}
-
-                var response = await _services.SendEmail(request);
+            { 
+                var response = await _authService.SendEmail(request);
                 return Ok(response);
             }
             catch (Exception ex)
             {
-                return Problem("An error occured while attempting to verify the user.");
+                _logger.LogCritical("An error occured while attempting to verify the user.", ex);
+                return Problem("An error occurred while processing your request. Please try again later.");
             }
 
         }
