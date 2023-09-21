@@ -22,6 +22,16 @@ namespace HRIS.Repositories.AuthRepository
             _config = config ?? throw new ArgumentNullException(nameof(config));
         }
 
+        public Task<bool> RegisterUser(User request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> LoginUser(User request)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<string> SendEmail(ForgotPassword request)
         {
             //VERIFY PASSWORD (User SignUp/SignIn) SQL
