@@ -1,13 +1,12 @@
 ﻿using HRIS.Models;
-using HRIS.Dtos;
 using HRIS.Models.AuthModels;
 
 namespace HRIS.Repositories.AuthRepository
 {
     public interface IAuthRepository
     {
-        Task<bool> RegisterUser(User request);
-        Task<bool> LoginUser(User request);
+        Task<bool> AddUser(User request);
+        Task<bool> IsEmailExists(string email);
         Task<string> SendEmail(ForgotPassword request);
     }
 }
