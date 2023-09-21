@@ -16,6 +16,16 @@ namespace HRIS.Services.AuthService
             _authRepository = authRepository ?? throw new ArgumentNullException(nameof(authRepository));
         }
 
+        public Task<string> LoginUser(LoginUserDto request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<string> RegisterUser(RegisterUserDto request)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<string> SendEmail(ForgotPasswordDto request)
         {
             var response = await _authRepository.SendEmail(_mapper.Map<ForgotPassword>(request));
