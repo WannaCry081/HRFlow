@@ -1,15 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using HRIS.Models;
 
 namespace HRIS.Context
 {
     public class DataContext : DbContext
     {
-        public DataContext(DbContextOptions options) : base(options)
-        {
-            
-        }
+        public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
-        //USER table
-        // public DbSet<User> Users { get; set; }
+        public DbSet<User> Users => Set<User>();
     }
 }
