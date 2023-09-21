@@ -25,7 +25,8 @@ namespace HRIS.Repositories.AuthRepository
 
         public async Task<bool> AddUser(User request)
         {
-            throw new NotImplementedException();    
+            _context.Users.Add(request);
+            return 0 < await _context.SaveChangesAsync();
         }
 
         public async Task<bool> IsEmailExists(string email)
