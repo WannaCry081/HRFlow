@@ -35,6 +35,12 @@ namespace HRIS.Repositories.AuthRepository
                 c => c.CompanyEmail.Equals(email)).AnyAsync();
         }
 
+        public async Task<User?> GetUserByEmail(string email)
+        {
+            return await _context.Users.Where(
+                c => c.CompanyEmail.Equals(email)).FirstOrDefaultAsync();
+        }
+
         public async Task<string> SendEmail(ForgotPassword request)
         {
             //VERIFY PASSWORD (User SignUp/SignIn) SQL
