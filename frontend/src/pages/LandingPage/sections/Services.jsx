@@ -7,15 +7,25 @@ import Megaphone from "../../../assets/svg/icons/Megaphone.svg";
 import Person from "../../../assets/svg/icons/Person.svg";
 import Thunder from "../../../assets/svg/icons/Thunder.svg";
 import FeatureCard from "../components/FeatureCard";
+import PurpleGradient from "../../../assets/svg/Services_purple.svg";
+import PinkGradient from "../../../assets/svg/Services_pink.svg";
 
 const Services = forwardRef((props, ref) => {
     return (
-        <section ref={ref} className="flex flex-col py-24 xl:py-22 px-4 justify-center">
+        <section ref={ref} className="relative flex flex-col py-24 xl:py-22 px-4 justify-center">
+            <img
+                src={PurpleGradient}
+                className="absolute -z-10 top-24 left-16 md:-right-10 md:top-32 xl:left-60 xl:top-28"
+            />
+            <img
+                src={PinkGradient}
+                className="absolute -z-20 top-10 -left-28 md:top-0 md:-left-32 xl:-left-10 xl:-top-6"
+            />
             <div className="w-full max-w-screen-xl mx-auto">
-                <div className="pt-2 pb-6">
-                    <img src={Thunder} className="h-10" />
-                    <h1 className="leading-tight text-jetblack font-lato font-bold text-3xl pt-2 pb-2">
-                        Convenient and optimized HR processes
+                <div className="pt-2 pb-8">
+                    <img src={Thunder} className="h-16" />
+                    <h1 className="leading-tight text-jetblack font-lato font-extrabold  text-3xl md:text-4xl pt-2 pb-2">
+                        Convenient and optimized 
                     </h1>
                     <p className="leading-tight text-gray-700 font-poppins text-xs">
                         HR Flow offers variety of services for the ease of use of both HR professionals and employees
