@@ -19,14 +19,14 @@ namespace HRIS.Controllers
 
         [HttpPost]
         [Route("/register")]
-        public IActionResult Register()
+        public IActionResult RegisterUser()
         {
             throw new NotImplementedException();
         }
 
         [HttpPost]
         [Route("/login")]
-        public IActionResult Login()
+        public IActionResult LoginUser()
         {
             throw new NotImplementedException();
         }
