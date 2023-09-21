@@ -6,19 +6,20 @@ using HRIS.Models.AuthModels;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-//using HRIS.Context;
+using HRIS.Models;
+using HRIS.Context;
 
 namespace HRIS.Repositories.AuthRepository
 {
     public class AuthRepository : IAuthRepository
     {
+        private readonly DataContext _context;
         private readonly IConfiguration _config;
-        //private readonly DataContext _context;
 
-        public AuthRepository(IConfiguration config) //DataContext context
+        public AuthRepository(DataContext context, IConfiguration config)
         {
-            _config = config;
-            //_context = context;
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _config = config ?? throw new ArgumentNullException(nameof(config));
         }
 
         public async Task<string> SendEmail(ForgotPassword request)
@@ -97,6 +98,5 @@ namespace HRIS.Repositories.AuthRepository
             return emailText;
 
         }
-
     }
 }
