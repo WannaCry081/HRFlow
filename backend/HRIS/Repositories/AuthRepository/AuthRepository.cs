@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using HRIS.Models;
 using HRIS.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace HRIS.Repositories.AuthRepository
 {
@@ -22,14 +23,15 @@ namespace HRIS.Repositories.AuthRepository
             _config = config ?? throw new ArgumentNullException(nameof(config));
         }
 
-        public Task<bool> RegisterUser(User request)
+        public async Task<bool> AddUser(User request)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException();    
         }
 
-        public Task<bool> LoginUser(User request)
+        public async Task<bool> IsEmailExists(string email)
         {
-            throw new NotImplementedException();
+            return await _context.Users.Where(
+                c => c.CompanyEmail.Equals(email)).AnyAsync();
         }
 
         public async Task<string> SendEmail(ForgotPassword request)
