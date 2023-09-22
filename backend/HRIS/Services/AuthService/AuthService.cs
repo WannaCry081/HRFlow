@@ -23,7 +23,20 @@ namespace HRIS.Services.AuthService
 
         public async Task<string> RegisterUser(RegisterUserDto request)
         {
-           throw new NotImplementedException();
+            var isEmailExists = await _authRepository.IsEmailExists(request.Email);
+            if (!isEmailExists)
+            {
+                throw new UserExistsException("User is already recorded to the database.");
+            }
+
+            var newUser = _mapper.Map<User>(request);
+            var isUserAdded = await _authRepository.AddUser(newUser);
+            if (!isUserAdded)
+            {
+                throw new Exception("Failed to save user information to database.");
+            }
+
+            return CodeGenerator.Token(_configuration, request.Email, DateTime.Now.AddDays(1));
         }
 
         public async Task<string> LoginUser(LoginUserDto request)
