@@ -2,6 +2,7 @@
 using HRIS.Dtos;
 using HRIS.Services.AuthService;
 using HRIS.Exceptions;
+using Microsoft.Extensions.FileProviders.Physical;
 
 namespace HRIS.Controllers
 {
@@ -20,9 +21,23 @@ namespace HRIS.Controllers
 
         [HttpPost]
         [Route("/register")]
-        public IActionResult RegisterUser([FromBody] RegisterUserDto request)
+        public async Task<IActionResult> RegisterUser([FromBody] RegisterUserDto request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var response = await _authService.RegisterUser(request);
+                return Ok(response);
+            }
+            catch (UserExistsException ex)
+            {
+                _logger.LogError("An error occurred while attempting to register user to database.", ex);
+                return BadRequest("An error occurred while processing ");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("An error occurred while attempting to register user. ", ex);
+                return Problem("An error occurred while processing login request. Please try again later.");
+            }
         }
 
         [HttpPost]
@@ -38,6 +53,11 @@ namespace HRIS.Controllers
             {
                 _logger.LogError("An error occurred while attempting to get user information.", ex);
                 return NotFound("An error occurred while getting user.");
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                _logger.LogWarning("An error occurred while attempting to force user credential.", ex);
+                return Unauthorized("An error occurred while logging in.");
             }
             catch (Exception ex)
             {
