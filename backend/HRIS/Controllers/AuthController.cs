@@ -18,8 +18,8 @@ namespace HRIS.Controllers
             _authService = authService ?? throw new ArgumentNullException(nameof(authService));
         }
 
-        [HttpPost]
-        [Route("/register")]
+        [HttpPost("register")]
+        [Consumes("application/json")]
         public async Task<IActionResult> RegisterUser([FromBody] RegisterUserDto request)
         {
             try
@@ -39,8 +39,8 @@ namespace HRIS.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("/login")]
+        [HttpPost("login")]
+        [Consumes("application/json")]
         public async Task<IActionResult> LoginUser([FromBody] LoginUserDto request)
         {
             try
@@ -65,14 +65,14 @@ namespace HRIS.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("/forgot-password")]
+        [HttpPost("forgot-password")]
+        [Consumes("application/json")]
         public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDto request)
         {
             try
             {
-                await _authService.ForgotPassword(request);
-                return NoContent();
+                var response = await _authService.ForgotPassword(request);
+                return Ok(response);
             }
             catch (UserNotFoundException ex)
             {

@@ -23,7 +23,7 @@ namespace HRIS.Services.AuthService
         public async Task<string> RegisterUser(RegisterUserDto request)
         {
             var isEmailExists = await _authRepository.IsEmailExists(request.Email);
-            if (!isEmailExists)
+            if (isEmailExists)
             {
                 throw new UserExistsException("User is already recorded to the database.");
             }
@@ -56,7 +56,7 @@ namespace HRIS.Services.AuthService
             return CodeGenerator.Token(_configuration, request.Email, DateTime.Now.AddDays(1));
         }
 
-        public async Task ForgotPassword(ForgotPasswordDto request)
+        public async Task<string> ForgotPassword(ForgotPasswordDto request)
         {
             var isEmailExists = await _authRepository.IsEmailExists(request.Email);
             if (!isEmailExists)
@@ -64,7 +64,7 @@ namespace HRIS.Services.AuthService
                 throw new UserNotFoundException("User is not recorded in the database.");
             }
 
-            SMTP.SendEmail(_configuration, request.Email);
+            return await SMTP.SendEmail(_configuration, request.Email);
         }
     }
 }

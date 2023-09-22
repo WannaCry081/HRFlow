@@ -10,7 +10,7 @@
 
         public static bool Verify(string passwordHash, string password)
         {
-            return BCrypt.Net.BCrypt.Verify(passwordHash, password);
+            return BCrypt.Net.BCrypt.Verify(password, passwordHash);
         }
     }
 }

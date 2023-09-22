@@ -7,7 +7,7 @@ namespace HRIS.Utils
 {
     public class SMTP
     {
-        public static void SendEmail(IConfiguration configuration, string email)
+        public async static Task<string> SendEmail(IConfiguration configuration, string email)
         {
             var mail = new MimeMessage();
 
@@ -17,7 +17,7 @@ namespace HRIS.Utils
             mail.Body = new TextPart(TextFormat.Html) { Text = EmailContent() };
 
             using var smtp = new SmtpClient();
-
+            
             smtp.Connect(
             configuration.GetSection("Sender:EmailHost").Value, 587,
             SecureSocketOptions.StartTls);
@@ -26,9 +26,10 @@ namespace HRIS.Utils
                 configuration.GetSection("Sender:EmailName").Value,
                 configuration.GetSection("Sender:EmailPassword").Value);
 
-            smtp.Send(mail);
+            var send = await smtp.SendAsync(mail);
 
             smtp.Disconnect(true);
+            return send;
         }
 
         private static string EmailContent()
