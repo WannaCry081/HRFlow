@@ -21,6 +21,12 @@ namespace HRIS.Dtos
         [PasswordPropertyText]
         [Required(ErrorMessage = "Password is required.")]
         [StringLength(150, ErrorMessage = "Password must be between {2} and {1} characters long.", MinimumLength = 8)]
-        public string PasswordSalt { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+
+        [PasswordPropertyText]
+        [Compare("Password", ErrorMessage = "Confirm Password does not match with your password.")]
+        [Required(ErrorMessage = "Confirm Password is required.")]
+        [StringLength(150, ErrorMessage = "Password must be between {2} and {1} characters long.", MinimumLength = 8)]
+        public string ConfirmPassword { get; set; } = string.Empty;
     }
 }
