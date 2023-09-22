@@ -17,7 +17,7 @@ const AboutItem = ({ icon, title, body }) => {
                 <h1 className="font-lato font-extrabold text-jetblack text-lg">
                     { title }
                 </h1>
-                <p className="text-xs leading-normal font-poppins">
+                <p className="text-xs leading-normal font-poppins text-jetblack">
                     { body }
                 </p>
             </div>
@@ -37,7 +37,7 @@ const About = forwardRef((props, ref) => {
                     <div className="text-4xl font-extrabold font-lato text-jetblack">
                         About HR Flow
                     </div>
-                    <p className="py-4 font-poppins">
+                    <p className="py-4 font-poppin text-jetblack">
                         Welcome to HR Flow, where HR management is redefined. Our web application serves as the central hub for all your HR needs, streamlining processes and simplifying workforce management.
                     </p>
                     <div className="w-full flex flex-col gap-4 py-4">
@@ -49,7 +49,7 @@ const About = forwardRef((props, ref) => {
                         <AboutItem 
                             icon={Crown}
                             title="Your Trusted HR Partner"
-                            body="We're dedicated to simplifying HR operations, boosting accuracy, and enhancing productivity. HR Hub Connect is your ally in efficient HR management."
+                            body="We're dedicated to simplifying HR operations, boosting accuracy, and enhancing productivity. HR Flow is your ally in efficient HR management."
                         />
                     </div>
                 </div>

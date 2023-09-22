@@ -27,7 +27,7 @@ const Navbar = ( props ) => {
                             <div>
                                 <Link to="/"
                                     onClick={() => menuItemClickHandler("homeRef")}
-                                    className="flex gap-1 font-bold text-gray-700 items-center "
+                                    className="flex gap-1 font-bold text-gray-700 items-center"
                                 >
                                     <img
                                         src={HRFlowLogo_Dark}
@@ -39,18 +39,18 @@ const Navbar = ( props ) => {
                         </div>
                         {/* secondary */}
                         <div className="flex gap-6">
-                            <div className="hidden xs:flex items-center gap-10 text-gray-500 ">
+                            <div className="hidden xs:flex items-center gap-10 text-jetblack">
                                 <div className="hidden lg:flex items-center gap-10 font-semibold">
-                                    <p  onClick={() => menuItemClickHandler("homeRef")} className="hover:text-jetblack">
+                                    <p onClick={() => menuItemClickHandler("homeRef")} className="hover:text-primary-dark">
                                         Home
                                     </p>
-                                    <p onClick={() => menuItemClickHandler("servicesRef")} className="hover:text-jetblack">
+                                    <p onClick={() => menuItemClickHandler("servicesRef")} className="hover:text-primary-dark">
                                         Services
                                     </p>
-                                    <p onClick={() => menuItemClickHandler("aboutRef")}  className="hover:text-jetblack">
+                                    <p onClick={() => menuItemClickHandler("aboutRef")} className="hover:text-primary-dark">
                                         About
                                     </p>
-                                    <p  onClick={() => menuItemClickHandler("contactRef")} className="hover:text-jetblack">
+                                    <p onClick={() => menuItemClickHandler("contactRef")} className="hover:text-primary-dark">
                                         Contact Us
                                     </p>
                                     <button className="bg-primary-light px-8 py-2 rounded-full text-white">
@@ -77,10 +77,10 @@ const Navbar = ( props ) => {
                 {/* mobile navigation */}
                 <div
                     className={`fixed z-40 w-5/6 bg-pastel-primary shadow-lg text-jetblack font-semibold rounded-3xl overflow-hidden flex flex-col px-6 lg:hidden gap-12 origin-top duration-1200 ${!toggleMenu ? "h-0" : "h-auto"
-                        } left-1/2 transform -translate-x-1/2 mt-4`}
+                        } left-1/2 transform -translate-x-1/2 mt-2`}
                 >
                     <div className="py-8">
-                        <div className="text-gray-500 flex flex-col gap-8 w-full tracking-wider">
+                        <div className="text-gray-700 flex flex-col gap-8 w-full tracking-wider">
                             <p 
                                 onClick={() => menuItemClickHandler("homeRef")} 
                                 className="hover:text-jetblack">

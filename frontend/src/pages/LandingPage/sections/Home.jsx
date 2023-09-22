@@ -5,6 +5,12 @@ import SkyblueGradient from "../../../assets/svg/Home_skyblue.svg";
 import PinkGradient from "../../../assets/svg/Home_pink.svg";
 
 const Home = forwardRef((props, ref) => {
+
+    const { sectionRefs } = props;
+    const menuItemClickHandler = (refName) => {
+        sectionRefs[refName].current.scrollIntoView({ behavior: "smooth" });
+    }
+
     return (
         <>
             <section ref={ref} className="h-full flex justify-center relative">
@@ -42,7 +48,9 @@ const Home = forwardRef((props, ref) => {
                                 <button className="bg-primary-light text-xs md:text-base px-4 md:px-8 py-2.5 text-white font-semibold font-poppins rounded-lg shadow-lg">
                                     Get Started
                                 </button>
-                                <button className="bg-pastel-primary px-4 md:px-8 py-2.5 text-sm md:text-base text-primary-light font-semibold font-poppins rounded-lg shadow-lg">
+                                <button 
+                                    onClick={() => menuItemClickHandler("servicesRef")}
+                                    className="bg-pastel-primary px-4 md:px-8 py-2.5 text-sm md:text-base text-primary-light font-semibold font-poppins rounded-lg  shadow-lg">
                                     Learn More
                                 </button>
                             </div>

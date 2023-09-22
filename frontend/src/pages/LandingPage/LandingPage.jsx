@@ -26,7 +26,7 @@ const LandingPage = () => {
                 />
             </div>
             <div className= "h-screen">
-                <Home ref={sectionRefs.homeRef} />
+                <Home ref={sectionRefs.homeRef} scrollIntoView={menuItemClickHandler} sectionRefs={sectionRefs}/>
                 <Services ref={sectionRefs.servicesRef} />
                 <About ref={sectionRefs.aboutRef} />
                 <Contact ref={sectionRefs.contactRef} />
