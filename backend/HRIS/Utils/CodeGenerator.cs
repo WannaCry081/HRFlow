@@ -19,5 +19,13 @@
 
             return digits;
         }
+
+        public string AlphaNumeric(int length)
+        {
+            string alphaNumeric = new string(Enumerable.Repeat(_chars + _digits, length)
+              .Select(s => s[_random.Next(s.Length)]).ToArray());
+
+            return alphaNumeric;
+        }
     }
 }
