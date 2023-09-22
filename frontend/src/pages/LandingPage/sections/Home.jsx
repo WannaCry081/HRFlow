@@ -10,7 +10,7 @@ const Home = forwardRef((props, ref) => {
             <section ref={ref} className="h-full flex justify-center relative">
                     <img
                         src={PurpleGradient}
-                        className="absolute -z-30 top-[7rem] -right-20 md:top-10 xl:top-5 xl:right-0"
+                        className="absolute -z-30 top-[7rem] -right-20 md:top-10 xl:top-8 xl:right-0"
                     />
                     <img
                         src={SkyblueGradient}
@@ -39,10 +39,10 @@ const Home = forwardRef((props, ref) => {
                                 Streamline HR tasks, from recruitment to payroll, with our all-in-one HRIS.
                             </h2>
                             <div className="flex gap-3 mt-2 justify-center lg:justify-start">
-                                <button className="bg-primary-light text-sm md:text-base px-8 py-2.5 text-white font-semibold font-poppins rounded-lg shadow-lg">
+                                <button className="bg-primary-light text-xs md:text-base px-4 md:px-8 py-2.5 text-white font-semibold font-poppins rounded-lg shadow-lg">
                                     Get Started
                                 </button>
-                                <button className="bg-pastel-primary px-8 py-2.5 text-sm md:text-base text-primary-light font-semibold font-poppins rounded-lg shadow-lg">
+                                <button className="bg-pastel-primary px-4 md:px-8 py-2.5 text-sm md:text-base text-primary-light font-semibold font-poppins rounded-lg shadow-lg">
                                     Learn More
                                 </button>
                             </div>
