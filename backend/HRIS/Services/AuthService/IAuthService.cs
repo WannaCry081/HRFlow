@@ -6,6 +6,6 @@ namespace HRIS.Services.AuthService
     {
         Task<string> RegisterUser(RegisterUserDto request);
         Task<string> LoginUser(LoginUserDto request);
-        Task<string> SendEmail(ForgotPasswordDto request);
+        Task ForgotPassword(ForgotPasswordDto request);
     }
 }
