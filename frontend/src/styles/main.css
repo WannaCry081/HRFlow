@@ -7,3 +7,11 @@
 @tailwind utilities;
 
 
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #dfdfdf;
+    border-radius: 3px;
+}
