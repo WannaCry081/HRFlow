@@ -1,7 +1,7 @@
 ﻿using MailKit.Net.Smtp;
 using MailKit.Security;
-using MimeKit.Text;
 using MimeKit;
+using MimeKit.Text;
 
 namespace HRIS.Utils
 {
@@ -16,20 +16,19 @@ namespace HRIS.Utils
             mail.Subject = configuration.GetSection("Sender:SubjectText").Value;
             mail.Body = new TextPart(TextFormat.Html) { Text = EmailContent() };
 
-            using (var smtp = new SmtpClient())
-            {
-                smtp.Connect(
-                configuration.GetSection("Sender:EmailHost").Value, 587,
-                SecureSocketOptions.StartTls);
+            using var smtp = new SmtpClient();
 
-                smtp.Authenticate(
-                    configuration.GetSection("Sender:EmailName").Value,
-                    configuration.GetSection("Sender:EmailPassword").Value);
+            smtp.Connect(
+            configuration.GetSection("Sender:EmailHost").Value, 587,
+            SecureSocketOptions.StartTls);
 
-                smtp.Send(mail);
+            smtp.Authenticate(
+                configuration.GetSection("Sender:EmailName").Value,
+                configuration.GetSection("Sender:EmailPassword").Value);
 
-                smtp.Disconnect(true);
-            }
+            smtp.Send(mail);
+
+            smtp.Disconnect(true);
         }
 
         private static string EmailContent()

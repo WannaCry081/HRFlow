@@ -8,7 +8,7 @@ namespace HRIS.Repositories.AuthRepository
     {
         private readonly DataContext _context;
 
-        public AuthRepository(DataContext context, IConfiguration config)
+        public AuthRepository(DataContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }

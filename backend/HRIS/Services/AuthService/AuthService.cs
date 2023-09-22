@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using HRIS.Repositories.AuthRepository;
 using HRIS.Dtos;
-using HRIS.Models;
 using HRIS.Exceptions;
+using HRIS.Models;
+using HRIS.Repositories.AuthRepository;
 using HRIS.Utils;
 
 namespace HRIS.Services.AuthService
@@ -45,11 +45,8 @@ namespace HRIS.Services.AuthService
 
         public async Task<string> LoginUser(LoginUserDto request)
         {
-            var user = await _authRepository.GetUserByEmail(request.Email);
-            if (user is null)
-            {
+            var user = await _authRepository.GetUserByEmail(request.Email) ??
                 throw new UserNotFoundException("User is not recorded in the database.");
-            }
 
             if (!Password.Verify(user.PasswordHash, request.Password))
             {

@@ -7,8 +7,8 @@ namespace HRIS.Utils
 {
     public class CodeGenerator
     {
-        private static string _chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        private static string _digits = "0123456789";
+        private readonly static string _chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private readonly static string _digits = "0123456789";
 
         public static string Digit(int length)
         {
@@ -28,7 +28,7 @@ namespace HRIS.Utils
 
         public static string Token(IConfiguration configuration, string email, DateTime expiresIn)
         {
-            List<Claim> claims = new List<Claim>()
+            List<Claim> claims = new()
             {
                 new Claim(ClaimTypes.Email, email)
             };
@@ -37,9 +37,9 @@ namespace HRIS.Utils
                 configuration.GetSection("AppSettings:Token").Value!));
             var credential = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
             var token = new JwtSecurityToken(
-                claims : claims,
-                expires : expiresIn,
-                signingCredentials : credential
+                claims: claims,
+                expires: expiresIn,
+                signingCredentials: credential
             );
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 
