@@ -8,6 +8,9 @@
             passwordHash = BCrypt.Net.BCrypt.HashPassword(password, passwordSalt);
         }
 
-        
+        public static bool Verify(string passwordHash, string password)
+        {
+            return BCrypt.Net.BCrypt.Verify(passwordHash, password);
+        }
     }
 }
