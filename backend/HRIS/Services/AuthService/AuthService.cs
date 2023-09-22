@@ -5,6 +5,7 @@ using HRIS.Models;
 using HRIS.Models.AuthModels;
 using HRIS.Exceptions;
 using HRIS.Utils;
+using Microsoft.AspNetCore.Identity;
 
 namespace HRIS.Services.AuthService
 {
@@ -29,7 +30,12 @@ namespace HRIS.Services.AuthService
                 throw new UserExistsException("User is already recorded to the database.");
             }
 
+            Password.Encrypt(request.Password, out string passwordHash, out string passwordSalt);
+
             var newUser = _mapper.Map<User>(request);
+            newUser.PasswordHash = passwordHash;
+            newUser.PasswordSalt = passwordSalt;
+
             var isUserAdded = await _authRepository.AddUser(newUser);
             if (!isUserAdded)
             {
@@ -41,7 +47,18 @@ namespace HRIS.Services.AuthService
 
         public async Task<string> LoginUser(LoginUserDto request)
         {
-           throw new NotImplementedException();
+            var user = await _authRepository.GetUserByEmail(request.Email);
+            if (user is null)
+            {
+                throw new UserNotFoundException("User is not recorded to the database.");
+            }
+
+            if (!Password.Verify(user.PasswordHash, request.Password))
+            {
+                throw new UnauthorizedAccessException("Password does not match with the user's credentials.");
+            }
+
+            return CodeGenerator.Token(_configuration, request.Email, DateTime.Now.AddDays(1));
         }
 
         public async Task<string> SendEmail(ForgotPasswordDto request)
