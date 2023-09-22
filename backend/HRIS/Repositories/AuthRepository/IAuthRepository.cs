@@ -1,5 +1,4 @@
 ﻿using HRIS.Models;
-using HRIS.Models.AuthModels;
 
 namespace HRIS.Repositories.AuthRepository
 {
@@ -8,6 +7,5 @@ namespace HRIS.Repositories.AuthRepository
         Task<bool> AddUser(User request);
         Task<bool> IsEmailExists(string email);
         Task<User?> GetUserByEmail(string email);
-        Task<string> SendEmail(ForgotPassword request);
     }
 }
