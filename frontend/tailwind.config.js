@@ -7,9 +7,9 @@ export default {
   darkMode : "class",
   theme: {
     fontFamily : {
-      oswald : ["oswald", "sans"],
-      lato : ["lato", "sans"],
-      poppins : ["poppins", "sans"]
+      oswald : ["Oswald", "sans"],
+      lato : ["Lato", "sans"],
+      poppins : ["Poppins", "sans"]
     },
     extend: {
       screens : {
@@ -48,6 +48,15 @@ export default {
         "rustic" : {
           "dark" : "#F29879",
           "light" : "#E57853"
+        },
+        "pastel": {
+          "primary": "#F0EEFA",
+          "secondary": "#F9F8F8",
+          "tertiary": "#F5EAFA",
+          "skyblue": "#F3F3FF",
+          "honey": "#FFFAEF",
+          "grass": "#EFFFE7",
+          "rustic": "#FFEAE3"
         },
         "jetblack" : "#20262E"
       }
