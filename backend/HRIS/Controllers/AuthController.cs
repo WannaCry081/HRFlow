@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using HRIS.Dtos;
-using HRIS.Services.AuthService;
+﻿using HRIS.Dtos;
 using HRIS.Exceptions;
-using Microsoft.Extensions.FileProviders.Physical;
+using HRIS.Services.AuthService;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HRIS.Controllers
 {
@@ -72,8 +71,13 @@ namespace HRIS.Controllers
         {
             try
             {
-                var response = await _authService.SendEmail(request);
-                return Ok(response);
+                await _authService.ForgotPassword(request);
+                return NoContent();
+            }
+            catch (UserNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to get user information.", ex);
+                return NotFound("An error occurred while finding user.");
             }
             catch (Exception ex)
             {
