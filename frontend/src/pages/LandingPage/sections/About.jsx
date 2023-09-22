@@ -1,13 +1,13 @@
 import React, { forwardRef } from "react";
-import PinkGradient from "../../../assets/svg/About_pink.svg";
-import HumanRocket from "../../../assets/svg/Human_rocket.svg";
-import Rocket from "../../../assets/svg/icons/Rocket.svg";
-import Crown from "../../../assets/svg/icons/Crown.svg";
+import PinkGradient from "assets/svg/About_pink.svg";
+import HumanRocket from "assets/svg/Human_rocket.svg";
+import Rocket from "assets/svg/icons/Rocket.svg";
+import Crown from "assets/svg/icons/Crown.svg";
 
 const AboutItem = ({ icon, title, body }) => {
     return (
         <div className="flex gap-3">
-            <div className="h-16 w-16 bg-pastel-tertiary border border-gray-300 rounded-xl">
+            <div className="h-16 w-16 bg-tertiary-pastel border border-gray-300 rounded-xl">
                 <img
                     src={ icon }
                     className="p-2"
@@ -27,11 +27,11 @@ const AboutItem = ({ icon, title, body }) => {
 
 const About = forwardRef((props, ref) => {
     return (
-        <section ref={ref} className="flex items-center justify-center relative py-8 px-4">
+        <section ref={ref} className="flex items-center justify-center relative pt-32 px-4">
             <div className="w-full max-w-screen-xl mx-auto flex flex-col md:flex-row items-center">
                 <img
                     src={PinkGradient}
-                    className="absolute -z-10 right-0 top-12"
+                    className="absolute -z-10 top-0 sm:-top-10 -left-20 md:-top-10 md:-left-36 xl:right-20 xl:-bottom-12"
                 />
                 <div className="w-full">
                     <div className="text-4xl font-extrabold font-lato text-jetblack">
@@ -55,7 +55,7 @@ const About = forwardRef((props, ref) => {
                 </div>
                 <img
                     src={HumanRocket}
-                    className="w-1/3 hidden xl:block"
+                    className="w-2/3 hidden xl:block"
                 />
             </div>
         </section>
