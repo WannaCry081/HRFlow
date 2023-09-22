@@ -1,11 +1,9 @@
-﻿using HRIS.Repositories.AuthRepository;
-using AutoMapper;
+﻿using AutoMapper;
+using HRIS.Repositories.AuthRepository;
 using HRIS.Dtos;
 using HRIS.Models;
-using HRIS.Models.AuthModels;
 using HRIS.Exceptions;
 using HRIS.Utils;
-using Microsoft.AspNetCore.Identity;
 
 namespace HRIS.Services.AuthService
 {
@@ -50,7 +48,7 @@ namespace HRIS.Services.AuthService
             var user = await _authRepository.GetUserByEmail(request.Email);
             if (user is null)
             {
-                throw new UserNotFoundException("User is not recorded to the database.");
+                throw new UserNotFoundException("User is not recorded in the database.");
             }
 
             if (!Password.Verify(user.PasswordHash, request.Password))
@@ -61,10 +59,15 @@ namespace HRIS.Services.AuthService
             return CodeGenerator.Token(_configuration, request.Email, DateTime.Now.AddDays(1));
         }
 
-        public async Task<string> SendEmail(ForgotPasswordDto request)
+        public async Task ForgotPassword(ForgotPasswordDto request)
         {
-            var response = await _authRepository.SendEmail(_mapper.Map<ForgotPassword>(request));
-            return response;
+            var isEmailExists = await _authRepository.IsEmailExists(request.Email);
+            if (!isEmailExists)
+            {
+                throw new UserNotFoundException("User is not recorded in the database.");
+            }
+
+            SMTP.SendEmail(_configuration, request.Email);
         }
     }
 }
