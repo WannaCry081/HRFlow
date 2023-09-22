@@ -17,19 +17,19 @@ namespace HRIS.Utils
             mail.Body = new TextPart(TextFormat.Html) { Text = EmailContent() };
 
             using var smtp = new SmtpClient();
-            
-            smtp.Connect(
-            configuration.GetSection("Sender:EmailHost").Value, 587,
-            SecureSocketOptions.StartTls);
 
-            smtp.Authenticate(
+            await smtp.ConnectAsync(
+                   configuration.GetSection("Sender:EmailHost").Value, 587,
+                   SecureSocketOptions.StartTls);
+
+            await smtp.AuthenticateAsync(
                 configuration.GetSection("Sender:EmailName").Value,
                 configuration.GetSection("Sender:EmailPassword").Value);
 
-            var send = await smtp.SendAsync(mail);
+            await smtp.SendAsync(mail);
 
-            smtp.Disconnect(true);
-            return send;
+            await smtp.DisconnectAsync(true);
+            return "Email sent successfully";
         }
 
         private static string EmailContent()
