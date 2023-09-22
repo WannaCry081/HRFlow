@@ -1,13 +1,13 @@
 import React, { forwardRef } from "react";
-import HumanTexting from "../../../assets/svg/HumanTexting.svg";
-import PurpleGradient from "../../../assets/svg/Contact_purple.svg";
+import HumanTexting from "assets/svg/HumanTexting.svg";
+import PurpleGradient from "assets/svg/Contact_purple.svg";
 
 const Contact = forwardRef((props, ref) => {
     return (
         <section ref={ref} className="h-full flex items-center justify-center py-24 xl:py-22 px-4 relative">
             <img
-                src={PurpleGradient}
-                className="absolute -z-10 top-10 -left-20 md:top-0 xl:-top-12"
+                src={PurpleGradient}    
+                className="absolute -z-10 top-10 -left-20 md:top-0 xl:-top-16"
             />
             <div className="w-full max-w-screen-xl mx-auto flex h-full">
                 <img

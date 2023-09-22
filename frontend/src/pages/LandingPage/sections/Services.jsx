@@ -1,14 +1,14 @@
 import React, { forwardRef } from "react";
-import Bell from "../../../assets/svg/icons/Bell.svg";
-import Clock from "../../../assets/svg/icons/Clock.svg";
-import Coin from "../../../assets/svg/icons/Coin.svg";
-import Folder from "../../../assets/svg/icons/Folder.svg";
-import Megaphone from "../../../assets/svg/icons/Megaphone.svg";
-import Person from "../../../assets/svg/icons/Person.svg";
-import Thunder from "../../../assets/svg/icons/Thunder.svg";
+import Bell from "assets/svg/icons/Bell.svg";
+import Clock from "assets/svg/icons/Clock.svg";
+import Coin from "assets/svg/icons/Coin.svg";
+import Folder from "assets/svg/icons/Folder.svg";
+import Megaphone from "assets/svg/icons/Megaphone.svg";
+import Person from "assets/svg/icons/Person.svg";
+import Thunder from "assets/svg/icons/Thunder.svg";
 import FeatureCard from "../components/FeatureCard";
-import PurpleGradient from "../../../assets/svg/Services_purple.svg";
-import PinkGradient from "../../../assets/svg/Services_pink.svg";
+import PurpleGradient from "assets/svg/Services_purple.svg";
+import PinkGradient from "assets/svg/Services_pink.svg";
 
 const Services = forwardRef((props, ref) => {
     return (

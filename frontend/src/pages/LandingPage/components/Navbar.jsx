@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import HRFlowLogo_Dark from "../../../assets/svg/HRFlowLogo_Light.svg";
+import HRFlowLogo_Dark from "assets/svg/HRFlowLogo_Light.svg";
 import { FiMenu } from "react-icons/fi";
 import { MdOutlineClose } from "react-icons/md";
 import { Link } from 'react-router-dom';
@@ -76,7 +76,7 @@ const Navbar = ( props ) => {
                 </div>
                 {/* mobile navigation */}
                 <div
-                    className={`fixed z-40 w-5/6 bg-pastel-primary shadow-lg text-jetblack font-semibold rounded-3xl overflow-hidden flex flex-col px-6 lg:hidden gap-12 origin-top duration-1200 ${!toggleMenu ? "h-0" : "h-auto"
+                    className={`fixed z-40 w-5/6 bg-primary-pastel shadow-lg text-jetblack font-semibold rounded-3xl overflow-hidden flex flex-col px-6 lg:hidden gap-12 origin-top duration-1200 ${!toggleMenu ? "h-0" : "h-auto"
                         } left-1/2 transform -translate-x-1/2 mt-2`}
                 >
                     <div className="py-8">

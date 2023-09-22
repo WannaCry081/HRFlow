@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react";
-import ComputerChild from "../../../assets/svg/ComputerChild.svg";
-import PurpleGradient from "../../../assets/svg/Home_purple.svg";
-import SkyblueGradient from "../../../assets/svg/Home_skyblue.svg";
-import PinkGradient from "../../../assets/svg/Home_pink.svg";
+import ComputerChild from "assets/svg/ComputerChild.svg";
+import PurpleGradient from "assets/svg/Home_purple.svg";
+import SkyblueGradient from "assets/svg/Home_skyblue.svg";
+import PinkGradient from "assets/svg/Home_pink.svg";
 
 const Home = forwardRef((props, ref) => {
 
@@ -50,7 +50,7 @@ const Home = forwardRef((props, ref) => {
                                 </button>
                                 <button 
                                     onClick={() => menuItemClickHandler("servicesRef")}
-                                    className="bg-pastel-primary px-4 md:px-8 py-2.5 text-sm md:text-base text-primary-light font-semibold font-poppins rounded-lg  shadow-lg">
+                                    className="bg-primary-pastel px-4 md:px-8 py-2.5 text-sm md:text-base text-primary-light font-semibold font-poppins rounded-lg  shadow-lg">
                                     Learn More
                                 </button>
                             </div>

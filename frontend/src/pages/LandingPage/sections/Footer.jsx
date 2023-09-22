@@ -1,5 +1,4 @@
-import HRFlowLogo_Dark from "../../../assets/svg/HRFlowLogo_Light.svg";
-
+import HRFlowLogo_Dark from "assets/svg/HRFlowLogo_Light.svg";
 
 const Footer = () => {
     return (
