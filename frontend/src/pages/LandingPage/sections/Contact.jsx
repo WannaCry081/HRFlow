@@ -7,7 +7,7 @@ const Contact = forwardRef((props, ref) => {
         <section ref={ref} className="h-full flex items-center justify-center py-24 xl:py-22 px-4 relative">
             <img
                 src={PurpleGradient}    
-                className="absolute -z-10 top-10 -left-20 md:top-0 xl:-top-12"
+                className="absolute -z-10 top-10 -left-20 md:top-0 xl:-top-16"
             />
             <div className="w-full max-w-screen-xl mx-auto flex h-full">
                 <img
