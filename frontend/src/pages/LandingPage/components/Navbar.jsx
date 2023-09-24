@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { easeOut, motion } from "framer-motion";
 import HRFlowLogo_Dark from "assets/svg/HRFlowLogo_Light.svg";
 import { FiMenu } from "react-icons/fi";
 import { MdOutlineClose } from "react-icons/md";
@@ -17,12 +18,25 @@ const Navbar = ( props ) => {
             toggleMenuHandler();
         }
 
+        const underlineOnHover = {
+            hidden: {
+                width: 0
+            }, 
+            visible : {
+                width: "100%",
+                transition: {
+                    width: 0.3,
+                    ease: easeOut
+                }
+            }
+        }
+
         return (
             <nav className="fixed top-0 w-full bg-white z-50">
-                <div className="max-w-screen-xl mx-auto">
-                    <div className="flex mx-auto justify-between items-center w-full px-2 xl:px-0">
+                <div className="max-w-screen-2xl mx-auto">
+                    <div className="flex mx-auto justify-between items-center w-full px-4 2xl:px-0">
                         {/* Primary menu and logo */}
-                        <div className="flex items-center my-4">
+                        <div className="flex items-center my-6">
                             {/* logo */}
                             <div>
                                 <Link to="/"
@@ -32,7 +46,7 @@ const Navbar = ( props ) => {
                                     <img
                                         src={HRFlowLogo_Dark}
                                         alt="HR Flow Logo"
-                                        className="h-12"
+                                        className="h-16"
                                     />
                                 </Link>
                             </div>
@@ -40,8 +54,11 @@ const Navbar = ( props ) => {
                         {/* secondary */}
                         <div className="flex gap-6">
                             <div className="hidden xs:flex items-center gap-10 text-jetblack">
-                                <div className="hidden lg:flex items-center gap-10 font-semibold">
-                                    <p onClick={() => menuItemClickHandler("homeRef")} className="hover:text-primary-dark">
+                                <div className="hidden lg:flex items-center gap-8 2xl:gap-10 font-semibold text-lg 2xl:text-xl transition-all ease-in">
+                                    <p
+                                        onClick={() => menuItemClickHandler("homeRef")} 
+                                        className="hover:text-primary-dark"
+                                    >
                                         Home
                                     </p>
                                     <p onClick={() => menuItemClickHandler("servicesRef")} className="hover:text-primary-dark">
@@ -53,7 +70,7 @@ const Navbar = ( props ) => {
                                     <p onClick={() => menuItemClickHandler("contactRef")} className="hover:text-primary-dark">
                                         Contact Us
                                     </p>
-                                    <button className="bg-primary-light px-8 py-2 rounded-full text-white">
+                                    <button className="bg-primary-light px-8 py-1.5 2xl:px-10 2xl:py-2 rounded-full text-white hover:bg-primary-dark">
                                         Sign in
                                     </button>
                                 </div>
@@ -80,7 +97,7 @@ const Navbar = ( props ) => {
                         } left-1/2 transform -translate-x-1/2 mt-2`}
                 >
                     <div className="py-8">
-                        <div className="text-gray-700 flex flex-col gap-8 w-full tracking-wider">
+                        <div className="text-gray-700 flex flex-col gap-8 w-full tracking-wide text-xl">
                             <p 
                                 onClick={() => menuItemClickHandler("homeRef")} 
                                 className="hover:text-jetblack">
@@ -95,7 +112,7 @@ const Navbar = ( props ) => {
                             <p onClick={() => menuItemClickHandler("contactRef")} className="hover:text-jetblack">
                                 Contact Us
                             </p>
-                            <button className="w-full bg-primary-light rounded-xl text-white py-2">
+                            <button className="w-full bg-primary-light rounded-full text-white py-3 hover:bg-primary-dark">
                                 Sign in
                             </button>
                         </div>
