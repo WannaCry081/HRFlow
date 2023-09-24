@@ -1,29 +1,8 @@
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 import PinkGradient from "assets/svg/About_pink.svg";
 import HumanRocket from "assets/svg/Human_rocket.svg";
 import Rocket from "assets/svg/icons/Rocket.svg";
 import Crown from "assets/svg/icons/Crown.svg";
-
-const AboutItem = ({ icon, title, body }) => {
-    return (
-        <div className="flex gap-3">
-            <div className="h-16 w-16 bg-tertiary-pastel border border-gray-300 rounded-xl">
-                <img
-                    src={ icon }
-                    className="p-2"
-                />
-            </div>
-            <div className="w-4/5">
-                <h1 className="font-lato font-extrabold text-jetblack text-lg">
-                    { title }
-                </h1>
-                <p className="text-xs leading-normal font-poppins text-jetblack">
-                    { body }
-                </p>
-            </div>
-        </div>
-    )
-}
 
 const About = forwardRef((props, ref) => {
     return (
@@ -61,6 +40,27 @@ const About = forwardRef((props, ref) => {
         </section>
     );
 });
+
+const AboutItem = ({ icon, title, body }) => {
+    return (
+        <div className="flex gap-3">
+            <div className="h-16 w-16 bg-tertiary-pastel border border-gray-300 rounded-xl">
+                <img
+                    src={ icon }
+                    className="p-2"
+                />
+            </div>
+            <div className="w-4/5">
+                <h1 className="font-lato font-extrabold text-jetblack text-lg">
+                    { title }
+                </h1>
+                <p className="text-xs leading-normal font-poppins text-jetblack">
+                    { body }
+                </p>
+            </div>
+        </div>
+    );
+};
 
 export default About;
 

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import Navbar from "./components/Navbar";
 import Home from "./sections/Home";
 import Services from "./sections/Services";
@@ -12,7 +12,8 @@ const LandingPage = () => {
         servicesRef: useRef(null),
         aboutRef: useRef(null),
         contactRef: useRef(null),
-    }
+    };
+
     const menuItemClickHandler = (ref) => {
         ref.current.scrollIntoView({ behavior: "smooth" });
     };
@@ -35,6 +36,6 @@ const LandingPage = () => {
         
         </div>
     );
-}
+};
 
 export default LandingPage;

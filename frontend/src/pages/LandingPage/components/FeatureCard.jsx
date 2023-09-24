@@ -11,7 +11,7 @@ const FeatureCard = (props) => {
                 </p>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default FeatureCard;

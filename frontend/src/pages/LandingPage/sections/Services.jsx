@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 import Bell from "assets/svg/icons/Bell.svg";
 import Clock from "assets/svg/icons/Clock.svg";
 import Coin from "assets/svg/icons/Coin.svg";
@@ -64,7 +64,6 @@ const Services = forwardRef((props, ref) => {
                     />
                 </div>
             </div>
-            
         </section>
     );
 });

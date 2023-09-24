@@ -1,15 +1,14 @@
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 import ComputerChild from "assets/svg/ComputerChild.svg";
 import PurpleGradient from "assets/svg/Home_purple.svg";
 import SkyblueGradient from "assets/svg/Home_skyblue.svg";
 import PinkGradient from "assets/svg/Home_pink.svg";
 
 const Home = forwardRef((props, ref) => {
-
     const { sectionRefs } = props;
     const menuItemClickHandler = (refName) => {
         sectionRefs[refName].current.scrollIntoView({ behavior: "smooth" });
-    }
+    };
 
     return (
         <>
@@ -65,7 +64,6 @@ const Home = forwardRef((props, ref) => {
                 </div>
             </section>
         </>
-        
     );
 });
 

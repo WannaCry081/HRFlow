@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 import HumanTexting from "assets/svg/HumanTexting.svg";
 import PurpleGradient from "assets/svg/Contact_purple.svg";
 
@@ -37,8 +37,6 @@ const Contact = forwardRef((props, ref) => {
                     </div>
                 </div>
             </div>
-          
-           
         </section>
     );
 });
