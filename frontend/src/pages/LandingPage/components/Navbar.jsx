@@ -1,9 +1,11 @@
 import { useState } from "react";
-import HRFlowLogo_Dark from "assets/svg/HRFlowLogo_Light.svg";
+import { useNavigate } from "react-router-dom";
 import { FiMenu } from "react-icons/fi";
 import { MdOutlineClose } from "react-icons/md";
+import HRFlowLogo_Dark from "assets/svg/HRFlowLogo_Light.svg";
 
 const Navbar = ( props ) => {
+    const navigate = useNavigate();
     const { sectionRefs } = props;
     const [toggleMenu, setToggleMenu] = useState(false);
 
@@ -15,6 +17,8 @@ const Navbar = ( props ) => {
         sectionRefs[refName].current.scrollIntoView({ behavior: "smooth" });
         toggleMenuHandler();
     };
+    
+    const onClickRoute = () => navigate("/auth/login");
 
     return (
         <nav className="fixed top-0 w-full bg-white z-50">
@@ -49,7 +53,7 @@ const Navbar = ( props ) => {
                                 <p onClick={() => menuItemClickHandler("contactRef")} className="hover:text-primary-dark">
                                     Contact Us
                                 </p>
-                                <button className="bg-primary-light px-8 py-2 rounded-full text-white">
+                                <button onClick={onClickRoute} className="bg-primary-light px-8 py-2 rounded-full text-white">
                                     Sign in
                                 </button>
                             </div>
