@@ -57,7 +57,7 @@ const Navbar = ( props ) => {
                                         Contact Us
                                     </p>
                                     <button className="bg-primary-light px-8 py-1.5 2xl:px-10 2xl:py-2 rounded-full text-white hover:bg-primary-dark">
-                                        Sign in
+                                        Sign In
                                     </button>
                                 </div>
 
@@ -99,7 +99,7 @@ const Navbar = ( props ) => {
                                 Contact Us
                             </p>
                             <button className="w-full bg-primary-light rounded-full text-white py-3 hover:bg-primary-dark">
-                                Sign in
+                                Sign In
                             </button>
                         </div>
                     </div>
