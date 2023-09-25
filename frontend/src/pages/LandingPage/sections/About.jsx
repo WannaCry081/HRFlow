@@ -6,7 +6,7 @@ import Crown from "assets/svg/icons/Crown.svg";
 
 const AboutItem = ( props ) => {
     return (
-        <div className="flex gap-3">
+        <div className="flex gap-8">
             <div className="h-20 w-20 md:h-24 md:w-24 xl:w-26 xl:h-26 bg-tertiary-pastel border border-gray-300 rounded-xl flex items-center justify-center">
                 <img
                     src={ props.icon }
@@ -40,7 +40,7 @@ const About = forwardRef((props, ref) => {
                     <p className="py-4 font-poppins text-xl leading-snug text-jetblack">
                         Welcome to HR Flow — Redefining HR Management. Our central hub streamlines HR processes for effortless workforce management.
                     </p>
-                    <div className="w-full flex flex-col gap-4 py-4">
+                    <div className="w-full flex flex-col gap-8 py-4">
                         <AboutItem 
                             icon={Rocket}
                             title="Empowering HR Efficiency"
