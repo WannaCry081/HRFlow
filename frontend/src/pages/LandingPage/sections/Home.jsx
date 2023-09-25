@@ -16,7 +16,7 @@ const Home = forwardRef((props, ref) => {
             <section ref={ref} className="pt-36 pb-28 flex justify-center relative">
                     <img
                         src={PurpleGradient}
-                        className="absolute -z-30 top-[7rem] -right-20 md:top-18 xl:top-16 xl:-right-20 2xl:top-16 2xl:right-[14rem]"
+                        className="absolute -z-30 top-[7rem] -right-20 md:top-18 xl:top-16 xl:-right-20 2xl:top-28 2xl:right-[14rem]"
                     />
                     <img
                         src={SkyblueGradient}
