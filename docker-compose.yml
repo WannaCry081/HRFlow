@@ -7,4 +7,13 @@ services:
       - SA_PASSWORD=Password123
     ports:
       - "1433:1433"
-  
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:80"
+    depends_on:
+      - sqlserver
+
+  # frontend:
