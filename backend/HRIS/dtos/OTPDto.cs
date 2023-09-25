@@ -10,7 +10,7 @@ namespace HRIS.Dtos
         public string Email { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "OTP is required.")]
-        [StringLength(8, ErrorMessage = "OTP must be 8 characters long.", MinimumLength = 8)]
+        [StringLength(6, ErrorMessage = "OTP must be 6 characters long.", MinimumLength = 6)]
         public string Code { get; set; } = string.Empty;
     }
 }
