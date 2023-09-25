@@ -5,7 +5,7 @@ import Coin from "assets/svg/icons/Coin.svg";
 import Folder from "assets/svg/icons/Folder.svg";
 import Megaphone from "assets/svg/icons/Megaphone.svg";
 import Person from "assets/svg/icons/Person.svg";
-import Diamond from "assets/svg/icons/Diamond.svg";
+import Thunder from "assets/svg/icons/Thunder.svg";
 import FeatureCard from "../components/FeatureCard";
 import PurpleGradient from "assets/svg/Services_purple.svg";
 import PinkGradient from "assets/svg/Services_pink.svg";
@@ -22,8 +22,8 @@ const Services = forwardRef((props, ref) => {
                 className="absolute -z-20 top-10 -left-28 md:top-0 md:-left-32 xl:-left-10 xl:-top-6"
             />
             <div className="w-full max-w-screen-2xl mx-auto">
-                <div className="pt-2 pb-8">
-                    <img src={Diamond} className="h-20"/>
+                <div className="pt-2 pb-4">
+                    <img src={Thunder} className="h-24"/>
                     <h1 className="transition leading-none text-jetblack font-lato font-black text-5xl md:text-5xl py-6 pb-2 pr-10">
                         Seamless HR Solutions
                     </h1>
