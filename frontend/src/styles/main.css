@@ -6,6 +6,9 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+    color : #20262E;
+}
 
 ::-webkit-scrollbar {
     width: 8px;
