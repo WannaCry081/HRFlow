@@ -1,0 +1,19 @@
+import axios from "axios";
+import { AUTH_URL } from "../utils/constants";
+
+const axiosInstance = axios.create({
+    baseURL : AUTH_URL,
+    headers : {
+        "Content-Type" : "application/json"
+    }
+});
+
+export const RegisterUser = async (request) => {
+    try {
+        const response = await axiosInstance.post("/register", request);
+        return response.data;
+    } catch (error) {
+        return error.response;
+    }
+};
+
