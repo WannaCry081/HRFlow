@@ -17,3 +17,12 @@ export const RegisterUser = async (request) => {
     }
 };
 
+export const LoginUser = async (request) => {
+    try {
+        const response = await axiosInstance.post("/login", request);
+        return response.data;
+    } catch (error) {
+        return error.response;
+    }
+};
+
