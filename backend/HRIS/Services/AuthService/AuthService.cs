@@ -4,6 +4,7 @@ using HRIS.Exceptions;
 using HRIS.Models;
 using HRIS.Repositories.AuthRepository;
 using HRIS.Utils;
+using Microsoft.AspNetCore.Server.IIS.Core;
 
 namespace HRIS.Services.AuthService
 {
@@ -58,13 +59,42 @@ namespace HRIS.Services.AuthService
 
         public async Task<string> ForgotPassword(ForgotPasswordDto request)
         {
-            var isEmailExists = await _authRepository.IsEmailExists(request.Email);
-            if (!isEmailExists)
+            var user = await _authRepository.GetUserByEmail(request.Email);
+            if (user is null)
             {
                 throw new UserNotFoundException("User is not recorded in the database.");
             }
 
-            return await SMTP.SendEmail(_configuration, request.Email);
+            var code = CodeGenerator.Digit(6);
+            var isUserUpdated = await _authRepository.UpdateUserCode(user, code);
+            if (!isUserUpdated)
+            {
+                throw new Exception();
+            }
+
+            return await SMTP.SendEmail(_configuration, request.Email, code);
+        }
+
+        public async Task<string> VerifyPassword(OTPDto request)
+        {
+            var user = await _authRepository.GetUserByEmail(request.Email);
+            if (user is null)
+            {
+                throw new UserNotFoundException("User is not recorded in the database.");
+            }
+
+            if (!user.PasswordToken.Equals(request.Code))
+            {
+                throw new UnauthorizedAccessException("Invalid OTP Code.");
+            }
+
+            var isUserUpdated = await _authRepository.UpdateUserCode(user, "");
+            if (!isUserUpdated)
+            {
+                throw new Exception();
+            }
+
+            return CodeGenerator.Token(_configuration, request.Email, DateTime.Now.AddDays(1));
         }
     }
 }

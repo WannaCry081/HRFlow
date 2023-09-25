@@ -33,9 +33,12 @@ namespace HRIS.Models
 
         [StringLength(150)]
         public string CompanyEmail { get; set; } = string.Empty;
-            
+
         [StringLength(150)]
         public string PasswordHash { get; set; } = string.Empty;
+
+        [StringLength(6)]
+        public string PasswordToken { get; set; } = string.Empty;
 
         [StringLength(150)]
         public string PasswordSalt { get; set; } = string.Empty;
