@@ -84,7 +84,31 @@ namespace HRIS.Controllers
                 _logger.LogCritical("An error occurred while attempting to verify the user.", ex);
                 return Problem("An error occurred while processing your request. Please try again later.");
             }
+        }
 
+        [HttpPost("forgot-password/verfication")]
+        public async Task<IActionResult> VerifyPassword([FromBody] OTPDto request)
+        {
+            try
+            {
+                var response = await _authService.VerifyPassword(request);
+                return Ok(response);
+            }
+            catch (UserNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to get user information.", ex);
+                return NotFound("An error occurred while finding user.");
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                _logger.LogWarning("An error occurred while attempting to force user credential.", ex);
+                return Unauthorized("An error occurred while processing OTP code.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("An error occurred while attempting to verify OTP password.", ex);
+                return Problem("An error occurred while processing OTP verification");
+            }
         }
     }
 }
