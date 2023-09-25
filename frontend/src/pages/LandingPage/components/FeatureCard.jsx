@@ -5,7 +5,7 @@ const FeatureCard = (props) => {
                 <img src={props.featureIcon} className="h-16 transition lg:h-18"/>
             </div>
             <div className="w-full h-1/12 md:h-1/4 flex justify-center items-end"> 
-                <h1 className="transition text-jetblack font-lato font-extrabold text-[1.7rem] leading-tight md:text-2xl md:leading-none  xl:leading-none pt-2 pb-6 md:pb-0 2xl:text-[1.7rem]">
+                <h1 className="transition text-jetblack font-lato font-extrabold text-[1.7rem] leading-tight md:text-2xl md:leading-none  xl:leading-none pt-2 pb-6 md:pb-4 xl:pb-2 2xl:pb-1 2xl:text-[1.7rem]">
                     {props.featureTitle}
                 </h1>
             </div>
