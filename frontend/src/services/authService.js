@@ -26,3 +26,12 @@ export const LoginUser = async (request) => {
     }
 };
 
+export const ForgotPassword = async (request) => {
+    try {
+        const response  = await axiosInstance.post("/forgot-password", request);
+        return response.data;
+    } catch (error) {
+        return error.response;
+    }
+};
+
