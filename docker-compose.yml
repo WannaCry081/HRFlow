@@ -8,11 +8,11 @@ services:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=Password123
     networks:
-      - mynetwork
+      - HRISNetwork
   backend:
     build:
       context: ./backend
-      dockerfile: HRIS/Dockerfile
+      dockerfile: HRIS/HRIS/Dockerfile
     ports:
       - "8000:80"
     environment:
@@ -23,5 +23,5 @@ services:
       - mynetwork
 
 networks:
-  mynetwork:
+  HRISNetwork:
     driver: bridge
