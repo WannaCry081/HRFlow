@@ -15,7 +15,7 @@ const Contact = forwardRef((props, ref) => {
                     className="w-1/5  hidden 2xl:block"
                 />
                 <div className="w-full h-2/5 transition">
-                    <h1 className="font-lato font-extrabold text-4xl text-jetblack py-3 transition">
+                    <h1 className="font-lato font-extrabold text-5xl text-jetblack py-3 mb-2 transition">
                         Contact Us
                     </h1>
                     <div className="bg-white text-xl font-poppins rounded-2xl shadow-lg py-6 px-4 flex flex-col gap-2.5 border border-gray-100 transition">
