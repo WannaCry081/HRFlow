@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import HRFlowLogo_Dark from "assets/svg/HRFlowLogo_Light.svg";
+import HRFlowLogo_Dark from "assets/svg/HRFlowLogo_Dark.svg";
 import { FiMenu } from "react-icons/fi";
 import { MdOutlineClose } from "react-icons/md";
 import { Link } from 'react-router-dom';
