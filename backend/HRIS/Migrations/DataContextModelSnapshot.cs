@@ -81,6 +81,11 @@ namespace HRIS.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
+                    b.Property<string>("PasswordToken")
+                        .IsRequired()
+                        .HasMaxLength(6)
+                        .HasColumnType("nvarchar(6)");
+
                     b.Property<string>("PersonalEmail")
                         .IsRequired()
                         .HasMaxLength(150)
