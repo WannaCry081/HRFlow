@@ -35,3 +35,11 @@ export const ForgotPassword = async (request) => {
     }
 };
 
+export const VerifyPassword = async (request) => {
+    try {
+        const response = await axiosInstance.post("/forgot-password/verification");
+        return response.data;
+    } catch (error) {
+        return error.response;
+    }
+};
