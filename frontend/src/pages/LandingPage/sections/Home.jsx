@@ -12,50 +12,50 @@ const Home = forwardRef((props, ref) => {
 
     return (
         <>
-            <section ref={ref} className="h-full flex justify-center relative">
+            <section ref={ref} className="pt-36 pb-28 flex justify-center relative">
                     <img
                         src={PurpleGradient}
-                        className="absolute -z-30 top-[7rem] -right-20 md:top-10 xl:top-8 xl:right-0"
+                        className="absolute -z-30 top-[7rem] -right-20 md:top-18 xl:top-16 xl:-right-20 2xl:top-28 2xl:right-[14rem]"
                     />
                     <img
                         src={SkyblueGradient}
-                        className=" absolute -z-20 bottom-[4rem] -right-20 md:-bottom-28
-                        xl:-bottom-10 xl:right-20"
+                        className=" absolute -z-20 bottom-[12rem] -right-20 md:bottom-[7rem]
+                        xl:-bottom-16 xl:right-20 2xl:right-[22rem]"
                     />
                     <img
                         src={PinkGradient}
-                    className="-z-10 absolute top-[12rem] -left-32 md:bottom-0 md:-left-44  xl:left-[10rem] xl:top-40"
+                    className="-z-10 absolute top-[12rem] -left-32 md:bottom-0 md:-left-44 xl:-left-0 xl:top-[16rem] 2xl:left-[22rem] 2xl:top-[18rem]"
                     />
-                <div className="w-full max-w-screen-xl mx-auto flex flex-col md:flex-row">
-                    <div className="flex flex-col h-full justify-center w-full pt-12 px-2 xl:px-0">
-                        <div className="font-lato font-bold text-[42px] md:text-[60px] text-center lg:text-left">
+                <div className="w-full max-w-screen-2xl mx-auto flex flex-col md:flex-row">
+                    <div className="flex flex-col h-full justify-center w-full pt-12 px-2 xl:px-4">
+                        <div className="font-lato font-extrabold transition text-[3.5rem] sm:text-[4.1rem] md:text-6xl lg:text-[4.2rem] text-center xl:text-left xl:text-6xl 2xl:text-[4.2rem]">
                             <h1 className="leading-tight text-jetblack">
-                                Nurturing HR,
+                                Innovate HR,
                             </h1>
                             <h1 className="leading-tight text-jetblack">
-                                Enhancing Workplaces,
+                                Elevate Workplaces,
                             </h1>
-                            <h1 className="leading-tight  text-jetblack">
-                                Empowering Employees
+                            <h1 className="leading-tight text-jetblack">
+                                Empower Teams
                             </h1>
                         </div>
-                        <div className="text-center lg:text-left leading-tight">
-                            <h2 className="font-poppins py-4">
+                        <div className="text-center leading-tight">
+                            <h2 className="font-poppins py-8 text-2xl lg:text-[1.6rem] text-gray-700  transition px-4 lg:px-20 lg:py-10 xl:text-left xl:px-0">
                                 Streamline HR tasks, from recruitment to payroll, with our all-in-one HRIS.
                             </h2>
-                            <div className="flex gap-3 mt-2 justify-center lg:justify-start">
-                                <button className="bg-primary-light text-xs md:text-base px-4 md:px-8 py-2.5 text-white font-semibold font-poppins rounded-lg shadow-lg">
+                            <div className="flex gap-4 mt-2 justify-center xl:justify-start">
+                                <button className="bg-primary-light sm:text-lg px-10 md:px-12 py-3.5 text-white font-semibold font-poppins rounded-lg shadow-lg lg:text-2xl xl:text-xl transition hover:bg-primary-dark">
                                     Get Started
                                 </button>
                                 <button 
                                     onClick={() => menuItemClickHandler("servicesRef")}
-                                    className="bg-primary-pastel px-4 md:px-8 py-2.5 text-sm md:text-base text-primary-light font-semibold font-poppins rounded-lg  shadow-lg">
+                                    className="bg-primary-pastel px-10 md:px-12 py-3.5 sm:text-lg text-primary-light font-semibold font-poppins rounded-lg shadow-lg lg:text-2xl xl:text-xl hov transition hover:bg-tertiary-pastel">
                                     Learn More
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <div className="w-full self-center hidden lg:block">
+                    <div className="w-full self-center hidden xl:block">
                         <img
                             src={ComputerChild}
                             className="w-full"

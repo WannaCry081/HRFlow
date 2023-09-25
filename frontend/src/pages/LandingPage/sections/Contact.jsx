@@ -4,34 +4,34 @@ import PurpleGradient from "assets/svg/Contact_purple.svg";
 
 const Contact = forwardRef((props, ref) => {
     return (
-        <section ref={ref} className="h-full flex items-center justify-center py-24 xl:py-22 px-4 relative">
+        <section ref={ref} className="flex items-center justify-center py-20 px-4 relative">
             <img
                 src={PurpleGradient}    
                 className="absolute -z-10 top-10 -left-20 md:top-0 xl:-top-16"
             />
-            <div className="w-full max-w-screen-xl mx-auto flex h-full">
+            <div className="w-full max-w-screen-2xl mx-auto flex h-full gap-10">
                 <img
                     src={HumanTexting}
-                    className="w-2/5 h-full mt-32 hidden md:block"
+                    className="w-1/5  hidden 2xl:block"
                 />
-                <div className="w-full h-full">
-                    <h1 className="font-lato font-extrabold text-3xl text-jetblack py-2">
+                <div className="w-full h-3/5 transition">
+                    <h1 className="font-lato font-extrabold text-5xl text-jetblack py-3 mb-2 transition">
                         Contact Us
                     </h1>
-                    <div className="bg-white h-full rounded-2xl shadow-lg py-6 px-4 flex flex-col gap-2.5 border border-gray-100">
+                    <div className="bg-white text-xl font-poppins rounded-2xl shadow-lg py-6 px-4 flex flex-col gap-2.5 border border-gray-100 transition">
                         <input
-                            className="text-xs xl:text-sm rounded-md p-4 bg-gray-100 w-full focus:border focus:border-mistyBlue focus:outline-none font-normal"
-                            placeholder="Name"
+                            className="rounded-md p-4 transitionf bg-gray-100 w-full focus:border focus:border-gray-400 focus:outline-none font-normal"
+                            placeholder="Subject"
                         />
                         <input
-                            className="text-xs xl:text-sm rounded-md p-4 bg-gray-100 w-full focus:border focus:border-mistyBlue focus:outline-none font-normal"
+                            className="rounded-md p-4 transition bg-gray-100 w-full focus:border focus:border-gray-400 focus:outline-none font-normal"
                             placeholder="Email"
                         />
                         <textarea
-                            className="text-xs xl:text-sm resize-none h-full rounded-md p-4 bg-gray-100 w-full focus:border focus:border-mistyBlue focus:outline-none font-normal"
+                            className="resize-none transition rounded-md p-4 bg-gray-100 w-full focus:border focus:border-gray-400 focus:outline-none font-normal h-52"
                             placeholder="Message"
                         />
-                        <button className="bg-secondary-light text-sm md:text-base px-10 py-2.5 text-white font-semibold font-poppins rounded-lg shadow-lg mt-3">
+                        <button className="bg-secondary-light hover:bg-secondary-dark text-xl px-10 py-3 text-white font-semibold font-poppins rounded-lg shadow-lg mt-3">
                             Submit
                         </button>
                     </div>
