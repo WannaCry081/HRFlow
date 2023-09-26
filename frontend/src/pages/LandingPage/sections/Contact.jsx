@@ -9,12 +9,14 @@ const Contact = forwardRef((props, ref) => {
                 src={PurpleGradient}    
                 className="absolute -z-10 top-10 -left-20 md:top-0 xl:-top-16"
             />
-            <div className="w-full max-w-screen-2xl mx-auto flex h-full gap-10">
-                <img
+            <div className="w-full max-w-screen-2xl mx-auto flex h-full gap-12">
+            <div className="w-full hidden 2xl:block">
+                {/* <img
                     src={HumanTexting}
-                    className="w-1/5  hidden 2xl:block"
-                />
-                <div className="w-full h-3/5 transition">
+                    className="h-full mb-22 hidden 2xl:block"
+                /> */}
+            </div>
+                <div className="w-full transition">
                     <h1 className="font-lato font-extrabold text-5xl text-jetblack py-3 mb-2 transition">
                         Contact Us
                     </h1>
