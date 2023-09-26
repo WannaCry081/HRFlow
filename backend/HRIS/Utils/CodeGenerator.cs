@@ -26,11 +26,11 @@ namespace HRIS.Utils
             return alphaNumeric;
         }
 
-        public static string Token(IConfiguration configuration, string email, string role, DateTime expiresIn)
+        public static string Token(IConfiguration configuration, Guid id, string role, DateTime expiresIn)
         {
             List<Claim> claims = new()
             {
-                new Claim(ClaimTypes.Email, email),
+                new Claim(ClaimTypes.Name, id.ToString()),
                 new Claim(ClaimTypes.Role, role)
             };
 
