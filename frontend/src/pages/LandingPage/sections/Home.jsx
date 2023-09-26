@@ -1,4 +1,5 @@
 import { forwardRef } from "react";
+import { Link } from "react-router-dom";
 import ComputerChild from "assets/svg/ComputerChild.svg";
 import PurpleGradient from "assets/svg/Home_purple.svg";
 import SkyblueGradient from "assets/svg/Home_skyblue.svg";
@@ -44,9 +45,9 @@ const Home = forwardRef((props, ref) => {
                                 Streamline HR tasks, from recruitment to payroll, with our all-in-one HRIS.
                             </h2>
                             <div className="flex gap-4 mt-2 justify-center xl:justify-start">
-                                <button className="bg-primary-light sm:text-lg px-10 md:px-12 py-3.5 text-white font-semibold font-poppins rounded-lg shadow-lg lg:text-2xl xl:text-xl transition hover:bg-primary-dark">
+                                <Link to="/auth/register" className="bg-primary-light sm:text-lg px-10 md:px-12 py-3.5 text-white font-semibold font-poppins rounded-lg shadow-lg lg:text-2xl xl:text-xl transition hover:bg-primary-dark">
                                     Get Started
-                                </button>
+                                </Link>
                                 <button 
                                     onClick={() => menuItemClickHandler("servicesRef")}
                                     className="bg-primary-pastel px-10 md:px-12 py-3.5 sm:text-lg text-primary-light font-semibold font-poppins rounded-lg shadow-lg lg:text-2xl xl:text-xl hov transition hover:bg-tertiary-pastel">
