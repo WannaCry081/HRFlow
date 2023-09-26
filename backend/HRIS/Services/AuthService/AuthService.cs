@@ -4,7 +4,6 @@ using HRIS.Exceptions;
 using HRIS.Models;
 using HRIS.Repositories.AuthRepository;
 using HRIS.Utils;
-using Microsoft.AspNetCore.Server.IIS.Core;
 
 namespace HRIS.Services.AuthService
 {
@@ -41,7 +40,11 @@ namespace HRIS.Services.AuthService
                 throw new Exception("Failed to save user information to database.");
             }
 
-            return CodeGenerator.Token(_configuration, request.Email, DateTime.Now.AddDays(1));
+            return CodeGenerator.Token(
+                _configuration,
+                request.Email,
+                "Human Resource",
+                DateTime.Now.AddDays(1));
         }
 
         public async Task<string> LoginUser(LoginUserDto request)
@@ -54,7 +57,11 @@ namespace HRIS.Services.AuthService
                 throw new UnauthorizedAccessException("Password does not match with the user's credentials.");
             }
 
-            return CodeGenerator.Token(_configuration, request.Email, DateTime.Now.AddDays(1));
+            return CodeGenerator.Token(
+                _configuration, 
+                request.Email,
+                "Human Resource",
+                DateTime.Now.AddDays(1));
         }
 
         public async Task<string> ForgotPassword(ForgotPasswordDto request)
@@ -69,7 +76,7 @@ namespace HRIS.Services.AuthService
             var isUserUpdated = await _authRepository.UpdateUserCode(user, code);
             if (!isUserUpdated)
             {
-                throw new Exception();
+                throw new Exception("An error occurred while sending OTP code.");
             }
 
             return await SMTP.SendEmail(_configuration, request.Email, code);
@@ -88,13 +95,17 @@ namespace HRIS.Services.AuthService
                 throw new UnauthorizedAccessException("Invalid OTP Code.");
             }
 
-            var isUserUpdated = await _authRepository.UpdateUserCode(user, "");
+            var isUserUpdated = await _authRepository.UpdateUserCode(user, string.Empty);
             if (!isUserUpdated)
             {
-                throw new Exception();
+                throw new Exception("An error occurred while verifying OTP code.");
             }
 
-            return CodeGenerator.Token(_configuration, request.Email, DateTime.Now.AddDays(1));
+            return CodeGenerator.Token(
+                _configuration, 
+                request.Email, 
+                "Human Resource",
+                DateTime.Now.AddDays(1));
         }
     }
 }
