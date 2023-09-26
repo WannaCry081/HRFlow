@@ -1,6 +1,9 @@
-﻿namespace HRIS.Services.UserService
+﻿using HRIS.Dtos.UserDto;
+
+namespace HRIS.Services.UserService
 {
     public interface IUserService
     {
+        Task<GetUserProfileDto> GetUserProfile(Guid id);
     }
 }
