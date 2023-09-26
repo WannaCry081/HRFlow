@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using HRIS.Dtos;
+using HRIS.Dtos.AuthDto;
 using HRIS.Exceptions;
 using HRIS.Models;
 using HRIS.Repositories.AuthRepository;
@@ -33,6 +33,7 @@ namespace HRIS.Services.AuthService
             var newUser = _mapper.Map<User>(request);
             newUser.PasswordHash = passwordHash;
             newUser.PasswordSalt = passwordSalt;
+            newUser.Role = "Human Resource";
 
             var isUserAdded = await _authRepository.AddUser(newUser);
             if (!isUserAdded)
@@ -42,7 +43,7 @@ namespace HRIS.Services.AuthService
 
             return CodeGenerator.Token(
                 _configuration,
-                request.Email,
+                newUser.Id,
                 "Human Resource",
                 DateTime.Now.AddDays(1));
         }
@@ -58,8 +59,8 @@ namespace HRIS.Services.AuthService
             }
 
             return CodeGenerator.Token(
-                _configuration, 
-                request.Email,
+                _configuration,
+                user.Id,
                 "Human Resource",
                 DateTime.Now.AddDays(1));
         }
@@ -84,11 +85,8 @@ namespace HRIS.Services.AuthService
 
         public async Task<string> VerifyPassword(OTPDto request)
         {
-            var user = await _authRepository.GetUserByEmail(request.Email);
-            if (user is null)
-            {
+            var user = await _authRepository.GetUserByEmail(request.Email) ??
                 throw new UserNotFoundException("User is not recorded in the database.");
-            }
 
             if (!user.PasswordToken.Equals(request.Code))
             {
@@ -102,8 +100,8 @@ namespace HRIS.Services.AuthService
             }
 
             return CodeGenerator.Token(
-                _configuration, 
-                request.Email, 
+                _configuration,
+                user.Id,
                 "Human Resource",
                 DateTime.Now.AddDays(1));
         }
