@@ -10,7 +10,7 @@ const FeatureCard = (props) => {
                 </h1>
             </div>
             <div className="w-full h-1/3"> 
-                <p className="transition leading-tight text-gray-500 font-poppins text-xl md:text-[1.2rem] xl:text-[1.18rem] xl:leading-tight xl:pt-4 2xl:pt-4 2xl:text-lg 2xl:leading-tight">
+                <p className="transition leading-tight text-gray-500 font-poppins text-xl md:text-[1.2rem] xl:text-[1.18rem] xl:leading-tight xl:pt-4 2xl:pt-4 2xl:text-xl 2xl:leading-tight">
                     {props.featureDescription}
                 </p>
             </div>

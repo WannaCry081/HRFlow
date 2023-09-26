@@ -22,3 +22,18 @@
 .transition {
     @apply transition-all ease-in;
 }
+
+@font-face {
+    font-family : "AssetsLato";
+    src: url("../assets/fonts/Lato.ttf");
+}
+
+@font-face {
+    font-family : "AssetsPoppins";
+    src: url("../assets/fonts/Poppins.ttf");
+}
+
+@font-face {
+    font-family : "AssetOswald";
+    src: url("../assets/fonts/Oswald.ttf");
+}

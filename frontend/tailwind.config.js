@@ -7,9 +7,9 @@ export default {
   darkMode : "class",
   theme: {
     fontFamily : {
-      oswald : ["Oswald", "sans"],
-      lato : ["Lato", "sans"],
-      poppins : ["Poppins", "sans"]
+      oswald : ["Oswald", "AssetsOswald","sans"],
+      lato : ["Lato", "AssetsLato","sans"],
+      poppins : ["Poppins", "AssetsPoppins","sans"]
     },
     extend: {
       screens : {
