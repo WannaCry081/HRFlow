@@ -12,7 +12,7 @@ import PinkGradient from "assets/svg/Services_pink.svg";
 
 const Services = forwardRef((props, ref) => {
     return (
-        <section ref={ref} className="relative flex flex-col px-4 justify-center scroll-m-32">
+        <section ref={ref} className="relative flex flex-col px-4 justify-center scroll-m-12 py-20">
             <img
                 src={PurpleGradient}
                 className="absolute -z-10 top-24 left-16 md:-right-10 md:top-32 xl:left-60 xl:top-28"
