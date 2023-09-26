@@ -16,10 +16,10 @@ const About = forwardRef((props, ref) => {
                     <div className="text-5xl font-extrabold font-lato text-jetblack">
                         About HR Flow
                     </div>
-                    <p className="py-4 font-poppins text-xl leading-snug text-jetblack">
+                    <p className="py-4 font-poppins text-2xl leading-snug text-gray-700">
                         Welcome to HR Flow — Redefining HR Management. Our central hub streamlines HR processes for effortless workforce management.
                     </p>
-                    <div className="w-full flex flex-col gap-8 py-4">
+                    <div className="w-full flex flex-col gap-10 py-6">
                         <AboutItem 
                             icon={Rocket}
                             title="Empowering HR Efficiency"
@@ -43,18 +43,18 @@ const About = forwardRef((props, ref) => {
 
 const AboutItem = ( props ) => {
     return (
-        <div className="flex gap-3">
-            <div className="h-16 w-16 bg-tertiary-pastel border border-gray-300 rounded-xl">
+        <div className="flex gap-8">
+            <div className="h-24 w-24 bg-tertiary-pastel border border-gray-300 rounded-xl">
                 <img
                     src={ props.icon }
                     className="p-2"
                 />
             </div>
-            <div className="w-4/5">
-                <h1 className="font-lato font-extrabold text-jetblack text-lg">
+            <div className="w-4/5 flex flex-col gap-2">
+                <h1 className="font-lato font-extrabold text-jetblack text-2xl">
                     { props.title }
                 </h1>
-                <p className="text-xs leading-normal font-poppins text-jetblack">
+                <p className="text-lg text-justify leading-normal font-poppins text-jetblack">
                     { props.body }
                 </p>
             </div>
