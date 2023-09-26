@@ -27,7 +27,6 @@
   <ItemGroup>
     <Folder Include="Context\" />
     <Folder Include="Mappers\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
