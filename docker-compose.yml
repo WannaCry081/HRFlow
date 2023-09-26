@@ -2,26 +2,27 @@ version: "3.8"
 services:
   sqlserver:
     image: "mcr.microsoft.com/mssql/server:2019-latest"
-    ports:
-      - "1433:1433"
     environment:
       - ACCEPT_EULA=Y
+      - SA_USER=sa
       - SA_PASSWORD=Password123
+    ports:
+      - "1433:1433"
     networks:
-      - mynetwork
+      - HRISNetwork
   backend:
     build:
       context: ./backend
       dockerfile: HRIS/Dockerfile
-    ports:
-      - "8000:80"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     depends_on:
       - sqlserver
+    ports:
+      - "8000:80"
     networks:
-      - mynetwork
+      - HRISNetwork
 
 networks:
-  mynetwork:
+  HRISNetwork:
     driver: bridge
