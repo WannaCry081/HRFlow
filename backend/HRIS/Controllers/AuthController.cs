@@ -1,4 +1,4 @@
-﻿using HRIS.Dtos;
+﻿using HRIS.Dtos.AuthDto;
 using HRIS.Exceptions;
 using HRIS.Services.AuthService;
 using Microsoft.AspNetCore.Mvc;
