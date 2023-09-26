@@ -1,4 +1,4 @@
-﻿using HRIS.Dtos;
+﻿using HRIS.Dtos.AuthDto;
 using HRIS.Exceptions;
 using HRIS.Services.AuthService;
 using Microsoft.AspNetCore.Mvc;
@@ -30,7 +30,7 @@ namespace HRIS.Controllers
             catch (UserExistsException ex)
             {
                 _logger.LogError("An error occurred while attempting to register user to database.", ex);
-                return BadRequest("An error occurred while processing ");
+                return BadRequest("An error occurred while registering duplicate records.");
             }
             catch (Exception ex)
             {
@@ -87,6 +87,7 @@ namespace HRIS.Controllers
         }
 
         [HttpPost("forgot-password/verfication")]
+        [Consumes("application/json")]
         public async Task<IActionResult> VerifyPassword([FromBody] OTPDto request)
         {
             try

@@ -7,7 +7,7 @@ namespace HRIS.Models
     public class User
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [StringLength(100)]
         public string FirstName { get; set; } = string.Empty;
@@ -42,6 +42,9 @@ namespace HRIS.Models
 
         [StringLength(150)]
         public string PasswordSalt { get; set; } = string.Empty;
+
+        [StringLength(20)]
+        public string Role { get; set; } = string.Empty;
 
         [StringLength(8)]
         public string GroupCode { get; set; } = string.Empty;

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace HRIS.Dtos
+namespace HRIS.Dtos.AuthDto
 {
     public class LoginUserDto
     {

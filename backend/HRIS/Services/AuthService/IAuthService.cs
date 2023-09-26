@@ -1,4 +1,4 @@
-﻿using HRIS.Dtos;
+﻿using HRIS.Dtos.AuthDto;
 
 namespace HRIS.Services.AuthService
 {
