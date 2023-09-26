@@ -43,8 +43,12 @@ namespace HRIS.Models
         [StringLength(150)]
         public string PasswordSalt { get; set; } = string.Empty;
 
+        [StringLength(20)]
+        public string Role { get; set; } = string.Empty;
+
         [StringLength(8)]
         public string GroupCode { get; set; } = string.Empty;
+
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
