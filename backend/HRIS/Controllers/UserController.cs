@@ -1,10 +1,9 @@
-﻿using HRIS.Exceptions;
+﻿using HRIS.Dtos.UserDto;
+using HRIS.Exceptions;
 using HRIS.Services.UserService;
 using HRIS.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Reflection.Metadata.Ecma335;
-using System.Security.Cryptography.Xml;
 
 namespace HRIS.Controllers
 {
@@ -48,9 +47,9 @@ namespace HRIS.Controllers
 
         [HttpPut]
         [Produces("application/json")]
-        public Task<IActionResult> UpdateUserProfile()
+        public Task<IActionResult> UpdateUserProfile([FromBody] UpdateUserProfileDto request)
         {
-            throw new ArgumentNullException();
+            throw new NotImplementedException();
         }
     }
 }
