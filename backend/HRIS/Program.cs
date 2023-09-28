@@ -1,8 +1,10 @@
 using HRIS.Context;
 using HRIS.Repositories.AuthRepository;
 using HRIS.Repositories.UserRepository;
+using HRIS.Repositories.HumanResourceRepository;
 using HRIS.Services.AuthService;
 using HRIS.Services.UserService;
+using HRIS.Services.HumanResourceService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -59,6 +61,8 @@ builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.AddScoped<IHumanResourceRepository, HumanResourceRepository>();
 
 var app = builder.Build();
 
