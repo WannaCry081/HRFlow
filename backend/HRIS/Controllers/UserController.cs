@@ -3,6 +3,8 @@ using HRIS.Services.UserService;
 using HRIS.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection.Metadata.Ecma335;
+using System.Security.Cryptography.Xml;
 
 namespace HRIS.Controllers
 {
@@ -27,7 +29,7 @@ namespace HRIS.Controllers
             try
             {
                 var userId = UserClaim.GetCurrentUser(HttpContext) ??
-                    throw new Exception();
+                    throw new UserNotFoundException("Invalid user.");
 
                 var response = await _userService.GetUserProfile(userId);
                 return Ok(response);
@@ -39,9 +41,16 @@ namespace HRIS.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogCritical("", ex);
-                return Problem("");
+                _logger.LogCritical("An error occurred while attempting to get user data.", ex);
+                return Problem("An error occurred while getting user profile. Please try again later.");
             }
+        }
+
+        [HttpPut]
+        [Produces("application/json")]
+        public Task<IActionResult> UpdateUserProfile()
+        {
+            throw new ArgumentNullException();
         }
     }
 }
