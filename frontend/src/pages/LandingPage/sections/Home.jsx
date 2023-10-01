@@ -1,9 +1,33 @@
 import { forwardRef } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import ComputerChild from "assets/svg/ComputerChild.svg";
 import PurpleGradient from "assets/svg/Home_purple.svg";
 import SkyblueGradient from "assets/svg/Home_skyblue.svg";
 import PinkGradient from "assets/svg/Home_pink.svg";
+
+const defaultVariant  = {
+    hidden: {
+        opacity: 0,
+        y: 50,
+    },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.4,
+        }
+    }
+}
+
+const staggerContainerVariants = {
+    visible: {
+        transition: {
+            staggerChildren: 0.15, 
+        },
+    },
+};
+
 
 const Home = forwardRef((props, ref) => {
     const { sectionRefs } = props;
@@ -29,22 +53,42 @@ const Home = forwardRef((props, ref) => {
                     />
                 <div className="w-full max-w-screen-2xl mx-auto flex flex-col md:flex-row">
                     <div className="flex flex-col h-full justify-center w-full pt-12 px-2 xl:px-4">
-                        <div className="font-lato font-extrabold transition text-[3.5rem] sm:text-[4.1rem] md:text-6xl lg:text-[4.2rem] text-center xl:text-left xl:text-6xl 2xl:text-[4.2rem]">
-                            <h1 className="leading-tight text-jetblack">
+                        <motion.div 
+                            className="font-lato font-extrabold transition text-[3.5rem] sm:text-[4.1rem] md:text-6xl lg:text-[4.2rem] text-center xl:text-left xl:text-6xl 2xl:text-[4.2rem]"
+                            initial="hidden"
+                            animate="visible"
+                            variants={staggerContainerVariants}
+                        >
+                            <motion.h1 
+                                className="leading-tight text-jetblack"
+                                variants={defaultVariant}
+                            >
                                 Innovate HR,
-                            </h1>
-                            <h1 className="leading-tight text-jetblack">
+                            </motion.h1>
+                            <motion.h1 
+                                className="leading-tight text-jetblack"
+                                variants={defaultVariant}
+                            >
                                 Elevate Workplaces,
-                            </h1>
-                            <h1 className="leading-tight text-jetblack">
+                            </motion.h1>
+                            <motion.h1 
+                                className="leading-tight text-jetblack"
+                                variants={defaultVariant}
+                            >
                                 Empower Teams
-                            </h1>
-                        </div>
+                            </motion.h1>
+                        </motion.div>
                         <div className="text-center leading-tight">
-                            <h2 className="font-poppins py-8 text-2xl lg:text-[1.6rem] text-gray-700  transition px-4 lg:px-20 lg:py-10 xl:text-left xl:px-0">
+                            <motion.h2 
+                                className="font-poppins py-8 text-2xl lg:text-[1.6rem] text-gray-700  transition px-4 lg:px-20 lg:py-10 xl:text-left xl:px-0"
+                                initial="hidden"
+                                animate="visible"
+                                variants={defaultVariant}
+                            >
                                 Streamline HR tasks, from recruitment to payroll, with our all-in-one HRIS.
-                            </h2>
-                            <div className="flex gap-4 mt-2 justify-center xl:justify-start">
+                            </motion.h2>
+                            <div 
+                                className="flex gap-4 mt-2 justify-center xl:justify-start">
                                 <Link to="/auth/register" className="bg-primary-light sm:text-lg px-10 md:px-12 py-3.5 text-white font-semibold font-poppins rounded-lg shadow-lg lg:text-2xl xl:text-xl transition hover:bg-primary-dark">
                                     Get Started
                                 </Link>
