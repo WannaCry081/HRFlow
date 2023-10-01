@@ -27,7 +27,7 @@ namespace HRIS.Utils
             return null;
         }
 
-        public string? GetCurrentRole(HttpContext context)
+        public static string? GetCurrentRole(HttpContext context)
         {
             var identity = context.User.Identity as ClaimsIdentity;
 
