@@ -28,7 +28,7 @@ namespace HRIS.Controllers
             try
             {
                 var userId = UserClaim.GetCurrentUser(HttpContext) ??
-                    throw new UserNotFoundException("Invalid user.");
+                    throw new UserNotFoundException("Invalid user.");   
 
                 var response = await _userService.GetUserProfile(userId);
                 return Ok(response);
@@ -47,9 +47,29 @@ namespace HRIS.Controllers
 
         [HttpPut]
         [Produces("application/json")]
-        public Task<IActionResult> UpdateUserProfile([FromBody] UpdateUserProfileDto request)
+        public async Task<IActionResult> UpdateUserProfile([FromBody] UpdateUserProfileDto request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var userId = UserClaim.GetCurrentUser(HttpContext) ??
+                    throw new UserNotFoundException("Invalid user.");
+
+                var userRole = UserClaim.GetCurrentRole(HttpContext) ??
+                    throw new Exception();
+
+                var response = await _userService.UpdateUserProfile(userId, userRole, request);
+                return Ok(response);
+            }
+            catch (UserNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to get user information.", ex);
+                return NotFound("An error occurred while finding user.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("", ex);
+                return Problem("An error occurred while updating user profile. Please try again later.");
+            }
         }
     }
 }
