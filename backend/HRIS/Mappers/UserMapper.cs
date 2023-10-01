@@ -8,7 +8,10 @@ namespace HRIS.Mappers
     {
         public UserMapper()
         {
-            CreateMap<User, GetUserProfileDto>();
+            CreateMap<User, GetUserProfileDto>()
+                .ReverseMap();
+            CreateMap<User, UpdateUserProfileDto>()
+                .ReverseMap();
         }
     }
 }

@@ -108,7 +108,7 @@ namespace HRIS.Controllers
             catch (Exception ex)
             {
                 _logger.LogCritical("An error occurred while attempting to verify OTP password.", ex);
-                return Problem("An error occurred while processing OTP verification");
+                return Problem("An error occurred while verifying OTP code. Please try again later.");
             }
         }
     }
