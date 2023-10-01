@@ -54,10 +54,7 @@ namespace HRIS.Controllers
                 var userId = UserClaim.GetCurrentUser(HttpContext) ??
                     throw new UserNotFoundException("Invalid user.");
 
-                var userRole = UserClaim.GetCurrentRole(HttpContext) ??
-                    throw new Exception();
-
-                var response = await _userService.UpdateUserProfile(userId, userRole, request);
+                var response = await _userService.UpdateUserProfile(userId, request);
                 return Ok(response);
             }
             catch (UserNotFoundException ex)
@@ -67,8 +64,8 @@ namespace HRIS.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogCritical("", ex);
-                return Problem("An error occurred while updating user profile. Please try again later.");
+                _logger.LogCritical("An error occurred while attempting to update user data.", ex);
+                return Problem(ex.Message);
             }
         }
     }
