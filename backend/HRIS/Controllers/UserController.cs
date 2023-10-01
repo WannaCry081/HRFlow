@@ -1,4 +1,5 @@
-﻿using HRIS.Exceptions;
+﻿using HRIS.Dtos.UserDto;
+using HRIS.Exceptions;
 using HRIS.Services.UserService;
 using HRIS.Utils;
 using Microsoft.AspNetCore.Authorization;
@@ -27,7 +28,7 @@ namespace HRIS.Controllers
             try
             {
                 var userId = UserClaim.GetCurrentUser(HttpContext) ??
-                    throw new Exception();
+                    throw new UserNotFoundException("Invalid user.");   
 
                 var response = await _userService.GetUserProfile(userId);
                 return Ok(response);
@@ -39,8 +40,32 @@ namespace HRIS.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogCritical("", ex);
-                return Problem("");
+                _logger.LogCritical("An error occurred while attempting to get user data.", ex);
+                return Problem("An error occurred while getting user profile. Please try again later.");
+            }
+        }
+
+        [HttpPut]
+        [Produces("application/json")]
+        public async Task<IActionResult> UpdateUserProfile([FromBody] UpdateUserProfileDto request)
+        {
+            try
+            {
+                var userId = UserClaim.GetCurrentUser(HttpContext) ??
+                    throw new UserNotFoundException("Invalid user.");
+
+                var response = await _userService.UpdateUserProfile(userId, request);
+                return Ok(response);
+            }
+            catch (UserNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to get user information.", ex);
+                return NotFound("An error occurred while finding user.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("An error occurred while attempting to update user data.", ex);
+                return Problem(ex.Message);
             }
         }
     }

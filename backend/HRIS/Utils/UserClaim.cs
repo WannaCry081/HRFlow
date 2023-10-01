@@ -26,5 +26,23 @@ namespace HRIS.Utils
 
             return null;
         }
+
+        public static string? GetCurrentRole(HttpContext context)
+        {
+            var identity = context.User.Identity as ClaimsIdentity;
+
+            if (identity != null)
+            {
+                var userClaim = identity.Claims;
+                var userRoleClaim = userClaim.FirstOrDefault(c => c.Type == ClaimTypes.Role);
+
+                if (userRoleClaim != null)
+                {
+                    return userRoleClaim.Value; ;
+                }
+            }
+
+            return null;
+        }
     }
 }
