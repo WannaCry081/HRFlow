@@ -37,8 +37,6 @@ namespace HRIS.Services.UserService
                 throw new Exception("Failed to update user profile to database.");
             }
             return _mapper.Map<GetUserProfileDto>(user);
-
         }
-
     }
 }
