@@ -16,17 +16,10 @@ const defaultVariant  = {
         y: 0,
         transition: {
             duration: 0.4,
+            staggerChildren: 0.15, 
         }
     }
 }
-
-const staggerContainerVariants = {
-    visible: {
-        transition: {
-            staggerChildren: 0.15, 
-        },
-    },
-};
 
 
 const Home = forwardRef((props, ref) => {
@@ -57,7 +50,7 @@ const Home = forwardRef((props, ref) => {
                             className="font-lato font-extrabold transition text-[3.5rem] sm:text-[4.1rem] md:text-6xl lg:text-[4.2rem] text-center xl:text-left xl:text-6xl 2xl:text-[4.2rem]"
                             initial="hidden"
                             animate="visible"
-                            variants={staggerContainerVariants}
+                            variants={defaultVariant}
                         >
                             <motion.h1 
                                 className="leading-tight text-jetblack"
