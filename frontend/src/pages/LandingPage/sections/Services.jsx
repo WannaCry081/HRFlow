@@ -1,4 +1,5 @@
 import { forwardRef } from "react";
+import { motion } from "framer-motion";
 import Bell from "assets/svg/icons/Bell.svg";
 import Clock from "assets/svg/icons/Clock.svg";
 import Coin from "assets/svg/icons/Coin.svg";
@@ -9,6 +10,24 @@ import Thunder from "assets/svg/icons/Thunder.svg";
 import FeatureCard from "../components/FeatureCard";
 import PurpleGradient from "assets/svg/Services_purple.svg";
 import PinkGradient from "assets/svg/Services_pink.svg";
+
+const defaultVariant = {
+    hidden: {
+        opacity: 0,
+        x: 70,
+    },
+    visible: {
+        opacity: 1,
+        x: 0,
+        transition: {
+            duration: 0.4,
+            staggerChildren: 0.1,
+        },
+        viewport: {
+            once: true
+        }
+    }
+}
 
 const Services = forwardRef((props, ref) => {
     return (
@@ -31,38 +50,49 @@ const Services = forwardRef((props, ref) => {
                         HR Flow offers variety of services for the ease of use of both HR professionals and employees.
                     </p>
                 </div>
-                <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                <motion.div 
+                    className="grid gap-4 md:grid-cols-2 xl:grid-cols-3"
+                    variants={defaultVariant}
+                    initial="hidden"
+                    whileInView="visible"
+                >
                     <FeatureCard
                         featureIcon={Folder}
                         featureTitle="Employee Records Management"
                         featureDescription="Maintain a comprehensive database of employee information, including personal details and  contact information."
+                        variants={defaultVariant}
                     />
                     <FeatureCard
                         featureIcon={Person}
                         featureTitle="Employee Self-service"
                         featureDescription="Allow employees to update their personal information and submit requests and documents."
+                        variants={defaultVariant}
                     />
                     <FeatureCard
                         featureIcon={Coin}
                         featureTitle="Payroll, Benefits, and Compensation Management"
                         featureDescription="Automate payroll calculations, tax deductions, and generate paychecks, manages employee benefits and salary structures."
+                        variants={defaultVariant}
                     />
                     <FeatureCard
                         featureIcon={Clock}
                         featureTitle="Time and Attendance Tracking"
                         featureDescription="Record and monitor employee attendance and work hours, including clock-in/clock-out features."
+                        variants={defaultVariant}
                     />
                     <FeatureCard
                         featureIcon={Megaphone}
                         featureTitle="Recruitment and Applicant Tracking"
                         featureDescription="Accept applications and track candidates throughout the hiring process."
+                        variants={defaultVariant}
                     />
                     <FeatureCard
                         featureIcon={Bell}
                         featureTitle="Notifications and Alerts"
                         featureDescription="Send automated notifications for important announcements and upcoming events to employees."
+                        variants={defaultVariant}
                     />
-                </div>
+                </motion.div>
             </div>
         </section>
     );
