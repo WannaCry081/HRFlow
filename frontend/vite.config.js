@@ -5,14 +5,33 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   resolve : {
-    alias : {
-      src : "/src",
-      components : "/src/components",
-      pages : "/src/pages",
-      services : "/src/services",
-      utils : "/src/utils",
-      constants : "/src/constants",
-      assets : "/src/assets"
-    }
+    alias : [{
+      find : "@",
+      replacement : "/src"
+    }, {
+      find : "@Components",
+      replacement : "/src/components"
+    }, {
+      find : "@Pages",
+      replacement : "/src/pages",
+    }, {
+      find : "@Services",
+      replacement : "/src/services",
+    }, {
+      find : "@Utils",
+      replacement : "/src/services",
+    }, {
+      find : "@Assets",
+      replacement : "/src/services",
+    }, {
+      find : "@Layouts",
+      replacement : "/src/layouts",
+    }, {
+      find : "@Styles",
+      replacement : "/src/styles",
+    }, {
+      find : "@Hooks",
+      replacement : "/src/hooks",
+    }]
   }
 })
