@@ -12,9 +12,11 @@ namespace HRIS.Repositories.HumanResourceRepository
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public Task<bool> CreateEmployeeRecord(User employee)
+        public async Task<bool> CreateEmployeeRecord(User employee)
         {
-            throw new NotImplementedException();
+            _context.Add(employee);
+            var result = await _context.SaveChangesAsync();
+            return result > 0;
         }
 
         public Task<bool> UpdateEmployeeRecord(User employee, User newEmployeeDetails)
