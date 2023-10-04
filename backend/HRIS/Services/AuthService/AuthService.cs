@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
+using HRIS.dtos.AuthDto;
 using HRIS.Dtos.AuthDto;
 using HRIS.Exceptions;
 using HRIS.Models;
 using HRIS.Repositories.AuthRepository;
 using HRIS.Utils;
+using Microsoft.AspNetCore.Identity;
+using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
 
 namespace HRIS.Services.AuthService
 {
@@ -103,7 +106,43 @@ namespace HRIS.Services.AuthService
                 _configuration,
                 user.Id,
                 "Human Resource",
-                DateTime.Now.AddDays(1));
+            DateTime.Now.AddDays(1));
         }
+
+        public async Task<string> ResetPassword(ResetPasswordDto request)
+        {
+            var user = await _authRepository.GetUserByEmail(request.Email);
+            if (user is null)
+            {
+                throw new UserNotFoundException("User is not found in the database.");
+            }
+
+            if (!user.CompanyEmail.Equals(request.Email))
+            {
+                throw new UnauthorizedAccessException("Invalid Email.");
+            }
+
+            Password.Encrypt(request.NewPassword, out string passwordHash, out string passwordSalt);
+
+            var updateUser = _mapper.Map<User>(request);
+            updateUser.PasswordHash = passwordHash;
+            updateUser.PasswordSalt = passwordSalt;
+            updateUser.UpdatedAt = DateTime.Now;
+
+            var isUserUpdated = await _authRepository.UpdateUserPassword(updateUser, request.Email);
+            if (!isUserUpdated)
+            {
+                throw new Exception("Failed to save user information to database.");
+            }
+
+            var newToken = CodeGenerator.Token(
+                _configuration,
+                user.Id,
+                "Human Resource",
+                DateTime.Now.AddDays(1));
+
+            return newToken;
+        }
+
     }
 }
