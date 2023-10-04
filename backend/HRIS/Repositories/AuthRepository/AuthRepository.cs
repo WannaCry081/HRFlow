@@ -36,5 +36,21 @@ namespace HRIS.Repositories.AuthRepository
             user.PasswordToken = code;
             return 0 < await _context.SaveChangesAsync();
         }
+
+        public async Task<bool> UpdateUserPassword(User request, string email)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.CompanyEmail == email);
+            if (user != null)
+            {
+                user.PasswordHash = request.PasswordHash;
+                user.PasswordSalt = request.PasswordSalt;
+                user.UpdatedAt = request.UpdatedAt;
+                _context.Users.Update(user);
+                return 0 < await _context.SaveChangesAsync();
+            }
+            return false;
+
+        }
+
     }
 }
