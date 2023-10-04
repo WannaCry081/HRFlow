@@ -1,4 +1,5 @@
-﻿using HRIS.Dtos.AuthDto;
+﻿using HRIS.dtos.AuthDto;
+using HRIS.Dtos.AuthDto;
 using HRIS.Exceptions;
 using HRIS.Services.AuthService;
 using Microsoft.AspNetCore.Mvc;
@@ -111,5 +112,27 @@ namespace HRIS.Controllers
                 return Problem("An error occurred while verifying OTP code. Please try again later.");
             }
         }
+
+        [HttpPut("forgot-password/reset-password")]
+        [Consumes("application/json")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto request)
+        {
+            try
+            {
+                var response = await _authService.ResetPassword(request);
+                return Ok(response);
+            }
+            catch (UserNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to get user information.", ex);
+                return NotFound("An error occurred while finding user.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("An error occurred while attempting to update user password. ", ex);
+                return Problem("An error occurred while processing reset password request. Please try again later.");
+            }
+        }
+
     }
 }
