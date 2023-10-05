@@ -1,4 +1,5 @@
-﻿using HRIS.Dtos.AuthDto;
+﻿using HRIS.dtos.AuthDto;
+using HRIS.Dtos.AuthDto;
 using HRIS.Exceptions;
 using HRIS.Services.AuthService;
 using Microsoft.AspNetCore.Mvc;
@@ -86,7 +87,7 @@ namespace HRIS.Controllers
             }
         }
 
-        [HttpPost("forgot-password/verfication")]
+        [HttpPost("forgot-password/verification")]
         [Consumes("application/json")]
         public async Task<IActionResult> VerifyPassword([FromBody] OTPDto request)
         {
@@ -110,6 +111,22 @@ namespace HRIS.Controllers
                 _logger.LogCritical("An error occurred while attempting to verify OTP password.", ex);
                 return Problem("An error occurred while verifying OTP code. Please try again later.");
             }
+        }
+
+        [HttpPost("send-email")]
+        [Consumes("application/json")]
+        public async Task<IActionResult> SendEmailToAdmin([FromBody] ContactAdminDto request)
+        {
+           try
+           {
+               var response = await _authService.SendEmailToAdmin(request);
+               return Ok(response);
+           }
+           catch (Exception ex)
+           {
+               _logger.LogCritical("An error occurred while attempting to send the email to the admin.", ex);
+               return Problem(ex.Message);
+           }
         }
     }
 }
