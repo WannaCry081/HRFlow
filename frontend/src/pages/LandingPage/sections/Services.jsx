@@ -22,9 +22,6 @@ const defaultVariant = {
         transition: {
             duration: 0.4,
             staggerChildren: 0.1,
-        },
-        viewport: {
-            once: true
         }
     }
 }
