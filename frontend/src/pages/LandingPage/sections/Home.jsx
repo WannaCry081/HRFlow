@@ -17,8 +17,9 @@ const defaultVariant  = {
         transition: {
             duration: 0.4,
             staggerChildren: 0.15, 
-        }
-    }
+        },
+    },
+    
 }
 
 
@@ -54,19 +55,16 @@ const Home = forwardRef((props, ref) => {
                         >
                             <motion.h1 
                                 className="leading-tight text-jetblack"
-                                variants={defaultVariant}
                             >
                                 Innovate HR,
                             </motion.h1>
                             <motion.h1 
                                 className="leading-tight text-jetblack"
-                                variants={defaultVariant}
                             >
                                 Elevate Workplaces,
                             </motion.h1>
                             <motion.h1 
                                 className="leading-tight text-jetblack"
-                                variants={defaultVariant}
                             >
                                 Empower Teams
                             </motion.h1>
