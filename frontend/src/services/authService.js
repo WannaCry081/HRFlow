@@ -43,3 +43,12 @@ export const VerifyPassword = async (request) => {
         return error.response;
     }
 };
+
+export const SendEmailToAdmin = async (request) => {
+    try {
+        const response = await axiosInstance.post("/send-email");
+        return response.data;
+    } catch (error){
+        return error.response;
+    }
+}
