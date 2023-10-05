@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HRIS.dtos.AuthDto;
 using HRIS.Dtos.AuthDto;
 using HRIS.Exceptions;
 using HRIS.Models;
@@ -104,6 +105,11 @@ namespace HRIS.Services.AuthService
                 user.Id,
                 "Human Resource",
                 DateTime.Now.AddDays(1));
+        }
+
+        public async Task<string> SendEmailToAdmin(ContactAdminDto request)
+        {
+           return await SMTP.SendEmailToAdmin(_configuration, request.Email, request.Subject, request.Body);
         }
     }
 }
