@@ -12,15 +12,12 @@ const Contact = forwardRef((props, ref) => {
             subject: "",
             body: ""
         },
-        onSubmit: (values) => {
-            const SendEmailToAdmin = async () => {
-                try {
-                    const response = await SendEmailToAdmin(values);
-                } catch (error) {
-                    console.log(error.response);
-                }
-            };
-            SendEmailToAdmin();
+        onSubmit: async (values) => {
+            try {
+                const response = await SendEmailToAdmin(values);
+            } catch (error){
+                console.log(error.response);
+            }
         },
         validationSchema: Yup.object({
             email: Yup.string().required("Email Address is Required.")
@@ -32,7 +29,7 @@ const Contact = forwardRef((props, ref) => {
                 .max(150, "Email Subject can be at most 150 characters."),
             body: Yup.string().required("Message Body is required.")
                 .min(3, "Message Body must be at least 3 characters.")
-                .max(150, "Email Address can be at most 150 characters."),
+                .max(150, "Message Body can be at most 150 characters."),
 
         })
     });
@@ -89,8 +86,7 @@ const Contact = forwardRef((props, ref) => {
                                 <textarea
                                     className="resize-none transition rounded-md p-4 bg-gray-100 w-full focus:border focus:border-gray-400 focus:outline-none font-normal h-52"
                                     placeholder="Message"
-                                    type="text"
-                                    id="message-body"
+                                    name="body"
                                     value={formik.values.body}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
