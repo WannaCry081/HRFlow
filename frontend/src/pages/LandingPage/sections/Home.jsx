@@ -16,12 +16,10 @@ const defaultVariant  = {
         y: 0,
         transition: {
             duration: 0.4,
-            staggerChildren: 0.15, 
-        },
-    },
-    
+            staggerChildren: 0.15
+        }
+    }
 }
-
 
 const Home = forwardRef((props, ref) => {
     const { sectionRefs } = props;
