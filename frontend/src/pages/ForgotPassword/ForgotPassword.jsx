@@ -55,7 +55,7 @@ const FPCodeSection = (prop) => {
         <>
             <header className="mb-6">
                 <span className="flex items-center gap-2">
-                    <LuMessagesSquare size={26} className="text-primary-light"/>
+                    <LuMessagesSquare size={26} className="stroke-primary-light"/>
                     <h1 className="text-3xl font-lato font-extrabold text-primary-light ">Confirm your Email</h1>
                 </span>
                 <p className="font-poppins text-sm text-gray-600 mt-2">We've sent a confirmation code to your email. Input the code to proceed.</p>
@@ -70,12 +70,12 @@ const FPCodeSection = (prop) => {
                     </div>
                 </span>
 
-                <p className="font-poppins text-sm font-semibold text-primary-light cursor-pointer max-w-max">
+                <p className="font-poppins text-sm font-semibold text-primary-light cursor-pointer max-w-max active-primary">
                     Resend Verification
                 </p>
 
                 <button type="submit"
-                    className="bg-primary-light rounded-full self-end h-14 w-full sm:w-44 text-poppins text-white font-semibold shadow-[0_8px_40px_-8px_rgba(110,105,216,.6)]">
+                    className="bg-primary-light rounded-full self-end h-14 w-full sm:w-44 text-poppins text-white font-semibold shadow-primary">
                     Submit
                 </button>
             </form>
@@ -105,7 +105,7 @@ const FPEmailSection = (prop) => {
         <>
             <header className="mb-6">
                 <span className="flex items-center gap-2">
-                    <LuMessagesSquare size={26} className="text-primary-light"/>
+                    <LuMessagesSquare size={26} className="stroke-primary-light"/>
                     <h1 className="text-3xl font-lato font-extrabold text-primary-light ">Forgot your password?</h1>
                 </span>
                 <p className="font-poppins text-sm text-gray-600 mt-2">Don't worry, we just need your Email Address for confirmation.</p>
@@ -122,7 +122,7 @@ const FPEmailSection = (prop) => {
                     value={formik.values.email}/>
 
                 <button type="submit"
-                    className="bg-primary-light rounded-full self-end h-14 w-full sm:w-44 text-poppins text-white font-semibold shadow-[0_8px_40px_-8px_rgba(110,105,216,.6)]">
+                    className="bg-primary-light rounded-full self-end h-14 w-full sm:w-44 text-poppins text-white font-semibold shadow-primary">
                     Proceed
                 </button>
             </form>

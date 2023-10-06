@@ -63,16 +63,16 @@ const Login = () => {
                             value={formik.values.password}/>
                 
                         <div className="mt-2 text-end float-right">
-                            <p className="font-poppins text-sm font-semibold text-secondary-light cursor-pointer" onClick={onShowForgotPassword}>
+                            <p className="font-poppins text-sm font-semibold text-secondary-light cursor-pointer active-secondary" onClick={onShowForgotPassword}>
                                 Forgot Password?
                             </p>
                         </div>
                     </div>
 
                     <button type="submit"
-                        className="bg-primary-light rounded-full h-14 text-poppins text-white font-semibold shadow-[0_8px_40px_-8px_rgba(110,105,216,.6)]">
+                        className="bg-primary-light rounded-full h-14 text-poppins text-white font-semibold shadow-primary">
                         Sign In
-                    </button>
+                    </button>   
 
                     <p className="flex items-center text-center text-black">
                         <span className="flex-grow h-[1px] rounded-full bg-gray-200"></span>
@@ -87,7 +87,7 @@ const Login = () => {
                 </form>
                 <p className="mt-4 font-poppins text-sm text-gray-600">
                     {"Don't have an account yet? "}
-                    <Link to="/auth/register" className="font-semibold text-secondary-light">Sign Up</Link>
+                    <Link to="/auth/register" className="font-semibold text-secondary-light active-secondary ">Sign Up</Link>
                 </p>
             </div>
         </div>

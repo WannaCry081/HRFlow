@@ -89,21 +89,21 @@ const Register = () => {
                                 name="Confirm Password"
                                 maxLength={150}
                                 type="password"
-                                placeholder="Password"
+                                placeholder="Re-enter Password"
                                 onChange={formik.handleChange}
                                 errors={formik.errors.confirmPassword}
                                 touched={formik.touched.confirmPassword}
                                 value={formik.values.confirmPassword}/>
 
                     <button type="submit"
-                        className="mt-2 bg-primary-light rounded-full h-14 text-poppins text-white font-semibold shadow-[0_8px_40px_-8px_rgba(110,105,216,.6)]">
+                        className="mt-2 bg-primary-light rounded-full h-14 text-poppins text-white font-semibold shadow-primary">
                         Submit
                     </button>
 
                 </form>
                 <p className="mt-4 font-poppins text-sm text-gray-600">
                     Already have an account?
-                    <Link to="/auth/login" className="font-semibold text-secondary-light"> Sign In</Link>
+                    <Link to="/auth/login" className="font-semibold text-secondary-light active-secondary"> Sign In</Link>
                 </p>
             </div>
         </div>
