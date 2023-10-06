@@ -3,7 +3,7 @@ import Login from "@Pages/Login";
 import Register from "@Pages/Register";
 
 export const routes = [
-    {
+    { 
         title : "Landing Page",
         layout : "Landing",
         pages : [
@@ -27,11 +27,6 @@ export const routes = [
                 name: "Register",
                 path: "/register",
                 element : <Register />
-            },
-            {
-                name: "Group",
-                path: "/group",
-                element: <Group />
             }
         ]
     },
@@ -43,6 +38,14 @@ export const routes = [
                 title : "Human Resource",
                 pages : [
                     {
+                        name: "",
+                        path: "",
+                        element: null
+                    },
+                    {
+                        name: "",
+                        path: "",
+                        element: null
                     }
                 ]
             }, 
@@ -50,6 +53,14 @@ export const routes = [
                 title : "Employee",
                 pages : [
                     {
+                        name: "",
+                        path: "",
+                        element: null
+                    },
+                    {
+                        name: "",
+                        path: "",
+                        element: null
                     }
                 ]
             }
