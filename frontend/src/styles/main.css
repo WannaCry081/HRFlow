@@ -19,11 +19,34 @@
     border-radius: 3px;
 }
 
-@layer {
-    .transition {
-        @apply transition-all ease-in;
-    }
+.transition-in {
+    @apply transition-all ease-in;
 }
+
+.shadow-primary {
+    @apply shadow-[0_8px_40px_-8px_rgba(110,105,216,.6)]
+}
+
+.shadow-secondary {
+    @apply shadow-[0_8px_40px_-8px_rgba(255,91,143,.6)];
+}
+
+.shadow-tertiary {
+    @apply shadow-[0_8px_40px_-8px_rgba(188,111,241,.6)];
+}
+
+.active-primary {
+    @apply before:transition-all before:ease-out relative before:absolute before:h-[2px] before:w-full before:left-0 before:bg-primary-light before:-bottom-2 before:opacity-0 hover:before:opacity-100 hover:before:-bottom-1;
+}
+
+.active-secondary {
+    @apply before:transition-all before:ease-out relative before:absolute before:h-[2px] before:w-full before:left-0 before:bg-secondary-light before:-bottom-2 before:opacity-0 hover:before:opacity-100 hover:before:-bottom-1;
+}
+
+.active-tertiary {
+    @apply before:transition-all before:ease-out relative before:absolute before:h-[2px] before:w-full before:left-0 before:bg-tertiary-light before:-bottom-2 before:opacity-0 hover:before:opacity-100 hover:before:-bottom-1;
+}
+
 
 @font-face {
     font-family : "AssetsLato";
