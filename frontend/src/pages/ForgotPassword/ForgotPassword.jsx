@@ -11,7 +11,7 @@ const ForgotPassword = (prop) => {
     const onSectionChange = (value) => setCurrentSection(value);
 
     return (
-        <ModalBox onCancel={prop.onCancel}>
+        <ModalBox onCancel={prop.onCancel}> 
             {(currentSection === 1) ? (
                 <FPEmailSection onSubmit={onSectionChange} />
             ) : (
@@ -70,7 +70,7 @@ const FPCodeSection = (prop) => {
                     </div>
                 </span>
 
-                <p className="font-poppins text-sm font-semibold text-primary-light cursor-pointer max-w-max active-primary">
+                <p className="font-poppins text-sm font-semibold text-secondary-light cursor-pointer max-w-max active-secondary">
                     Resend Verification
                 </p>
 
@@ -106,7 +106,7 @@ const FPEmailSection = (prop) => {
             <header className="mb-6">
                 <span className="flex items-center gap-2">
                     <LuMessagesSquare size={26} className="stroke-primary-light"/>
-                    <h1 className="text-3xl font-lato font-extrabold text-primary-light ">Forgot your password?</h1>
+                    <h1 className="text-2xl sm:text-3xl font-lato font-extrabold text-primary-light ">Forgot your password?</h1>
                 </span>
                 <p className="font-poppins text-sm text-gray-600 mt-2">Don't worry, we just need your Email Address for confirmation.</p>
             </header>
