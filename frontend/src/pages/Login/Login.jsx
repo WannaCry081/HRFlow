@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { FcGoogle } from "react-icons/fc";
 import { TextInput, PasswordInput } from "@Components/FormInput";
@@ -8,6 +8,7 @@ import * as Yup from "yup";
 
 
 const Login = () => { 
+    const navigate = useNavigate();
     const [showForgotPassword, setShowForgotPassword] = useState(false);
     const onShowForgotPassword = () => setShowForgotPassword(!showForgotPassword);
 
@@ -17,7 +18,7 @@ const Login = () => {
             password : ""
         },
         onSubmit : (values) => {
-            
+            navigate("/dashboard/home")
         },
         validationSchema : Yup.object({
             email :Yup.string().required("Email Address is required.")
@@ -35,10 +36,10 @@ const Login = () => {
         <div className="mx-auto max-w-[24rem]">
             {showForgotPassword && <ForgotPassword onCancel={onShowForgotPassword} />}
             <div className="flex flex-col items-center">
-                <div className="text-center mb-6">
+                <header className="text-center mb-6">
                     <h1 className="text-lato text-4xl font-bold my-2 sm:text-6xl">Welcome!</h1>
                     <p className="text-poppins text-sm text-gray-600 sm:text-lg">Log in to your HR Flow account to continue.</p>
-                </div>
+                </header>
                 <form onSubmit={formik.handleSubmit}
                     className="w-full flex flex-col gap-5">
                     <TextInput nameId="email"
@@ -72,7 +73,7 @@ const Login = () => {
                     <button type="submit"
                         className="bg-primary-light rounded-full h-14 text-poppins text-white font-semibold shadow-primary">
                         Sign In
-                    </button>   
+                    </button>
 
                     <p className="flex items-center text-center text-black">
                         <span className="flex-grow h-[1px] rounded-full bg-gray-200"></span>

@@ -1,4 +1,3 @@
-import Group from "@Pages/Group";
 import Login from "@Pages/Login";
 import Register from "@Pages/Register";
 
@@ -36,6 +35,7 @@ export const routes = [
         pages : [
             {
                 title : "Human Resource",
+                layout: "Dashboard",
                 pages : [
                     {
                         name: "",
@@ -51,6 +51,7 @@ export const routes = [
             }, 
             {
                 title : "Employee",
+                layout: "Dashboard",
                 pages : [
                     {
                         name: "",

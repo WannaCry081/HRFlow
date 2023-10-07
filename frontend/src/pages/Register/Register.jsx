@@ -1,10 +1,13 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { TextInput, PasswordInput } from "@Components/FormInput";
+import Group from "@Pages/Group";
 import * as Yup from "yup";
 
 const Register = () => { 
-
+    const [registerUser, setRegisterUser] = useState(false);
+    const onSetRegisterUser = () => setRegisterUser(!registerUser);
     const formik = useFormik({
         initialValues : {
             firstName : "",
@@ -14,7 +17,7 @@ const Register = () => {
             confirmPassword : ""
         },
         onSubmit : (values) => {
-            
+            onSetRegisterUser();
         },
         validationSchema : Yup.object({
             firstName : Yup.string().required("First Name is required.")
@@ -36,11 +39,12 @@ const Register = () => {
 
     return (
         <div className="mx-auto max-w-[24rem]">
+            {registerUser && <Group onCancel={onSetRegisterUser}/>}
             <div className="flex flex-col items-center">
-                <div className="text-center mb-6">
+                <header className="text-center mb-6">
                     <h1 className="text-lato text-4xl font-bold my-2 sm:text-5xl">Create Account!</h1>
                     <p className="text-poppins text-sm text-gray-600 sm:text-lg">Register to start your journey with HR Flow.</p>
-                </div>
+                </header>
                 <form onSubmit={formik.handleSubmit}
                     className="w-full flex flex-col gap-5">
                     <div className="flex gap-5">
