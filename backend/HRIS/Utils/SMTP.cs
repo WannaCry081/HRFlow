@@ -45,5 +45,38 @@ namespace HRIS.Utils
             </div>";
             return emailText;
         }
+
+        public async static Task<string> SendEmailToAdmin(
+           IConfiguration configuration,
+           string email,
+           string subject,
+           string body
+        )
+        {
+            var mail = new MimeMessage();
+            mail.From.Add(MailboxAddress.Parse(configuration.GetSection("Sender:EmailName").Value));
+            mail.To.Add(MailboxAddress.Parse(configuration.GetSection("Sender:EmailName").Value));
+            mail.Subject = subject;
+            mail.Body = new TextPart(TextFormat.Html)
+            {
+                Text = $"<p>From: {email}</p><p>Message: {body}</p>"
+            };
+
+            using var smtp = new SmtpClient();
+
+            await smtp.ConnectAsync(
+                configuration.GetSection("Sender:EmailHost").Value, 587,
+                SecureSocketOptions.StartTls);
+
+            await smtp.AuthenticateAsync(
+               configuration.GetSection("Sender:EmailName").Value,
+               configuration.GetSection("Sender:EmailPassword").Value);
+
+            await smtp.SendAsync(mail);
+
+            await smtp.DisconnectAsync(true);
+            return "Email sent successfully to the admin!";
+
+        }
     }
 }

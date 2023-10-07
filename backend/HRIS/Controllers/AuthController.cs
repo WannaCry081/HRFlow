@@ -87,7 +87,7 @@ namespace HRIS.Controllers
             }
         }
 
-        [HttpPost("forgot-password/verfication")]
+        [HttpPost("forgot-password/verification")]
         [Consumes("application/json")]
         public async Task<IActionResult> VerifyPassword([FromBody] OTPDto request)
         {
@@ -113,6 +113,21 @@ namespace HRIS.Controllers
             }
         }
 
+        [HttpPost("send-email")]
+        [Consumes("application/json")]
+        public async Task<IActionResult> SendEmailToAdmin([FromBody] ContactAdminDto request)
+        {
+           try
+           {
+               var response = await _authService.SendEmailToAdmin(request);
+               return Ok(response);
+           }
+           catch (Exception ex)
+           {
+               _logger.LogCritical("An error occurred while attempting to send the email to the admin.", ex);
+               return Problem("An error occured while sending an email to the admin. Please try again later.");
+           }
+        }
         [HttpPut("forgot-password/reset-password")]
         [Consumes("application/json")]
         public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto request)

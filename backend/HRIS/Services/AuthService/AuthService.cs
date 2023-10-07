@@ -5,8 +5,6 @@ using HRIS.Exceptions;
 using HRIS.Models;
 using HRIS.Repositories.AuthRepository;
 using HRIS.Utils;
-using Microsoft.AspNetCore.Identity;
-using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
 
 namespace HRIS.Services.AuthService
 {
@@ -144,5 +142,10 @@ namespace HRIS.Services.AuthService
             return newToken;
         }
 
+
+        public async Task<string> SendEmailToAdmin(ContactAdminDto request)
+        {
+           return await SMTP.SendEmailToAdmin(_configuration, request.Email, request.Subject, request.Body);
+        }
     }
 }
