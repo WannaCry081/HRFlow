@@ -1,9 +1,9 @@
 import { forwardRef } from "react";
+import ContactHand from "@Assets/svg/ContactHand.svg";
+import PurpleGradient from "@Assets/svg/Contact_purple.svg";
 import { useFormik } from "formik";
 import { SendEmailToAdmin } from "services/authService.js";
 import * as Yup from "yup";
-import ContactHand from "assets/svg/ContactHand.svg";
-import PurpleGradient from "assets/svg/Contact_purple.svg";
 
 const Contact = forwardRef((props, ref) => {
     const formik = useFormik({

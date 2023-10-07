@@ -1,9 +1,9 @@
 import { forwardRef } from "react";
 import { motion } from "framer-motion";
-import PinkGradient from "assets/svg/About_pink.svg";
-import HumanRocket from "assets/svg/Human_rocket.svg";
-import Rocket from "assets/svg/icons/Rocket.svg";
-import Crown from "assets/svg/icons/Crown.svg";
+import PinkGradient from "@Assets/svg/About_pink.svg";
+import HumanRocket from "@Assets/svg/Human_rocket.svg";
+import Rocket from "@Assets/svg/icons/Rocket.svg";
+import Crown from "@Assets/svg/icons/Crown.svg";
 
 const About = forwardRef((props, ref) => {
     return (

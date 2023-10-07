@@ -1,10 +1,10 @@
 import { forwardRef } from "react";
 import { Link } from "react-router-dom";
+import ComputerChild from "@Assets/svg/ComputerChild.svg";
+import PurpleGradient from "@Assets/svg/Home_purple.svg";
+import SkyblueGradient from "@Assets/svg/Home_skyblue.svg";
+import PinkGradient from "@Assets/svg/Home_pink.svg";
 import { motion } from "framer-motion";
-import ComputerChild from "assets/svg/ComputerChild.svg";
-import PurpleGradient from "assets/svg/Home_purple.svg";
-import SkyblueGradient from "assets/svg/Home_skyblue.svg";
-import PinkGradient from "assets/svg/Home_pink.svg";
 
 const defaultVariant  = {
     hidden: {

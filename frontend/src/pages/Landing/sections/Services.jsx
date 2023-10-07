@@ -1,15 +1,15 @@
 import { forwardRef } from "react";
+import Bell from "@Assets/svg/icons/Bell.svg";
+import Clock from "@Assets/svg/icons/Clock.svg";
+import Coin from "@Assets/svg/icons/Coin.svg";
+import Folder from "@Assets/svg/icons/Folder.svg";
+import Megaphone from "@Assets/svg/icons/Megaphone.svg";
+import Person from "@Assets/svg/icons/Person.svg";
+import Thunder from "@Assets/svg/icons/Thunder.svg";
 import { motion } from "framer-motion";
-import Bell from "assets/svg/icons/Bell.svg";
-import Clock from "assets/svg/icons/Clock.svg";
-import Coin from "assets/svg/icons/Coin.svg";
-import Folder from "assets/svg/icons/Folder.svg";
-import Megaphone from "assets/svg/icons/Megaphone.svg";
-import Person from "assets/svg/icons/Person.svg";
-import Thunder from "assets/svg/icons/Thunder.svg";
 import FeatureCard from "../components/FeatureCard";
-import PurpleGradient from "assets/svg/Services_purple.svg";
-import PinkGradient from "assets/svg/Services_pink.svg";
+import PurpleGradient from "@Assets/svg/Services_purple.svg";
+import PinkGradient from "@Assets/svg/Services_pink.svg";
 
 const defaultVariant = {
     hidden: {

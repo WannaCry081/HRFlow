@@ -6,7 +6,7 @@ import About from "./sections/About";
 import Contact from "./sections/Contact"; 
 import Footer from "./sections/Footer"; 
 
-const LandingPage = () => {
+const Landing = () => {
     const sectionRefs = {
         homeRef: useRef(null),
         servicesRef: useRef(null),
@@ -38,4 +38,4 @@ const LandingPage = () => {
     );
 };
 
-export default LandingPage;
+export default Landing;

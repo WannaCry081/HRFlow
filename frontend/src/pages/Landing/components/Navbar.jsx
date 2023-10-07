@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import HRFlowLogo_Dark from "assets/svg/HRFlowLogo_Dark.svg";
 import { FiMenu } from "react-icons/fi";
 import { MdOutlineClose } from "react-icons/md";
+import HRFlowLogo_Dark from "@Assets/svg/HRFlowLogo_Dark.svg";
 
 const Navbar = ( props ) => {
     const navigate = useNavigate();
