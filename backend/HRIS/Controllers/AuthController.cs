@@ -128,5 +128,26 @@ namespace HRIS.Controllers
                return Problem(ex.Message);
            }
         }
+        [HttpPut("forgot-password/reset-password")]
+        [Consumes("application/json")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto request)
+        {
+            try
+            {
+                var response = await _authService.ResetPassword(request);
+                return Ok(response);
+            }
+            catch (UserNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to get user information.", ex);
+                return NotFound("An error occurred while finding user.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("An error occurred while attempting to update user password. ", ex);
+                return Problem("An error occurred while processing reset password request. Please try again later.");
+            }
+        }
+
     }
 }
