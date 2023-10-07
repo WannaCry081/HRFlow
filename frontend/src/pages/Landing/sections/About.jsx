@@ -1,4 +1,5 @@
 import { forwardRef } from "react";
+import { motion } from "framer-motion";
 import PinkGradient from "@Assets/svg/About_pink.svg";
 import HumanRocket from "@Assets/svg/Human_rocket.svg";
 import Rocket from "@Assets/svg/icons/Rocket.svg";
@@ -13,8 +14,25 @@ const About = forwardRef((props, ref) => {
                     className="absolute -z-10 top-0 sm:-top-10 -left-20 md:-top-10 md:-left-36 xl:top-[18rem] xl:left-[30rem] 2xl:-bottom-[10rem] 2xl:left-[50rem]"
                 />
                 <div className="w-full">
-                    <div className="text-5xl font-extrabold font-lato text-jetblack">
-                        About HR Flow
+                    <div>
+                        <h1 className="text-5xl font-extrabold font-lato text-jetblack">
+                            About HR Flow
+                        </h1>
+                        <motion.div 
+                            className="my-2 h-2 bg-primary-light rounded-full"
+                            initial={{
+                                opacity: 0,
+                                width: "0%"
+                            }}
+                            whileInView={{
+                                opacity: 1,
+                                width: "21rem",
+                                transition: {
+                                    duration: 0.7
+                                }
+                            }}
+
+                        ></motion.div>
                     </div>
                     <p className="py-4 font-poppins text-2xl leading-snug text-gray-700">
                         Welcome to HR Flow — Redefining HR Management. Our central hub streamlines HR processes for effortless workforce management.

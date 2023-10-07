@@ -1,6 +1,13 @@
+import { motion } from "framer-motion";
+
 const FeatureCard = (props) => {
     return (
-        <div className="border-[0.5px] border-gray-200 shadow-lg rounded-3xl px-4 xl:p-6 transition h-[22rem] md:h-[26rem] xl:h-96 lg:h-80 flex flex-col items-start justify-center text-center bg-secondary-pastel">
+        <motion.div 
+            className="border-[0.5px] border-gray-200 shadow-lg rounded-3xl px-4 xl:p-6 transition h-[22rem] md:h-[26rem] xl:h-96 lg:h-80 flex flex-col items-start justify-center text-center bg-secondary-pastel hover:border-gray-300"
+            whileHover={{ scale: 1.1}}
+            transition={{ duration: 0}}
+            variants={props.variants}
+        >
             <div className="w-full h-1/5 flex items-center justify-center"> 
                 <img src={props.featureIcon} className="h-16 transition lg:h-18"/>
             </div>
@@ -14,7 +21,7 @@ const FeatureCard = (props) => {
                     {props.featureDescription}
                 </p>
             </div>
-        </div>
+        </motion.div>
     );
 };
 
