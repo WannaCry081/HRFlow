@@ -125,7 +125,7 @@ namespace HRIS.Controllers
            catch (Exception ex)
            {
                _logger.LogCritical("An error occurred while attempting to send the email to the admin.", ex);
-               return Problem(ex.Message);
+               return Problem("An error occured while sending an email to the admin. Please try again later.");
            }
         }
         [HttpPut("forgot-password/reset-password")]

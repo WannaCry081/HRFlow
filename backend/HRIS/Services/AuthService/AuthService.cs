@@ -5,8 +5,6 @@ using HRIS.Exceptions;
 using HRIS.Models;
 using HRIS.Repositories.AuthRepository;
 using HRIS.Utils;
-using Microsoft.AspNetCore.Identity;
-using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
 
 namespace HRIS.Services.AuthService
 {
