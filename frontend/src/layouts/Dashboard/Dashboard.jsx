@@ -1,4 +1,7 @@
+import { Route, Routes } from "react-router-dom";
+
 const Dashboard = () => {
+   
 
     // Decrypt the jwt token then destructor the 
     // router depending the title of routers
