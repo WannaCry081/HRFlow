@@ -46,13 +46,14 @@ const Register = () => {
                     <p className="text-poppins text-sm text-gray-600 sm:text-lg">Register to start your journey with HR Flow.</p>
                 </header>
                 <form onSubmit={formik.handleSubmit}
-                    className="w-full flex flex-col gap-5">
-                    <div className="flex gap-5">
+                    className="w-full flex flex-col gap-4">
+                    <div className="flex gap-4">
                         <TextInput nameId="firstName"
                                     name="First Name"
                                     type="text"
                                     placeholder="Johnny"
                                     maxLength={100}
+                                    onBlur={formik.handleBlur}
                                     errors={formik.errors.firstName}
                                     touched={formik.touched.firstName}
                                     onChange={formik.handleChange}
@@ -63,6 +64,7 @@ const Register = () => {
                                     type="text"
                                     placeholder="Doe"
                                     maxLength={100}
+                                    onBlur={formik.handleBlur}
                                     errors={formik.errors.lastName}
                                     touched={formik.touched.lastName}
                                     onChange={formik.handleChange}
@@ -75,6 +77,7 @@ const Register = () => {
                                 maxLength={150}
                                 placeholder="JohnDoe@example.com"
                                 errors={formik.errors.email}
+                                onBlur={formik.handleBlur}
                                 touched={formik.touched.email}
                                 onChange={formik.handleChange}
                                 value={formik.values.email}/>
@@ -84,6 +87,7 @@ const Register = () => {
                                 maxLength={150}
                                 type="password"
                                 placeholder="Password"
+                                onBlur={formik.handleBlur}
                                 onChange={formik.handleChange}
                                 errors={formik.errors.password}
                                 touched={formik.touched.password}
@@ -94,6 +98,7 @@ const Register = () => {
                                 maxLength={150}
                                 type="password"
                                 placeholder="Re-enter Password"
+                                onBlur={formik.handleBlur}
                                 onChange={formik.handleChange}
                                 errors={formik.errors.confirmPassword}
                                 touched={formik.touched.confirmPassword}

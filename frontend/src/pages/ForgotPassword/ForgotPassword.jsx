@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ModalBox } from "@Components/ModalBox";
 import { TextInput, CodeInput } from "@Components/FormInput";
 import { useFormik } from "formik";
@@ -22,12 +23,14 @@ const ForgotPassword = (prop) => {
 };
 
 const FPCodeSection = (prop) => {
+    const navigate = useNavigate();
+
     const formik = useFormik({
         initialValues: {
             code: "" 
         },
         onSubmit: (values) => {
-
+            navigate("/dashboard/home", { replace : true});
         },
         validationSchema: Yup.object({
             code: Yup.string().required("Code is required.")
@@ -46,6 +49,7 @@ const FPCodeSection = (prop) => {
             nameId={`code${index + 1}`}
             maxLength={1}
             minLength={1}
+            onBlur={formik.handleBlur}
             value={formik.values.code[index] || ""}
             onChange={(e) => handleCodeChange(index, e.target.value)}
         />
@@ -60,7 +64,7 @@ const FPCodeSection = (prop) => {
                 </span>
                 <p className="font-poppins text-sm text-gray-600 mt-2">We've sent a confirmation code to your email. Input the code to proceed.</p>
             </header>
-            <form onSubmit={formik.handleSubmit} className="flex flex-col gap-5">
+            <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4">
                 <span>
                     <div className="flex items-center gap-2 sm:px-6">
                         {codeInputs}
@@ -82,8 +86,6 @@ const FPCodeSection = (prop) => {
         </>
     );
 };
-
-
 
 const FPEmailSection = (prop) => {
     const formik = useFormik({
@@ -110,12 +112,13 @@ const FPEmailSection = (prop) => {
                 </span>
                 <p className="font-poppins text-sm text-gray-600 mt-2">Don't worry, we just need your Email Address for confirmation.</p>
             </header>
-            <form onSubmit={formik.handleSubmit} className="flex flex-col gap-5 ">
+            <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4 ">
                 <TextInput nameId="email"
                     name="Email"
                     type="email"
                     placeholder="JohnDoe@example.com"
                     maxLength={150}
+                    onBlur={formik.handleBlur}
                     errors={formik.errors.email}
                     touched={formik.touched.email}
                     onChange={formik.handleChange}
@@ -129,9 +132,5 @@ const FPEmailSection = (prop) => {
         </>
     );
 };
-
-
-
-
 
 export default ForgotPassword;

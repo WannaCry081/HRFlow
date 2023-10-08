@@ -18,7 +18,7 @@ const Login = () => {
             password : ""
         },
         onSubmit : (values) => {
-            navigate("/dashboard/home")
+            navigate("/dashboard/home", { replace : true});
         },
         validationSchema : Yup.object({
             email :Yup.string().required("Email Address is required.")
@@ -41,7 +41,7 @@ const Login = () => {
                     <p className="text-poppins text-sm text-gray-600 sm:text-lg">Log in to your HR Flow account to continue.</p>
                 </header>
                 <form onSubmit={formik.handleSubmit}
-                    className="w-full flex flex-col gap-5">
+                    className="w-full flex flex-col gap-4">
                     <TextInput nameId="email"
                         name="Email"
                         type="email"
@@ -50,6 +50,7 @@ const Login = () => {
                         errors={formik.errors.email}
                         touched={formik.touched.email}
                         onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                         value={formik.values.email}/>
 
                     <div className="mb-2">
@@ -61,6 +62,7 @@ const Login = () => {
                             errors={formik.errors.password}
                             touched={formik.touched.password}
                             onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
                             value={formik.values.password}/>
                 
                         <div className="mt-2 text-end float-right">
