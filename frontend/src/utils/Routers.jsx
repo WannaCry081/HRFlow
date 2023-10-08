@@ -34,36 +34,46 @@ export const routes = [
         layout : "Dashboard",
         pages : [
             {
-                title : "Human Resource",
-                layout: "Dashboard",
-                pages : [
-                    {
-                        name: "",
-                        path: "",
-                        element: null
-                    },
-                    {
-                        name: "",
-                        path: "",
-                        element: null
-                    }
-                ]
-            }, 
+                accessId : 3,
+                name: "Home",
+                path: "/home",
+                element: null
+            },
             {
-                title : "Employee",
-                layout: "Dashboard",
-                pages : [
-                    {
-                        name: "",
-                        path: "",
-                        element: null
-                    },
-                    {
-                        name: "",
-                        path: "",
-                        element: null
-                    }
-                ]
+                accessId: 3,
+                name: "Time Clock",
+                path: "/applicant-tracking",
+                element: null
+            },
+            {
+                accessId: 1,
+                name: "Applicant Tracking",
+                path: "/applicant-tracking",
+                element: null
+            },
+            {
+                accessId: 1,
+                name: "Employee Records",
+                path: "/employee-records",
+                element: null
+            },
+            {
+                accessId : 3,
+                name: "Employee Service",
+                path: "/employee-service",
+                element: null
+            },
+            {
+                accessId : 3,
+                name: "Notification",
+                path: "/notification",
+                element: null
+            },
+            {
+                accessId : 3,
+                name: "Profile",
+                path: "/profile",
+                element: null
             }
         ]
     }
