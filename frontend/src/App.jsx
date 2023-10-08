@@ -8,7 +8,8 @@ const App = () => {
     <Routes>
       <Route path="/" index element={<Landing />} />
       <Route path="/auth/*" element={<Auth />} /> 
-      <Route path="/dashboard/*" element={<Dashboard />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="*" element={<h1>Page does not exists</h1>} />
     </Routes>
   );
 };
