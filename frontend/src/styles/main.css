@@ -47,6 +47,9 @@
     @apply before:transition-all before:ease-out relative before:absolute before:h-[2px] before:w-full before:left-0 before:bg-tertiary-light before:-bottom-2 before:opacity-0 hover:before:opacity-100 hover:before:-bottom-1;
 }
 
+.line-above {
+    @apply relative before:absolute before:w-full before:h-[2px] before:bg-jetblack before:top-0; 
+}
 
 @font-face {
     font-family : "AssetsLato";
