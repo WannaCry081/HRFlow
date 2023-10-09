@@ -10,6 +10,9 @@ namespace HRIS.Mappers
         {
             CreateMap<User, UpsertEmployeeDto>()
                 .ReverseMap();
+
+            CreateMap<User, GetEmployeeDto>()
+                .ReverseMap();
         }
     }
 }
