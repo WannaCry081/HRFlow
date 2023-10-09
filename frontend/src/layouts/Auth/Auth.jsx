@@ -1,5 +1,5 @@
 import { Routes, Route, Link, Navigate } from "react-router-dom";
-import { routes } from "../../utils/Routers";
+import { routes } from "@Utils/Routers";
 import HRFlowLogo_Dark from "@Assets/svg/HRFlowLogo_Dark.svg";
 
 const Auth = () => {
