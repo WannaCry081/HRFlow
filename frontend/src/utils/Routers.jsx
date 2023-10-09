@@ -1,5 +1,12 @@
 import Login from "@Pages/Login";
 import Register from "@Pages/Register";
+import Home from "@Pages/Home";
+import ApplicantTracking from "@Pages/ApplicantTracking";
+import EmployeeRecord from "@Pages/EmployeeRecord";
+import EmployeeService from "@Pages/EmployeeService";
+import Notifications from "@Pages/Notifications";
+import TimeClock from "@Pages/TimeClock";
+import Profile from "@Pages/Profile";
 
 export const routes = [
     { 
@@ -37,43 +44,59 @@ export const routes = [
                 accessId : 3,
                 name: "Home",
                 path: "/home",
-                element: null
+                element: <Home />
             },
             {
                 accessId: 3,
                 name: "Time Clock",
-                path: "/applicant-tracking",
-                element: null
+                path: "/time-clock",
+                element: <TimeClock />
             },
             {
                 accessId: 1,
                 name: "Applicant Tracking",
                 path: "/applicant-tracking",
-                element: null
+                element: <ApplicantTracking />
             },
             {
                 accessId: 1,
                 name: "Employee Records",
                 path: "/employee-records",
-                element: null
+                element: <EmployeeRecord />
             },
             {
                 accessId : 3,
                 name: "Employee Service",
                 path: "/employee-service",
-                element: null
+                element: <EmployeeService />
             },
             {
                 accessId : 3,
-                name: "Notification",
-                path: "/notification",
-                element: null
+                name: "Notifications",
+                path: "/notifications",
+                element: <Notifications />
             },
             {
                 accessId : 3,
                 name: "Profile",
                 path: "/profile",
-                element: null
+                element: <Profile />
+            }
+        ]
+    }, 
+    {
+        title : "Common Pages",
+        layout : "Common", 
+        pages : [
+            {
+                name :  "Settings",
+                path : "/settings",
+                element : null
+            },
+            {
+                name : "Help",
+                path : "/help",
+                element : null
             }
         ]
     }
