@@ -6,7 +6,7 @@ namespace HRIS.Repositories.HumanResourceRepository
     {
         Task<User?> GetEmployee(Guid userId);
         Task<bool> CreateEmployeeRecord(User employee);
-        Task<bool> UpdateEmployeeRecord(User updateEmployee);
+        Task<bool> UpdateEmployeeRecords(User updateEmployee);
        // Task<bool> UpdateEmployeeStatus(User updateEmployee); 
     }
 }

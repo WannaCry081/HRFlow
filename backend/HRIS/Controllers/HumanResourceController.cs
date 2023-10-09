@@ -36,7 +36,7 @@ namespace HRIS.Controllers
         [HttpPost("add-employee")]
         [Consumes("application/json")]
         [Produces("application/json")]
-        public async Task<IActionResult> CreateEmployeeRecord([FromBody] UpsertEmployeeDto request)
+        public async Task<IActionResult> CreateEmployeeRecord([FromBody] UpsertEmployeeRecordDto request)
         {
             try
             {
@@ -59,11 +59,11 @@ namespace HRIS.Controllers
         [HttpPut("{employeeId}")]
         [Consumes("application/json")]
         [Produces("application/json")]
-        public async Task<IActionResult> UpdateEmployeeRecords(Guid employeeId, UpsertEmployeeDto request)
+        public async Task<IActionResult> UpdateEmployeeRecords(Guid employeeId, UpsertEmployeeRecordDto request)
         {
             try
             {
-                var employee = await _humanResourceService.UpdateEmployeeRecord(employeeId, request);
+                var employee = await _humanResourceService.UpdateEmployeeRecords(employeeId, request);
                 return Ok(employee);
             }
             catch (Exception ex)

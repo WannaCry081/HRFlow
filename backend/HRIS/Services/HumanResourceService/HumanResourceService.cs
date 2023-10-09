@@ -16,7 +16,7 @@ namespace HRIS.Services.HumanResourceService
             _humanResourceRepository = humanResourceRepository ?? throw new ArgumentNullException(nameof(humanResourceRepository));
         }
 
-        public async Task<User> CreateEmployeeRecord(UpsertEmployeeDto request)
+        public async Task<User> CreateEmployeeRecord(UpsertEmployeeRecordDto request)
         {
             var employee = _mapper.Map<User>(request);
             var response = await _humanResourceRepository.CreateEmployeeRecord(employee);
@@ -28,7 +28,7 @@ namespace HRIS.Services.HumanResourceService
 
         }
 
-        public async Task<GetEmployeeDto> UpdateEmployeeRecord(Guid employeeId, UpsertEmployeeDto request)
+        public async Task<GetEmployeeRecordDto> UpdateEmployeeRecords(Guid employeeId, UpsertEmployeeRecordDto request)
         {
             var employee = await _humanResourceRepository.GetEmployee(employeeId);
             if(employee is null)
@@ -38,13 +38,13 @@ namespace HRIS.Services.HumanResourceService
             var dbEmployee = _mapper.Map(request, employee);
             dbEmployee.Id = employeeId;
 
-            var isEmployeeUpdated = await _humanResourceRepository.UpdateEmployeeRecord(dbEmployee);
+            var isEmployeeUpdated = await _humanResourceRepository.UpdateEmployeeRecords(dbEmployee);
             if (!isEmployeeUpdated)
             {
                 throw new Exception("Failed to update employee record");
             }
 
-            return _mapper.Map<GetEmployeeDto>(dbEmployee);
+            return _mapper.Map<GetEmployeeRecordDto>(dbEmployee);
 
         }
     }

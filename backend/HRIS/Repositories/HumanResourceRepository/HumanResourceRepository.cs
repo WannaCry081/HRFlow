@@ -26,7 +26,7 @@ namespace HRIS.Repositories.HumanResourceRepository
                 .FirstOrDefaultAsync(c => c.Id == userId);
         }
 
-        public async Task<bool> UpdateEmployeeRecord(User updateEmployee)
+        public async Task<bool> UpdateEmployeeRecords(User updateEmployee)
         {
             var employee = await _context.Users.FirstOrDefaultAsync(c => c.Id == updateEmployee.Id);
             if(employee is null)
