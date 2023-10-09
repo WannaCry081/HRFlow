@@ -19,7 +19,7 @@ export default defineConfig({
       replacement : "/src/services",
     }, {
       find : "@Utils",
-      replacement : "/src/services",
+      replacement : "/src/Utils",
     }, {
       find : "@Assets",
       replacement : "/src/assets",

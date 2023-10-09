@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FiMenu } from "react-icons/fi";
 import { MdOutlineClose } from "react-icons/md";
 import HRFlowLogo_Dark from "@Assets/svg/HRFlowLogo_Dark.svg";
 
 const Navbar = ( props ) => {
-    const navigate = useNavigate();
     const { sectionRefs } = props;
     const [toggleMenu, setToggleMenu] = useState(false);
 
@@ -17,8 +16,6 @@ const Navbar = ( props ) => {
         sectionRefs[refName].current.scrollIntoView({ behavior: "smooth" });
         toggleMenuHandler();
     };
-    
-    const onClickRoute = () => navigate("/auth/login");
 
         return (
             <nav className="fixed top-0 w-full bg-white z-50">
@@ -59,9 +56,9 @@ const Navbar = ( props ) => {
                                     <p onClick={() => menuItemClickHandler("contactRef")} className="hover:text-primary-dark">
                                         Contact Us
                                     </p>
-                                    <button onClick={onClickRoute}  className="bg-primary-light px-8 py-1.5 2xl:px-10 2xl:py-2 rounded-full text-white hover:bg-primary-dark">
+                                    <Link to="/auth/login" target="_blank" className="bg-primary-light px-8 py-1.5 2xl:px-10 2xl:py-2 rounded-full text-white hover:bg-primary-dark">
                                         Sign In
-                                    </button>
+                                    </Link>
                                 </div>
 
                             </div>
@@ -102,9 +99,9 @@ const Navbar = ( props ) => {
                             <p onClick={() => menuItemClickHandler("contactRef")} className="hover:text-jetblack">
                                 Contact Us
                             </p>
-                            <button className="w-full bg-primary-light rounded-full text-white py-3 hover:bg-primary-dark">
+                            <Link to="/auth/login" target="_blank" className="w-full bg-primary-light rounded-full text-white py-3 hover:bg-primary-dark">
                                 Sign In
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -129,9 +126,9 @@ const Navbar = ( props ) => {
                         <p onClick={() => menuItemClickHandler("contactRef")} className="hover:text-jetblack">
                             Contact Us
                         </p>
-                        <button onClick={onClickRoute} className="w-full bg-primary-light rounded-xl text-white py-2">
+                        <Link to="/auth/login" target="_blank" className="w-full bg-primary-light rounded-xl text-white py-2">
                             Sign in
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </div>
