@@ -1,6 +1,6 @@
 ﻿namespace HRIS.dtos.EmployeeDto
 {
-    public class GetEmployeeDto
+    public class GetEmployeeRecordDto
     {
 
         public string FirstName { get; set; } = string.Empty;
