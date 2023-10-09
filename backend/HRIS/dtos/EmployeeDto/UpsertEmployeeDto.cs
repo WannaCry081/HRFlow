@@ -41,5 +41,6 @@ namespace HRIS.dtos.EmployeeDto
         public string Role { get; set; } = "Employee";
         public string Status { get; set; } = "Active";
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime UpdatedAt { get; set; } = DateTime.Now;
     }
 }
