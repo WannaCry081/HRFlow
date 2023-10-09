@@ -8,7 +8,7 @@ namespace HRIS.dtos.EmployeeDto
         [StringLength(100, ErrorMessage = "First Name must be between {2} and {1} characters long.", MinimumLength = 2)]
         public string FirstName { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "Middle Name is required.")]
+
         [StringLength(100, ErrorMessage = "Middle Name must be between {2} and {1} characters long.", MinimumLength = 2)]
         public string MiddleName { get; set; } = string.Empty;
 
@@ -16,7 +16,7 @@ namespace HRIS.dtos.EmployeeDto
         [StringLength(100, ErrorMessage = "Last Name must be between {2} and {1} characters long.", MinimumLength = 2)]
         public string LastName { get; set; } = string.Empty;
 
-        [StringLength(2, ErrorMessage = "Suffix must be between {2} and {1} characters long.", MinimumLength = 1)]
+        [StringLength(2, ErrorMessage = "Suffix must be between {2} and {1} characters long.", MinimumLength = 0)]
         public string Suffix { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Age is required.")]
