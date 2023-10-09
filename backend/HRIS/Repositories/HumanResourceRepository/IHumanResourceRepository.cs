@@ -5,9 +5,7 @@ namespace HRIS.Repositories.HumanResourceRepository
     public interface IHumanResourceRepository
     {
         Task<bool> CreateEmployeeRecord(User employee);
-        Task<bool> UpdateEmployeeRecord(User employee, User newEmployeeDetails);
-
-        //Task<bool> UpdateEmployeeRecordProperty(); 
-        //Task<bool> DeleteEmployeeRecord(); 
+        Task<bool> UpdateEmployeeRecord(int employeeId, User newEmployeeDetails);
+        Task<bool> UpdateEmployeeStatus(int employeeId, User newEmployeeDetails); 
     }
 }
