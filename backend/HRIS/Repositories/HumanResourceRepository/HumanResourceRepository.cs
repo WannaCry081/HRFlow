@@ -1,5 +1,6 @@
 ﻿using HRIS.Context;
 using HRIS.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
 
 namespace HRIS.Repositories.HumanResourceRepository
@@ -7,7 +8,7 @@ namespace HRIS.Repositories.HumanResourceRepository
     public class HumanResourceRepository : IHumanResourceRepository
     {
         private readonly DataContext _context;
-        
+
         public HumanResourceRepository(DataContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
@@ -20,10 +21,17 @@ namespace HRIS.Repositories.HumanResourceRepository
             return result > 0;
         }
 
+        public async Task<bool> UpdateEmployeeRecord(User updateEmployee, JsonPatchDocument<User> request)
+        {
+            request.ApplyTo(updateEmployee);
+            var result = await _context.SaveChangesAsync();
+            return result > 0;
+        }
+
         public async Task<bool> UpdateEmployeeRecords(User updateEmployee)
         {
             var employee = await _context.Users.FirstOrDefaultAsync(c => c.Id == updateEmployee.Id);
-            if(employee is null)
+            if (employee is null)
             {
                 return false;
             }
@@ -40,7 +48,7 @@ namespace HRIS.Repositories.HumanResourceRepository
             employee.CompanyEmail = updateEmployee.CompanyEmail;
             employee.UpdatedAt = updateEmployee.UpdatedAt;
             employee.UpdatedBy = updateEmployee.UpdatedBy;
-  
+
             await _context.SaveChangesAsync();
             return true;
         }
