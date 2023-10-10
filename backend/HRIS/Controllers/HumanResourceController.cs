@@ -1,6 +1,8 @@
 ﻿using HRIS.dtos.EmployeeDto;
+using HRIS.Exceptions;
 using HRIS.Services.HumanResourceService;
 using HRIS.Services.UserService;
+using HRIS.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -40,13 +42,20 @@ namespace HRIS.Controllers
         {
             try
             {
-                var response = await _humanResourceService.CreateEmployeeRecord(request);
+                var userId = UserClaim.GetCurrentUser(HttpContext) ??
+                  throw new UserNotFoundException("Invalid user.");
+                var response = await _humanResourceService.CreateEmployeeRecord(userId, request);
                 return Ok(response);
+            }
+            catch (UserExistsException ex)
+            {
+                _logger.LogError("An error occurred while attempting to register employee to database.", ex);
+                return BadRequest("An error occurred while registering duplicate records.");
             }
             catch (Exception ex)
             {
                 _logger.LogCritical(ex, "An error occurred while attempting to add a new employee record.");
-                return Problem(ex.Message);
+                return Problem("An error occurred while processing employee creation request. Please try again later.");
             }
         }
 
