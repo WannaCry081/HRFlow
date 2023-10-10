@@ -72,9 +72,7 @@ namespace HRIS.Controllers
         {
             try
             {
-                var userId = UserClaim.GetCurrentUser(HttpContext) ??
-                    throw new UserNotFoundException("Invalid user.");
-                var employee = await _humanResourceService.UpdateEmployeeRecords(userId, employeeId, request);
+                var employee = await _humanResourceService.UpdateEmployeeRecords(employeeId, request);
                 return Ok(employee);
             }
             catch (UserNotFoundException ex)

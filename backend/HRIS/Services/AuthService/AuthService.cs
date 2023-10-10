@@ -145,7 +145,7 @@ namespace HRIS.Services.AuthService
 
         public async Task<string> SendEmailToAdmin(ContactAdminDto request)
         {
-            return await SMTP.SendEmailToAdmin(_configuration, request.Email, request.Subject, request.Body);
+           return await SMTP.SendEmailToAdmin(_configuration, request.Email, request.Subject, request.Body);
         }
 
         public async Task<string> GenerateTeamCode(Guid id, GenerateTeamCodeDto request)
