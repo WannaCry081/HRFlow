@@ -1,5 +1,6 @@
 ﻿using HRIS.dtos.EmployeeDto;
 using HRIS.Models;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace HRIS.Services.HumanResourceService
 {
@@ -7,5 +8,6 @@ namespace HRIS.Services.HumanResourceService
     {
         Task<User> CreateEmployeeRecord(Guid id, UpsertEmployeeRecordDto request);
         Task<GetEmployeeRecordDto> UpdateEmployeeRecords(Guid hrId, Guid employeeId, UpsertEmployeeRecordDto request);
+        Task<bool> UpdateEmployeeRecord(Guid employeeId, JsonPatchDocument<User> request);
     }
 }
