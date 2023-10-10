@@ -21,6 +21,7 @@ namespace HRIS.Repositories.HumanResourceRepository
             return result > 0;
         }
 
+
         public async Task<bool> UpdateEmployeeRecord(User updateEmployee, JsonPatchDocument<User> request)
         {
             request.ApplyTo(updateEmployee);
@@ -48,10 +49,12 @@ namespace HRIS.Repositories.HumanResourceRepository
             employee.CompanyEmail = updateEmployee.CompanyEmail;
             employee.UpdatedAt = updateEmployee.UpdatedAt;
             employee.UpdatedBy = updateEmployee.UpdatedBy;
+            employee.GroupCode = updateEmployee.GroupCode;
+            employee.TeamId = updateEmployee.TeamId;
+            employee.Status = updateEmployee.Status;
 
             await _context.SaveChangesAsync();
             return true;
         }
-
     }
 }
