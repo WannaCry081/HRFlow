@@ -32,6 +32,8 @@ namespace HRIS.Services.HumanResourceService
 
             var employee = _mapper.Map<User>(request);
             employee.CreatedBy = hr.FirstName + " " + hr.LastName;
+            employee.GroupCode = hr.GroupCode;
+            employee.TeamId = hr.TeamId;
 
             var response = await _humanResourceRepository.CreateEmployeeRecord(employee);
             if (!response)
@@ -80,7 +82,6 @@ namespace HRIS.Services.HumanResourceService
             }
 
             return _mapper.Map<GetEmployeeRecordDto>(dbEmployee);
-
         }
     }
 }
