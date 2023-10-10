@@ -1,9 +1,12 @@
 ﻿using HRIS.dtos.EmployeeDto;
 using HRIS.Exceptions;
+using HRIS.Models;
+using HRIS.Repositories.AuthRepository;
 using HRIS.Services.HumanResourceService;
 using HRIS.Services.UserService;
 using HRIS.Utils;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HRIS.Controllers
@@ -15,12 +18,12 @@ namespace HRIS.Controllers
     {
         private readonly ILogger<HumanResourceController> _logger;
         private readonly IHumanResourceService _humanResourceService;
-        private readonly IUserService _userService;
-        public HumanResourceController(ILogger<HumanResourceController> logger, IHumanResourceService humanResourceService, IUserService userService)
+        private readonly IAuthRepository _authRepository;
+        public HumanResourceController(ILogger<HumanResourceController> logger, IHumanResourceService humanResourceService, IAuthRepository authRepository)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _humanResourceService = humanResourceService ?? throw new ArgumentNullException(nameof(humanResourceService));
-            _userService = userService ?? throw new ArgumentNullException(nameof(userService));
+            _authRepository = authRepository ?? throw new ArgumentNullException(nameof(authRepository));
         }
 
         [HttpGet("{id}")]
@@ -58,17 +61,34 @@ namespace HRIS.Controllers
                 return Problem("An error occurred while processing employee creation request. Please try again later.");
             }
         }
-
-        [HttpPatch("{id}")]
-        public Task<IActionResult> UpdateEmployeeRecord()
+         
+        [HttpPatch("{employeeId}")]
+        public async Task<IActionResult> UpdateEmployeeRecord([FromRoute] Guid employeeId, JsonPatchDocument<User> request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var hrId = UserClaim.GetCurrentUser(HttpContext) ??
+                 throw new UserNotFoundException("Invalid user.");
+
+                var response = await _humanResourceService.UpdateEmployeeRecord(employeeId, request);
+                return Ok("Successfully updated employee's record.");
+            }
+            catch (UserNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to find employee.", ex);
+                return NotFound("An error occurred while finding employee.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while attempting to update employee record.");
+                return Problem(ex.Message);
+            }
         }
 
         [HttpPut("{employeeId}")]
         [Consumes("application/json")]
         [Produces("application/json")]
-        public async Task<IActionResult> UpdateEmployeeRecords(Guid employeeId, UpsertEmployeeRecordDto request)
+        public async Task<IActionResult> UpdateEmployeeRecords([FromRoute] Guid employeeId, [FromBody] UpsertEmployeeRecordDto request)
         {
             try
             {
@@ -87,7 +107,7 @@ namespace HRIS.Controllers
                 _logger.LogError(ex, "An error occurred while attempting to update employee record.");
                 return Problem("An error occurred while processing employee update request. Please try again later.");
             }
-        
+
         }
     }
 }
