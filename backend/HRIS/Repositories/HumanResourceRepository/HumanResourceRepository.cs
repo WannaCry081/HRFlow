@@ -20,12 +20,6 @@ namespace HRIS.Repositories.HumanResourceRepository
             return result > 0;
         }
 
-        public async Task<User?> GetEmployee(Guid userId)
-        {
-            return await _context.Users
-                .FirstOrDefaultAsync(c => c.Id == userId);
-        }
-
         public async Task<bool> UpdateEmployeeRecords(User updateEmployee)
         {
             var employee = await _context.Users.FirstOrDefaultAsync(c => c.Id == updateEmployee.Id);
@@ -39,13 +33,13 @@ namespace HRIS.Repositories.HumanResourceRepository
             employee.LastName = updateEmployee.LastName;
             employee.Suffix = updateEmployee.Suffix;
             employee.Age = updateEmployee.Age;
+            employee.Birthdate = updateEmployee.Birthdate;
             employee.MobileNumber = updateEmployee.MobileNumber;
             employee.LandlineNumber = updateEmployee.LandlineNumber;
             employee.PersonalEmail = updateEmployee.PersonalEmail;
             employee.CompanyEmail = updateEmployee.CompanyEmail;
             employee.UpdatedAt = updateEmployee.UpdatedAt;
-
-
+  
             await _context.SaveChangesAsync();
             return true;
         }
