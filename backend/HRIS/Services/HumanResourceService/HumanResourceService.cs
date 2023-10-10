@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 using HRIS.dtos.EmployeeDto;
+using HRIS.Exceptions;
 using HRIS.Models;
+using HRIS.Repositories.AuthRepository;
 using HRIS.Repositories.HumanResourceRepository;
+using HRIS.Utils;
 
 namespace HRIS.Services.HumanResourceService
 {
@@ -9,23 +12,33 @@ namespace HRIS.Services.HumanResourceService
     {
         private readonly IMapper _mapper;
         private readonly IHumanResourceRepository _humanResourceRepository;
+        private readonly IAuthRepository _authRepository;
 
-        public HumanResourceService(IMapper mapper, IHumanResourceRepository humanResourceRepository)
+        public HumanResourceService(IMapper mapper, IHumanResourceRepository humanResourceRepository, IAuthRepository authRepository)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _humanResourceRepository = humanResourceRepository ?? throw new ArgumentNullException(nameof(humanResourceRepository));
+            _authRepository = authRepository ?? throw new ArgumentNullException(nameof(authRepository));
         }
 
-        public async Task<User> CreateEmployeeRecord(UpsertEmployeeRecordDto request)
+        public async Task<User> CreateEmployeeRecord(Guid id, UpsertEmployeeRecordDto request)
         {
+            var hr = await _authRepository.GetUserById(id);
+            var isEmployeeExists = await _authRepository.IsEmailExists(request.CompanyEmail);
+            if (isEmployeeExists)
+            {
+                throw new UserExistsException("Employee is already recorded to the database.");
+            }
+
             var employee = _mapper.Map<User>(request);
+            employee.CreatedBy = hr.FirstName + " " + hr.LastName;
+            
             var response = await _humanResourceRepository.CreateEmployeeRecord(employee);
             if (!response)
             {
                 throw new Exception("Failed to add new employee record");
             }
             return employee;
-
         }
 
         public async Task<GetEmployeeRecordDto> UpdateEmployeeRecords(Guid employeeId, UpsertEmployeeRecordDto request)

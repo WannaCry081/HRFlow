@@ -5,7 +5,7 @@ namespace HRIS.Services.HumanResourceService
 {
     public interface IHumanResourceService
     {
-        Task<User> CreateEmployeeRecord(UpsertEmployeeRecordDto request);
+        Task<User> CreateEmployeeRecord(Guid id, UpsertEmployeeRecordDto request);
         Task<GetEmployeeRecordDto> UpdateEmployeeRecords(Guid employeeId, UpsertEmployeeRecordDto request);
     }
 }
