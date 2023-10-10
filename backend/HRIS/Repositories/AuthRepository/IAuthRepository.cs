@@ -1,4 +1,5 @@
-﻿using HRIS.Models;
+﻿using HRIS.dtos.AuthDto;
+using HRIS.Models;
 
 namespace HRIS.Repositories.AuthRepository
 {
@@ -10,5 +11,6 @@ namespace HRIS.Repositories.AuthRepository
         Task<User?> GetUserById(Guid id); 
         Task<bool> UpdateUserCode(User user, string code);
         Task<bool> UpdateUserPassword(User request, string email);
+        Task<bool> GenerateTeamCode(Guid id, GenerateTeamCodeDto request);
     }
 }
