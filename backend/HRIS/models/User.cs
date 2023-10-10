@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using HRIS.models;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace HRIS.Models
 {
@@ -58,6 +60,11 @@ namespace HRIS.Models
         [StringLength(100)]
         public string UpdatedBy { get; set; } = string.Empty;
 
+        [ForeignKey("TeamId")]
+        [JsonIgnore]
+        public Guid? TeamId { get; set; }
+        [JsonIgnore]
+        public Team Team { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
