@@ -30,6 +30,11 @@ namespace HRIS.Repositories.AuthRepository
             return await _context.Users.Where(
                 c => c.CompanyEmail.Equals(email)).FirstOrDefaultAsync();
         }
+        public async Task<User?> GetUserById(Guid id)
+        {
+            return await _context.Users.Where(
+                c => c.Id.Equals(id)).FirstOrDefaultAsync();
+        }
 
         public async Task<bool> UpdateUserCode(User user, string code)
         {
