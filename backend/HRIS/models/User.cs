@@ -21,6 +21,7 @@ namespace HRIS.Models
         [StringLength(10)]
         public string Suffix { get; set; } = string.Empty;
         public int Age { get; set; } = 0;
+        public DateTime Birthdate { get; set; } 
 
         [StringLength(15)]
         public string MobileNumber { get; set; } = string.Empty;
@@ -43,11 +44,20 @@ namespace HRIS.Models
         [StringLength(150)]
         public string PasswordSalt { get; set; } = string.Empty;
 
+        [StringLength(10)]
+        public string Status { get; set; } = string.Empty;
+
         [StringLength(20)]
         public string Role { get; set; } = string.Empty;
-
         [StringLength(8)]
         public string GroupCode { get; set; } = string.Empty;
+
+        [StringLength(100)]
+        public string CreatedBy { get; set; } = string.Empty;
+
+        [StringLength(100)]
+        public string UpdatedBy { get; set; } = string.Empty;
+
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
