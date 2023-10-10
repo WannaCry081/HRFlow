@@ -21,6 +21,8 @@ namespace HRIS.dtos.EmployeeDto
 
         [Required(ErrorMessage = "Age is required.")]
         public int Age { get; set; } = 0;
+        public DateTime Birthdate { get; set; }
+
 
         [StringLength(13, ErrorMessage = "Mobile Number must be between {2} and {1} characters long.", MinimumLength = 11)]
         public string MobileNumber { get; set; } = string.Empty;
@@ -40,6 +42,14 @@ namespace HRIS.dtos.EmployeeDto
 
         public string Role { get; set; } = "Employee";
         public string Status { get; set; } = "Active";
+
+        public string GroupCode { get; set; } = string.Empty;
+
+        [StringLength(100)]
+        public string CreatedBy { get; set; } = string.Empty;
+
+        [StringLength(100)]
+        public string UpdatedBy { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
     }
