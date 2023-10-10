@@ -4,6 +4,7 @@ using HRIS.Exceptions;
 using HRIS.Models;
 using HRIS.Repositories.AuthRepository;
 using HRIS.Repositories.HumanResourceRepository;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace HRIS.Services.HumanResourceService
 {
@@ -40,6 +41,25 @@ namespace HRIS.Services.HumanResourceService
             return employee;
         }
 
+        public async Task<bool> UpdateEmployeeRecord(Guid employeeId, JsonPatchDocument<User> request)
+        {
+            //var hr = await _authRepository.GetUserById(hrId);
+            var employee = await _authRepository.GetUserById(employeeId);
+            if(employee is null)
+            {
+                throw new UserNotFoundException("Employee not found.");
+            }
+
+           // employee.UpdatedBy = hr.FirstName + " " + hr.LastName;
+
+            var response = await _humanResourceRepository.UpdateEmployeeRecord(employee, request);
+            if (!response)
+            {
+                throw new Exception("Failed to update employee record.");
+            }
+            return response;
+        }
+
         public async Task<GetEmployeeRecordDto> UpdateEmployeeRecords(Guid hrId, Guid employeeId, UpsertEmployeeRecordDto request)
         {
             var hr = await _authRepository.GetUserById(hrId);
@@ -56,7 +76,7 @@ namespace HRIS.Services.HumanResourceService
             var isEmployeeUpdated = await _humanResourceRepository.UpdateEmployeeRecords(dbEmployee);
             if (!isEmployeeUpdated)
             {
-                throw new Exception("Failed to update employee record");
+                throw new Exception("Failed to update employee record.");
             }
 
             return _mapper.Map<GetEmployeeRecordDto>(dbEmployee);
