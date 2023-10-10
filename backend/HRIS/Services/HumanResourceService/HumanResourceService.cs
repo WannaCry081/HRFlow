@@ -7,7 +7,7 @@ using HRIS.Repositories.HumanResourceRepository;
 using HRIS.Utils;
 
 namespace HRIS.Services.HumanResourceService
-{
+{0
     public class HumanResourceService : IHumanResourceService
     {
         private readonly IMapper _mapper;
@@ -43,11 +43,12 @@ namespace HRIS.Services.HumanResourceService
 
         public async Task<GetEmployeeRecordDto> UpdateEmployeeRecords(Guid employeeId, UpsertEmployeeRecordDto request)
         {
-            var employee = await _humanResourceRepository.GetEmployee(employeeId);
+            var employee = await _authRepository.GetUserById(employeeId);
             if(employee is null)
             {
-               throw new Exception("Employee not found.");
+               throw new UserNotFoundException("Employee not found.");
             }
+
             var dbEmployee = _mapper.Map(request, employee);
             dbEmployee.Id = employeeId;
 
