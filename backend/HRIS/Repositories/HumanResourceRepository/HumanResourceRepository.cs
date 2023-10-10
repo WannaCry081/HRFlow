@@ -39,6 +39,7 @@ namespace HRIS.Repositories.HumanResourceRepository
             employee.PersonalEmail = updateEmployee.PersonalEmail;
             employee.CompanyEmail = updateEmployee.CompanyEmail;
             employee.UpdatedAt = updateEmployee.UpdatedAt;
+            employee.UpdatedBy = updateEmployee.UpdatedBy;
   
             await _context.SaveChangesAsync();
             return true;
