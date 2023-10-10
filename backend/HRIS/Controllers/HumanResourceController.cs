@@ -75,11 +75,17 @@ namespace HRIS.Controllers
                 var employee = await _humanResourceService.UpdateEmployeeRecords(employeeId, request);
                 return Ok(employee);
             }
+            catch (UserNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to find employee.", ex);
+                return NotFound("An error occurred while finding employee.");
+            }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "An error occured while attempting to update employee record.");
-                return Problem(ex.Message);
+                _logger.LogError(ex, "An error occurred while attempting to update employee record.");
+                return Problem("An error occurred while processing employee update request. Please try again later.");
             }
+        
         }
     }
 }
