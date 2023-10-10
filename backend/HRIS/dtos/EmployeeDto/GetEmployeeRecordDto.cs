@@ -25,6 +25,7 @@ namespace HRIS.dtos.EmployeeDto
         public string Role { get; set; } = string.Empty;
         public string Status { get; set; } = string.Empty;
         public string GroupCode { get; set; } = string.Empty;
+        public Guid TeamId { get; set; }
 
         public string CreatedBy { get; set; } = string.Empty;
         public string UpdatedBy { get; set; } = string.Empty;

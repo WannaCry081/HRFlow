@@ -44,6 +44,7 @@ namespace HRIS.dtos.EmployeeDto
         public string Status { get; set; } = "Active";
 
         public string GroupCode { get; set; } = string.Empty;
+        public Guid TeamId { get; set; }
 
         [StringLength(100)]
         public string CreatedBy { get; set; } = string.Empty;
