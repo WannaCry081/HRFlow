@@ -1,4 +1,5 @@
 ﻿using HRIS.dtos.EmployeeDto;
+using HRIS.Dtos.EmployeeDto;
 using HRIS.Exceptions;
 using HRIS.Models;
 using HRIS.Repositories.AuthRepository;
@@ -41,12 +42,13 @@ namespace HRIS.Controllers
         [HttpPost("add-employee")]
         [Consumes("application/json")]
         [Produces("application/json")]
-        public async Task<IActionResult> CreateEmployeeRecord([FromBody] UpsertEmployeeRecordDto request)
+        public async Task<IActionResult> CreateEmployeeRecord([FromBody] AddEmployeeRecordDto request)
         {
             try
             {
                 var userId = UserClaim.GetCurrentUser(HttpContext) ??
                   throw new UserNotFoundException("Invalid user.");
+
                 var response = await _humanResourceService.CreateEmployeeRecord(userId, request);
                 return Ok(response);
             }
@@ -63,7 +65,7 @@ namespace HRIS.Controllers
         }
          
         [HttpPatch("{employeeId}")]
-        public async Task<IActionResult> UpdateEmployeeRecord([FromRoute] Guid employeeId, JsonPatchDocument<User> request)
+        public async Task<IActionResult> UpdateEmployeeRecord([FromRoute] Guid employeeId, [FromBody] JsonPatchDocument<User> request)
         {
             try
             {
@@ -88,7 +90,7 @@ namespace HRIS.Controllers
         [HttpPut("{employeeId}")]
         [Consumes("application/json")]
         [Produces("application/json")]
-        public async Task<IActionResult> UpdateEmployeeRecords([FromRoute] Guid employeeId, [FromBody] UpsertEmployeeRecordDto request)
+        public async Task<IActionResult> UpdateEmployeeRecords([FromRoute] Guid employeeId, [FromBody] UpdateEmployeeRecordDto request)
         {
             try
             {

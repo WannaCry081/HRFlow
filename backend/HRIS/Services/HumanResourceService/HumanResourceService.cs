@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HRIS.dtos.EmployeeDto;
+using HRIS.Dtos.EmployeeDto;
 using HRIS.Exceptions;
 using HRIS.Models;
 using HRIS.Repositories.AuthRepository;
@@ -21,9 +22,8 @@ namespace HRIS.Services.HumanResourceService
             _authRepository = authRepository ?? throw new ArgumentNullException(nameof(authRepository));
         }
 
-        public async Task<User> CreateEmployeeRecord(Guid id, UpsertEmployeeRecordDto request)
+        public async Task<User> CreateEmployeeRecord(Guid id, AddEmployeeRecordDto request)
         {
-            var hr = await _authRepository.GetUserById(id);
             var isEmployeeExists = await _authRepository.IsEmailExists(request.CompanyEmail);
             if (isEmployeeExists)
             {
@@ -31,11 +31,8 @@ namespace HRIS.Services.HumanResourceService
             }
 
             var employee = _mapper.Map<User>(request);
-            employee.CreatedBy = hr.FirstName + " " + hr.LastName;
-            employee.GroupCode = hr.GroupCode;
-            employee.TeamId = hr.TeamId;
 
-            var response = await _humanResourceRepository.CreateEmployeeRecord(employee);
+            var response = await _humanResourceRepository.CreateEmployeeRecord(id, employee);
             if (!response)
             {
                 throw new Exception("Failed to add new employee record");
@@ -62,7 +59,7 @@ namespace HRIS.Services.HumanResourceService
             return response;
         }
 
-        public async Task<GetEmployeeRecordDto> UpdateEmployeeRecords(Guid hrId, Guid employeeId, UpsertEmployeeRecordDto request)
+        public async Task<GetEmployeeRecordDto> UpdateEmployeeRecords(Guid hrId, Guid employeeId, UpdateEmployeeRecordDto request)
         {
             var hr = await _authRepository.GetUserById(hrId);
             var employee = await _authRepository.GetUserById(employeeId);

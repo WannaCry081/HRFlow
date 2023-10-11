@@ -174,6 +174,29 @@ namespace HRIS.Controllers
             }
         }
 
+        [HttpPut("join-team")]
+        [Produces("application/json")]
+        public async Task<IActionResult> JoinTeamWithCode([FromBody] JoinWithTeamCodeDto request)
+        {
+            try
+            {
+                var userId = UserClaim.GetCurrentUser(HttpContext) ??
+                  throw new UserNotFoundException("Invalid user.");
+                var response = await _authService.JoinTeamWithCode(userId, request);
+                return Ok(response);
+            }
+            catch (UserNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to get user information.", ex);
+                return NotFound("An error occurred while finding user.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("An error occurred while attempting to join a team. ", ex);
+                return Problem("An error occurred while processing team entry request. Please try again later.");
+            }
+        }
+
 
     }
 }

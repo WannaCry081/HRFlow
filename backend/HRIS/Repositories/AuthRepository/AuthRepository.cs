@@ -62,12 +62,12 @@ namespace HRIS.Repositories.AuthRepository
         public async Task<bool> GenerateTeamCode(Guid id, GenerateTeamCodeDto request)
         {
             var user = await _context.Users.Where(c => c.Id.Equals(id)).FirstOrDefaultAsync();
-            if(user is null)
+            if (user is null)
             {
                 return false;
             }
 
-            if(user.TeamId != null)
+            if (user.TeamId != null)
             {
                 throw new Exception("User has already joined a team.");
             }
@@ -83,6 +83,34 @@ namespace HRIS.Repositories.AuthRepository
             user.TeamId = newTeam.Id;
 
             _context.Teams.Add(newTeam);
+            _context.Users.Update(user);
+
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> JoinWithTeamCode(Guid id, JoinWithTeamCodeDto request)
+        {
+            var user = await _context.Users.Where(c => c.Id.Equals(id)).FirstOrDefaultAsync();
+            if (user is null)
+            {
+                return false;
+            }
+
+            if (user.TeamId != null)
+            {
+                throw new Exception("User has already joined a team.");
+            }
+
+            var team = await _context.Teams.Where(c => c.Code.Equals(request.Code)).FirstOrDefaultAsync();
+            if (team is null)
+            {
+                throw new Exception("Team does not exist.");
+            }
+
+            user.TeamId = team.Id;
+            user.GroupCode = team.Code;
+
             _context.Users.Update(user);
 
             await _context.SaveChangesAsync();
