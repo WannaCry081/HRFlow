@@ -1,13 +1,19 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useFormik } from "formik";
-import { TextInput, PasswordInput } from "@Components/FormInput";
-import Group from "@Pages/Group";
 import * as Yup from "yup";
+import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
+import { TextInput, PasswordInput, SubmitButton } from "@Components/FormInput";
+import { ProgressBar, CircularProgressBar } from "@Components/Loading";
+import Group from "@Pages/Group";
+import useToggle from "@Hooks/useToggle";
 
 const Register = () => { 
-    const [registerUser, setRegisterUser] = useState(false);
-    const onSetRegisterUser = () => setRegisterUser(!registerUser);
+    document.title = "HR Flow | Sign Up";
+
+    const navigate = useNavigate();
+
+    const [ submit, onSetSubmit ] = useToggle();
+    const [ loading, onSetLoading ] = useToggle();
+
     const formik = useFormik({
         initialValues : {
             firstName : "",
@@ -17,7 +23,7 @@ const Register = () => {
             confirmPassword : ""
         },
         onSubmit : (values) => {
-            onSetRegisterUser();
+            onSetSubmit();
         },
         validationSchema : Yup.object({
             firstName : Yup.string().required("First Name is required.")
@@ -39,7 +45,13 @@ const Register = () => {
 
     return (
         <div className="mx-auto max-w-[24rem]">
-            {registerUser && <Group onCancel={onSetRegisterUser}/>}
+            {loading && 
+                <ProgressBar duration={.4} 
+                    onAnimationComplete={() => navigate("/auth/login") } />} 
+
+            {submit && 
+                <Group onCancel={onSetSubmit}/>}
+
             <div className="flex flex-col items-center">
                 <header className="text-center mb-6">
                     <h1 className="text-lato text-4xl font-bold my-2 sm:text-5xl">Create Account!</h1>
@@ -104,15 +116,14 @@ const Register = () => {
                                 touched={formik.touched.confirmPassword}
                                 value={formik.values.confirmPassword}/>
 
-                    <button type="submit"
-                        className="mt-2 bg-primary-light rounded-full h-14 text-poppins text-white font-semibold shadow-primary">
-                        Submit
-                    </button>
+                    <SubmitButton>
+                        <p className="text-poppins text-white">Submit</p>
+                    </SubmitButton>
 
                 </form>
                 <p className="mt-4 font-poppins text-sm text-gray-600">
-                    Already have an account?
-                    <Link to="/auth/login" className="font-semibold text-secondary-light active-secondary"> Sign In</Link>
+                    {"Already have an account? "}
+                    <span className="font-semibold text-secondary-light active-secondary cursor-pointer" onClick={onSetLoading}>Sign In</span>
                 </p>
             </div>
         </div>
