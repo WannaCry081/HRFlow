@@ -35,9 +35,12 @@ namespace HRIS.Repositories.HumanResourceRepository
                 throw new UserNotFoundException("User not found.");
             }
 
+            request.Role = "Employee";
+            request.Status = "Active";
             request.CreatedBy = hr.FirstName + " " + hr.LastName;
             request.GroupCode = hr.GroupCode;
             request.TeamId = hr.TeamId;
+            request.CreatedAt = DateTime.Now;
 
             _context.Users.Add(request);
             return await _context.SaveChangesAsync() > 0;
@@ -69,7 +72,7 @@ namespace HRIS.Repositories.HumanResourceRepository
             employee.LandlineNumber = updateEmployee.LandlineNumber;
             employee.PersonalEmail = updateEmployee.PersonalEmail;
             employee.CompanyEmail = updateEmployee.CompanyEmail;
-            employee.UpdatedAt = updateEmployee.UpdatedAt;
+            employee.UpdatedAt = DateTime.Now;
             employee.UpdatedBy = updateEmployee.UpdatedBy;
             employee.GroupCode = updateEmployee.GroupCode;
             employee.TeamId = updateEmployee.TeamId;
