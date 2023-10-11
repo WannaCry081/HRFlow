@@ -2,7 +2,7 @@
 
 namespace HRIS.Dtos.EmployeeDto
 {
-    public class AddEmployeeDto
+    public class AddEmployeeRecordDto
     {
         [Required(ErrorMessage = "First Name is required.")]
         [StringLength(100, ErrorMessage = "First Name must be between {2} and {1} characters long.", MinimumLength = 2)]
