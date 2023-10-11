@@ -23,7 +23,6 @@ namespace HRIS.Services.HumanResourceService
 
         public async Task<User> CreateEmployeeRecord(Guid id, UpsertEmployeeRecordDto request)
         {
-            var hr = await _authRepository.GetUserById(id);
             var isEmployeeExists = await _authRepository.IsEmailExists(request.CompanyEmail);
             if (isEmployeeExists)
             {
@@ -31,11 +30,8 @@ namespace HRIS.Services.HumanResourceService
             }
 
             var employee = _mapper.Map<User>(request);
-            employee.CreatedBy = hr.FirstName + " " + hr.LastName;
-            employee.GroupCode = hr.GroupCode;
-            employee.TeamId = hr.TeamId;
 
-            var response = await _humanResourceRepository.CreateEmployeeRecord(employee);
+            var response = await _humanResourceRepository.CreateEmployeeRecord(id, employee);
             if (!response)
             {
                 throw new Exception("Failed to add new employee record");
