@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HRIS.dtos.EmployeeDto;
+using HRIS.Dtos.EmployeeDto;
 using HRIS.Exceptions;
 using HRIS.Models;
 using HRIS.Repositories.AuthRepository;
@@ -21,7 +22,7 @@ namespace HRIS.Services.HumanResourceService
             _authRepository = authRepository ?? throw new ArgumentNullException(nameof(authRepository));
         }
 
-        public async Task<User> CreateEmployeeRecord(Guid id, UpsertEmployeeRecordDto request)
+        public async Task<User> CreateEmployeeRecord(Guid id, AddEmployeeRecordDto request)
         {
             var isEmployeeExists = await _authRepository.IsEmailExists(request.CompanyEmail);
             if (isEmployeeExists)
@@ -58,7 +59,7 @@ namespace HRIS.Services.HumanResourceService
             return response;
         }
 
-        public async Task<GetEmployeeRecordDto> UpdateEmployeeRecords(Guid hrId, Guid employeeId, UpsertEmployeeRecordDto request)
+        public async Task<GetEmployeeRecordDto> UpdateEmployeeRecords(Guid hrId, Guid employeeId, UpdateEmployeeRecordDto request)
         {
             var hr = await _authRepository.GetUserById(hrId);
             var employee = await _authRepository.GetUserById(employeeId);
