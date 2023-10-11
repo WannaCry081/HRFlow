@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HRIS.dtos.EmployeeDto
+namespace HRIS.Dtos.EmployeeDto
 {
-    public class UpsertEmployeeRecordDto
+    public class AddEmployeeDto
     {
         [Required(ErrorMessage = "First Name is required.")]
         [StringLength(100, ErrorMessage = "First Name must be between {2} and {1} characters long.", MinimumLength = 2)]
@@ -39,19 +39,5 @@ namespace HRIS.dtos.EmployeeDto
         [EmailAddress(ErrorMessage = "Please enter a valid email address.")]
         [StringLength(150, ErrorMessage = "Company Email Address must be between {2} and {1} characters long.", MinimumLength = 3)]
         public string CompanyEmail { get; set; } = string.Empty;
-
-        public string Role { get; set; } = "Employee";
-        public string Status { get; set; } = "Active";
-
-        public string GroupCode { get; set; } = string.Empty;
-        public Guid TeamId { get; set; }
-
-        [StringLength(100)]
-        public string CreatedBy { get; set; } = string.Empty;
-
-        [StringLength(100)]
-        public string UpdatedBy { get; set; } = string.Empty;
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
-        public DateTime UpdatedAt { get; set; } = DateTime.Now;
     }
 }
