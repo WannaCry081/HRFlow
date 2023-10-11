@@ -1,22 +1,22 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { ModalBox } from "@Components/ModalBox";
-import { TextInput, CodeInput } from "@Components/FormInput";
+import * as Yup from "yup";
 import { useFormik } from "formik";
 import { LuMessagesSquare } from "react-icons/lu";
-import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
+import { ModalBox } from "@Components/ModalBox";
+import { TextInput, CodeInput, SubmitButton } from "@Components/FormInput";
+import { CircularProgressBar } from "@Components/Loading";
+import useToggle from "@Hooks/useToggle";
 
 const ForgotPassword = (prop) => {  
     
-    const [currentSection, setCurrentSection] = useState(1);
-    const onSectionChange = (value) => setCurrentSection(value);
+    const [verifyCode, onSetVerifyCode] = useToggle(); 
 
     return (
         <ModalBox onCancel={prop.onCancel}> 
-            {(currentSection === 1) ? (
-                <FPEmailSection onSubmit={onSectionChange} />
+            {(verifyCode) ? (
+                <FPCodeSection onSubmit={onSetVerifyCode}/>
             ) : (
-                <FPCodeSection onSubmit={onSectionChange}/>
+                <FPEmailSection onSubmit={onSetVerifyCode} />
             )}
         </ModalBox>
     );
@@ -25,12 +25,16 @@ const ForgotPassword = (prop) => {
 const FPCodeSection = (prop) => {
     const navigate = useNavigate();
 
+    const [submit, onSetSubmit] = useToggle();
+
     const formik = useFormik({
         initialValues: {
             code: "" 
         },
         onSubmit: (values) => {
+            onSetSubmit();
             navigate("/dashboard/home", { replace : true});
+            onSetSubmit();
         },
         validationSchema: Yup.object({
             code: Yup.string().required("Code is required.")
@@ -78,22 +82,33 @@ const FPCodeSection = (prop) => {
                     Resend Verification
                 </p>
 
-                <button type="submit"
-                    className="bg-primary-light rounded-full self-end h-14 w-full sm:w-44 text-poppins text-white font-semibold shadow-primary">
-                    Submit
-                </button>
+                <div className="w-full sm:w-44 self-end">
+                    <SubmitButton>
+                        {(submit) ? (
+                            <CircularProgressBar>
+                                <p className="ml-2 text-poppins text-white">Loading...</p>
+                            </CircularProgressBar>
+                        ) : (
+                            <p className="text-poppins text-white">Submit</p>
+                        )}
+                    </SubmitButton>
+                </div>
             </form>
         </>
     );
 };
 
 const FPEmailSection = (prop) => {
+
+    const [ submit, onSetSubmit ] = useToggle();
     const formik = useFormik({
         initialValues : {
             email : ""
         }, 
         onSubmit : (values) => {
-            prop.onSubmit(2)
+            onSetSubmit();
+            prop.onSubmit();
+            onSetSubmit();
         }, 
         validationSchema : Yup.object({
             email :Yup.string().required("Email Address is required.")
@@ -124,10 +139,17 @@ const FPEmailSection = (prop) => {
                     onChange={formik.handleChange}
                     value={formik.values.email}/>
 
-                <button type="submit"
-                    className="bg-primary-light rounded-full self-end h-14 w-full sm:w-44 text-poppins text-white font-semibold shadow-primary">
-                    Proceed
-                </button>
+                <div className="self-end w-full sm:w-44 ">
+                    <SubmitButton>
+                        {(submit) ? (
+                            <CircularProgressBar>
+                                <p className="ml-2 text-poppins text-white">Loading...</p>
+                            </CircularProgressBar>
+                        ) : (
+                            <p className="text-poppins text-white">Proceed</p>
+                        )}
+                    </SubmitButton>
+                </div>
             </form>
         </>
     );
