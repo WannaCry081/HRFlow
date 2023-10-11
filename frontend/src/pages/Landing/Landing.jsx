@@ -7,6 +7,8 @@ import Contact from "./sections/Contact";
 import Footer from "./sections/Footer"; 
 
 const Landing = () => {
+    document.title = "HR Flow | Streamline HR tasks";
+
     const sectionRefs = {
         homeRef: useRef(null),
         servicesRef: useRef(null),
