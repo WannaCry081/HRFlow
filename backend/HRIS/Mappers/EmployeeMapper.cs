@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HRIS.dtos.EmployeeDto;
+using HRIS.Dtos.EmployeeDto;
 using HRIS.Models;
 
 namespace HRIS.Mappers
@@ -8,9 +9,10 @@ namespace HRIS.Mappers
     {
         public EmployeeMapper()
         {
-            CreateMap<User, UpsertEmployeeRecordDto>()
+            CreateMap<User, AddEmployeeRecordDto>()
                 .ReverseMap();
-
+            CreateMap<User, UpdateEmployeeRecordDto>()
+                .ReverseMap();
             CreateMap<User, GetEmployeeRecordDto>()
                 .ReverseMap();
         }
