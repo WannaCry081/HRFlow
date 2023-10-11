@@ -12,5 +12,6 @@ namespace HRIS.Repositories.AuthRepository
         Task<bool> UpdateUserCode(User user, string code);
         Task<bool> UpdateUserPassword(User request, string email);
         Task<bool> GenerateTeamCode(Guid id, GenerateTeamCodeDto request);
+        Task<bool> JoinWithTeamCode(Guid id, JoinWithTeamCodeDto request);
     }
 }
