@@ -2,6 +2,7 @@
 using HRIS.Dtos.AuthDto;
 using HRIS.Exceptions;
 using HRIS.Services.AuthService;
+using HRIS.Utils;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HRIS.Controllers
@@ -125,9 +126,10 @@ namespace HRIS.Controllers
            catch (Exception ex)
            {
                _logger.LogCritical("An error occurred while attempting to send the email to the admin.", ex);
-               return Problem("An error occured while sending an email to the admin. Please try again later.");
+               return Problem("An error occurred while sending an email to the admin. Please try again later.");
            }
         }
+
         [HttpPut("forgot-password/reset-password")]
         [Consumes("application/json")]
         public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto request)
@@ -148,6 +150,30 @@ namespace HRIS.Controllers
                 return Problem("An error occurred while processing reset password request. Please try again later.");
             }
         }
+
+        [HttpPut("generate-team-code")]
+        [Produces("application/json")]
+        public async Task<IActionResult> GenerateTeamCode([FromBody] GenerateTeamCodeDto request)
+        {
+            try
+            {
+                var userId = UserClaim.GetCurrentUser(HttpContext) ??
+                  throw new UserNotFoundException("Invalid user.");
+                var response = await _authService.GenerateTeamCode(userId, request);
+                return Ok(response);
+            }
+            catch (UserNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to get user information.", ex);
+                return NotFound("An error occurred while finding user.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("An error occurred while attempting to generate team code. ", ex);
+                return Problem("An error occurred while processing team code request. Please try again later.");
+            }
+        }
+
 
     }
 }

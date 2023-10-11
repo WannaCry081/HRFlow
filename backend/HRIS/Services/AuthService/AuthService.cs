@@ -147,5 +147,22 @@ namespace HRIS.Services.AuthService
         {
            return await SMTP.SendEmailToAdmin(_configuration, request.Email, request.Subject, request.Body);
         }
+
+        public async Task<string> GenerateTeamCode(Guid id, GenerateTeamCodeDto request)
+        {
+            var user = await _authRepository.GetUserById(id);
+            if (user is null)
+            {
+                throw new UserNotFoundException("User is not found in the database.");
+            }
+
+            var isUserUpdated = await _authRepository.GenerateTeamCode(id, request);
+            if (!isUserUpdated)
+            {
+                throw new Exception("User has already joined a team.");
+            }
+
+            return user.GroupCode;
+        }
     }
 }

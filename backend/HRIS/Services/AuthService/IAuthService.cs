@@ -11,5 +11,6 @@ namespace HRIS.Services.AuthService
         Task<string> VerifyPassword(OTPDto request);
         Task<string> SendEmailToAdmin(ContactAdminDto request);
         Task<string> ResetPassword(ResetPasswordDto request);
+        Task<string> GenerateTeamCode(Guid id, GenerateTeamCodeDto request);
     }
  }
