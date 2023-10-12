@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using HRIS.dtos.AuthDto;
 using HRIS.Dtos.AuthDto;
 using HRIS.Exceptions;
 using HRIS.Models;
@@ -68,11 +67,8 @@ namespace HRIS.Services.AuthService
 
         public async Task<string> ForgotPassword(ForgotPasswordDto request)
         {
-            var user = await _authRepository.GetUserByEmail(request.Email);
-            if (user is null)
-            {
+            var user = await _authRepository.GetUserByEmail(request.Email) ??
                 throw new UserNotFoundException("User is not recorded in the database.");
-            }
 
             var code = CodeGenerator.Digit(6);
             var isUserUpdated = await _authRepository.UpdateUserCode(user, code);
@@ -109,11 +105,8 @@ namespace HRIS.Services.AuthService
 
         public async Task<string> ResetPassword(ResetPasswordDto request)
         {
-            var user = await _authRepository.GetUserByEmail(request.Email);
-            if (user is null)
-            {
+            var user = await _authRepository.GetUserByEmail(request.Email) ??
                 throw new UserNotFoundException("User is not found in the database.");
-            }
 
             if (!user.CompanyEmail.Equals(request.Email))
             {
@@ -142,44 +135,9 @@ namespace HRIS.Services.AuthService
             return newToken;
         }
 
-
         public async Task<string> SendEmailToAdmin(ContactAdminDto request)
         {
             return await SMTP.SendEmailToAdmin(_configuration, request.Email, request.Subject, request.Body);
-        }
-
-        public async Task<string> GenerateTeamCode(Guid id, GenerateTeamCodeDto request)
-        {
-            var user = await _authRepository.GetUserById(id);
-            if (user is null)
-            {
-                throw new UserNotFoundException("User is not found in the database.");
-            }
-
-            var isUserUpdated = await _authRepository.GenerateTeamCode(id, request);
-            if (!isUserUpdated)
-            {
-                throw new Exception("User has already joined a team.");
-            }
-
-            return user.GroupCode;
-        }
-
-        public async Task<User> JoinTeamWithCode(Guid id, JoinWithTeamCodeDto request)
-        {
-            var user = await _authRepository.GetUserById(id);
-            if (user is null)
-            {
-                throw new UserNotFoundException("User is not found in the database.");
-            }
-
-            var isUserUpdated = await _authRepository.JoinWithTeamCode(id, request);
-            if (!isUserUpdated)
-            {
-                throw new Exception("User has already joined a team.");
-            }
-
-            return user;
         }
     }
 }
