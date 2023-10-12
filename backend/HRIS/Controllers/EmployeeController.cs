@@ -1,10 +1,7 @@
-﻿using HRIS.dtos.EmployeeDto;
-using HRIS.Dtos.EmployeeDto;
+﻿using HRIS.Dtos.EmployeeDto;
 using HRIS.Exceptions;
 using HRIS.Models;
-using HRIS.Repositories.AuthRepository;
-using HRIS.Services.HumanResourceService;
-using HRIS.Services.UserService;
+using HRIS.Services.EmployeeService;
 using HRIS.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
@@ -12,19 +9,20 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HRIS.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Human Resource")]
     [ApiController]
-    [Route("/api/human-resource")]
-    public class HumanResourceController : ControllerBase
+    [Route("/api/employee")]
+    public class EmployeeController : ControllerBase
     {
-        private readonly ILogger<HumanResourceController> _logger;
-        private readonly IHumanResourceService _humanResourceService;
-        private readonly IAuthRepository _authRepository;
-        public HumanResourceController(ILogger<HumanResourceController> logger, IHumanResourceService humanResourceService, IAuthRepository authRepository)
+        private readonly ILogger<EmployeeController> _logger;
+        private readonly IEmployeeService _employeeService;
+
+        public EmployeeController(ILogger<EmployeeController> logger, IEmployeeService humanResourceService)
         {
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _humanResourceService = humanResourceService ?? throw new ArgumentNullException(nameof(humanResourceService));
-            _authRepository = authRepository ?? throw new ArgumentNullException(nameof(authRepository));
+            _logger = logger ??
+                throw new ArgumentNullException(nameof(logger));
+            _employeeService = humanResourceService ??
+                throw new ArgumentNullException(nameof(humanResourceService));
         }
 
         [HttpGet("{id}")]
@@ -34,12 +32,12 @@ namespace HRIS.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetEmployeeRecords(Guid id)
+        public Task<IActionResult> GetEmployeeRecords(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        [HttpPost("add-employee")]
+        [HttpPost]
         [Consumes("application/json")]
         [Produces("application/json")]
         public async Task<IActionResult> CreateEmployeeRecord([FromBody] AddEmployeeRecordDto request)
@@ -49,7 +47,7 @@ namespace HRIS.Controllers
                 var userId = UserClaim.GetCurrentUser(HttpContext) ??
                   throw new UserNotFoundException("Invalid user.");
 
-                var response = await _humanResourceService.CreateEmployeeRecord(userId, request);
+                var response = await _employeeService.CreateEmployeeRecord(userId, request);
                 return Ok(response);
             }
             catch (UserExistsException ex)
@@ -63,7 +61,7 @@ namespace HRIS.Controllers
                 return Problem("An error occurred while processing employee creation request. Please try again later.");
             }
         }
-         
+
         [HttpPatch("{employeeId}")]
         public async Task<IActionResult> UpdateEmployeeRecord([FromRoute] Guid employeeId, [FromBody] JsonPatchDocument<User> request)
         {
@@ -72,7 +70,7 @@ namespace HRIS.Controllers
                 var hrId = UserClaim.GetCurrentUser(HttpContext) ??
                  throw new UserNotFoundException("Invalid user.");
 
-                var response = await _humanResourceService.UpdateEmployeeRecord(employeeId, request);
+                var response = await _employeeService.UpdateEmployeeRecord(hrId, employeeId, request);
                 return Ok("Successfully updated employee's record.");
             }
             catch (UserNotFoundException ex)
@@ -94,9 +92,10 @@ namespace HRIS.Controllers
         {
             try
             {
-                var userId = UserClaim.GetCurrentUser(HttpContext) ??
+                var hrId = UserClaim.GetCurrentUser(HttpContext) ??
                     throw new UserNotFoundException("Invalid user.");
-                var employee = await _humanResourceService.UpdateEmployeeRecords(userId, employeeId, request);
+
+                var employee = await _employeeService.UpdateEmployeeRecords(hrId, employeeId, request);
                 return Ok(employee);
             }
             catch (UserNotFoundException ex)

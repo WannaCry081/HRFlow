@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using HRIS.dtos.AuthDto;
 using HRIS.Dtos.AuthDto;
 using HRIS.Models;
 

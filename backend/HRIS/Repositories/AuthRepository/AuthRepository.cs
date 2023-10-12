@@ -1,8 +1,5 @@
 ﻿using HRIS.Context;
-using HRIS.dtos.AuthDto;
-using HRIS.models;
 using HRIS.Models;
-using HRIS.Utils;
 using Microsoft.EntityFrameworkCore;
 
 namespace HRIS.Repositories.AuthRepository
@@ -54,67 +51,9 @@ namespace HRIS.Repositories.AuthRepository
                 user.PasswordSalt = request.PasswordSalt;
                 user.UpdatedAt = request.UpdatedAt;
                 _context.Users.Update(user);
-                return 0 < await _context.SaveChangesAsync();
+                return await _context.SaveChangesAsync() > 0;
             }
             return false;
-        }
-
-        public async Task<bool> GenerateTeamCode(Guid id, GenerateTeamCodeDto request)
-        {
-            var user = await _context.Users.Where(c => c.Id.Equals(id)).FirstOrDefaultAsync();
-            if (user is null)
-            {
-                return false;
-            }
-
-            if (user.TeamId != null)
-            {
-                throw new Exception("User has already joined a team.");
-            }
-
-            var newTeam = new Team
-            {
-                Id = Guid.NewGuid(),
-                Code = CodeGenerator.AlphaNumeric(8),
-                Name = request.Name
-            };
-
-            user.GroupCode = newTeam.Code;
-            user.TeamId = newTeam.Id;
-
-            _context.Teams.Add(newTeam);
-            _context.Users.Update(user);
-
-            await _context.SaveChangesAsync();
-            return true;
-        }
-
-        public async Task<bool> JoinWithTeamCode(Guid id, JoinWithTeamCodeDto request)
-        {
-            var user = await _context.Users.Where(c => c.Id.Equals(id)).FirstOrDefaultAsync();
-            if (user is null)
-            {
-                return false;
-            }
-
-            if (user.TeamId != null)
-            {
-                throw new Exception("User has already joined a team.");
-            }
-
-            var team = await _context.Teams.Where(c => c.Code.Equals(request.Code)).FirstOrDefaultAsync();
-            if (team is null)
-            {
-                throw new Exception("Team does not exist.");
-            }
-
-            user.TeamId = team.Id;
-            user.GroupCode = team.Code;
-
-            _context.Users.Update(user);
-
-            await _context.SaveChangesAsync();
-            return true;
         }
     }
 }

@@ -81,3 +81,14 @@ export const CodeInput = (prop) => {
             type="text" />
     );
 };
+
+export const SubmitButton = (prop) => {
+    return (
+        <button type="submit"
+            className="bg-primary-light rounded-full h-14 font-semibold shadow-primary w-full">
+            <div className="w-full h-full flex items-center justify-center">
+                {prop.children}
+            </div>
+        </button>
+    );
+};
