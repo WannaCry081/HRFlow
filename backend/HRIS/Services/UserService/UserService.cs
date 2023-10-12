@@ -3,6 +3,7 @@ using HRIS.Dtos.UserDto;
 using HRIS.Exceptions;
 using HRIS.Models;
 using HRIS.Repositories.UserRepository;
+using HRIS.Utils;
 
 namespace HRIS.Services.UserService
 {
@@ -37,6 +38,32 @@ namespace HRIS.Services.UserService
                 throw new Exception("Failed to update user profile to database.");
             }
             return _mapper.Map<GetUserProfileDto>(user);
+        }
+
+        public async Task<bool> CreateTeam(Guid id, CreateTeamDto request)
+        {
+            var user = await _userRepository.GetUserById(id) ??
+                throw new UserNotFoundException("User is not found in the database.");
+
+            var newTeam = new Team()
+            {
+                Id = Guid.NewGuid(),
+                Code = CodeGenerator.AlphaNumeric(8),
+                Name = request.Name
+            };
+
+            return await _userRepository.CreateTeam(user, newTeam);
+        }
+
+        public async Task<bool> JoinTeam(Guid id, JoinTeamDto request)
+        {
+            var user = await _userRepository.GetUserById(id) ??
+                throw new UserNotFoundException("User is not found in the database.");
+
+            var team = await _userRepository.GetTeamByCode(request.Code) ??
+                throw new TeamNotFoundException("Team does not exist.");
+
+            return await _userRepository.JoinTeam(user, team, request.Code);
         }
     }
 }
