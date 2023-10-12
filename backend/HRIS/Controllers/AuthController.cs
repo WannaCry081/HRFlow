@@ -1,8 +1,6 @@
-﻿using HRIS.dtos.AuthDto;
-using HRIS.Dtos.AuthDto;
+﻿using HRIS.Dtos.AuthDto;
 using HRIS.Exceptions;
 using HRIS.Services.AuthService;
-using HRIS.Utils;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HRIS.Controllers
@@ -16,8 +14,10 @@ namespace HRIS.Controllers
 
         public AuthController(ILogger<AuthController> logger, IAuthService authService)
         {
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _authService = authService ?? throw new ArgumentNullException(nameof(authService));
+            _logger = logger ??
+                throw new ArgumentNullException(nameof(logger));
+            _authService = authService ??
+                throw new ArgumentNullException(nameof(authService));
         }
 
         [HttpPost("register")]
@@ -37,7 +37,7 @@ namespace HRIS.Controllers
             catch (Exception ex)
             {
                 _logger.LogCritical("An error occurred while attempting to register user. ", ex);
-                return Problem("An error occurred while processing login request. Please try again later.");
+                return Problem("An error occurred while processing register request. Please try again later.");
             }
         }
 
@@ -118,16 +118,16 @@ namespace HRIS.Controllers
         [Consumes("application/json")]
         public async Task<IActionResult> SendEmailToAdmin([FromBody] ContactAdminDto request)
         {
-           try
-           {
-               var response = await _authService.SendEmailToAdmin(request);
-               return Ok(response);
-           }
-           catch (Exception ex)
-           {
-               _logger.LogCritical("An error occurred while attempting to send the email to the admin.", ex);
-               return Problem("An error occurred while sending an email to the admin. Please try again later.");
-           }
+            try
+            {
+                var response = await _authService.SendEmailToAdmin(request);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("An error occurred while attempting to send the email to the admin.", ex);
+                return Problem("An error occurred while sending an email to the admin. Please try again later.");
+            }
         }
 
         [HttpPut("forgot-password/reset-password")]
@@ -150,53 +150,5 @@ namespace HRIS.Controllers
                 return Problem("An error occurred while processing reset password request. Please try again later.");
             }
         }
-
-        [HttpPut("generate-team-code")]
-        [Produces("application/json")]
-        public async Task<IActionResult> GenerateTeamCode([FromBody] GenerateTeamCodeDto request)
-        {
-            try
-            {
-                var userId = UserClaim.GetCurrentUser(HttpContext) ??
-                  throw new UserNotFoundException("Invalid user.");
-                var response = await _authService.GenerateTeamCode(userId, request);
-                return Ok(response);
-            }
-            catch (UserNotFoundException ex)
-            {
-                _logger.LogError("An error occurred while attempting to get user information.", ex);
-                return NotFound("An error occurred while finding user.");
-            }
-            catch (Exception ex)
-            {
-                _logger.LogCritical("An error occurred while attempting to generate team code. ", ex);
-                return Problem("An error occurred while processing team code request. Please try again later.");
-            }
-        }
-
-        [HttpPut("join-team")]
-        [Produces("application/json")]
-        public async Task<IActionResult> JoinTeamWithCode([FromBody] JoinWithTeamCodeDto request)
-        {
-            try
-            {
-                var userId = UserClaim.GetCurrentUser(HttpContext) ??
-                  throw new UserNotFoundException("Invalid user.");
-                var response = await _authService.JoinTeamWithCode(userId, request);
-                return Ok(response);
-            }
-            catch (UserNotFoundException ex)
-            {
-                _logger.LogError("An error occurred while attempting to get user information.", ex);
-                return NotFound("An error occurred while finding user.");
-            }
-            catch (Exception ex)
-            {
-                _logger.LogCritical("An error occurred while attempting to join a team. ", ex);
-                return Problem("An error occurred while processing team entry request. Please try again later.");
-            }
-        }
-
-
     }
 }
