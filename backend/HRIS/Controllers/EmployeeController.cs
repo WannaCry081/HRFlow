@@ -26,15 +26,45 @@ namespace HRIS.Controllers
         }
 
         [HttpGet("{id}")]
-        public Task<IActionResult> GetEmployeeRecord()
+        [Produces("application/json")]
+        public async Task<IActionResult> GetEmployeeRecord(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var response = await _employeeService.GetEmployeeRecord(id);
+                return Ok(response);
+            }
+            catch (UserNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to find employee.", ex);
+                return NotFound("An error occurred while finding employee.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while attempting to get employee record.");
+                return Problem(ex.Message);
+            }
         }
 
         [HttpGet]
-        public Task<IActionResult> GetEmployeeRecords(Guid id)
+        [Produces("application/json")]
+        public async Task<IActionResult> GetEmployeeRecords()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var response = await _employeeService.GetEmployeeRecords();
+                return Ok(response);
+            }
+            catch (UserNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to find employee.", ex);
+                return NotFound("An error occurred while finding employee.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while attempting to get employee records.");
+                return Problem(ex.Message);
+            }
         }
 
         [HttpPost]
