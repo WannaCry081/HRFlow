@@ -20,6 +20,19 @@ namespace HRIS.Services.EmployeeService
                 throw new ArgumentNullException(nameof(employeeRepository));
         }
 
+        public async Task<GetEmployeeRecordDto> GetEmployeeRecord(Guid id)
+        {
+            var user = await _employeeRepository.GetUserById(id) ??
+                throw new UserNotFoundException("Employee is not found in the database.");
+            return _mapper.Map<GetEmployeeRecordDto>(user);
+        }
+
+        public async Task<GetEmployeeRecordDto> GetEmployeeRecords()
+        {
+            var users = await _employeeRepository.GetEmployeeRecords();
+            return _mapper.Map<GetEmployeeRecordDto>(users);
+        }
+
         public async Task<GetEmployeeRecordDto> CreateEmployeeRecord(Guid id, AddEmployeeRecordDto request)
         {
             var hr = await _employeeRepository.GetUserById(id) ??
