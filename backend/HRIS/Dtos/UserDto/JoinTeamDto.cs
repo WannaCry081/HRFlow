@@ -1,8 +1,8 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace HRIS.dtos.AuthDto
+namespace HRIS.Dtos.UserDto
 {
-    public class JoinWithTeamCodeDto
+    public class JoinTeamDto
     {
         [Required(ErrorMessage = "Team code is required.")]
         [StringLength(8, ErrorMessage = "Team code must be 8 characters long.")]
