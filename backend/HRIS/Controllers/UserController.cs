@@ -18,7 +18,7 @@ namespace HRIS.Controllers
         public UserController(ILogger<UserController> logger, IUserService userService)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _userService = userService ?? throw new ArgumentNullException(nameof(logger));
+            _userService = userService ?? throw new ArgumentNullException(nameof(userService));
         }
 
         [HttpGet]

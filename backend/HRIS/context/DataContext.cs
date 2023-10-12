@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using HRIS.Models;
+using HRIS.models;
 
 namespace HRIS.Context
 {
@@ -8,6 +9,7 @@ namespace HRIS.Context
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
         public DbSet<User> Users => Set<User>();
+        public DbSet<Team> Teams => Set<Team>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

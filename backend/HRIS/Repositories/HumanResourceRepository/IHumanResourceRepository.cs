@@ -1,13 +1,12 @@
 ﻿using HRIS.Models;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace HRIS.Repositories.HumanResourceRepository
 {
     public interface IHumanResourceRepository
     {
-        Task<bool> CreateEmployeeRecord(User employee);
-        Task<bool> UpdateEmployeeRecord(User employee, User newEmployeeDetails);
-
-        //Task<bool> UpdateEmployeeRecordProperty(); 
-        //Task<bool> DeleteEmployeeRecord(); 
+        Task<bool> CreateEmployeeRecord(Guid id, User request);
+        Task<bool> UpdateEmployeeRecords(User user);
+        Task<bool> UpdateEmployeeRecord(User user, JsonPatchDocument<User> request);
     }
 }

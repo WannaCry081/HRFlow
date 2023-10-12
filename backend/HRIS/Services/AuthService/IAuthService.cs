@@ -1,5 +1,6 @@
 ﻿using HRIS.dtos.AuthDto;
 using HRIS.Dtos.AuthDto;
+using HRIS.Models;
 
 namespace HRIS.Services.AuthService
 {
@@ -11,5 +12,7 @@ namespace HRIS.Services.AuthService
         Task<string> VerifyPassword(OTPDto request);
         Task<string> SendEmailToAdmin(ContactAdminDto request);
         Task<string> ResetPassword(ResetPasswordDto request);
+        Task<string> GenerateTeamCode(Guid id, GenerateTeamCodeDto request);
+        Task<User> JoinTeamWithCode(Guid id, JoinWithTeamCodeDto request);
     }
  }
