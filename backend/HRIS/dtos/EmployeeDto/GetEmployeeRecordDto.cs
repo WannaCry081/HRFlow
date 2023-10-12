@@ -1,35 +1,22 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace HRIS.dtos.EmployeeDto
+﻿namespace HRIS.Dtos.EmployeeDto
 {
     public class GetEmployeeRecordDto
     {
-
-        public string FirstName { get; set; } = string.Empty;
-
-        public string MiddleName { get; set; } = string.Empty;
-
-        public string LastName { get; set; } = string.Empty;
-
-        public string Suffix { get; set; } = string.Empty;
-        public int Age { get; set; } = 0;
+        public Guid Id { get; set; }
+        public string? FirstName { get; set; }
+        public string? MiddleName { get; set; }
+        public string? LastName { get; set; }
+        public string? Suffix { get; set; }
+        public int? Age { get; set; }
         public DateTime Birthdate { get; set; }
-
-        public string MobileNumber { get; set; } = string.Empty;
-
-        public string LandlineNumber { get; set; } = string.Empty;
-
-        public string PersonalEmail { get; set; } = string.Empty;
-        public string CompanyEmail { get; set; } = string.Empty;
-
-        public string Role { get; set; } = string.Empty;
-        public string Status { get; set; } = string.Empty;
-        public string GroupCode { get; set; } = string.Empty;
+        public string? MobileNumber { get; set; }
+        public string? LandlineNumber { get; set; }
+        public string? PersonalEmail { get; set; }
+        public string? CompanyEmail { get; set; }
+        public string? Status { get; set; }
+        public string? GroupCode { get; set; }
         public Guid TeamId { get; set; }
-
-        public string CreatedBy { get; set; } = string.Empty;
-        public string UpdatedBy { get; set; } = string.Empty;
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
-        public DateTime UpdatedAt { get; set; } = DateTime.Now;
+        public string? CreatedBy { get; set; }
+        public string? UpdatedBy { get; set; }
     }
 }

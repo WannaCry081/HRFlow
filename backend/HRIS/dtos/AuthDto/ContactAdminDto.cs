@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HRIS.dtos.AuthDto
+namespace HRIS.Dtos.AuthDto
 {
     public class ContactAdminDto
     {
