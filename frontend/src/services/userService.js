@@ -18,3 +18,16 @@ export const GetUserProfileApi = async (token) => {
         return error.response;
     }
 };
+
+
+export const UpdateUserProfileApi = async (token, request) => {
+    const instance = axiosInstance(token);
+    try {
+        const response = await instance.put("", request);
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+};
+
+
