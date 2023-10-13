@@ -1,11 +1,13 @@
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
 import { TextInput, SubmitButton } from "@Components/FormInput";
 import { JoinTeamApi } from "@Services/userService.js";
 import { CircularProgressBar } from "@Components/Loading";
 import useToggle from "@Hooks/useToggle";
 
 const JoinTeamSection = () => {
+    const navigate = useNavigate();
     const [submit, onSetSubmit] = useToggle();
 
     const formik = useFormik({
@@ -13,8 +15,23 @@ const JoinTeamSection = () => {
             code : ""
         },
         onSubmit : async (values) => {
+            onSetSubmit();
             const token = sessionStorage.getItem("token");
-            const response = await JoinTeamApi(token, values)
+            const {status, data} = await JoinTeamApi(token, values)
+            
+            setTimeout(() => {
+                if (status === 200) {
+                    sessionStorage.setItem("token", data);
+                    navigate("/dashboard/error");
+                } else if (status === 404 || status === 400) {
+                    formik.setErrors({
+                        code : status
+                    });
+                } else {
+                    navigate("/error");
+                }
+                onSetSubmit();
+            }, 1000);
         },
         validationSchema : Yup.object({
             code : Yup.string().required("Team Code is required.")    
