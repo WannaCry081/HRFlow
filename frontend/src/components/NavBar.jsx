@@ -1,12 +1,13 @@
 import { GoKebabHorizontal } from "react-icons/go";
 import { Link } from "react-router-dom";
+import HRFlowLogoLightSvg from "@Assets/svg/HRFlowLogo_Light.svg"; 
 
 
 const NavBar = (prop) => {
     return (
         <nav className="shadow-xl p-6 w-80 relative flex flex-col">
             <div className="pb-4">
-                <h1 className="text-4xl font-bold">Logo</h1>
+                <img src={HRFlowLogoLightSvg} className="h-12 sm:h-16" alt="HR Flow Logo" />
             </div>
             <div className="flex-grow line-above py-6">
                 {prop.routes.map(({ layout, pages }) => 
