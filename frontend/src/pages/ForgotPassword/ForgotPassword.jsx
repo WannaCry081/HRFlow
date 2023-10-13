@@ -27,12 +27,12 @@ const ForgotPassword = (prop) => {
 
                 if (status === 200) {
                     onSetVerifyCode();
-                    onSetSubmit();
                 } else if (status === 404) {
                     formik.setErrors({ email : data });
                 } else {
                     navigate("/error");
                 }
+                onSetSubmit();
             } else {
                 const { status, data } = await VerifyCodeApi(values);
                 setTimeout(() => {
