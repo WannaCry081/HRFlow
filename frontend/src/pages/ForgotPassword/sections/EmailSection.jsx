@@ -1,39 +1,9 @@
-import * as Yup from "yup";
-import { useFormik } from "formik";
 import { LuMessagesSquare } from "react-icons/lu";
 import { TextInput, SubmitButton } from "@Components/FormInput";
 import { CircularProgressBar } from "@Components/Loading";
-import { ForgotPasswordApi } from "@Services/authService.js";
-import useToggle from "@Hooks/useToggle";
 
 const EmailSection = (prop) => {
-
-    const [ submit, onSetSubmit ] = useToggle();
-    const formik = useFormik({
-        initialValues : {
-            email : ""
-        }, 
-        onSubmit : async (values) => {
-            onSetSubmit();
-            const { status, data } = await ForgotPasswordApi(values);
-
-            if (status === 200) {
-                prop.onSetEmail(values.email);
-                prop.onNextPage();
-            } else if (status === 404) {
-                formik.setErrors({ email : data});
-            } else {
-                prop.navigate("/error", { replace : true });
-            }
-            onSetSubmit();
-        }, 
-        validationSchema : Yup.object({
-            email :Yup.string().required("Email Address is required.")
-                .email("Invalid Email Address")
-                .min(4, "Email Address must be at least 4 characters.")
-                .max(150, "Email Address can be at most 150 characters."),
-        })
-    });
+    const { formik } = prop;
 
     return (
         <>
@@ -58,7 +28,7 @@ const EmailSection = (prop) => {
 
                 <div className="self-end w-full sm:w-44 ">
                     <SubmitButton>
-                        {(submit) ? (
+                        {(prop.submit) ? (
                             <CircularProgressBar>
                                 <p className="ml-2 text-poppins text-white">Loading...</p>
                             </CircularProgressBar>

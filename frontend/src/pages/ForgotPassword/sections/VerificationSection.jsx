@@ -1,45 +1,13 @@
-import * as Yup from "yup";
-import { useFormik } from "formik";
 import { LuMessagesSquare } from "react-icons/lu";
 import { CodeInput, SubmitButton } from "@Components/FormInput";
 import { CircularProgressBar } from "@Components/Loading";
-import { VerifyCodeApi } from "@Services/authService.js";
 import useToggle from "@Hooks/useToggle";
 
 const VerficationSection = (prop) => {
 
-    const [submit, onSetSubmit] = useToggle();
-
-    const formik = useFormik({
-        initialValues: {
-            email : prop.email,
-            code: "" 
-        },
-        onSubmit: async (values) => {
-            onSetSubmit();
-            const {status, data} = await VerifyCodeApi(values);
-            
-            setTimeout(() => {
-                if (status === 200) {
-                    sessionStorage.setItem("token", data);
-                    navigate("/dashboard/home", { replace: true });
-                } else if (status === 401 || status === 404) {
-                    formik.setErrors({ password: "Invalid Email Address. Please try again." });
-                } else {
-                    prop.navigate("/error", { replace : true });
-                }
-                onSetSubmit();
-            }, 1000);
-        },
-        validationSchema: Yup.object({
-            code: Yup.string().required("Code is required.")
-                .min(6, "Invalid Verification Code. Please enter again.")
-        })
-    });
-
     const handleCodeChange = (index, value) => {
-        const newCode = formik.values.code.slice(0, index) + value + formik.values.code.slice(index + 1);
-        formik.setFieldValue("code", newCode);
+        const newCode = prop.formik.values.code.slice(0, index) + value + prop.formik.values.code.slice(index + 1);
+        prop.formik.setFieldValue("code", newCode);
     };
 
     const codeInputs = Array.from({ length: 6 }, (_, index) => (
@@ -48,8 +16,8 @@ const VerficationSection = (prop) => {
             nameId={`code${index + 1}`}
             maxLength={1}
             minLength={1}
-            onBlur={formik.handleBlur}
-            value={formik.values.code[index] || ""}
+            onBlur={prop.formik.handleBlur}
+            value={prop.formik.values.code[index] || ""}
             onChange={(e) => handleCodeChange(index, e.target.value)}
         />
     ));
@@ -63,13 +31,13 @@ const VerficationSection = (prop) => {
                 </span>
                 <p className="font-poppins text-sm text-gray-600 mt-2">We've sent a confirmation code to your email. Input the code to proceed.</p>
             </header>
-            <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4">
+            <form onSubmit={prop.formik.handleSubmit} className="flex flex-col gap-4">
                 <span>
                     <div className="flex items-center gap-2 sm:px-6">
                         {codeInputs}
                     </div>
                     <div className="text-sm text-start text-red-500 font-semibold mt-2 sm:ml-7 ">
-                        {formik.errors.code && formik.touched.code && formik.errors.code }
+                        {prop.formik.errors.code && prop.formik.touched.code && prop.formik.errors.code }
                     </div>
                 </span>
 
@@ -79,7 +47,7 @@ const VerficationSection = (prop) => {
 
                 <div className="w-full sm:w-44 self-end">
                     <SubmitButton>
-                        {(submit) ? (
+                        {(prop.submit) ? (
                             <CircularProgressBar>
                                 <p className="ml-2 text-poppins text-white">Loading...</p>
                             </CircularProgressBar>
