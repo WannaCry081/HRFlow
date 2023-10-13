@@ -4,7 +4,7 @@ const useToggle = () => {
     const [toggle, setToggle] = useState(false);
 
     const onSetToggle = () => {
-        setToggle(!toggle);
+        setToggle(prev => !prev);
     };
 
     return [ toggle, onSetToggle ];

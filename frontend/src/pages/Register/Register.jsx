@@ -3,8 +3,10 @@ import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { TextInput, PasswordInput, SubmitButton } from "@Components/FormInput";
 import { ProgressBar, CircularProgressBar } from "@Components/Loading";
-import Group from "@Pages/Group";
+import Team from "@Pages/Team";
 import useToggle from "@Hooks/useToggle";
+import { RegisterUserApi } from "@Services/authService";
+
 
 const Register = () => { 
     document.title = "HR Flow | Sign Up";
@@ -12,6 +14,7 @@ const Register = () => {
     const navigate = useNavigate();
 
     const [ submit, onSetSubmit ] = useToggle();
+    const [ team, onSetTeam ] = useToggle();
     const [ loading, onSetLoading ] = useToggle();
 
     const formik = useFormik({
@@ -22,8 +25,23 @@ const Register = () => {
             password : "",
             confirmPassword : ""
         },
-        onSubmit : (values) => {
+        onSubmit : async (values) => {
             onSetSubmit();
+
+            const { status, data } = await RegisterUserApi(values);
+            setTimeout(() => {
+                if (status === 200) {
+                    sessionStorage.setItem("token", data);
+                    onSetTeam();
+                } else if (status === 400) {
+                    formik.setErrors({
+                        email : "Invalid Email Address. Please try again."
+                    });
+                } else {
+                    navigate("/error");
+                }
+                onSetSubmit();
+            }, 1000)
         },
         validationSchema : Yup.object({
             firstName : Yup.string().required("First Name is required.")
@@ -49,8 +67,7 @@ const Register = () => {
                 <ProgressBar duration={.4} 
                     onAnimationComplete={() => navigate("/auth/login") } />} 
 
-            {submit && 
-                <Group onCancel={onSetSubmit}/>}
+            {team && <Team />}
 
             <div className="flex flex-col items-center">
                 <header className="text-center mb-6">
@@ -117,7 +134,13 @@ const Register = () => {
                                 value={formik.values.confirmPassword}/>
 
                     <SubmitButton>
-                        <p className="text-poppins text-white">Submit</p>
+                        {(submit) ? (
+                            <CircularProgressBar>
+                                <p className="ml-2 text-poppins text-white">Loading...</p>
+                            </CircularProgressBar>
+                        ) : (
+                            <p className="text-poppins text-white">Submit</p>
+                        )}
                     </SubmitButton>
 
                 </form>
