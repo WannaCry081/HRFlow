@@ -11,7 +11,7 @@ const Dashboard = () => {
     return (
         <main className="h-screen w-screen flex">
             <NavBar routes={routes} />
-            <section>
+            <section className="w-full h-full">
                 <Routes>
                     <Route path="*" element={<Navigate to="/dashboard/home" replace/>} />
                     {routes.map(({ layout, pages }) =>
