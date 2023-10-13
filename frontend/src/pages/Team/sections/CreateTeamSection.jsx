@@ -1,19 +1,35 @@
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
 import { TextInput, SubmitButton } from "@Components/FormInput";
 import { CreateTeamApi } from "@Services/userService.js";
 import { CircularProgressBar } from "@Components/Loading";
 import useToggle from "@Hooks/useToggle";
 
 const CreateTeamSection = () => {
+    const navigate = useNavigate();
     const [submit, onSetSubmit] = useToggle();
     const formik = useFormik({
         initialValues : {
             name : ""
         },
         onSubmit : async (values) => {
+            onSetSubmit();
             const token = sessionStorage.getItem("token");
-            const response = await CreateTeamApi(token, values);
+            const { status, data } = await CreateTeamApi(token, values);
+            setTimeout(() => {
+                if (status === 200) {
+                    sessionStorage.setItem("token", data);
+                    navigate("/dashboard/home", {replace : true});
+                } else if (status === 404 || status === 400) {
+                    formik.setErrors({
+                        name : data
+                    });
+                } else {
+                    navigate("/error");
+                }
+                onSetSubmit();
+            }, 1000);
         },
         validationSchema : Yup.object({
             name : Yup.string().required("Team Name is required.")
@@ -25,11 +41,11 @@ const CreateTeamSection = () => {
     return (
         <>
             <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4">
-                <TextInput nameId="teamName"
+                <TextInput nameId="name"
                     name="Team Name"
                     type="text"
-                    placeholder="HR Flow"
-                    maxLength={150}
+                    placeholder="HR Flow"   
+                    maxLength={100}
                     errors={formik.errors.name}
                     touched={formik.touched.name}
                     onChange={formik.handleChange}
