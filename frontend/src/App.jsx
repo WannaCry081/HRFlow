@@ -9,6 +9,7 @@ const App = () => {
       <Route path="/" index element={<Landing />} />
       <Route path="/auth/*" element={<Auth />} /> 
       <Route path="/dashboard/*" element={<Dashboard />} />
+      <Route path="/error" element={<h1>Internal Server Error</h1>} />
     </Routes>
   );
 };
