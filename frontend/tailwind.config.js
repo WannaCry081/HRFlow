@@ -24,12 +24,14 @@ export default {
         "primary" : {
           "dark" : "#6E69D8",
           "light" : "#5955B3",
-          "pastel": "#F0EEFA"
+          "pastel": "#F0EEFA",
+          "base": "#F9FAFB",
+          "palePastel": "#F4EEF6"
         },
         "secondary" : {
           "dark" : "#FF719E",
           "light" : "#FF5B8F",
-          "pastel": "#F9F8F8"
+          "pastel": "#FCEBF1"
         },
         "tertiary"  : {
           "dark" : "#CF89FF",
