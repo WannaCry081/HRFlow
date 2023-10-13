@@ -5,6 +5,8 @@ import { TextInput, PasswordInput, SubmitButton } from "@Components/FormInput";
 import { ProgressBar, CircularProgressBar } from "@Components/Loading";
 import Group from "@Pages/Group";
 import useToggle from "@Hooks/useToggle";
+import { RegisterUserApi } from "@Services/authService";
+
 
 const Register = () => { 
     document.title = "HR Flow | Sign Up";
@@ -22,8 +24,22 @@ const Register = () => {
             password : "",
             confirmPassword : ""
         },
-        onSubmit : (values) => {
+        onSubmit : async (values) => {
             onSetSubmit();
+
+            const { status, data } = await RegisterUserApi(values);
+            setTimeout(() => {
+                if (status === 200) {
+                    sessionStorage.setItem("token", data);
+                } else if (status === 400) {
+                    formik.setErrors({
+                        email : "Invalid Email Address. Please try again."
+                    });
+                } else {
+                    // Handle internal server
+                }
+                onSetSubmit();
+            }, 1000)
         },
         validationSchema : Yup.object({
             firstName : Yup.string().required("First Name is required.")
@@ -49,8 +65,7 @@ const Register = () => {
                 <ProgressBar duration={.4} 
                     onAnimationComplete={() => navigate("/auth/login") } />} 
 
-            {submit && 
-                <Group onCancel={onSetSubmit}/>}
+            {/* {submit && <Group />} */}
 
             <div className="flex flex-col items-center">
                 <header className="text-center mb-6">
@@ -117,7 +132,13 @@ const Register = () => {
                                 value={formik.values.confirmPassword}/>
 
                     <SubmitButton>
-                        <p className="text-poppins text-white">Submit</p>
+                        {(submit) ? (
+                            <CircularProgressBar>
+                                <p className="ml-2 text-poppins text-white">Loading...</p>
+                            </CircularProgressBar>
+                        ) : (
+                            <p className="text-poppins text-white">Sign In</p>
+                        )}
                     </SubmitButton>
 
                 </form>

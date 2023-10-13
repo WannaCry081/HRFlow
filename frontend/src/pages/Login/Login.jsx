@@ -6,6 +6,7 @@ import { TextInput, PasswordInput, SubmitButton } from "@Components/FormInput";
 import { ProgressBar, CircularProgressBar } from "@Components/Loading";
 import ForgotPassword from "@Pages/ForgotPassword";
 import useToggle from "@Hooks/useToggle";
+import { LoginUserApi } from "@Services/authService.js";
 
 const Login = () => { 
     document.title = "HR Flow | Sign In";
@@ -15,16 +16,27 @@ const Login = () => {
     const [ forgotPassword, onSetForgotPassword ] = useToggle();
     const [ loading, onSetLoading ] = useToggle();
     const [ submit, onSetSubmit ] = useToggle();
-
+  
     const formik = useFormik({
         initialValues : {
             email : "",
             password : ""
         },
-        onSubmit : (values) => {
+        onSubmit : async (values) => {
             onSetSubmit();
-            navigate("/dashboard/home", { replace : true});
-            onSetSubmit();
+            const {status, data} = await LoginUserApi(values);
+                
+            setTimeout(() => {
+                if (status === 200) {
+                    sessionStorage.setItem("token", data);
+                    navigate("/dashboard/home", { replace: true });
+                } else if (status === 401 || status === 404) {
+                    formik.setErrors({ email: data });
+                } else {
+                    navigate("/error", { replace : true });
+                }
+                onSetSubmit();
+            }, 1000);
         },
         validationSchema : Yup.object({
             email :Yup.string().required("Email Address is required.")
