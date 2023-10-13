@@ -13,10 +13,10 @@ namespace HRIS.Repositories.UserRepository
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<User?> GetUserById(Guid id)
+        public async Task<User?> GetUserById(Guid userId)
         {
             return await _context.Users.Where(
-                c => c.Id.Equals(id)).FirstOrDefaultAsync();
+                c => c.Id.Equals(userId)).FirstOrDefaultAsync();
         }
 
         public async Task<bool> UpdateUserProfile(User user, User request)

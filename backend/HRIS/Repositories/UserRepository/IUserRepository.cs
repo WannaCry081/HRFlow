@@ -4,7 +4,7 @@ namespace HRIS.Repositories.UserRepository
 {
     public interface IUserRepository
     {
-        Task<User?> GetUserById(Guid id);
+        Task<User?> GetUserById(Guid userId);
         Task<bool> UpdateUserProfile(User user, User request);
         Task<Team?> GetTeamByCode(string code);
         Task<bool> CreateTeam(User user, Team team);

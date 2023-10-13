@@ -1,5 +1,4 @@
-﻿using HRIS.Dtos.EmployeeDto;
-using HRIS.Models;
+﻿using HRIS.Models;
 using Microsoft.AspNetCore.JsonPatch;
 
 namespace HRIS.Repositories.EmployeeRepository
@@ -8,10 +7,10 @@ namespace HRIS.Repositories.EmployeeRepository
     {
         Task<bool> IsEmailExists(string email);
         Task<User?> GetUserById(Guid id);
-        Task<User?> GetEmployeeRecord(Guid id, string code);
-        Task<List<User>> GetEmployeeRecords();
-        Task<bool> CreateEmployeeRecord(User user);
-        Task<bool> UpdateEmployeeRecords(User user, User request);
-        Task<bool> UpdateEmployeeRecord(User user, JsonPatchDocument<User> request);
+        Task<User?> GetEmployeeRecord(User hr, Guid employeeId);
+        Task<ICollection<User>> GetEmployeeRecords(User hr);
+        Task<bool> CreateEmployeeRecord(User employee);
+        Task<bool> UpdateEmployeeRecords(User employee, User request);
+        Task<bool> UpdateEmployeeRecord(User employee, JsonPatchDocument<User> request);
     }
 }

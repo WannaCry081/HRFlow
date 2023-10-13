@@ -26,64 +26,43 @@ namespace HRIS.Repositories.EmployeeRepository
                 c => c.Id.Equals(id)).FirstOrDefaultAsync();
         }
 
-        public async Task<bool> CreateEmployeeRecord(User user)
+        public async Task<bool> CreateEmployeeRecord(User employee)
         {
-            _context.Users.Add(user);
+            _context.Users.Add(employee);
             return await _context.SaveChangesAsync() > 0;
         }
 
-        // subject to change 
-        public async Task<User?> GetEmployeeRecord(Guid id, string code)
+        public async Task<User?> GetEmployeeRecord(User hr, Guid employeeId)
         {
-            var team = await _context.Teams
-                        .Include(c => c.Users)
-                        .FirstOrDefaultAsync(c => c.Code == code);
-
-            if (team is null)
-            {
-                return null;
-            }
-
-            var user = team.Users.FirstOrDefault(u => u.Status == "active" && u.Role == "employee");
-            return user;
+            return await _context.Users.Where(
+                c => c.Id.Equals(employeeId) && c.TeamId.Equals(hr.TeamId)).FirstOrDefaultAsync();
         }
 
-        // subject to change 
-        public async Task<List<User>> GetEmployeeRecords()
+        public async Task<ICollection<User>> GetEmployeeRecords(User hr)
         {
-            var teams = await _context.Teams
-                            .Include(c => c.Users)
-                            .ToListAsync();
-
-            var users = new List<User>();
-            foreach (var team in teams)
-            {
-                var teamUsers = team.Users.Where(u => u.Status == "active");
-                users.AddRange(teamUsers);
-            }
-
-            return users;
+            return await _context.Users.Where(
+                c => c.TeamId.Equals(hr.TeamId)).ToListAsync();
         }
 
-        public async Task<bool> UpdateEmployeeRecord(User user, JsonPatchDocument<User> request)
+        public async Task<bool> UpdateEmployeeRecord(User employee, JsonPatchDocument<User> request)
         {
-            request.ApplyTo(user);
+            request.ApplyTo(employee);
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> UpdateEmployeeRecords(User user, User request)
+        public async Task<bool> UpdateEmployeeRecords(User employee, User request)
         {
-            user.FirstName = request.FirstName;
-            user.MiddleName = request.MiddleName;
-            user.LastName = request.LastName;
-            user.Suffix = request.Suffix;
-            user.MobileNumber = request.MobileNumber;
-            user.LandlineNumber = request.LandlineNumber;
-            user.PersonalEmail = request.PersonalEmail;
-            user.CompanyEmail = request.CompanyEmail;
-            user.Status = request.Status;
-            user.UpdatedAt = DateTime.Now;
-            user.UpdatedBy = request.UpdatedBy;
+            employee.FirstName = request.FirstName;
+            employee.MiddleName = request.MiddleName;
+            employee.LastName = request.LastName;
+            employee.Suffix = request.Suffix;
+            employee.MobileNumber = request.MobileNumber;
+            employee.LandlineNumber = request.LandlineNumber;
+            employee.PersonalEmail = request.PersonalEmail;
+            employee.CompanyEmail = request.CompanyEmail;
+            employee.Status = request.Status;
+            employee.UpdatedAt = DateTime.Now;
+            employee.UpdatedBy = request.UpdatedBy;
 
             return await _context.SaveChangesAsync() > 0;
         }

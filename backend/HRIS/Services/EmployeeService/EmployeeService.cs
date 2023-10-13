@@ -20,22 +20,26 @@ namespace HRIS.Services.EmployeeService
                 throw new ArgumentNullException(nameof(employeeRepository));
         }
 
-        public async Task<GetEmployeeRecordDto> GetEmployeeRecord(Guid id)
+        public async Task<GetEmployeeRecordDto> GetEmployeeRecord(Guid hrId, Guid employeeId)
         {
-            var user = await _employeeRepository.GetUserById(id) ??
+            var hr = await _employeeRepository.GetUserById(hrId) ??
                 throw new UserNotFoundException("Employee is not found in the database.");
-            return _mapper.Map<GetEmployeeRecordDto>(user);
+            var employee = await _employeeRepository.GetEmployeeRecord(hr, employeeId);
+            return _mapper.Map<GetEmployeeRecordDto>(employee);
         }
 
-        public async Task<GetEmployeeRecordDto> GetEmployeeRecords()
+        public async Task<ICollection<GetEmployeeRecordDto>> GetEmployeeRecords(Guid hrId)
         {
-            var users = await _employeeRepository.GetEmployeeRecords();
-            return _mapper.Map<GetEmployeeRecordDto>(users);
+            var hr = await _employeeRepository.GetUserById(hrId) ??
+                throw new UserNotFoundException("HR is not recorded in the database.");
+
+            var employees = await _employeeRepository.GetEmployeeRecords(hr);
+            return _mapper.Map<ICollection<GetEmployeeRecordDto>>(employees);
         }
 
-        public async Task<GetEmployeeRecordDto> CreateEmployeeRecord(Guid id, AddEmployeeRecordDto request)
+        public async Task<GetEmployeeRecordDto> CreateEmployeeRecord(Guid hrId, AddEmployeeRecordDto request)
         {
-            var hr = await _employeeRepository.GetUserById(id) ??
+            var hr = await _employeeRepository.GetUserById(hrId) ??
                 throw new UserNotFoundException("HR is not recorded in the database.");
 
             var isEmployeeExists = await _employeeRepository.IsEmailExists(request.CompanyEmail);
