@@ -39,3 +39,14 @@ export const CreateTeamApi = async (token, request) => {
         return error.response;
     }
 };
+
+
+export const JoinTeamApi = async (token, request) => {
+    const instance = axiosInstance(token);
+    try {
+        const response = await instance.put("/team", request);
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+};
