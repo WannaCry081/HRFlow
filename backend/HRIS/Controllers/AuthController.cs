@@ -32,12 +32,12 @@ namespace HRIS.Controllers
             catch (UserExistsException ex)
             {
                 _logger.LogError("An error occurred while attempting to register user to database.", ex);
-                return BadRequest("An error occurred while registering duplicate records.");
+                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {
                 _logger.LogCritical("An error occurred while attempting to register user. ", ex);
-                return Problem("An error occurred while processing register request. Please try again later.");
+                return Problem("Internal server error.");
             }
         }
 
@@ -53,17 +53,17 @@ namespace HRIS.Controllers
             catch (UserNotFoundException ex)
             {
                 _logger.LogError("An error occurred while attempting to get user information.", ex);
-                return NotFound("An error occurred while getting user.");
+                return NotFound(ex.Message);
             }
             catch (UnauthorizedAccessException ex)
             {
                 _logger.LogWarning("An error occurred while attempting to force user credential.", ex);
-                return Unauthorized("An error occurred while logging in.");
+                return Unauthorized(ex.Message);
             }
             catch (Exception ex)
             {
                 _logger.LogCritical("An error occurred while attempting to login user.", ex);
-                return Problem("An error occurred while processing login request. Please try again later.");
+                return Problem("Internal server error.");
             }
         }
 
@@ -79,12 +79,12 @@ namespace HRIS.Controllers
             catch (UserNotFoundException ex)
             {
                 _logger.LogError("An error occurred while attempting to get user information.", ex);
-                return NotFound("An error occurred while finding user.");
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {
                 _logger.LogCritical("An error occurred while attempting to verify the user.", ex);
-                return Problem("An error occurred while processing your request. Please try again later.");
+                return Problem("Internal server error");
             }
         }
 
@@ -100,17 +100,17 @@ namespace HRIS.Controllers
             catch (UserNotFoundException ex)
             {
                 _logger.LogError("An error occurred while attempting to get user information.", ex);
-                return NotFound("An error occurred while finding user.");
+                return NotFound(ex.Message);
             }
             catch (UnauthorizedAccessException ex)
             {
                 _logger.LogWarning("An error occurred while attempting to force user credential.", ex);
-                return Unauthorized("An error occurred while processing OTP code.");
+                return Unauthorized(ex.Message);
             }
             catch (Exception ex)
             {
                 _logger.LogCritical("An error occurred while attempting to verify OTP password.", ex);
-                return Problem("An error occurred while verifying OTP code. Please try again later.");
+                return Problem("Internal server error");
             }
         }
 
@@ -126,7 +126,7 @@ namespace HRIS.Controllers
             catch (Exception ex)
             {
                 _logger.LogCritical("An error occurred while attempting to send the email to the admin.", ex);
-                return Problem("An error occurred while sending an email to the admin. Please try again later.");
+                return Problem("Internal server error.");
             }
         }
 
@@ -142,12 +142,12 @@ namespace HRIS.Controllers
             catch (UserNotFoundException ex)
             {
                 _logger.LogError("An error occurred while attempting to get user information.", ex);
-                return NotFound("An error occurred while finding user.");
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {
                 _logger.LogCritical("An error occurred while attempting to update user password. ", ex);
-                return Problem("An error occurred while processing reset password request. Please try again later.");
+                return Problem("Internal server error.");
             }
         }
     }
