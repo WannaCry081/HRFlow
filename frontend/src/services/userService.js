@@ -30,4 +30,12 @@ export const UpdateUserProfileApi = async (token, request) => {
     }
 };
 
-
+export const CreateTeamApi = async (token, request) => {
+    const instance = axiosInstance(token);
+    try {
+        const response = await instance.post("/team", request);
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+};
