@@ -2,6 +2,7 @@
 using HRIS.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
+using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
 
 namespace HRIS.Repositories.EmployeeRepository
 {
@@ -32,6 +33,36 @@ namespace HRIS.Repositories.EmployeeRepository
             return await _context.SaveChangesAsync() > 0;
         }
 
+        public async Task<User?> GetEmployeeRecord(Guid id, string code)
+        {
+            var team = await _context.Teams
+                        .Include(c => c.Users)
+                        .FirstOrDefaultAsync(c => c.Code == code);
+
+            if (team is null)
+            {
+                return null;
+            }
+
+            var user = team.Users.FirstOrDefault(u => u.Status == "active" && u.Role == "employee");
+            return user;
+        }
+
+        public async Task<List<User>> GetEmployeeRecords()
+        {
+            var teams = await _context.Teams
+                            .Include(c => c.Users)
+                            .ToListAsync();
+
+            var users = new List<User>();
+            foreach (var team in teams)
+            {
+                var teamUsers = team.Users.Where(u => u.Status == "active" && u.Role == "employee");
+                users.AddRange(teamUsers);
+            }
+
+            return users;
+        }
 
         public async Task<bool> UpdateEmployeeRecord(User user, JsonPatchDocument<User> request)
         {
