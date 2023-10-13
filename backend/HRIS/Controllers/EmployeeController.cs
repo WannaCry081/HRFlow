@@ -25,24 +25,27 @@ namespace HRIS.Controllers
                 throw new ArgumentNullException(nameof(humanResourceService));
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{employeeId}")]
         [Produces("application/json")]
-        public async Task<IActionResult> GetEmployeeRecord(Guid id)
+        public async Task<IActionResult> GetEmployeeRecord([FromRoute] Guid employeeId)
         {
             try
             {
-                var response = await _employeeService.GetEmployeeRecord(id);
+                var hrId = UserClaim.GetCurrentUser(HttpContext) ??
+                  throw new UserNotFoundException("Invalid user.");
+
+                var response = await _employeeService.GetEmployeeRecord(hrId, employeeId);
                 return Ok(response);
             }
             catch (UserNotFoundException ex)
             {
                 _logger.LogError("An error occurred while attempting to find employee.", ex);
-                return NotFound("An error occurred while finding employee.");
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred while attempting to get employee record.");
-                return Problem(ex.Message);
+                return Problem("Internal server error.");
             }
         }
 
@@ -52,18 +55,21 @@ namespace HRIS.Controllers
         {
             try
             {
-                var response = await _employeeService.GetEmployeeRecords();
+                var hrId = UserClaim.GetCurrentUser(HttpContext) ??
+                  throw new UserNotFoundException("Invalid user.");
+
+                var response = await _employeeService.GetEmployeeRecords(hrId);
                 return Ok(response);
             }
             catch (UserNotFoundException ex)
             {
                 _logger.LogError("An error occurred while attempting to find employee.", ex);
-                return NotFound("An error occurred while finding employee.");
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred while attempting to get employee records.");
-                return Problem(ex.Message);
+                return Problem("Internal server error.");
             }
         }
 
@@ -74,21 +80,21 @@ namespace HRIS.Controllers
         {
             try
             {
-                var userId = UserClaim.GetCurrentUser(HttpContext) ??
+                var hrId = UserClaim.GetCurrentUser(HttpContext) ??
                   throw new UserNotFoundException("Invalid user.");
 
-                var response = await _employeeService.CreateEmployeeRecord(userId, request);
+                var response = await _employeeService.CreateEmployeeRecord(hrId, request);
                 return Ok(response);
             }
             catch (UserExistsException ex)
             {
                 _logger.LogError("An error occurred while attempting to register employee to database.", ex);
-                return BadRequest("An error occurred while registering duplicate records.");
+                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {
                 _logger.LogCritical(ex, "An error occurred while attempting to add a new employee record.");
-                return Problem("An error occurred while processing employee creation request. Please try again later.");
+                return Problem("Internal server error.");
             }
         }
 
@@ -106,12 +112,12 @@ namespace HRIS.Controllers
             catch (UserNotFoundException ex)
             {
                 _logger.LogError("An error occurred while attempting to find employee.", ex);
-                return NotFound("An error occurred while finding employee.");
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred while attempting to update employee record.");
-                return Problem(ex.Message);
+                return Problem("Internal server error.");
             }
         }
 
@@ -125,18 +131,18 @@ namespace HRIS.Controllers
                 var hrId = UserClaim.GetCurrentUser(HttpContext) ??
                     throw new UserNotFoundException("Invalid user.");
 
-                var employee = await _employeeService.UpdateEmployeeRecords(hrId, employeeId, request);
-                return Ok(employee);
+                var response = await _employeeService.UpdateEmployeeRecords(hrId, employeeId, request);
+                return Ok(response);
             }
             catch (UserNotFoundException ex)
             {
                 _logger.LogError("An error occurred while attempting to find employee.", ex);
-                return NotFound("An error occurred while finding employee.");
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred while attempting to update employee record.");
-                return Problem("An error occurred while processing employee update request. Please try again later.");
+                return Problem("Internal server error.");
             }
 
         }

@@ -18,17 +18,17 @@ namespace HRIS.Services.UserService
             _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
         }
 
-        public async Task<GetUserProfileDto> GetUserProfile(Guid id)
+        public async Task<GetUserProfileDto> GetUserProfile(Guid userId)
         {
-            var response = await _userRepository.GetUserById(id) ??
+            var response = await _userRepository.GetUserById(userId) ??
                 throw new UserNotFoundException("User is not recorded in the database.");
 
             return _mapper.Map<GetUserProfileDto>(response);
         }
 
-        public async Task<GetUserProfileDto> UpdateUserProfile(Guid id, UpdateUserProfileDto request)
+        public async Task<GetUserProfileDto> UpdateUserProfile(Guid userId, UpdateUserProfileDto request)
         {
-            var user = await _userRepository.GetUserById(id) ??
+            var user = await _userRepository.GetUserById(userId) ??
                 throw new UserNotFoundException("User is not recorded in the database.");
             var isUserUpdated = await _userRepository.UpdateUserProfile(
                 user, _mapper.Map<User>(request));
@@ -40,9 +40,9 @@ namespace HRIS.Services.UserService
             return _mapper.Map<GetUserProfileDto>(user);
         }
 
-        public async Task<bool> CreateTeam(Guid id, CreateTeamDto request)
+        public async Task<bool> CreateTeam(Guid userId, CreateTeamDto request)
         {
-            var user = await _userRepository.GetUserById(id) ??
+            var user = await _userRepository.GetUserById(userId) ??
                 throw new UserNotFoundException("User is not found in the database.");
 
             var newTeam = new Team()
@@ -55,9 +55,9 @@ namespace HRIS.Services.UserService
             return await _userRepository.CreateTeam(user, newTeam);
         }
 
-        public async Task<bool> JoinTeam(Guid id, JoinTeamDto request)
+        public async Task<bool> JoinTeam(Guid userId, JoinTeamDto request)
         {
-            var user = await _userRepository.GetUserById(id) ??
+            var user = await _userRepository.GetUserById(userId) ??
                 throw new UserNotFoundException("User is not found in the database.");
 
             var team = await _userRepository.GetTeamByCode(request.Code) ??

@@ -38,12 +38,12 @@ namespace HRIS.Controllers
             catch (UserNotFoundException ex)
             {
                 _logger.LogError("An error occurred while attempting to get user information.", ex);
-                return NotFound("An error occurred while finding user.");
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {
                 _logger.LogCritical("An error occurred while attempting to get user data.", ex);
-                return Problem("An error occurred while getting user profile. Please try again later.");
+                return Problem("Internal server error");
             }
         }
 
@@ -62,12 +62,12 @@ namespace HRIS.Controllers
             catch (UserNotFoundException ex)
             {
                 _logger.LogError("An error occurred while attempting to get user information.", ex);
-                return NotFound("An error occurred while finding user.");
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {
                 _logger.LogCritical("An error occurred while attempting to update user data.", ex);
-                return Problem(ex.Message);
+                return Problem("Internal server error.");
             }
         }
 
@@ -90,17 +90,17 @@ namespace HRIS.Controllers
             catch (UserNotFoundException ex)
             {
                 _logger.LogError("An error occurred while attempting to get user information.", ex);
-                return NotFound("An error occurred while finding user.");
+                return NotFound(ex.Message);
             }
             catch (TeamExistsException ex)
             {
                 _logger.LogError("An error occurred while attempting to create a team.", ex);
-                return BadRequest("An error occurred while trying to create a team.");
+                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {
                 _logger.LogCritical("An error occurred while attempting to generate team code. ", ex);
-                return Problem("An error occurred while processing team code request. Please try again later.");
+                return Problem("Internal server error.");
             }
         }
 
@@ -123,22 +123,22 @@ namespace HRIS.Controllers
             catch (UserNotFoundException ex)
             {
                 _logger.LogError("An error occurred while attempting to get user information.", ex);
-                return NotFound("An error occurred while finding user.");
+                return NotFound(ex.Message);
             }
             catch (TeamExistsException ex)
             {
                 _logger.LogError("An error occurred while attempting to join a team.", ex);
-                return BadRequest("An error occurred while trying to join a team.");
+                return BadRequest(ex.Message);
             }
             catch (TeamNotFoundException ex)
             {
                 _logger.LogError("An error occurred while attempting to find the team.", ex);
-                return NotFound("An error occurred while finding the team.");
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {
                 _logger.LogCritical("An error occurred while attempting to join a team. ", ex);
-                return Problem("An error occurred while processing team entry request. Please try again later.");
+                return Problem("Internal server error.");
             }
         }
     }
