@@ -1,6 +1,5 @@
 ﻿using HRIS.Context;
 using HRIS.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace HRIS.Repositories.TeamRepository
 {
@@ -27,6 +26,20 @@ namespace HRIS.Repositories.TeamRepository
             _context.Teams.Add(team);
             _context.Users.Update(user);
 
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> JoinTeam(User user, Team team, string code)
+        {
+            if (user.TeamId is not null)
+            {
+                return false;
+            }
+
+            user.TeamId = team.Id;
+            user.GroupCode = code;
+
+            _context.Users.Update(user);
             return await _context.SaveChangesAsync() > 0;
         }
     }
