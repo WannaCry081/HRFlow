@@ -1,6 +1,6 @@
 ﻿namespace HRIS.Repositories.TeamRepository
 {
-    public class TeamRepository
+    public class TeamRepository : ITeamRepository
     {
     }
 }
