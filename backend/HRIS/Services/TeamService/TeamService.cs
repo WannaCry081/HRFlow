@@ -1,6 +1,6 @@
 ﻿namespace HRIS.Services.TeamService
 {
-    public class TeamService
+    public class TeamService : ITeamService
     {
     }
 }
