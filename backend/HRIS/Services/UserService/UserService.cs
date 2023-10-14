@@ -21,7 +21,7 @@ namespace HRIS.Services.UserService
         public async Task<GetUserProfileDto> GetUserProfile(Guid userId)
         {
             var response = await _userRepository.GetUserById(userId) ??
-                throw new UserNotFoundException("User is not recorded in the database.");
+                throw new UserNotFoundException("Invalid email address. Please try again.");
 
             return _mapper.Map<GetUserProfileDto>(response);
         }
@@ -29,13 +29,13 @@ namespace HRIS.Services.UserService
         public async Task<GetUserProfileDto> UpdateUserProfile(Guid userId, UpdateUserProfileDto request)
         {
             var user = await _userRepository.GetUserById(userId) ??
-                throw new UserNotFoundException("User is not recorded in the database.");
+                throw new UserNotFoundException("Invalid email address. Please try again.");
             var isUserUpdated = await _userRepository.UpdateUserProfile(
                 user, _mapper.Map<User>(request));
 
             if (!isUserUpdated)
             {
-                throw new Exception("Failed to update user profile to database.");
+                throw new Exception("Failed to update user's credential to database.");
             }
             return _mapper.Map<GetUserProfileDto>(user);
         }
@@ -43,7 +43,7 @@ namespace HRIS.Services.UserService
         public async Task<bool> CreateTeam(Guid userId, CreateTeamDto request)
         {
             var user = await _userRepository.GetUserById(userId) ??
-                throw new UserNotFoundException("User is not found in the database.");
+                throw new UserNotFoundException("Invalid email address. Please try again.");
 
             var newTeam = new Team()
             {
@@ -58,10 +58,10 @@ namespace HRIS.Services.UserService
         public async Task<bool> JoinTeam(Guid userId, JoinTeamDto request)
         {
             var user = await _userRepository.GetUserById(userId) ??
-                throw new UserNotFoundException("User is not found in the database.");
+                throw new UserNotFoundException("Invalid email address. Please try again.");
 
             var team = await _userRepository.GetTeamByCode(request.Code) ??
-                throw new TeamNotFoundException("Team does not exist.");
+                throw new TeamNotFoundException("Invalid team code. Please try again.");
 
             return await _userRepository.JoinTeam(user, team, request.Code);
         }

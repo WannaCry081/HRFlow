@@ -30,7 +30,7 @@ namespace HRIS.Controllers
             try
             {
                 var userId = UserClaim.GetCurrentUser(HttpContext) ??
-                    throw new UserNotFoundException("Invalid user.");
+                    throw new UserNotFoundException("Invalid user's credential. Please try again.");
 
                 var response = await _userService.GetUserProfile(userId);
                 return Ok(response);
@@ -54,7 +54,7 @@ namespace HRIS.Controllers
             try
             {
                 var userId = UserClaim.GetCurrentUser(HttpContext) ??
-                    throw new UserNotFoundException("Invalid user.");
+                    throw new UserNotFoundException("Invalid user's credential. Please try again.");
 
                 var response = await _userService.UpdateUserProfile(userId, request);
                 return Ok(response);
@@ -78,12 +78,12 @@ namespace HRIS.Controllers
             try
             {
                 var userId = UserClaim.GetCurrentUser(HttpContext) ??
-                  throw new UserNotFoundException("Invalid user.");
+                  throw new UserNotFoundException("Invalid user's credential. Please try again.");
 
                 var response = await _userService.CreateTeam(userId, request);
                 if (!response)
                 {
-                    throw new TeamExistsException("Team already exists");
+                    throw new TeamExistsException("User already has a team.");
                 }
                 return Ok("Successfully created a team.");
             }
@@ -111,14 +111,14 @@ namespace HRIS.Controllers
             try
             {
                 var userId = UserClaim.GetCurrentUser(HttpContext) ??
-                  throw new UserNotFoundException("Invalid user.");
+                  throw new UserNotFoundException("Invalid user's credential. Please try again.");
 
                 var response = await _userService.JoinTeam(userId, request);
                 if (!response)
                 {
-                    throw new TeamExistsException("User already has a team.");
+                    throw new TeamExistsException("User already has a team. Please try again.");
                 }
-                return Ok("Successfully joined team.");
+                return Ok("Successfully joined a team.");
             }
             catch (UserNotFoundException ex)
             {

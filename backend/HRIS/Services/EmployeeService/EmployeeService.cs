@@ -23,7 +23,7 @@ namespace HRIS.Services.EmployeeService
         public async Task<GetEmployeeRecordDto> GetEmployeeRecord(Guid hrId, Guid employeeId)
         {
             var hr = await _employeeRepository.GetUserById(hrId) ??
-                throw new UserNotFoundException("Employee is not found in the database.");
+                throw new UserNotFoundException("Invalid email address. Please try again.");
             var employee = await _employeeRepository.GetEmployeeRecord(hr, employeeId);
             return _mapper.Map<GetEmployeeRecordDto>(employee);
         }
@@ -31,7 +31,7 @@ namespace HRIS.Services.EmployeeService
         public async Task<ICollection<GetEmployeeRecordDto>> GetEmployeeRecords(Guid hrId)
         {
             var hr = await _employeeRepository.GetUserById(hrId) ??
-                throw new UserNotFoundException("HR is not recorded in the database.");
+                throw new UserNotFoundException("Invalid email address. Please try again.");
 
             var employees = await _employeeRepository.GetEmployeeRecords(hr);
             return _mapper.Map<ICollection<GetEmployeeRecordDto>>(employees);
@@ -40,12 +40,12 @@ namespace HRIS.Services.EmployeeService
         public async Task<GetEmployeeRecordDto> CreateEmployeeRecord(Guid hrId, AddEmployeeRecordDto request)
         {
             var hr = await _employeeRepository.GetUserById(hrId) ??
-                throw new UserNotFoundException("HR is not recorded in the database.");
+                throw new UserNotFoundException("Invalid email address. Please try again.");
 
             var isEmployeeExists = await _employeeRepository.IsEmailExists(request.CompanyEmail);
             if (isEmployeeExists)
             {
-                throw new UserExistsException("Employee is already recorded in the database.");
+                throw new UserExistsException("Employee already exists. Please try again.");
             }
 
             var employee = _mapper.Map<User>(request);
@@ -66,10 +66,10 @@ namespace HRIS.Services.EmployeeService
         public async Task<bool> UpdateEmployeeRecord(Guid hrId, Guid employeeId, JsonPatchDocument<User> request)
         {
             var hr = await _employeeRepository.GetUserById(hrId) ??
-                throw new UserNotFoundException("HR is not recorded in the database.");
+                throw new UserNotFoundException("Invalid email address. Please try again.");
 
             var employee = await _employeeRepository.GetUserById(employeeId) ??
-                throw new UserNotFoundException("Employee is not recorded in the database.");
+                throw new UserNotFoundException("Employee already exists. Please try again.");
 
             employee.UpdatedBy = hr.FirstName + " " + hr.LastName;
             employee.UpdatedAt = DateTime.Now;
@@ -85,10 +85,10 @@ namespace HRIS.Services.EmployeeService
         public async Task<GetEmployeeRecordDto> UpdateEmployeeRecords(Guid hrId, Guid employeeId, UpdateEmployeeRecordDto request)
         {
             var hr = await _employeeRepository.GetUserById(hrId) ??
-                throw new UserNotFoundException("HR is not recorded in the database.");
+                throw new UserNotFoundException("Invalid email address. Please try again.");
 
             var employee = await _employeeRepository.GetUserById(employeeId) ??
-                throw new UserNotFoundException("Employee is not recorded in the database.");
+                throw new UserNotFoundException("Employee already exists. Please try again.");
 
             var dbEmployee = _mapper.Map<User>(request);
             dbEmployee.UpdatedBy = hr.FirstName + " " + hr.LastName;
