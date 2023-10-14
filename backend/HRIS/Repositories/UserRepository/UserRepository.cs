@@ -32,19 +32,5 @@ namespace HRIS.Repositories.UserRepository
             return await _context.Teams.Where(
                 c => c.Code.Equals(code)).FirstOrDefaultAsync();
         }
-
-        public async Task<bool> JoinTeam(User user, Team team, string code)
-        {
-            if (user.TeamId is not null)
-            {
-                return false;
-            }
-
-            user.TeamId = team.Id;
-            user.GroupCode = code;
-
-            _context.Users.Update(user);
-            return await _context.SaveChangesAsync() > 0;
-        }
     }
 }
