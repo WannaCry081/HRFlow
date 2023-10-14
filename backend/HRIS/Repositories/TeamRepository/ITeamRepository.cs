@@ -7,5 +7,6 @@ namespace HRIS.Repositories.TeamRepository
         Task<User?> GetUserById(Guid userId);
         Task<bool> CreateTeam(User user, Team team);
         Task<bool> JoinTeam(User user, Team team, string code);
+        Task<Team?> GetTeamByCode(string code);
     }
 }

@@ -49,5 +49,11 @@ namespace HRIS.Repositories.TeamRepository
             _context.Users.Update(user);
             return await _context.SaveChangesAsync() > 0;
         }
+
+        public async Task<Team?> GetTeamByCode(string code)
+        {
+            return await _context.Teams.Where(
+                c => c.Code.Equals(code)).FirstOrDefaultAsync();
+        }
     }
 }
