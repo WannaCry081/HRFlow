@@ -26,11 +26,5 @@ namespace HRIS.Repositories.UserRepository
             user.PersonalEmail = request.PersonalEmail;
             return 0 < await _context.SaveChangesAsync();
         }
-
-        public async Task<Team?> GetTeamByCode(string code)
-        {
-            return await _context.Teams.Where(
-                c => c.Code.Equals(code)).FirstOrDefaultAsync();
-        }
     }
 }
