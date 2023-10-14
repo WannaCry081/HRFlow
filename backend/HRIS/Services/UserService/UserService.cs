@@ -40,21 +40,6 @@ namespace HRIS.Services.UserService
             return _mapper.Map<GetUserProfileDto>(user);
         }
 
-        public async Task<bool> CreateTeam(Guid userId, CreateTeamDto request)
-        {
-            var user = await _userRepository.GetUserById(userId) ??
-                throw new UserNotFoundException("Invalid email address. Please try again.");
-
-            var newTeam = new Team()
-            {
-                Id = Guid.NewGuid(),
-                Code = CodeGenerator.AlphaNumeric(8),
-                Name = request.Name
-            };
-
-            return await _userRepository.CreateTeam(user, newTeam);
-        }
-
         public async Task<bool> JoinTeam(Guid userId, JoinTeamDto request)
         {
             var user = await _userRepository.GetUserById(userId) ??

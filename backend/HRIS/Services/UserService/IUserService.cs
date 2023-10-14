@@ -6,7 +6,6 @@ namespace HRIS.Services.UserService
     {
         Task<GetUserProfileDto> GetUserProfile(Guid userId);
         Task<GetUserProfileDto> UpdateUserProfile(Guid userId, UpdateUserProfileDto request);
-        Task<bool> CreateTeam(Guid userId, CreateTeamDto request);
         Task<bool> JoinTeam(Guid userId, JoinTeamDto request);
     }
 }
