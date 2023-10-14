@@ -39,16 +39,5 @@ namespace HRIS.Services.UserService
             }
             return _mapper.Map<GetUserProfileDto>(user);
         }
-
-        public async Task<bool> JoinTeam(Guid userId, JoinTeamDto request)
-        {
-            var user = await _userRepository.GetUserById(userId) ??
-                throw new UserNotFoundException("Invalid email address. Please try again.");
-
-            var team = await _userRepository.GetTeamByCode(request.Code) ??
-                throw new TeamNotFoundException("Invalid team code. Please try again.");
-
-            return await _userRepository.JoinTeam(user, team, request.Code);
-        }
     }
 }
