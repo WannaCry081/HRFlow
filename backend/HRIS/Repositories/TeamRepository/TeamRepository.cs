@@ -1,5 +1,6 @@
 ﻿using HRIS.Context;
 using HRIS.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HRIS.Repositories.TeamRepository
 {
@@ -10,7 +11,13 @@ namespace HRIS.Repositories.TeamRepository
         public TeamRepository(DataContext context)
         {
             _context = context ??
-                throw new ArgumentException(nameof(context));
+                throw new ArgumentNullException(nameof(context));
+        }
+
+        public async Task<User?> GetUserById(Guid userId)
+        {
+            return await _context.Users.Where(
+                c => c.Id.Equals(userId)).FirstOrDefaultAsync();
         }
 
         public async Task<bool> CreateTeam(User user, Team team)
