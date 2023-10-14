@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using HRIS.Services.TeamService;
 
 namespace HRIS.Controllers
 {
@@ -8,9 +9,15 @@ namespace HRIS.Controllers
     [Route("/api/team")]
     public class TeamController : ControllerBase
     {
-        public TeamController()
-        {
+        private readonly ILogger<TeamController> _logger;
+        private readonly ITeamService _teamService;
 
+        public TeamController(ILogger<TeamController> logger, ITeamService teamService)
+        {
+            _logger = logger ?? 
+                throw new ArgumentNullException(nameof(logger));
+            _teamService = teamService ?? 
+                throw new ArgumentNullException(nameof(teamService));
         }
     }
 }
