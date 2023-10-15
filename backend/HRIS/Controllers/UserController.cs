@@ -72,9 +72,31 @@ namespace HRIS.Controllers
         }
 
         [HttpPut("/reset-password")]
-        public Task<IActionResult> UpdateUserPassword([FromBody] UpdateUserPasswordDto request)
+        public async Task<IActionResult> UpdateUserPassword([FromBody] UpdateUserPasswordDto request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var userId = UserClaim.GetCurrentUser(HttpContext) ??
+                    throw new UnauthorizedAccessException("Invalid user's credential. Please try again.");
+
+                var response = await _userService.UpdateUserPassword(userId, request);
+                return Ok();
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                _logger.LogError("An error occurred while attempting to get user information.", ex);
+                return NotFound(ex.Message);
+            }
+            catch (BadHttpRequestException ex)
+            {
+                _logger.LogError("An error occurred while verifying user data.", ex);
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("An error occurred while attempting to update user data.", ex);
+                return Problem(ex.Message);
+            }
         }
 
     }
