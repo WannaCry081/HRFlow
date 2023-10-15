@@ -25,7 +25,7 @@ const VerficationSection = (prop) => {
     return (
         <motion.div initial={{translateX : 20 }}
                     animate={{translateX : 0 }}>
-                        
+
             <header className="mb-6">
                 <span className="flex items-center gap-2">
                     <LuMessagesSquare size={26} className="stroke-primary-light"/>
@@ -42,10 +42,6 @@ const VerficationSection = (prop) => {
                         {prop.formik.errors.code && prop.formik.touched.code && prop.formik.errors.code }
                     </div>
                 </span>
-
-                <p className="font-poppins text-sm font-semibold text-secondary-light cursor-pointer max-w-max active-secondary">
-                    Resend Verification
-                </p>
 
                 <div className="w-full sm:w-44 self-end">
                     <SubmitButton>
