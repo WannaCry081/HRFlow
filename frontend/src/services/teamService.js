@@ -18,4 +18,16 @@ export const JoinTeamApi = async (token, request) => {
     } catch (error) {
         return error.response;
     }
-}
+};
+
+
+export const CreateTeamApi = async (token, request) => {
+    const instance = axiosInstance(token);
+    
+    try {
+        const response = await instance.post("", request);
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+};
