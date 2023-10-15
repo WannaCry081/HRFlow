@@ -30,7 +30,7 @@ namespace HRIS.Controllers
             try
             {
                 var userId = UserClaim.GetCurrentUser(HttpContext) ??
-                    throw new UserNotFoundException("Invalid user.");
+                    throw new UserNotFoundException("Invalid user's credential. Please try again.");
 
                 var response = await _userService.GetUserProfile(userId);
                 return Ok(response);
@@ -54,7 +54,7 @@ namespace HRIS.Controllers
             try
             {
                 var userId = UserClaim.GetCurrentUser(HttpContext) ??
-                    throw new UserNotFoundException("Invalid user.");
+                    throw new UserNotFoundException("Invalid user's credential. Please try again.");
 
                 var response = await _userService.UpdateUserProfile(userId, request);
                 return Ok(response);
@@ -71,74 +71,36 @@ namespace HRIS.Controllers
             }
         }
 
-        [HttpPost("team")]
-        [Produces("application/json")]
-        public async Task<IActionResult> CreateTeam([FromBody] CreateTeamDto request)
+        [HttpPut("/reset-password")]
+        public async Task<IActionResult> UpdateUserPassword([FromBody] UpdateUserPasswordDto request)
         {
             try
             {
                 var userId = UserClaim.GetCurrentUser(HttpContext) ??
-                  throw new UserNotFoundException("Invalid user.");
+                    throw new UserNotFoundException("Invalid user's credential. Please try again.");
 
-                var response = await _userService.CreateTeam(userId, request);
-                if (!response)
-                {
-                    throw new TeamExistsException("Team already exists");
-                }
-                return Ok("Successfully created a team.");
+                var response = await _userService.UpdateUserPassword(userId, request);
+                return Ok();
             }
             catch (UserNotFoundException ex)
             {
                 _logger.LogError("An error occurred while attempting to get user information.", ex);
                 return NotFound(ex.Message);
             }
-            catch (TeamExistsException ex)
+            catch (UnauthorizedAccessException ex)
             {
-                _logger.LogError("An error occurred while attempting to create a team.", ex);
+                _logger.LogError("An error occurred while attempting to validate user's credential", ex);
+                return Unauthorized(ex.Message);
+            }
+            catch (BadHttpRequestException ex)
+            {
+                _logger.LogError("An error occurred while verifying user data.", ex);
                 return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {
-                _logger.LogCritical("An error occurred while attempting to generate team code. ", ex);
-                return Problem("Internal server error.");
-            }
-        }
-
-        [HttpPut("team")]
-        [Produces("application/json")]
-        public async Task<IActionResult> JoinTeam([FromBody] JoinTeamDto request)
-        {
-            try
-            {
-                var userId = UserClaim.GetCurrentUser(HttpContext) ??
-                  throw new UserNotFoundException("Invalid user.");
-
-                var response = await _userService.JoinTeam(userId, request);
-                if (!response)
-                {
-                    throw new TeamExistsException("User already has a team.");
-                }
-                return Ok("Successfully joined team.");
-            }
-            catch (UserNotFoundException ex)
-            {
-                _logger.LogError("An error occurred while attempting to get user information.", ex);
-                return NotFound(ex.Message);
-            }
-            catch (TeamExistsException ex)
-            {
-                _logger.LogError("An error occurred while attempting to join a team.", ex);
-                return BadRequest(ex.Message);
-            }
-            catch (TeamNotFoundException ex)
-            {
-                _logger.LogError("An error occurred while attempting to find the team.", ex);
-                return NotFound(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogCritical("An error occurred while attempting to join a team. ", ex);
-                return Problem("Internal server error.");
+                _logger.LogCritical("An error occurred while attempting to update user data.", ex);
+                return Problem(ex.Message);
             }
         }
     }

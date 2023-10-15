@@ -2,9 +2,9 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { ModalBox } from "@Components/ModalBox";
+import { VerifyCodeApi, ForgotPasswordApi } from "@Services/authService.js";
 import useToggle from "@Hooks/useToggle";
 import EmailSection from "./sections/EmailSection";
-import { VerifyCodeApi, ForgotPasswordApi } from "@Services/authService.js";
 import VerificationSection from "./sections/VerificationSection";
 
 const ForgotPassword = (prop) => {  
@@ -27,12 +27,12 @@ const ForgotPassword = (prop) => {
 
                 if (status === 200) {
                     onSetVerifyCode();
-                    onSetSubmit();
                 } else if (status === 404) {
                     formik.setErrors({ email : data });
                 } else {
                     navigate("/error");
                 }
+                onSetSubmit();
             } else {
                 const { status, data } = await VerifyCodeApi(values);
                 setTimeout(() => {
@@ -56,7 +56,7 @@ const ForgotPassword = (prop) => {
             code: Yup.string().min(6, "Invalid Verification Code. Please enter again.")
         })
     });
-    
+
     return (
         <ModalBox onCancel={prop.onCancel}> 
             {(verifyCode) ? (
