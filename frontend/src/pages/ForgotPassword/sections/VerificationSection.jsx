@@ -1,7 +1,7 @@
 import { LuMessagesSquare } from "react-icons/lu";
 import { CodeInput, SubmitButton } from "@Components/FormInput";
 import { CircularProgressBar } from "@Components/Loading";
-import useToggle from "@Hooks/useToggle";
+import { motion } from "framer-motion";
 
 const VerficationSection = (prop) => {
 
@@ -23,7 +23,9 @@ const VerficationSection = (prop) => {
     ));
 
     return (
-        <>
+        <motion.div initial={{translateX : 20 }}
+                    animate={{translateX : 0 }}>
+                        
             <header className="mb-6">
                 <span className="flex items-center gap-2">
                     <LuMessagesSquare size={26} className="stroke-primary-light"/>
@@ -57,7 +59,7 @@ const VerficationSection = (prop) => {
                     </SubmitButton>
                 </div>
             </form>
-        </>
+        </motion.div>
     );
 };
 
