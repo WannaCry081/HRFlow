@@ -14,6 +14,7 @@ namespace HRIS.Dtos.UserDto
         public string PersonalEmail { get; set; } = string.Empty;
         public string CompanyEmail { get; set; } = string.Empty;
         public string TeamCode { get; set; } = string.Empty;
+        public string Role { get; set; } = string.Empty;
         public string CreatedBy { get; set; } = string.Empty;
         public string UpdatedBy { get; set; } = string.Empty;
     }
