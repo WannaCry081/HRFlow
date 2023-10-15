@@ -19,6 +19,14 @@ namespace HRIS.Repositories.UserRepository
                 c => c.Id.Equals(userId)).FirstOrDefaultAsync();
         }
 
+        public async Task<bool> UpdateUserPassword(User user, string passwordHash, string passwordSalt)
+        {
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
+            _context.Users.Update(user);
+            return await _context.SaveChangesAsync() > 0;
+        }
+
         public async Task<bool> UpdateUserProfile(User user, User request)
         {
             user.MobileNumber = request.MobileNumber;

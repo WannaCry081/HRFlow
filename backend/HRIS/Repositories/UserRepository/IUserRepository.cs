@@ -6,5 +6,6 @@ namespace HRIS.Repositories.UserRepository
     {
         Task<User?> GetUserById(Guid userId);
         Task<bool> UpdateUserProfile(User user, User request);
+        Task<bool> UpdateUserPassword(User user, string passwordHash, string passwordSalt);
     }
 }
