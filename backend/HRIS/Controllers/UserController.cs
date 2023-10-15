@@ -77,15 +77,20 @@ namespace HRIS.Controllers
             try
             {
                 var userId = UserClaim.GetCurrentUser(HttpContext) ??
-                    throw new UnauthorizedAccessException("Invalid user's credential. Please try again.");
+                    throw new UserNotFoundException("Invalid user's credential. Please try again.");
 
                 var response = await _userService.UpdateUserPassword(userId, request);
                 return Ok();
             }
-            catch (UnauthorizedAccessException ex)
+            catch (UserNotFoundException ex)
             {
                 _logger.LogError("An error occurred while attempting to get user information.", ex);
                 return NotFound(ex.Message);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                _logger.LogError("An error occurred while attempting to validate user's credential", ex);
+                return Unauthorized(ex.Message);
             }
             catch (BadHttpRequestException ex)
             {
@@ -98,6 +103,5 @@ namespace HRIS.Controllers
                 return Problem(ex.Message);
             }
         }
-
     }
 }

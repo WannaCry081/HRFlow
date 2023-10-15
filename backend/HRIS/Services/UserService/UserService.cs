@@ -29,7 +29,7 @@ namespace HRIS.Services.UserService
         public async Task<GetUserProfileDto> UpdateUserPassword(Guid userId, UpdateUserPasswordDto request)
         {
             var user = await _userRepository.GetUserById(userId) ??
-                throw new UnauthorizedAccessException("Invalid email address. Please try again.");
+                throw new UserNotFoundException("Invalid email address. Please try again.");
 
             if (!Password.Verify(user.PasswordHash, request.OldPassword))
             {
