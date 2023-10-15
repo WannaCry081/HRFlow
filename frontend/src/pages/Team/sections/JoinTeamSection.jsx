@@ -2,7 +2,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { TextInput, SubmitButton } from "@Components/FormInput";
-import { JoinTeamApi } from "@Services/userService.js";
+import { JoinTeamApi } from "@Services/teamService.js";
 import { CircularProgressBar } from "@Components/Loading";
 import useToggle from "@Hooks/useToggle";
 
