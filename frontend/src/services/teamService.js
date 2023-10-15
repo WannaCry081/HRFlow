@@ -9,4 +9,13 @@ const axiosInstance = (token) => axios.create({
     }
 });
 
-
+export const JoinTeamApi = async (token, request) => {
+    const instance = axiosInstance(token);
+    
+    try {
+        const response = await instance.put("", request);
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}
