@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using HRIS.Services.TeamService;
-using HRIS.Dtos.UserDto;
+﻿using HRIS.Dtos.TeamDto;
 using HRIS.Exceptions;
+using HRIS.Services.TeamService;
 using HRIS.Utils;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HRIS.Controllers
 {
@@ -17,9 +17,9 @@ namespace HRIS.Controllers
 
         public TeamController(ILogger<TeamController> logger, ITeamService teamService)
         {
-            _logger = logger ?? 
+            _logger = logger ??
                 throw new ArgumentNullException(nameof(logger));
-            _teamService = teamService ?? 
+            _teamService = teamService ??
                 throw new ArgumentNullException(nameof(teamService));
         }
 

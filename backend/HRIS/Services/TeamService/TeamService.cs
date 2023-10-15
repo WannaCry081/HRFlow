@@ -1,4 +1,4 @@
-﻿using HRIS.Dtos.UserDto;
+﻿using HRIS.Dtos.TeamDto;
 using HRIS.Exceptions;
 using HRIS.Models;
 using HRIS.Repositories.TeamRepository;

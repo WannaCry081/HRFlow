@@ -1,4 +1,4 @@
-﻿using HRIS.Dtos.UserDto;
+﻿using HRIS.Dtos.TeamDto;
 
 namespace HRIS.Services.TeamService
 {

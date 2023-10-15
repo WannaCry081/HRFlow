@@ -52,7 +52,7 @@ namespace HRIS.Services.EmployeeService
             employee.Role = "Employee";
             employee.Status = "Active";
             employee.CreatedBy = hr.FirstName + " " + hr.LastName;
-            employee.GroupCode = hr.GroupCode;
+            employee.TeamCode = hr.TeamCode;
             employee.TeamId = hr.TeamId;
 
             var response = await _employeeRepository.CreateEmployeeRecord(employee);

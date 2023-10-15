@@ -3,7 +3,6 @@ using HRIS.Dtos.UserDto;
 using HRIS.Exceptions;
 using HRIS.Models;
 using HRIS.Repositories.UserRepository;
-using HRIS.Utils;
 
 namespace HRIS.Services.UserService
 {

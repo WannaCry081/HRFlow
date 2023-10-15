@@ -2,7 +2,7 @@
 
 namespace HRIS.Repositories.TeamRepository
 {
-    public interface ITeamRepository 
+    public interface ITeamRepository
     {
         Task<User?> GetUserById(Guid userId);
         Task<bool> CreateTeam(User user, Team team);

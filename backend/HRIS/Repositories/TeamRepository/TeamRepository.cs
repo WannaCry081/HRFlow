@@ -27,7 +27,7 @@ namespace HRIS.Repositories.TeamRepository
                 return false;
             }
 
-            user.GroupCode = team.Code;
+            user.TeamCode = team.Code;
             user.TeamId = team.Id;
 
             _context.Teams.Add(team);
@@ -44,7 +44,7 @@ namespace HRIS.Repositories.TeamRepository
             }
 
             user.TeamId = team.Id;
-            user.GroupCode = code;
+            user.TeamCode = code;
 
             _context.Users.Update(user);
             return await _context.SaveChangesAsync() > 0;

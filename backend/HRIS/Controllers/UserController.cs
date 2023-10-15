@@ -70,5 +70,12 @@ namespace HRIS.Controllers
                 return Problem("Internal server error.");
             }
         }
+
+        [HttpPut("/reset-password")]
+        public Task<IActionResult> UpdateUserPassword([FromBody] UpdateUserPasswordDto request)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
