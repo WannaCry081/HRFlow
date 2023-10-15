@@ -103,38 +103,6 @@ namespace HRIS.Services.AuthService
             DateTime.Now.AddDays(1));
         }
 
-        public async Task<string> ResetPassword(ResetPasswordDto request)
-        {
-            var user = await _authRepository.GetUserByEmail(request.Email) ??
-                throw new UserNotFoundException("Invalid email address. Please try again.");
-
-            if (!user.CompanyEmail.Equals(request.Email))
-            {
-                throw new UnauthorizedAccessException("Invalid Email Address. Please try again.");
-            }
-
-            Password.Encrypt(request.NewPassword, out string passwordHash, out string passwordSalt);
-
-            var updateUser = _mapper.Map<User>(request);
-            updateUser.PasswordHash = passwordHash;
-            updateUser.PasswordSalt = passwordSalt;
-            updateUser.UpdatedAt = DateTime.Now;
-
-            var isUserUpdated = await _authRepository.UpdateUserPassword(updateUser, request.Email);
-            if (!isUserUpdated)
-            {
-                throw new Exception("Failed to update user's credential to database.");
-            }
-
-            var newToken = CodeGenerator.Token(
-                _configuration,
-                user.Id,
-                "Human Resource",
-                DateTime.Now.AddDays(1));
-
-            return newToken;
-        }
-
         public async Task<string> SendEmailToAdmin(ContactAdminDto request)
         {
             return await SMTP.SendEmailToAdmin(_configuration, request.Email, request.Subject, request.Body);
