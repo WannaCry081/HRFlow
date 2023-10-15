@@ -4,17 +4,17 @@ namespace HRIS.Dtos.UserDto
 {
     public class GetUserProfileDto
     {
-        public string? FirstName { get; set; }
-        public string? MiddleName { get; set; }
-        public string? LastName { get; set; }
-        public string? Suffix { get; set; }
-        public int? Age { get; set; }
-        public string? MobileNumber { get; set; }
-        public string? LandlineNumber { get; set; }
-        public string? PersonalEmail { get; set; }
-        public string? CompanyEmail { get; set; }
-        public string? GroupCode { get; set; }
-        public string? CreatedBy { get; set; }
-        public string? UpdatedBy { get; set; }
+        public string FirstName { get; set; } = string.Empty;
+        public string MiddleName { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
+        public string Suffix { get; set; } = string.Empty;
+        public int Age { get; set; } = 0;
+        public string MobileNumber { get; set; } = string.Empty;
+        public string LandlineNumber { get; set; } = string.Empty;
+        public string PersonalEmail { get; set; } = string.Empty;
+        public string CompanyEmail { get; set; } = string.Empty;
+        public string TeamCode { get; set; } = string.Empty;
+        public string CreatedBy { get; set; } = string.Empty;
+        public string UpdatedBy { get; set; } = string.Empty;
     }
 }
