@@ -22,7 +22,7 @@ const Team = () => {
     };
     
     return (
-        <ModalBox top={( submit && container != 0) ? "" : "mt-4"}
+        <ModalBox top={( submit && container != 0) ? "" : "mt-8"}
                 topBreakpoint={( submit && container != 0) ? "" : "sm:mt-36"}>
             <header className="mb-6">
                 <span className="flex items-center gap-2">

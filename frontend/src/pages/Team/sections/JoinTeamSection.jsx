@@ -1,5 +1,6 @@
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { TextInput, SubmitButton } from "@Components/FormInput";
 import { JoinTeamApi } from "@Services/teamService.js";
@@ -21,7 +22,6 @@ const JoinTeamSection = () => {
             
             setTimeout(() => {
                 if (status === 200) {
-                    sessionStorage.setItem("token", data);
                     navigate("/dashboard/error");
                 } else if (status === 404 || status === 400) {
                     formik.setErrors({
@@ -40,9 +40,10 @@ const JoinTeamSection = () => {
     });
 
     return (
-        <>
+        <motion.div initial={{ translateX : 20 }}
+                    animate={{ translateX : 0 }}>
             <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4">
-                <TextInput nameId="teamCode"
+                <TextInput nameId="code"
                     name="Team Code"
                     type="text"
                     placeholder="7HX7J8"
@@ -65,7 +66,7 @@ const JoinTeamSection = () => {
                     </SubmitButton>
                 </div>
             </form>
-        </>
+        </motion.div>
     );
 };
 
