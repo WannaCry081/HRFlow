@@ -70,6 +70,7 @@ const Login = () => {
                         type="email"
                         required="required"
                         placeholder="JohnDoe@example.com"
+                        minLength={5}
                         maxLength={150}
                         errors={formik.errors.email}
                         touched={formik.touched.email}
@@ -82,6 +83,7 @@ const Login = () => {
                             name="Password" 
                             type="password"
                             placeholder="Password"
+                            minLength={8}
                             maxLength={150}
                             errors={formik.errors.password}
                             touched={formik.touched.password}

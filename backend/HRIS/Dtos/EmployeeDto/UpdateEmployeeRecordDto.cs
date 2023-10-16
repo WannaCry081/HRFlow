@@ -27,12 +27,12 @@ namespace HRIS.Dtos.EmployeeDto
 
         [Required(ErrorMessage = "Personal Email Address is required.")]
         [EmailAddress(ErrorMessage = "Please enter a valid email address.")]
-        [StringLength(150, ErrorMessage = "Personal Email Address must be between {2} and {1} characters long.", MinimumLength = 3)]
+        [StringLength(150, ErrorMessage = "Personal Email Address must be between {2} and {1} characters long.", MinimumLength = 5)]
         public string PersonalEmail { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Company Email Address is required.")]
         [EmailAddress(ErrorMessage = "Please enter a valid email address.")]
-        [StringLength(150, ErrorMessage = "Company Email Address must be between {2} and {1} characters long.", MinimumLength = 3)]
+        [StringLength(150, ErrorMessage = "Company Email Address must be between {2} and {1} characters long.", MinimumLength = 5)]
         public string CompanyEmail { get; set; } = string.Empty;
         public string Status { get; set; } = "Active";
     }

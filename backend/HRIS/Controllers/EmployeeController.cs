@@ -32,7 +32,7 @@ namespace HRIS.Controllers
             try
             {
                 var hrId = UserClaim.GetCurrentUser(HttpContext) ??
-                  throw new UserNotFoundException("Invalid user.");
+                  throw new UserNotFoundException("Invalid user's credential. Please try again.");
 
                 var response = await _employeeService.GetEmployeeRecord(hrId, employeeId);
                 return Ok(response);
@@ -56,7 +56,7 @@ namespace HRIS.Controllers
             try
             {
                 var hrId = UserClaim.GetCurrentUser(HttpContext) ??
-                  throw new UserNotFoundException("Invalid user.");
+                  throw new UserNotFoundException("Invalid user's credential. Please try again.");
 
                 var response = await _employeeService.GetEmployeeRecords(hrId);
                 return Ok(response);
@@ -81,7 +81,7 @@ namespace HRIS.Controllers
             try
             {
                 var hrId = UserClaim.GetCurrentUser(HttpContext) ??
-                  throw new UserNotFoundException("Invalid user.");
+                  throw new UserNotFoundException("Invalid user's credential. Please try again.");
 
                 var response = await _employeeService.CreateEmployeeRecord(hrId, request);
                 return Ok(response);
@@ -104,7 +104,7 @@ namespace HRIS.Controllers
             try
             {
                 var hrId = UserClaim.GetCurrentUser(HttpContext) ??
-                 throw new UserNotFoundException("Invalid user.");
+                 throw new UserNotFoundException("Invalid user's credential. Please try again.");
 
                 var response = await _employeeService.UpdateEmployeeRecord(hrId, employeeId, request);
                 return Ok("Successfully updated employee's record.");
@@ -129,7 +129,7 @@ namespace HRIS.Controllers
             try
             {
                 var hrId = UserClaim.GetCurrentUser(HttpContext) ??
-                    throw new UserNotFoundException("Invalid user.");
+                    throw new UserNotFoundException("Invalid user's credential. Please try again.");
 
                 var response = await _employeeService.UpdateEmployeeRecords(hrId, employeeId, request);
                 return Ok(response);

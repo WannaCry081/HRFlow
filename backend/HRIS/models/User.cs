@@ -51,7 +51,7 @@ namespace HRIS.Models
         [StringLength(20)]
         public string Role { get; set; } = string.Empty;
         [StringLength(8)]
-        public string GroupCode { get; set; } = string.Empty;
+        public string TeamCode { get; set; } = string.Empty;
 
         [StringLength(100)]
         public string CreatedBy { get; set; } = string.Empty;
