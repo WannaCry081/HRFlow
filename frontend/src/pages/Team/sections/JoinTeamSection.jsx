@@ -46,8 +46,8 @@ const JoinTeamSection = () => {
                 <TextInput nameId="code"
                     name="Team Code"
                     type="text"
-                    placeholder="7HX7J8"
-                    maxLength={150}
+                    placeholder="7HX7J800"
+                    maxLength={8}
                     errors={formik.errors.code}
                     touched={formik.touched.code}
                     onChange={formik.handleChange}
