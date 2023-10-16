@@ -46,6 +46,7 @@ const CreateTeamSection = () => {
                     name="Team Name"
                     type="text"
                     placeholder="HR Flow"   
+                    minLength={3}
                     maxLength={100}
                     errors={formik.errors.name}
                     touched={formik.touched.name}

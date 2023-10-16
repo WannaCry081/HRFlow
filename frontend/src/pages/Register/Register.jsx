@@ -82,6 +82,7 @@ const Register = () => {
                                     name="First Name"
                                     type="text"
                                     placeholder="Johnny"
+                                    minLength={2}
                                     maxLength={100}
                                     onBlur={formik.handleBlur}
                                     errors={formik.errors.firstName}
@@ -94,6 +95,7 @@ const Register = () => {
                                     name="Last Name"
                                     type="text"
                                     placeholder="Doe"
+                                    minLength={2}
                                     maxLength={100}
                                     onBlur={formik.handleBlur}
                                     errors={formik.errors.lastName}
@@ -106,6 +108,7 @@ const Register = () => {
                                 required="required"
                                 name="Email"
                                 type="email"
+                                minLength={5}
                                 maxLength={150}
                                 placeholder="JohnDoe@example.com"
                                 errors={formik.errors.email}
@@ -116,6 +119,7 @@ const Register = () => {
 
                     <PasswordInput nameId="password"
                                 name="Password"
+                                minLength={8}
                                 maxLength={150}
                                 type="password"
                                 placeholder="Password"
@@ -127,6 +131,7 @@ const Register = () => {
                     
                     <PasswordInput nameId="confirmPassword"
                                 name="Confirm Password"
+                                minLength={8}
                                 maxLength={150}
                                 type="password"
                                 placeholder="Re-enter Password"
