@@ -78,6 +78,7 @@ const Register = () => {
                     className="w-full flex flex-col gap-4">
                     <div className="flex gap-4">
                         <TextInput nameId="firstName"
+                                    required="required"
                                     name="First Name"
                                     type="text"
                                     placeholder="Johnny"
@@ -89,6 +90,7 @@ const Register = () => {
                                     value={formik.values.firstName}/>
                         
                         <TextInput nameId="lastName"
+                                    required="required"
                                     name="Last Name"
                                     type="text"
                                     placeholder="Doe"
@@ -101,6 +103,7 @@ const Register = () => {
                     </div>
 
                     <TextInput nameId="email"
+                                required="required"
                                 name="Email"
                                 type="email"
                                 maxLength={150}
