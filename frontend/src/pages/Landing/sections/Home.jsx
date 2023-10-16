@@ -29,7 +29,7 @@ const Home = forwardRef((props, ref) => {
 
     return (
         <>
-            <section ref={ref} className="py-48 flex justify-center relative">
+            <section ref={ref} className="py-28 sm:py-44 flex justify-center relative">
                     <img
                         src={PurpleGradient}
                         className="absolute -z-30 top-[7rem] -right-20 md:top-18 xl:top-16 xl:-right-20 2xl:top-28 2xl:right-[14rem]"
@@ -46,7 +46,7 @@ const Home = forwardRef((props, ref) => {
                 <div className="w-full max-w-screen-2xl mx-auto flex flex-col md:flex-row">
                     <div className="flex flex-col h-full justify-center w-full pt-12 px-2 xl:px-4">
                         <motion.div 
-                            className="font-lato font-extrabold transition text-[3.5rem] sm:text-[4.1rem] md:text-6xl lg:text-[4.2rem] text-center xl:text-left xl:text-6xl 2xl:text-[4.2rem]"
+                            className="font-lato font-extrabold transition text-[3.4rem] sm:text-[4.1rem] md:text-6xl lg:text-[4.2rem] text-center xl:text-left xl:text-6xl 2xl:text-[4.2rem]"
                             initial="hidden"
                             animate="visible"
                             variants={defaultVariant}

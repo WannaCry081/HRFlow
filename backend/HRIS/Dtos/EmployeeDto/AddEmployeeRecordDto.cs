@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace HRIS.Dtos.EmployeeDto
 {
@@ -7,11 +7,13 @@ namespace HRIS.Dtos.EmployeeDto
         [Required(ErrorMessage = "First Name is required.")]
         [StringLength(100, ErrorMessage = "First Name must be between {2} and {1} characters long.", MinimumLength = 2)]
         public string FirstName { get; set; } = string.Empty;
+      
         public string MiddleName { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Last Name is required.")]
         [StringLength(100, ErrorMessage = "Last Name must be between {2} and {1} characters long.", MinimumLength = 2)]
         public string LastName { get; set; } = string.Empty;
+      
         public string Suffix { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Age is required.")]
@@ -24,7 +26,9 @@ namespace HRIS.Dtos.EmployeeDto
         [Required(ErrorMessage = "Mobile Number is required.")]
         [StringLength(13, ErrorMessage = "Mobile Number must be between {2} and {1} characters long.", MinimumLength = 3)]
         public string MobileNumber { get; set; } = string.Empty;
+      
         public string LandlineNumber { get; set; } = string.Empty;
+      
         public string PersonalEmail { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Company Email Address is required.")]
