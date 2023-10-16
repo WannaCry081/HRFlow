@@ -18,8 +18,8 @@ const ViewEmployee = ({ selectEmployee }) => {
                 <div className="bg-secondary-pastel font-poppins text-4xl font-medium text-secondary-light rounded-2xl p-7">
                     {selectEmployee.firstName[0]}{selectEmployee.lastName[0]}
                 </div>
-                <h1 className="text-xl 2xl:text-2xl font-lato font-semibold text-jetblack pt-3 text-center">
-                    {selectEmployee.firstName} {selectEmployee.middleName} {selectEmployee.lastName}
+                <h1 className="text-2xl font-lato font-semibold text-jetblack pt-3 text-center">
+                    {selectEmployee.firstName} {selectEmployee.middleName} {selectEmployee.lastName} {selectEmployee.suffix}
                 </h1>
                 <p className="text-sm text-gray-400 font-semibold text-center">
                     ID:
