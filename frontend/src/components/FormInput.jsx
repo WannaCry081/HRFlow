@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { VscEye, VscEyeClosed } from "react-icons/vsc"; 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export const TextInput = (prop) => {
     return (
         <span>
             <label htmlFor={prop.nameId} 
                     className="block font-poppins mb-2 text-sm">{prop.name}
-                <span className="text-red-500">*</span>
+                {prop.required && <span className="text-red-500">*</span>}
             </label>
             <input type={prop.type} 
                     maxLength={prop.maxLength}
@@ -15,6 +17,7 @@ export const TextInput = (prop) => {
                     value={prop.value} 
                     name={prop.nameId} 
                     onChange={prop.onChange}
+                    readOnly={prop.readOnly}
                     placeholder={prop.placeholder}
                     onBlur={prop.onBlur}
                     className="w-full border border-primary-pastel rounded-md bg-gray-200 p-3 font-lato focus:border focus:outline-primary-light sm:p-3"/>
@@ -92,3 +95,22 @@ export const SubmitButton = (prop) => {
         </button>
     );
 };
+
+export const DatePickerInput = (prop) => {
+    return (
+        <span className="w-full">
+            <label htmlFor={prop.nameId}
+                className="block font-poppins mb-2 text-sm">{prop.name}
+                <span className="text-red-500">*</span>
+            </label>
+            <DatePicker 
+                id={prop.nameId}
+                name={prop.nameId}
+                placeholder={prop.placeholder}
+                selected={prop.selected}
+                onChange={prop.onChange} 
+                showYearDropdown
+                className="max-w-[24.8rem] border border-primary-pastel rounded-md bg-gray-200 p-3 font-lato focus:border focus:outline-primary-light sm:p-3"/>
+        </span>
+    )
+}

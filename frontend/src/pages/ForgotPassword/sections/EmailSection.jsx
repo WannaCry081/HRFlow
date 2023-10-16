@@ -19,6 +19,7 @@ const EmailSection = (prop) => {
                     name="Email"
                     type="email"
                     placeholder="JohnDoe@example.com"
+                    minLength={5}
                     maxLength={150}
                     onBlur={formik.handleBlur}
                     errors={formik.errors.email}
