@@ -68,6 +68,7 @@ const Login = () => {
                     <TextInput nameId="email"
                         name="Email"
                         type="email"
+                        required="required"
                         placeholder="JohnDoe@example.com"
                         maxLength={150}
                         errors={formik.errors.email}
