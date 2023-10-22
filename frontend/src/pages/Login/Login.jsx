@@ -1,24 +1,42 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useFormik } from "formik";
-import { FcGoogle } from "react-icons/fc";
-import { TextInput, PasswordInput } from "@Components/FormInput";
-import ForgotPassword from "@Pages/ForgotPassword";
 import * as Yup from "yup";
-
+import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
+import { TextInput, PasswordInput, SubmitButton } from "@Components/FormInput";
+import { ProgressBar, CircularProgressBar } from "@Components/Loading";
+import ForgotPassword from "@Pages/ForgotPassword";
+import useToggle from "@Hooks/useToggle";
+import { LoginUserApi } from "@Services/authService.js";
 
 const Login = () => { 
-    const navigate = useNavigate();
-    const [showForgotPassword, setShowForgotPassword] = useState(false);
-    const onShowForgotPassword = () => setShowForgotPassword(!showForgotPassword);
+    document.title = "HR Flow | Sign In";
 
+    const navigate = useNavigate();
+
+    const [ forgotPassword, onSetForgotPassword ] = useToggle();
+    const [ loading, onSetLoading ] = useToggle();
+    const [ submit, onSetSubmit ] = useToggle();
+  
     const formik = useFormik({
         initialValues : {
             email : "",
             password : ""
         },
-        onSubmit : (values) => {
-            navigate("/dashboard/home", { replace : true});
+        onSubmit : async (values) => {
+            onSetSubmit();
+            const {status, data} = await LoginUserApi(values);
+                
+            setTimeout(() => {
+                if (status === 200) {
+                    sessionStorage.setItem("token", data);
+                    navigate("/dashboard/home", { replace: true });
+                } else if (status === 401 || status === 404) {
+                    formik.setErrors({ email: data });
+                } else {
+                    navigate("/error", { replace : true });
+                }
+                onSetSubmit();
+            }, 1000);
         },
         validationSchema : Yup.object({
             email :Yup.string().required("Email Address is required.")
@@ -31,10 +49,15 @@ const Login = () => {
         })
     });
 
-
     return (
         <div className="mx-auto max-w-[24rem]">
-            {showForgotPassword && <ForgotPassword onCancel={onShowForgotPassword} />}
+            {loading && 
+                <ProgressBar duration={.4} 
+                    onAnimationComplete={() => navigate("/auth/register")}/>}
+
+            {forgotPassword && 
+                <ForgotPassword onCancel={onSetForgotPassword} />}
+
             <div className="flex flex-col items-center">
                 <header className="text-center mb-6">
                     <h1 className="text-lato text-4xl font-bold my-2 sm:text-6xl">Welcome!</h1>
@@ -45,7 +68,9 @@ const Login = () => {
                     <TextInput nameId="email"
                         name="Email"
                         type="email"
+                        required="required"
                         placeholder="JohnDoe@example.com"
+                        minLength={5}
                         maxLength={150}
                         errors={formik.errors.email}
                         touched={formik.touched.email}
@@ -58,6 +83,7 @@ const Login = () => {
                             name="Password" 
                             type="password"
                             placeholder="Password"
+                            minLength={8}
                             maxLength={150}
                             errors={formik.errors.password}
                             touched={formik.touched.password}
@@ -66,17 +92,22 @@ const Login = () => {
                             value={formik.values.password}/>
                 
                         <div className="mt-2 text-end float-right">
-                            <p className="font-poppins text-sm font-semibold text-secondary-light cursor-pointer active-secondary" onClick={onShowForgotPassword}>
+                            <p className="font-poppins text-sm font-semibold text-secondary-light cursor-pointer active-secondary" onClick={onSetForgotPassword}>
                                 Forgot Password?
                             </p>
                         </div>
                     </div>
 
-                    <button type="submit"
-                        className="bg-primary-light rounded-full h-14 text-poppins text-white font-semibold shadow-primary">
-                        Sign In
-                    </button>
-
+                    <SubmitButton>
+                        {(submit) ? (
+                            <CircularProgressBar>
+                                <p className="ml-2 text-poppins text-white">Loading...</p>
+                            </CircularProgressBar>
+                        ) : (
+                            <p className="text-poppins text-white">Sign In</p>
+                        )}
+                    </SubmitButton>
+                    
                     <p className="flex items-center text-center text-black">
                         <span className="flex-grow h-[1px] rounded-full bg-gray-200"></span>
                         <span className="px-2 font-lato text-gray-600 text-sm">or</span>
@@ -88,9 +119,10 @@ const Login = () => {
                         Continue with Google
                     </button>
                 </form>
+                
                 <p className="mt-4 font-poppins text-sm text-gray-600">
                     {"Don't have an account yet? "}
-                    <Link to="/auth/register" className="font-semibold text-secondary-light active-secondary ">Sign Up</Link>
+                    <span className="font-semibold text-secondary-light active-secondary cursor-pointer" onClick={onSetLoading}>Sign Up</span>
                 </p>
             </div>
         </div>

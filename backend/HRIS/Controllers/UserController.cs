@@ -17,8 +17,10 @@ namespace HRIS.Controllers
 
         public UserController(ILogger<UserController> logger, IUserService userService)
         {
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _userService = userService ?? throw new ArgumentNullException(nameof(userService));
+            _logger = logger ??
+                throw new ArgumentNullException(nameof(logger));
+            _userService = userService ??
+                throw new ArgumentNullException(nameof(userService));
         }
 
         [HttpGet]
@@ -28,7 +30,7 @@ namespace HRIS.Controllers
             try
             {
                 var userId = UserClaim.GetCurrentUser(HttpContext) ??
-                    throw new UserNotFoundException("Invalid user.");   
+                    throw new UserNotFoundException("Invalid user's credential. Please try again.");
 
                 var response = await _userService.GetUserProfile(userId);
                 return Ok(response);
@@ -36,12 +38,12 @@ namespace HRIS.Controllers
             catch (UserNotFoundException ex)
             {
                 _logger.LogError("An error occurred while attempting to get user information.", ex);
-                return NotFound("An error occurred while finding user.");
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {
                 _logger.LogCritical("An error occurred while attempting to get user data.", ex);
-                return Problem("An error occurred while getting user profile. Please try again later.");
+                return Problem("Internal server error");
             }
         }
 
@@ -52,7 +54,7 @@ namespace HRIS.Controllers
             try
             {
                 var userId = UserClaim.GetCurrentUser(HttpContext) ??
-                    throw new UserNotFoundException("Invalid user.");
+                    throw new UserNotFoundException("Invalid user's credential. Please try again.");
 
                 var response = await _userService.UpdateUserProfile(userId, request);
                 return Ok(response);
@@ -60,7 +62,40 @@ namespace HRIS.Controllers
             catch (UserNotFoundException ex)
             {
                 _logger.LogError("An error occurred while attempting to get user information.", ex);
-                return NotFound("An error occurred while finding user.");
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("An error occurred while attempting to update user data.", ex);
+                return Problem("Internal server error.");
+            }
+        }
+
+        [HttpPut("/reset-password")]
+        public async Task<IActionResult> UpdateUserPassword([FromBody] UpdateUserPasswordDto request)
+        {
+            try
+            {
+                var userId = UserClaim.GetCurrentUser(HttpContext) ??
+                    throw new UserNotFoundException("Invalid user's credential. Please try again.");
+
+                var response = await _userService.UpdateUserPassword(userId, request);
+                return Ok();
+            }
+            catch (UserNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to get user information.", ex);
+                return NotFound(ex.Message);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                _logger.LogError("An error occurred while attempting to validate user's credential", ex);
+                return Unauthorized(ex.Message);
+            }
+            catch (BadHttpRequestException ex)
+            {
+                _logger.LogError("An error occurred while verifying user data.", ex);
+                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {

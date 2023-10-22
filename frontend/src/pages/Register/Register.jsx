@@ -1,13 +1,22 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useFormik } from "formik";
-import { TextInput, PasswordInput } from "@Components/FormInput";
-import Group from "@Pages/Group";
 import * as Yup from "yup";
+import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
+import { TextInput, PasswordInput, SubmitButton } from "@Components/FormInput";
+import { ProgressBar, CircularProgressBar } from "@Components/Loading";
+import Team from "@Pages/Team";
+import useToggle from "@Hooks/useToggle";
+import { RegisterUserApi } from "@Services/authService";
+
 
 const Register = () => { 
-    const [registerUser, setRegisterUser] = useState(false);
-    const onSetRegisterUser = () => setRegisterUser(!registerUser);
+    document.title = "HR Flow | Sign Up";
+
+    const navigate = useNavigate();
+
+    const [ submit, onSetSubmit ] = useToggle();
+    const [ team, onSetTeam ] = useToggle();
+    const [ loading, onSetLoading ] = useToggle();
+
     const formik = useFormik({
         initialValues : {
             firstName : "",
@@ -16,8 +25,23 @@ const Register = () => {
             password : "",
             confirmPassword : ""
         },
-        onSubmit : (values) => {
-            onSetRegisterUser();
+        onSubmit : async (values) => {
+            onSetSubmit();
+
+            const { status, data } = await RegisterUserApi(values);
+            setTimeout(() => {
+                if (status === 200) {
+                    sessionStorage.setItem("token", data);
+                    onSetTeam();
+                } else if (status === 400) {
+                    formik.setErrors({
+                        email : "Invalid Email Address. Please try again."
+                    });
+                } else {
+                    navigate("/error");
+                }
+                onSetSubmit();
+            }, 1000)
         },
         validationSchema : Yup.object({
             firstName : Yup.string().required("First Name is required.")
@@ -39,7 +63,12 @@ const Register = () => {
 
     return (
         <div className="mx-auto max-w-[24rem]">
-            {registerUser && <Group onCancel={onSetRegisterUser}/>}
+            {loading && 
+                <ProgressBar duration={.4} 
+                    onAnimationComplete={() => navigate("/auth/login") } />} 
+
+            {team && <Team />}
+
             <div className="flex flex-col items-center">
                 <header className="text-center mb-6">
                     <h1 className="text-lato text-4xl font-bold my-2 sm:text-5xl">Create Account!</h1>
@@ -49,9 +78,11 @@ const Register = () => {
                     className="w-full flex flex-col gap-4">
                     <div className="flex gap-4">
                         <TextInput nameId="firstName"
+                                    required="required"
                                     name="First Name"
                                     type="text"
                                     placeholder="Johnny"
+                                    minLength={2}
                                     maxLength={100}
                                     onBlur={formik.handleBlur}
                                     errors={formik.errors.firstName}
@@ -60,9 +91,11 @@ const Register = () => {
                                     value={formik.values.firstName}/>
                         
                         <TextInput nameId="lastName"
+                                    required="required"
                                     name="Last Name"
                                     type="text"
                                     placeholder="Doe"
+                                    minLength={2}
                                     maxLength={100}
                                     onBlur={formik.handleBlur}
                                     errors={formik.errors.lastName}
@@ -72,8 +105,10 @@ const Register = () => {
                     </div>
 
                     <TextInput nameId="email"
+                                required="required"
                                 name="Email"
                                 type="email"
+                                minLength={5}
                                 maxLength={150}
                                 placeholder="JohnDoe@example.com"
                                 errors={formik.errors.email}
@@ -84,6 +119,7 @@ const Register = () => {
 
                     <PasswordInput nameId="password"
                                 name="Password"
+                                minLength={8}
                                 maxLength={150}
                                 type="password"
                                 placeholder="Password"
@@ -95,6 +131,7 @@ const Register = () => {
                     
                     <PasswordInput nameId="confirmPassword"
                                 name="Confirm Password"
+                                minLength={8}
                                 maxLength={150}
                                 type="password"
                                 placeholder="Re-enter Password"
@@ -104,15 +141,20 @@ const Register = () => {
                                 touched={formik.touched.confirmPassword}
                                 value={formik.values.confirmPassword}/>
 
-                    <button type="submit"
-                        className="mt-2 bg-primary-light rounded-full h-14 text-poppins text-white font-semibold shadow-primary">
-                        Submit
-                    </button>
+                    <SubmitButton>
+                        {(submit) ? (
+                            <CircularProgressBar>
+                                <p className="ml-2 text-poppins text-white">Loading...</p>
+                            </CircularProgressBar>
+                        ) : (
+                            <p className="text-poppins text-white">Submit</p>
+                        )}
+                    </SubmitButton>
 
                 </form>
                 <p className="mt-4 font-poppins text-sm text-gray-600">
-                    Already have an account?
-                    <Link to="/auth/login" className="font-semibold text-secondary-light active-secondary"> Sign In</Link>
+                    {"Already have an account? "}
+                    <span className="font-semibold text-secondary-light active-secondary cursor-pointer" onClick={onSetLoading}>Sign In</span>
                 </p>
             </div>
         </div>
