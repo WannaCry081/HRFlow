@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using HRIS.Repositories;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
@@ -18,7 +19,7 @@ namespace HRIS.Models
 
         [StringLength(50)]
         public string LastName { get; set; } = string.Empty;
-        
+
         [StringLength(10)]
         public string Suffix { get; set; } = string.Empty;
         public int Age { get; set; } = 0;
@@ -82,5 +83,8 @@ namespace HRIS.Models
 
         [JsonIgnore]
         public Team? Team { get; set; }
+
+        [JsonIgnore]
+        public ICollection<Attendance> Attendances { get; set; } = new List<Attendance>();
     }
 }
