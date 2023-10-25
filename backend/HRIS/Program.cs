@@ -1,12 +1,13 @@
 using HRIS.Context;
 using HRIS.Repositories.AuthRepository;
-using HRIS.Repositories.UserRepository;
 using HRIS.Repositories.EmployeeRepository;
 using HRIS.Repositories.TeamRepository;
+using HRIS.Repositories.UserRepository;
 using HRIS.Services.AuthService;
-using HRIS.Services.UserService;
 using HRIS.Services.EmployeeService;
+using HRIS.Services.LandingService;
 using HRIS.Services.TeamService;
+using HRIS.Services.UserService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -57,6 +58,7 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddTransient<DataContext>();
+builder.Services.AddScoped<ILandingService, LandingService>();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
