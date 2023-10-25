@@ -1,5 +1,4 @@
-﻿using HRIS.Repositories;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
@@ -85,6 +84,6 @@ namespace HRIS.Models
         public Team? Team { get; set; }
 
         [JsonIgnore]
-        public ICollection<Attendance> Attendances { get; set; } = new List<Attendance>();
+        public ICollection<Record> Records { get; set; } = new List<Record>();
     }
 }
