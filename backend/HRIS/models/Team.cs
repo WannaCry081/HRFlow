@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
-using HRIS.Models;
 
-namespace HRIS.Repositories
+namespace HRIS.Models
 {
     [Table("Teams")]
     public class Team
