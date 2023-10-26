@@ -17,19 +17,25 @@ namespace HRIS.Controllers
         }
 
         [HttpGet]
-        public Task<IActionResult> GetApplicants()
+        public Task<IActionResult> GetApplicantRecords()
         {
             throw new NotImplementedException();
         }
 
         [HttpGet("{applicantId}")]
-        public Task<IActionResult> GetApplicant([FromRoute] Guid applicantId)
+        public Task<IActionResult> GetApplicantRecord([FromRoute] Guid applicantId)
         {
             throw new NotImplementedException();
         }
 
-        [HttpPatch]
-        public Task<IActionResult> UpdateApplicant()
+        [HttpPatch("{applicantId}")]
+        public Task<IActionResult> UpdateApplicantRecord([FromRoute] Guid applicantId)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpPut("{applicantId}")]
+        public Task<IActionResult> UpdateApplicantRecords([FromRoute] Guid applicantId)
         {
             throw new NotImplementedException();
         }
