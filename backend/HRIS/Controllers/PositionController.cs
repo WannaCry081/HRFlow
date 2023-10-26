@@ -21,5 +21,11 @@ namespace HRIS.Controllers
         {
             throw new NotImplementedException();
         }
+
+        [HttpGet("{positionId}")]
+        public Task<IActionResult> GetPosition([FromRoute] Guid positionId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
