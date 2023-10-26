@@ -10,7 +10,7 @@ namespace HRIS.Repositories.AuthRepository
 
         public AuthRepository(DataContext context)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _context = context;
         }
 
         public async Task<bool> AddUser(User request)
@@ -30,6 +30,7 @@ namespace HRIS.Repositories.AuthRepository
             return await _context.Users.Where(
                 c => c.CompanyEmail.Equals(email)).FirstOrDefaultAsync();
         }
+
         public async Task<User?> GetUserById(Guid id)
         {
             return await _context.Users.Where(
