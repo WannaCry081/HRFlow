@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace HRIS.Dtos.EmployeeDto
@@ -28,12 +29,26 @@ namespace HRIS.Dtos.EmployeeDto
         public string MobileNumber { get; set; } = string.Empty;
       
         public string LandlineNumber { get; set; } = string.Empty;
-      
+
+        [Required(ErrorMessage = "Personal Email Address is required.")]
+        [EmailAddress(ErrorMessage = "Please enter a valid personal email address.")]
+        [StringLength(100, ErrorMessage = "Personal Email Address must be between {2} and {1} characters long.", MinimumLength = 5)]
         public string PersonalEmail { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Company Email Address is required.")]
         [EmailAddress(ErrorMessage = "Please enter a valid email address.")]
         [StringLength(100, ErrorMessage = "Company Email Address must be between {2} and {1} characters long.", MinimumLength = 5)]
         public string CompanyEmail { get; set; } = string.Empty;
+
+        [PasswordPropertyText]
+        [Required(ErrorMessage = "Password is required.")]
+        [StringLength(100, ErrorMessage = "Password must be between {2} and {1} characters long.", MinimumLength = 8)]
+        public string Password { get; set; } = string.Empty;
+
+        [PasswordPropertyText]
+        [Compare("Password", ErrorMessage = "Confirm Password does not match with your password.")]
+        [Required(ErrorMessage = "Confirm Password is required.")]
+        [StringLength(100, ErrorMessage = "Password must be between {2} and {1} characters long.", MinimumLength = 8)]
+        public string ConfirmPassword { get; set; } = string.Empty;
     }
 }
