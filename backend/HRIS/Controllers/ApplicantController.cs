@@ -27,5 +27,11 @@ namespace HRIS.Controllers
         {
             throw new NotImplementedException();
         }
+
+        [HttpPatch]
+        public Task<IActionResult> UpdateApplicant()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
