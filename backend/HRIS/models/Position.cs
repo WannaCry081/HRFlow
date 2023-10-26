@@ -8,7 +8,8 @@ namespace HRIS.Models
     public class Position
     {
         [Key]
-        public Guid Id { get; set; }
+        public Guid Id { get; set; }    
+        public Guid UserId { get; set; }
 
         [StringLength(50)]
         public string Title { get; set; } = string.Empty;
@@ -20,11 +21,5 @@ namespace HRIS.Models
         [ForeignKey("DepartmentId")]
         [JsonIgnore]
         public Guid? DepartmentId { get; set; }
-
-        [JsonIgnore]
-        public ICollection<User> Users { get; set; } = new List<User>();
-
-        [JsonIgnore]
-        public ICollection<Applicant> Applicants { get; set; } = new List<Applicant>();
     }
 }

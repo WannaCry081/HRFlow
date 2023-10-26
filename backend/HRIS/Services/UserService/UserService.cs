@@ -14,8 +14,8 @@ namespace HRIS.Services.UserService
 
         public UserService(IMapper mapper, IUserRepository userRepository)
         {
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
+            _mapper = mapper;
+            _userRepository = userRepository;
         }
 
         public async Task<GetUserProfileDto> GetUserProfile(Guid userId)
