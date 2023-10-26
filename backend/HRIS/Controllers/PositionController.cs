@@ -27,5 +27,10 @@ namespace HRIS.Controllers
         {
             throw new NotImplementedException();
         }
+
+        [HttpDelete("{positionId}")]
+        public Task<IActionResult> DeletePosition([FromRoute] Guid positionId) {
+            throw new NotImplementedException();
+        }
     }
 }
