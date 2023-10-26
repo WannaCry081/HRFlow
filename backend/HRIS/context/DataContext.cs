@@ -9,6 +9,9 @@ namespace HRIS.Context
 
         public DbSet<User> Users => Set<User>();
         public DbSet<Team> Teams => Set<Team>();
+        public DbSet<Applicant> Applicants => Set<Applicant>();
+        public DbSet<Position> Positions => Set<Position>();
+        public DbSet<Record> Records => Set<Record>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
