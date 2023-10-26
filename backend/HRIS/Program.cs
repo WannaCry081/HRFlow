@@ -3,11 +3,19 @@ using HRIS.Repositories.AuthRepository;
 using HRIS.Repositories.EmployeeRepository;
 using HRIS.Repositories.TeamRepository;
 using HRIS.Repositories.UserRepository;
+using HRIS.Repositories.ApplicantRepository;
+using HRIS.Repositories.DepartmentRepository;
+using HRIS.Repositories.PositionRepository;
+using HRIS.Repositories.RecordRepository;
 using HRIS.Services.AuthService;
 using HRIS.Services.EmployeeService;
 using HRIS.Services.LandingService;
 using HRIS.Services.TeamService;
 using HRIS.Services.UserService;
+using HRIS.Services.ApplicantService;
+using HRIS.Services.DepartmentService;
+using HRIS.Services.PositionService;
+using HRIS.Services.RecordService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -71,6 +79,10 @@ builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
 builder.Services.AddScoped<ITeamService, TeamService>();
 builder.Services.AddScoped<ITeamRepository, TeamRepository>();
+
+builder.Services.AddScoped<IApplicantService, ApplicantService>();
+builder.Services.AddScoped<IApplicantRepository, ApplicantRepository>();
+
 
 var app = builder.Build();
 
