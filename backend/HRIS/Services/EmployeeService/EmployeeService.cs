@@ -3,6 +3,7 @@ using HRIS.Dtos.EmployeeDto;
 using HRIS.Exceptions;
 using HRIS.Models;
 using HRIS.Repositories.EmployeeRepository;
+using HRIS.Utils;
 using Microsoft.AspNetCore.JsonPatch;
 
 namespace HRIS.Services.EmployeeService
@@ -48,12 +49,16 @@ namespace HRIS.Services.EmployeeService
                 throw new UserExistsException("Employee already exists. Please try again.");
             }
 
+            Password.Encrypt(request.Password, out string passwordHash, out string passwordSalt);
+
             var employee = _mapper.Map<User>(request);
             employee.Role = "Employee";
             employee.Status = "Active";
             employee.CreatedBy = hr.FirstName + " " + hr.LastName;
             employee.TeamCode = hr.TeamCode;
             employee.TeamId = hr.TeamId;
+            employee.PasswordHash = passwordHash;
+            employee.PasswordSalt = passwordSalt;
 
             var response = await _employeeRepository.CreateEmployeeRecord(employee);
             if (!response)
@@ -100,6 +105,11 @@ namespace HRIS.Services.EmployeeService
             }
 
             return _mapper.Map<GetEmployeeRecordDto>(dbEmployee);
+        }
+
+        public Task<GetEmployeeRecordDto> UpdateEmployeePassword(Guid hrId, Guid employeeId, UpdateEmployeePasswordDto request)
+        {
+            throw new NotImplementedException();
         }
     }
 }
