@@ -22,5 +22,10 @@ namespace HRIS.Controllers
             throw new NotImplementedException();
         }
 
+        [HttpGet("{departmentId}")]
+        public Task<IActionResult> GetDepartment([FromRoute] Guid departmentId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
