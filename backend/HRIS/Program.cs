@@ -86,6 +86,8 @@ builder.Services.AddScoped<IApplicantRepository, ApplicantRepository>();
 builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 
+builder.Services.AddScoped<IPositionService, PositionService>();
+builder.Services.AddScoped<IPositionRepository, PositionRepository>();
 
 var app = builder.Build();
 
