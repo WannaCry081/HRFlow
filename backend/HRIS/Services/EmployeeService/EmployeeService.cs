@@ -55,7 +55,6 @@ namespace HRIS.Services.EmployeeService
             employee.Role = "Employee";
             employee.Status = "Active";
             employee.CreatedBy = hr.FirstName + " " + hr.LastName;
-            employee.TeamCode = hr.TeamCode;
             employee.TeamId = hr.TeamId;
             employee.PasswordHash = passwordHash;
             employee.PasswordSalt = passwordSalt;

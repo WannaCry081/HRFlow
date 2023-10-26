@@ -10,8 +10,7 @@ namespace HRIS.Repositories.TeamRepository
 
         public TeamRepository(DataContext context)
         {
-            _context = context ??
-                throw new ArgumentNullException(nameof(context));
+            _context = context;
         }
 
         public async Task<User?> GetUserById(Guid userId)
@@ -27,7 +26,6 @@ namespace HRIS.Repositories.TeamRepository
                 return false;
             }
 
-            user.TeamCode = team.Code;
             user.TeamId = team.Id;
 
             _context.Teams.Add(team);
@@ -44,7 +42,6 @@ namespace HRIS.Repositories.TeamRepository
             }
 
             user.TeamId = team.Id;
-            user.TeamCode = code;
 
             _context.Users.Update(user);
             return await _context.SaveChangesAsync() > 0;
