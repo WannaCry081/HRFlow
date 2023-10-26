@@ -1,9 +1,9 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
-namespace HRIS.Dtos.UserDto
+namespace HRIS.Dtos.EmployeeDto
 {
-    public class UpdateUserPasswordDto
+    public class UpdateEmployeePasswordDto
     {
         [PasswordPropertyText]
         [Required(ErrorMessage = "Old Password is required.")]

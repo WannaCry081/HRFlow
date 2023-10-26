@@ -41,11 +41,7 @@ namespace HRIS.Services.AuthService
                 throw new Exception("Failed to save user information to database.");
             }
 
-            return CodeGenerator.Token(
-                _configuration,
-                newUser.Id,
-                "Human Resource",
-                DateTime.Now.AddDays(1));
+            return CodeGenerator.Token(_configuration, newUser.Id, "Human Resource", DateTime.Now.AddDays(1));
         }
 
         public async Task<string> LoginUser(LoginUserDto request)
@@ -58,11 +54,7 @@ namespace HRIS.Services.AuthService
                 throw new UnauthorizedAccessException("Invalid user's credentials. Please try again.");
             }
 
-            return CodeGenerator.Token(
-                _configuration,
-                user.Id,
-                "Human Resource",
-                DateTime.Now.AddDays(1));
+            return CodeGenerator.Token(_configuration, user.Id, "Human Resource", DateTime.Now.AddDays(1));
         }
 
         public async Task<string> ForgotPassword(ForgotPasswordDto request)
@@ -96,16 +88,7 @@ namespace HRIS.Services.AuthService
                 throw new Exception("An error occurred while verifying OTP code.");
             }
 
-            return CodeGenerator.Token(
-                _configuration,
-                user.Id,
-                "Human Resource",
-            DateTime.Now.AddDays(1));
-        }
-
-        public async Task<string> SendEmailToAdmin(ContactAdminDto request)
-        {
-            return await SMTP.SendEmailToAdmin(_configuration, request.Email, request.Subject, request.Body);
+            return CodeGenerator.Token(_configuration, user.Id, "Human Resource", DateTime.Now.AddDays(1));
         }
     }
 }
