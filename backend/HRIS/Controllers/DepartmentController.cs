@@ -27,5 +27,11 @@ namespace HRIS.Controllers
         {
             throw new NotImplementedException();
         }
+
+        [HttpPost] 
+        public Task<IActionResult> AddDepartment()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
