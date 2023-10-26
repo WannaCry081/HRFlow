@@ -29,7 +29,7 @@ namespace HRIS.Controllers
         }
 
         [HttpPost]
-        public Task<IActionResult> AddApplicantRecord()
+        public Task<IActionResult> CreateApplicantRecord()
         {
             throw new NotImplementedException();
         }

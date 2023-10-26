@@ -29,7 +29,7 @@ namespace HRIS.Controllers
         }
 
         [HttpPost] 
-        public Task<IActionResult> AddDepartment()
+        public Task<IActionResult> CreateDepartment()
         {
             throw new NotImplementedException();
         }
@@ -40,8 +40,8 @@ namespace HRIS.Controllers
             throw new NotImplementedException();
         }
 
-        [HttpDelete] 
-        public Task<IActionResult> DeleteDepartment()
+        [HttpDelete("{departmentId}")] 
+        public Task<IActionResult> DeleteDepartment([FromRoute] Guid departmentId)
         {
             throw new NotImplementedException();
         } 
