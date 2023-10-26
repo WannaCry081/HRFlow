@@ -12,12 +12,18 @@ namespace HRIS.Controllers
 
         public RecordController(ILogger<RecordController> logger)
         {
-            _logger = logger ?? 
+            _logger = logger ??
                 throw new ArgumentNullException(nameof(logger));
         }
 
         [HttpGet]
         public Task<IActionResult> GetRecords()
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpPatch("{recordId}")]
+        public Task<IActionResult> UpdateRecord([FromRoute] Guid recordId)
         {
             throw new NotImplementedException();
         }
