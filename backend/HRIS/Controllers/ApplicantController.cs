@@ -21,5 +21,11 @@ namespace HRIS.Controllers
         {
             throw new NotImplementedException();
         }
+
+        [HttpGet("{applicantId}")]
+        public Task<IActionResult> GetApplicant([FromRoute] Guid applicantId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
