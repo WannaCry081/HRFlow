@@ -15,5 +15,12 @@ namespace HRIS.Controllers
             _logger = logger ??
                 throw new ArgumentNullException(nameof(logger));
         }
+
+        [HttpGet]
+        public Task<IActionResult> GetDepartments()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
