@@ -89,6 +89,9 @@ builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddScoped<IPositionService, PositionService>();
 builder.Services.AddScoped<IPositionRepository, PositionRepository>();
 
+builder.Services.AddScoped<IRecordService, RecordService>();
+builder.Services.AddScoped<IRecordRepository, RecordRepository>();
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
