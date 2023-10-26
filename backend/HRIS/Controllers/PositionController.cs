@@ -28,6 +28,12 @@ namespace HRIS.Controllers
             throw new NotImplementedException();
         }
 
+        [HttpPost] 
+        public Task<IActionResult> CreatePosition()
+        {
+            throw new NotImplementedException();
+        }
+
         [HttpDelete("{positionId}")]
         public Task<IActionResult> DeletePosition([FromRoute] Guid positionId) {
             throw new NotImplementedException();
