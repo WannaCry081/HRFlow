@@ -129,26 +129,5 @@ namespace HRIS.Controllers
                 return Problem("Internal server error.");
             }
         }
-
-        [HttpPut("forgot-password/reset-password")]
-        [Consumes("application/json")]
-        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto request)
-        {
-            try
-            {
-                var response = await _authService.ResetPassword(request);
-                return Ok(response);
-            }
-            catch (UserNotFoundException ex)
-            {
-                _logger.LogError("An error occurred while attempting to get user information.", ex);
-                return NotFound(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogCritical("An error occurred while attempting to update user password. ", ex);
-                return Problem("Internal server error.");
-            }
-        }
     }
 }

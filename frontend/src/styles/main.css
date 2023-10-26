@@ -11,7 +11,7 @@
 }
 
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 3px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -20,7 +20,7 @@
 }
 
 .transition-in {
-    @apply transition-all ease-in;
+    @apply transition-all ease-in duration-75;
 }
 
 .shadow-primary {
@@ -48,7 +48,7 @@
 }
 
 .line-above {
-    @apply relative before:absolute before:w-full before:h-[2px] before:bg-jetblack before:top-0; 
+    @apply relative before:absolute before:w-full before:h-[2px] before:bg-primary-pastel before:top-0;  
 }
 
 @font-face {

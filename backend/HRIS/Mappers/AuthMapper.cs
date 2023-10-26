@@ -13,9 +13,6 @@ namespace HRIS.Mappers
                 .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.CompanyEmail))
                 .ReverseMap();
-
-            CreateMap<User, ResetPasswordDto>()
-                .ReverseMap();
         }
     }
 }

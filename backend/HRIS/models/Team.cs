@@ -10,7 +10,7 @@ namespace HRIS.Models
         [Key]
         public Guid Id { get; set; }
 
-        [StringLength(20)]
+        [StringLength(100)]
         public string Name { get; set; } = String.Empty;
 
         [StringLength(8)]

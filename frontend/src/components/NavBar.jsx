@@ -1,50 +1,68 @@
 import { GoKebabHorizontal } from "react-icons/go";
 import { Link } from "react-router-dom";
-
+import HRFlowLogoLightSvg from "@Assets/svg/HRFlowLogo_Light.svg"; 
+import useToggle from "@Hooks/useToggle";
+import { motion } from "framer-motion";
 
 const NavBar = (prop) => {
+    const [show, onSetShow] = useToggle();
+    const userData = prop.userData;
+
     return (
-        <nav className="shadow-xl p-6 w-80 relative flex flex-col">
+        <nav className="p-6 w-96 relative flex flex-col shadow-md">
             <div className="pb-4">
-                <h1 className="text-4xl font-bold">Logo</h1>
+                <img src={HRFlowLogoLightSvg} className="h-12 sm:h-16" alt="HR Flow Logo" />
             </div>
-            <div className="flex-grow line-above py-6">
-                {prop.routes.map(({ layout, pages }) => 
-                    <ul className="">   
-                        {layout === "Dashboard" && 
-                            pages.map(({ name, path }, key) => (
-                                <li className="block font-poppins py-2 text-lg">
-                                    <Link key={key} to={`/dashboard${path}`}>{name}</Link>
-                                </li>
-                        ))}   
-                    </ul>
+            <ul className="flex-grow py-4 line-above">
+                {prop.routes.map(({ role, layout, pages }) =>
+                    layout === "Dashboard" && 
+                    role === userData.role &&
+                    pages.map(({ icon, name, path }, key) => (
+                        <li className="rounded-md p-4 hover:bg-primary-pastel transition-in hover:text-primary-light group mb-1" key={key}>
+                            <Link to={`/dashboard${path}`} className="flex items-center gap-4 font-poppins font-medium">
+                                {icon} {name}
+                            </Link>
+                        </li>
+                    ))
                 )}
-            </div>
-            <div className="line-above py-4">
-                {prop.routes.map(({ layout, pages }) => 
-                    <ul className="">
-                        {
-                            layout === "Common" && 
-                            pages.map(({ name, path }, key) => (
-                                <li className="block font-poppins py-2 text-lg">
-                                    <Link key={key} to={`/dashboard${path}`}>{name}</Link>
-                                </li>
-                            ))
-                        }   
-                    </ul>
-                )}
-            </div>
+            </ul>
             <div className="flex justify-between items-center pt-6 line-above">
-                <span className="flex gap-4 items-center">
-                    <div className="bg-gray-400 h-10 w-10 rounded-full">
+                <span className="flex gap-2 items-center">
+                    <div className="bg-primary-pastel h-12 w-12 rounded-lg text-primary-light flex items-center justify-center font-semibold font-poppins text-xl shadow-inner">
+                        {userData.firstName !== undefined ? userData.firstName[0].toUpperCase() : ""}
+                        {userData.lastName !== undefined ? userData.lastName[0].toUpperCase() : ""}
                     </div>
                     <span>
-                        <h1 className="font-lato font-semibold">Name Surname</h1>
-                        <p className="text-xs font-poppins">Email Address</p>
+                        <h1 className="font-lato font-semibold">
+                            {`${userData.lastName}, ${userData.firstName} ${userData.middleName === "" && userData.middleName.length > 0 ? userData.middleName[0].toUpperCase() + "." : ""} ${userData.suffix}`}
+                        </h1>
+                        <p className="text-xs font-poppins">{userData.companyEmail}</p>
                     </span>
                 </span>
-                <p className="p-2 hover:bg-gray-200 rounded-full cursor-pointer">
-                    <GoKebabHorizontal size={24} />
+                <p className="relative font-medium">
+                    {show && (
+                        <motion.div 
+                            initial={{translateY : 20}}
+                            animate={{translateY : 0}}
+                            className="absolute -top-[11.5rem] -left-[9.5rem] rounded-lg border bg-white font-poppins w-48">
+                            <Link to="/dashboard/profile" onClick={onSetShow}>
+                                <span className="block p-4 hover:bg-primary-pastel hover:text-primary-light rounded-t-lg">
+                                    Profile
+                                </span>
+                            </Link>
+                            <Link to="/dashboard/settings" onClick={onSetShow}>
+                                <span className="block p-4 hover:bg-primary-pastel hover:text-primary-light">
+                                    Settings
+                                </span>
+                            </Link>
+                            <Link to="/auth/login" onClick={() => sessionStorage.clear()} replace>
+                                <span className="block p-4 hover:bg-primary-pastel rounded-b-lg text-secondary-light font-bold">
+                                    Log out
+                                </span>
+                            </Link>
+                        </motion.div>
+                    )}
+                    <GoKebabHorizontal size={40} onClick={onSetShow} className="p-2 hover:bg-gray-200 rounded-full cursor-pointer transition-in"/>
                 </p>
             </div>           
         </nav>

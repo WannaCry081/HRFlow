@@ -22,6 +22,27 @@ namespace HRIS.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("HRIS.Models.Team", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Teams");
+                });
+
             modelBuilder.Entity("HRIS.Models.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -51,11 +72,6 @@ namespace HRIS.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("GroupCode")
-                        .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)");
 
                     b.Property<string>("LandlineNumber")
                         .IsRequired()
@@ -112,6 +128,11 @@ namespace HRIS.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
+                    b.Property<string>("TeamCode")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
+
                     b.Property<Guid?>("TeamId")
                         .HasColumnType("uniqueidentifier");
 
@@ -130,37 +151,16 @@ namespace HRIS.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("HRIS.models.Team", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Teams");
-                });
-
             modelBuilder.Entity("HRIS.Models.User", b =>
                 {
-                    b.HasOne("HRIS.models.Team", "Team")
+                    b.HasOne("HRIS.Models.Team", "Team")
                         .WithMany("Users")
                         .HasForeignKey("TeamId");
 
                     b.Navigation("Team");
                 });
 
-            modelBuilder.Entity("HRIS.models.Team", b =>
+            modelBuilder.Entity("HRIS.Models.Team", b =>
                 {
                     b.Navigation("Users");
                 });

@@ -51,4 +51,4 @@ export const SendEmailToAdminApi = async (request) => {
     } catch (error){
         return error.response;
     }
-}
+};
