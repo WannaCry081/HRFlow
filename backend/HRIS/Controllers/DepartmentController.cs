@@ -33,5 +33,11 @@ namespace HRIS.Controllers
         {
             throw new NotImplementedException();
         }
+
+        [HttpDelete] 
+        public Task<IActionResult> DeleteDepartment()
+        {
+            throw new NotImplementedException();
+        } 
     }
 }
