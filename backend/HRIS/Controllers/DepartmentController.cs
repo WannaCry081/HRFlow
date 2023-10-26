@@ -34,6 +34,12 @@ namespace HRIS.Controllers
             throw new NotImplementedException();
         }
 
+        [HttpPut("{departmentId}")] 
+        public Task<IActionResult> UpdateDepartment([FromRoute] Guid departmentId)
+        {
+            throw new NotImplementedException();
+        }
+
         [HttpDelete] 
         public Task<IActionResult> DeleteDepartment()
         {
