@@ -28,6 +28,12 @@ namespace HRIS.Controllers
             throw new NotImplementedException();
         }
 
+        [HttpPost]
+        public Task<IActionResult> AddApplicantRecord()
+        {
+            throw new NotImplementedException();
+        }
+
         [HttpPatch("{applicantId}")]
         public Task<IActionResult> UpdateApplicantRecord([FromRoute] Guid applicantId)
         {
