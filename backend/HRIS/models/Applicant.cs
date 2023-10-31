@@ -42,6 +42,9 @@ namespace HRIS.Models
 
         [ForeignKey("TeamsId")]
         [JsonIgnore]
-        public Guid TeamId { get; set; }
+        public Guid? TeamId { get; set; }
+
+        [JsonIgnore]
+        public Team? Team { get; set; }
     }
 }
