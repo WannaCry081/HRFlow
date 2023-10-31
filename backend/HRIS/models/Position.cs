@@ -21,5 +21,8 @@ namespace HRIS.Models
         [ForeignKey("DepartmentId")]
         [JsonIgnore]
         public Guid? DepartmentId { get; set; }
+
+        [JsonIgnore]
+        public Department? Department { get; set; }
     }
 }
