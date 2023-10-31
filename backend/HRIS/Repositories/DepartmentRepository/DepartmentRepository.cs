@@ -45,14 +45,19 @@ namespace HRIS.Repositories.DepartmentRepository
                 c => c.TeamId.Equals(hr.TeamId)).ToListAsync(); 
         }
 
-        public Task<bool> UpdateDepartment(Department department, JsonPatchDocument<Department> request)
+        public async Task<bool> UpdateDepartment(Department department, JsonPatchDocument<Department> request)
         {
-            throw new NotImplementedException();
+            request.ApplyTo(department);
+            return await _context.SaveChangesAsync() > 0;
         }
 
-        public Task<bool> UpdateDepartments(Department department, Department request)
+        public async Task<bool> UpdateDepartments(Department department, Department request)
         {
-            throw new NotImplementedException();
+            department.Name = request.Name;
+            department.Manager = request.Manager;
+            department.Assistant = request.Assistant;
+
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }
