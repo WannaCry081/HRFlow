@@ -1,5 +1,6 @@
 import Login from "@Pages/Login";
 import Register from "@Pages/Register";
+import ResetPassword from "@Pages/ResetPassword";
 import Home from "@Pages/Home";
 import ApplicantTracking from "@Pages/ApplicantTracking";
 import EmployeeRecord from "@Pages/EmployeeRecord";
@@ -43,6 +44,11 @@ export const routes = [
                 name: "Register",
                 path: "/register",
                 element : <Register />
+            },
+            {
+                name: "ResetPassword",
+                path: "/reset-password",
+                element : <ResetPassword />
             }
         ]
     },

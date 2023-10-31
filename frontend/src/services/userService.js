@@ -34,7 +34,7 @@ export const UpdateUserPasswordApi = async (token, request) => {
     const instance = axiosInstance(token);
 
     try {
-        const response = await instance.post("/reset-password", request);
+        const response = await instance.put("/reset-password", request);
         return response;
     } catch (error) {
         return error.response;
