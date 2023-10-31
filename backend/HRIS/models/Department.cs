@@ -9,6 +9,7 @@ namespace HRIS.Models
     {
         [Key]
         public Guid Id { get; set; }
+        public Guid UserId { get; set; }
 
         [StringLength(50)]
         public string Name { get; set; } = string.Empty;
@@ -20,8 +21,12 @@ namespace HRIS.Models
         public string Assistant { get; set; } = string.Empty;
         public ICollection<User> Supervisors { get; set; } = new List<User>();
 
+        [ForeignKey("TeamsId")]
         [JsonIgnore]
-        public ICollection<User> Users { get; set; } = new List<User>();
+        public Guid? TeamId { get; set; }
+
+        [JsonIgnore] 
+        public Team? Team { get; set; }
 
         [JsonIgnore]
         public ICollection<Position> Positions { get; set; } = new List<Position>();

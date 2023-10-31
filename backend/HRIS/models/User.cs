@@ -51,9 +51,6 @@ namespace HRIS.Models
         [StringLength(20)]
         public string Role { get; set; } = string.Empty;
 
-        [StringLength(8)]
-        public string TeamCode { get; set; } = string.Empty;
-
         [StringLength(50)]
         public string CreatedBy { get; set; } = string.Empty;
 
@@ -68,19 +65,14 @@ namespace HRIS.Models
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
-        [ForeignKey("TeamId")]
+        public Guid? DepartmentId { get; set; }
+        public Guid? PositionId { get; set; }
+
+        [ForeignKey("TeamsId")]
         [JsonIgnore]
         public Guid? TeamId { get; set; }
 
-        [ForeignKey("DepartmentId")]
-        [JsonIgnore]
-        public Guid? DepartmentId { get; set; }
-
-        [ForeignKey("PositionId")]
-        [JsonIgnore]
-        public Guid? PositionId { get; set; }
-
-        [JsonIgnore]
+        [JsonIgnore] 
         public Team? Team { get; set; }
 
         [JsonIgnore]
