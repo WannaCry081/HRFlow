@@ -30,6 +30,6 @@ namespace HRIS.Models
 
         [ForeignKey("UsersId")]
         [JsonIgnore]
-        public User? UserId { get; set; }
+        public Guid? UserId { get; set; }
     }
 }
