@@ -38,7 +38,7 @@ const ForgotPassword = (prop) => {
                 setTimeout(() => {
                     if (status === 200) {
                         sessionStorage.setItem("token", data);
-                        navigate("/dashboard/home", { replace : true });
+                        navigate("/auth/reset-password", { replace : true });
                         onSetSubmit();
                     } else if (status === 401 || status === 404) {
                         formik.setErrors({ code : data });
