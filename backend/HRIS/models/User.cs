@@ -72,6 +72,9 @@ namespace HRIS.Models
         [JsonIgnore]
         public Guid? TeamId { get; set; }
 
+        [JsonIgnore] 
+        public Team? Team { get; set; }
+
         [JsonIgnore]
         public ICollection<Record> Records { get; set; } = new List<Record>();
     }
