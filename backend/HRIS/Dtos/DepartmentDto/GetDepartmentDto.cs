@@ -1,4 +1,5 @@
-﻿using HRIS.Models;
+﻿using HRIS.Dtos.PositionDto;
+using HRIS.Models;
 
 namespace HRIS.Dtos.DepartmentDto
 {
@@ -10,6 +11,6 @@ namespace HRIS.Dtos.DepartmentDto
         public string Assistant { get; set; } = string.Empty;
         public ICollection<User> Supervisors { get; set; } = new List<User>();
         public Guid? TeamId { get; set; }
-        public ICollection<Position> Positions { get; set; } = new List<Position>();
+        public List<GetPositionDto> Positions { get; set; } = new List<GetPositionDto>();
     }
 }
