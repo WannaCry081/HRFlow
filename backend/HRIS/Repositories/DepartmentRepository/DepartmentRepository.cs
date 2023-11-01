@@ -15,10 +15,10 @@ namespace HRIS.Repositories.DepartmentRepository
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<bool> IsDepartmentExists(string name)
+        public async Task<bool> IsDepartmentExists(User hr, string name)
         {
             return await _context.Departments.Where(
-                c => c.Name.Equals(name)).AnyAsync();
+                c => c.TeamId.Equals(hr.TeamId) && c.Name.Equals(name)).AnyAsync();
         }
 
         public async Task<User?> GetUserById(Guid id)
