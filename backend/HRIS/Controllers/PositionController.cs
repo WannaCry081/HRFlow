@@ -82,9 +82,71 @@ namespace HRIS.Controllers
         }
 
         [HttpPost] 
-        public Task<IActionResult> CreatePosition()
+        [Consumes("application/json")]
+        [Produces("application/json")]
+        public async Task<IActionResult> CreatePosition([FromRoute] Guid departmentId, [FromBody] CreatePositionDto request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var hrId = UserClaim.GetCurrentUser(HttpContext) ??
+                    throw new UserNotFoundException("Invalid user's credential. Please try again.");
+                var response = await _positionService.CreatePosition(hrId, departmentId, request);
+                return Ok(response);
+            }
+            catch (UserNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to find employee.", ex);
+                return NotFound(ex.Message);
+            }
+            catch (DepartmentNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to find department.", ex);
+                return NotFound(ex.Message);
+            }
+            catch (PositionExistsException ex)
+            {
+                _logger.LogError("An error occurred while attempting to create a position.", ex);
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while attempting to create a position.");
+                return Problem("Internal server error.");
+            }
+        }
+
+        [HttpPatch("{positionId}")]
+        [Consumes("application/json")]
+        [Produces("application/json")]
+        public async Task<IActionResult> UpdatePosition([FromRoute] Guid positionId, [FromRoute] Guid departmentId, [FromBody] JsonPatchDocument<Position> request)
+        {
+            try
+            {
+                var hrId = UserClaim.GetCurrentUser(HttpContext) ??
+                    throw new UserNotFoundException("Invalid user's credential. Please try again.");
+                var response = await _positionService.UpdatePosition(hrId, departmentId, positionId, request);
+                return Ok(response);
+            }
+            catch (UserNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to find employee.", ex);
+                return NotFound(ex.Message);
+            }
+            catch (DepartmentNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to find department.", ex);
+                return NotFound(ex.Message);
+            }
+            catch (PositionNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to find position.", ex);
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while attempting to update a position.");
+                return Problem("Internal server error.");
+            }
         }
 
         [HttpPut("{positionId}")]
