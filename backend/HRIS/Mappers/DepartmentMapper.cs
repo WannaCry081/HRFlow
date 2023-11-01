@@ -13,6 +13,8 @@ namespace HRIS.Mappers
                 .ReverseMap();
             CreateMap<Department, GetDepartmentDto>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => NameFormatter(src.Name)))
+                .ForMember(dest => dest.Manager, opt => opt.MapFrom(src => NameFormatter(src.Manager)))
+                .ForMember(dest => dest.Assistant, opt => opt.MapFrom(src => NameFormatter(src.Assistant)))
                 .ReverseMap();
             CreateMap<Department, UpdateDepartmentDto>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => NameFormatter(src.Name)))
