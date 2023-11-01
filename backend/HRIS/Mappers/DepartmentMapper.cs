@@ -14,6 +14,11 @@ namespace HRIS.Mappers
             CreateMap<Department, GetDepartmentDto>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => NameFormatter(src.Name)))
                 .ReverseMap();
+            CreateMap<Department, UpdateDepartmentDto>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => NameFormatter(src.Name)))
+                .ForMember(dest => dest.Manager, opt => opt.MapFrom(src => NameFormatter(src.Manager)))
+                .ForMember(dest => dest.Assistant, opt => opt.MapFrom(src => NameFormatter(src.Assistant)))
+                .ReverseMap();
         }
 
         private string NameFormatter(string input)
@@ -28,7 +33,7 @@ namespace HRIS.Mappers
             {
                 if (!string.IsNullOrEmpty(text[i]))
                 {
-                    text[i] = char.ToUpper(text[i][0]) + text[i].Substring(1).ToLower();
+                    text[i] = char.ToUpper(text[i][0]) + text[i].Substring(1);
                 }
             }
             return string.Join(" ", text);
