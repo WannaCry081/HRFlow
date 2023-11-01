@@ -35,7 +35,7 @@ namespace HRIS.Controllers
                     throw new UserNotFoundException("Invalid user's credential. Please try again.");
                 var response = await _positionService.GetPositions(hrId, departmentId);
                 return Ok(response);
-        }
+            }
             catch (UserNotFoundException ex)
             {
                 _logger.LogError("An error occurred while attempting to find employee.", ex);
@@ -63,7 +63,7 @@ namespace HRIS.Controllers
                     throw new UserNotFoundException("Invalid user's credential. Please try again.");
                 var response = await _positionService.GetPosition(hrId, departmentId, positionId);
                 return Ok(response);
-        }
+            }
             catch (UserNotFoundException ex)
             {
                 _logger.LogError("An error occurred while attempting to find employee.", ex);
@@ -81,7 +81,7 @@ namespace HRIS.Controllers
             }
         }
 
-        [HttpPost] 
+        [HttpPost]
         [Consumes("application/json")]
         [Produces("application/json")]
         public async Task<IActionResult> CreatePosition([FromRoute] Guid departmentId, [FromBody] CreatePositionDto request)
