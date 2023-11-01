@@ -12,6 +12,7 @@ namespace HRIS.Repositories.DepartmentRepository
         Task<bool> CreateDepartment(Department department);
         Task<bool> UpdateDepartments(Department department, Department request);
         Task<bool> UpdateDepartment(Department department, JsonPatchDocument<Department> request);
+        Task<bool> DeleteDepartment(User hr, Guid departmentId);
 
     }
 }
