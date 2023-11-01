@@ -151,9 +151,25 @@ namespace HRIS.Controllers
         }
 
         [HttpDelete("{departmentId}")]
-        public Task<IActionResult> DeleteDepartment([FromRoute] Guid departmentId)
+        public async Task<IActionResult> DeleteDepartment([FromRoute] Guid departmentId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var hrId = UserClaim.GetCurrentUser(HttpContext) ??
+                    throw new UserNotFoundException("Invalid user's credential. Please try again.");
+                var response = await _departmentService.DeleteDepartment(hrId, departmentId);
+                return Ok("Successfully deleted department.");
+            }
+            catch (UserNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to find employee.", ex);
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while attempting to delete department.");
+                return Problem("Internal server error.");
+            }
         }
     }
 }
