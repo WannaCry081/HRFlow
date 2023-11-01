@@ -150,9 +150,37 @@ namespace HRIS.Controllers
         }
 
         [HttpPut("{positionId}")]
-        public Task<IActionResult> UpdatePosition([FromRoute] Guid positionId)
+        [Consumes("application/json")]
+        [Produces("application/json")]
+        public async Task<IActionResult> UpdatePositions([FromRoute] Guid positionId, [FromRoute] Guid departmentId, [FromBody] UpdatePositionDto request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var hrId = UserClaim.GetCurrentUser(HttpContext) ??
+                    throw new UserNotFoundException("Invalid user's credential. Please try again.");
+                var response = await _positionService.UpdatePositions(hrId, departmentId, positionId, request);
+                return Ok(response);
+            }
+            catch (UserNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to find employee.", ex);
+                return NotFound(ex.Message);
+            }
+            catch (DepartmentNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to find department.", ex);
+                return NotFound(ex.Message);
+            }
+            catch (PositionNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to find position.", ex);
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while attempting to update a position.");
+                return Problem(ex.Message);
+            }
         }
 
         [HttpDelete("{positionId}")]
