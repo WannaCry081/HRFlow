@@ -54,9 +54,31 @@ namespace HRIS.Controllers
         }
 
         [HttpGet("{positionId}")]
-        public Task<IActionResult> GetPosition([FromRoute] Guid positionId)
+        [Produces("application/json")]
+        public async Task<IActionResult> GetPosition([FromRoute] Guid departmentId, [FromRoute] Guid positionId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var hrId = UserClaim.GetCurrentUser(HttpContext) ??
+                    throw new UserNotFoundException("Invalid user's credential. Please try again.");
+                var response = await _positionService.GetPosition(hrId, departmentId, positionId);
+                return Ok(response);
+        }
+            catch (UserNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to find employee.", ex);
+                return NotFound(ex.Message);
+            }
+            catch (DepartmentNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to find department.", ex);
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while attempting to get position.");
+                return Problem("Internal server error.");
+            }
         }
 
         [HttpPost] 
