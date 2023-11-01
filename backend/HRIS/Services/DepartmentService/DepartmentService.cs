@@ -43,10 +43,23 @@ namespace HRIS.Services.DepartmentService
 
         }
 
+        public async Task<bool> DeleteDepartment(Guid hrId, Guid departmentId)
+        {
+            var hr = await _departmentRepository.GetUserById(hrId) ??
+                throw new UserNotFoundException("Invalid email address. Please try again.");
+            var response = await _departmentRepository.DeleteDepartment(hr, departmentId);
+            if (!response)
+            {
+                throw new Exception("Failed to delete department.");
+            }
+
+            return response;
+        }
+
         public async Task<GetDepartmentDto> GetDepartment(Guid hrId, Guid departmentId)
         {
             var hr = await _departmentRepository.GetUserById(hrId) ??
-                throw new UserNotFoundException("Invalid email address. Please try again");
+                throw new UserNotFoundException("Invalid email address. Please try again.");
             var department = await _departmentRepository.GetDepartment(hr, departmentId);
             return _mapper.Map<GetDepartmentDto>(department);
         }
@@ -81,6 +94,8 @@ namespace HRIS.Services.DepartmentService
             var department = await _departmentRepository.GetDepartment(hr,departmentId);
 
             var dbDepartment = _mapper.Map<Department>(request);
+            dbDepartment.Id = departmentId;
+            dbDepartment.TeamId = hr.TeamId;
 
             var isDepartmentUpdated = await _departmentRepository.UpdateDepartments(department, dbDepartment);
             if (!isDepartmentUpdated)
