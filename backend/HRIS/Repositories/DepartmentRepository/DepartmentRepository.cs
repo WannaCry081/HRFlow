@@ -2,7 +2,7 @@
 using HRIS.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata.Ecma335;
+using System.Runtime.InteropServices;
 
 namespace HRIS.Repositories.DepartmentRepository
 {
@@ -42,7 +42,7 @@ namespace HRIS.Repositories.DepartmentRepository
         public async Task<ICollection<Department>> GetDepartments(User hr)
         {
             return await _context.Departments.Where(
-                c => c.TeamId.Equals(hr.TeamId)).ToListAsync(); 
+                c => c.TeamId.Equals(hr.TeamId)).ToListAsync();
         }
 
         public async Task<bool> UpdateDepartment(Department department, JsonPatchDocument<Department> request)
@@ -56,6 +56,17 @@ namespace HRIS.Repositories.DepartmentRepository
             department.Name = request.Name;
             department.Manager = request.Manager;
             department.Assistant = request.Assistant;
+
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> DeleteDepartment(User hr, Guid departmentId)
+        {
+            var department = await _context.Departments.Where(
+                c => c.Id.Equals(departmentId) &&
+                c.TeamId.Equals(hr.TeamId)).FirstOrDefaultAsync();
+
+            _context.Departments.Remove(department);
 
             return await _context.SaveChangesAsync() > 0;
         }
