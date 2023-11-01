@@ -4,7 +4,6 @@ using HRIS.Exceptions;
 using HRIS.Models;
 using HRIS.Repositories.DepartmentRepository;
 using Microsoft.AspNetCore.JsonPatch;
-using Microsoft.Identity.Client;
 
 namespace HRIS.Services.DepartmentService
 {
@@ -24,7 +23,7 @@ namespace HRIS.Services.DepartmentService
             var hr = await _departmentRepository.GetUserById(hrId) ??
                 throw new UserNotFoundException("Invalid email address. Please try again.");
 
-            var isDepartmentExists = await _departmentRepository.IsDepartmentExists(request.Name);
+            var isDepartmentExists = await _departmentRepository.IsDepartmentExists(hr, request.Name);
             if (isDepartmentExists)
             {
                 throw new DepartmentExistsException("Department already exists. Please try again.");
@@ -91,7 +90,7 @@ namespace HRIS.Services.DepartmentService
         {
             var hr = await _departmentRepository.GetUserById(hrId) ??
                 throw new UserNotFoundException("Invalid email address. Please try again.");
-            var department = await _departmentRepository.GetDepartment(hr,departmentId);
+            var department = await _departmentRepository.GetDepartment(hr, departmentId);
 
             var dbDepartment = _mapper.Map<Department>(request);
             dbDepartment.Id = departmentId;
