@@ -35,14 +35,16 @@ namespace HRIS.Repositories.DepartmentRepository
 
         public async Task<Department?> GetDepartment(User hr, Guid departmentId)
         {
-            return await _context.Departments.Where(
-                c => c.Id.Equals(departmentId) && c.TeamId.Equals(hr.TeamId)).FirstOrDefaultAsync();
+            return await _context.Departments
+                .Include(c => c.Positions)
+                .Where(c => c.Id.Equals(departmentId) && c.TeamId.Equals(hr.TeamId)).FirstOrDefaultAsync();
         }
 
         public async Task<ICollection<Department>> GetDepartments(User hr)
         {
-            return await _context.Departments.Where(
-                c => c.TeamId.Equals(hr.TeamId)).ToListAsync();
+            return await _context.Departments
+                .Include(c => c.Positions)
+                .Where(c => c.TeamId.Equals(hr.TeamId)).ToListAsync();
         }
 
         public async Task<bool> UpdateDepartment(Department department, JsonPatchDocument<Department> request)
