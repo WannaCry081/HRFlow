@@ -2,7 +2,9 @@
 using HRIS.Dtos.EmployeeDto;
 using HRIS.Exceptions;
 using HRIS.Models;
+using HRIS.Repositories.DepartmentRepository;
 using HRIS.Repositories.EmployeeRepository;
+using HRIS.Repositories.PositionRepository;
 using HRIS.Utils;
 using Microsoft.AspNetCore.JsonPatch;
 
@@ -12,13 +14,19 @@ namespace HRIS.Services.EmployeeService
     {
         private readonly IMapper _mapper;
         private readonly IEmployeeRepository _employeeRepository;
+        private readonly IDepartmentRepository _departmentRepository;
+        private readonly IPositionRepository _positionRepository;
 
-        public EmployeeService(IMapper mapper, IEmployeeRepository employeeRepository)
+        public EmployeeService(IMapper mapper, IEmployeeRepository employeeRepository, IDepartmentRepository departmentRepository, IPositionRepository positionRepository)
         {
             _mapper = mapper ??
                 throw new ArgumentNullException(nameof(mapper));
             _employeeRepository = employeeRepository ??
                 throw new ArgumentNullException(nameof(employeeRepository));
+            _departmentRepository = departmentRepository ??
+                throw new ArgumentNullException(nameof(departmentRepository));
+            _positionRepository = positionRepository ??
+                throw new ArgumentNullException(nameof(positionRepository));
         }
 
         public async Task<GetEmployeeRecordDto> GetEmployeeRecord(Guid hrId, Guid employeeId)
@@ -51,11 +59,22 @@ namespace HRIS.Services.EmployeeService
 
             Password.Encrypt(request.Password, out string passwordHash, out string passwordSalt);
 
+            var departments = await _departmentRepository.GetDepartments(hr);
+            var selectedDepartment = departments.FirstOrDefault(c => c.Name.Equals(request.Department));
+
+            var positions = await _positionRepository.GetPositions(hr, selectedDepartment.Id);
+            var selectedPosition = positions.FirstOrDefault(c => c.Title.Equals(request.Position));
+
+            char sex = request.Sex;
+
             var employee = _mapper.Map<User>(request);
             employee.Role = "Employee";
             employee.Status = "Active";
             employee.CreatedBy = hr.FirstName + " " + hr.LastName;
             employee.TeamId = hr.TeamId;
+            employee.DepartmentId = selectedDepartment.Id;
+            employee.PositionId = selectedPosition.Id;
+            employee.Sex = sex;
             employee.PasswordHash = passwordHash;
             employee.PasswordSalt = passwordSalt;
 

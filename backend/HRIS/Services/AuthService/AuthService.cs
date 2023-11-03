@@ -33,7 +33,9 @@ namespace HRIS.Services.AuthService
             var newUser = _mapper.Map<User>(request);
             newUser.PasswordHash = passwordHash;
             newUser.PasswordSalt = passwordSalt;
-            newUser.Role = "Human Resource";    
+            newUser.Role = "Human Resource";
+            newUser.Status = "Active";
+            newUser.CreatedBy = request.FirstName + " " + request.LastName;
 
             var isUserAdded = await _authRepository.AddUser(newUser);
             if (!isUserAdded)

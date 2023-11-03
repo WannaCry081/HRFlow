@@ -24,6 +24,9 @@ namespace HRIS.Dtos.EmployeeDto
         [Required(ErrorMessage = "Birthdate is required.")]
         public DateTime Birthdate { get; set; }
 
+        [Required(ErrorMessage = "Sex is required.")]
+        public char Sex { get; set; }
+
         [Required(ErrorMessage = "Mobile Number is required.")]
         [StringLength(15, ErrorMessage = "Mobile Number must be between {2} and {1} characters long.", MinimumLength = 3)]
         public string MobileNumber { get; set; } = string.Empty;
@@ -39,6 +42,14 @@ namespace HRIS.Dtos.EmployeeDto
         [EmailAddress(ErrorMessage = "Please enter a valid email address.")]
         [StringLength(100, ErrorMessage = "Company Email Address must be between {2} and {1} characters long.", MinimumLength = 5)]
         public string CompanyEmail { get; set; } = string.Empty;
+
+
+        [Required(ErrorMessage = "Department is required.")]
+        public string Department { get; set; } = string.Empty;
+
+
+        [Required(ErrorMessage = "Position is required.")]
+        public string Position { get; set; } = string.Empty;
 
         [PasswordPropertyText]
         [Required(ErrorMessage = "Password is required.")]

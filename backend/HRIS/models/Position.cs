@@ -9,7 +9,6 @@ namespace HRIS.Models
     {
         [Key]
         public Guid Id { get; set; }    
-        public Guid UserId { get; set; }
 
         [StringLength(50)]
         public string Title { get; set; } = string.Empty;
