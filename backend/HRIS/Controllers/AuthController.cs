@@ -113,21 +113,5 @@ namespace HRIS.Controllers
                 return Problem("Internal server error");
             }
         }
-
-        [HttpPost("send-email")]
-        [Consumes("application/json")]
-        public async Task<IActionResult> SendEmailToAdmin([FromBody] ContactAdminDto request)
-        {
-            try
-            {
-                var response = await _authService.SendEmailToAdmin(request);
-                return Ok(response);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogCritical("An error occurred while attempting to send the email to the admin.", ex);
-                return Problem("Internal server error.");
-            }
-        }
     }
 }

@@ -6,7 +6,7 @@ namespace HRIS.Dtos.AuthDto
     {
         [EmailAddress(ErrorMessage = "Please enter a valid email address.")]
         [Required(ErrorMessage = "Email Address is required.")]
-        [StringLength(150, ErrorMessage = "Email Address must be between {2} and {1} characters long.", MinimumLength = 5)]
+        [StringLength(100, ErrorMessage = "Email Address must be between {2} and {1} characters long.", MinimumLength = 5)]
         public string Email { get; set; } = string.Empty;
     }
 }

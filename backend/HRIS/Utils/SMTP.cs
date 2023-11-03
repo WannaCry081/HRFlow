@@ -46,11 +46,7 @@ namespace HRIS.Utils
             return emailText;
         }
 
-        public async static Task<string> SendEmailToAdmin(
-           IConfiguration configuration,
-           string email,
-           string subject,
-           string body
+        public async static Task<string> SendEmailToPage(IConfiguration configuration, string email, string subject, string body
         )
         {
             var mail = new MimeMessage();

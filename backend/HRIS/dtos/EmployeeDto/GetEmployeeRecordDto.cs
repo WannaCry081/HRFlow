@@ -14,7 +14,6 @@
         public string? PersonalEmail { get; set; }
         public string? CompanyEmail { get; set; }
         public string? Status { get; set; }
-        public string? GroupCode { get; set; }
         public Guid TeamId { get; set; }
         public string? CreatedBy { get; set; }
         public string? UpdatedBy { get; set; }

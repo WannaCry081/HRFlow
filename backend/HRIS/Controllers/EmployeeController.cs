@@ -121,6 +121,15 @@ namespace HRIS.Controllers
             }
         }
 
+        [HttpPut("reset-password/{employeeId}")]
+        [Consumes("application/json")]
+        [Produces("application/json")]
+        public Task<IActionResult> UpdateEmployeePassword([FromRoute] Guid employeeId, [FromBody] UpdateEmployeePasswordDto request)
+        {
+            throw new NotImplementedException();
+        }
+
+
         [HttpPut("{employeeId}")]
         [Consumes("application/json")]
         [Produces("application/json")]
@@ -144,7 +153,6 @@ namespace HRIS.Controllers
                 _logger.LogError(ex, "An error occurred while attempting to update employee record.");
                 return Problem("Internal server error.");
             }
-
         }
     }
 }
