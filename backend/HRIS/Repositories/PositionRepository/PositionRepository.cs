@@ -13,8 +13,8 @@ namespace HRIS.Repositories.PositionRepository
 
         public PositionRepository(DataContext context, IDepartmentRepository departmentRepository)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
-            _departmentRepository = departmentRepository ?? throw new ArgumentNullException(nameof(departmentRepository));
+            _context = context;
+            _departmentRepository = departmentRepository;
         }
         public async Task<User?> GetUserById(Guid id)
         {
