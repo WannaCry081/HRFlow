@@ -12,7 +12,7 @@ namespace HRIS.Repositories.DepartmentRepository
 
         public DepartmentRepository(DataContext context)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _context = context;
         }
 
         public async Task<bool> IsDepartmentExists(User hr, string name)

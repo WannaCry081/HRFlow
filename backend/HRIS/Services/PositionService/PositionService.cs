@@ -16,9 +16,9 @@ namespace HRIS.Services.PositionService
 
         public PositionService(IPositionRepository positionRepository, IDepartmentRepository departmentRepository, IMapper mapper)
         {
-            _positionRepository = positionRepository ?? throw new ArgumentNullException(nameof(positionRepository));
-            _departmentRepository = departmentRepository ?? throw new ArgumentNullException(nameof(departmentRepository));
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _positionRepository = positionRepository;
+            _departmentRepository = departmentRepository;
+            _mapper = mapper;
         }
 
         public async Task<GetPositionDto> CreatePosition(Guid hrId, Guid departmentId, CreatePositionDto request)
@@ -26,12 +26,9 @@ namespace HRIS.Services.PositionService
             var hr = await _positionRepository.GetUserById(hrId) ??
                 throw new UserNotFoundException("Invalid email address. Please try again.");
 
-            var department = await _departmentRepository.GetDepartment(hr, departmentId);
-            if (department is null)
-            {
+            var department = await _departmentRepository.GetDepartment(hr, departmentId) ??
                 throw new DepartmentNotFoundException("Department not found. Please try again.");
-            }
-
+           
             var isPositionExists = await _positionRepository.IsPositionExists(department.Id, request.Title);
             if (isPositionExists)
             {
@@ -54,11 +51,8 @@ namespace HRIS.Services.PositionService
         {
             var hr = await _positionRepository.GetUserById(hrId) ??
                 throw new UserNotFoundException("Invalid email address. Please try again.");
-            var department = await _departmentRepository.GetDepartment(hr, departmentId);
-            if (department is null)
-            {
+            var department = await _departmentRepository.GetDepartment(hr, departmentId) ??
                 throw new DepartmentNotFoundException("Department not found. Please try again.");
-            }
 
             var response = await _positionRepository.DeletePosition(hr, department.Id, positionId);
             if (!response)
@@ -73,11 +67,8 @@ namespace HRIS.Services.PositionService
         {
             var hr = await _positionRepository.GetUserById(hrId) ??
                 throw new UserNotFoundException("Invalid email address. Please try again.");
-            var department = await _departmentRepository.GetDepartment(hr, departmentId);
-            if (department is null)
-            {
+            var department = await _departmentRepository.GetDepartment(hr, departmentId) ?? 
                 throw new DepartmentNotFoundException("Department not found. Please try again.");
-            }
 
             var position = await _positionRepository.GetPosition(hr, department.Id, positionId);
             return _mapper.Map<GetPositionDto>(position);
@@ -87,11 +78,8 @@ namespace HRIS.Services.PositionService
         {
             var hr = await _positionRepository.GetUserById(hrId) ??
                 throw new UserNotFoundException("Invalid email address. Please try again.");
-            var department = await _departmentRepository.GetDepartment(hr, departmentId);
-            if(department is null)
-            {
+            var department = await _departmentRepository.GetDepartment(hr, departmentId) ?? 
                 throw new DepartmentNotFoundException("Department not found. Please try again.");
-            }
 
             var positions = await _positionRepository.GetPositions(hr,department.Id);
             return _mapper.Map<ICollection<GetPositionDto>>(positions);
@@ -101,17 +89,10 @@ namespace HRIS.Services.PositionService
         {
             var hr = await _positionRepository.GetUserById(hrId) ??
                 throw new UserNotFoundException("Invalid email address. Please try again.");
-            var department = await _departmentRepository.GetDepartment(hr, departmentId);
-            if (department is null)
-            {
+            var department = await _departmentRepository.GetDepartment(hr, departmentId) ??
                 throw new DepartmentNotFoundException("Department not found. Please try again.");
-            }
-
-            var position = await _positionRepository.GetPosition(hr, department.Id, positionId);
-            if(position is null)
-            {
+            var position = await _positionRepository.GetPosition(hr, department.Id, positionId) ?? 
                 throw new PositionNotFoundException("Position not found. Please try again.");
-            }
 
             var response = await _positionRepository.UpdatePosition(position, request);
             if (!response)
@@ -126,17 +107,10 @@ namespace HRIS.Services.PositionService
         {
             var hr = await _positionRepository.GetUserById(hrId) ??
                throw new UserNotFoundException("Invalid email address. Please try again.");
-            var department = await _departmentRepository.GetDepartment(hr, departmentId);
-            if (department is null)
-            {
+            var department = await _departmentRepository.GetDepartment(hr, departmentId) ??
                 throw new DepartmentNotFoundException("Department not found. Please try again.");
-            }
-
-            var position = await _positionRepository.GetPosition(hr, department.Id, positionId);
-            if (position is null)
-            {
+            var position = await _positionRepository.GetPosition(hr, department.Id, positionId) ??
                 throw new PositionNotFoundException("Position not found. Please try again.");
-            }
 
             var dbPosition = _mapper.Map<Position>(request);
             dbPosition.Id = positionId;

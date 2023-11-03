@@ -14,8 +14,8 @@ namespace HRIS.Services.DepartmentService
 
         public DepartmentService(IDepartmentRepository departmentRepository, IMapper mapper)
         {
-            _departmentRepository = departmentRepository ?? throw new ArgumentNullException(nameof(departmentRepository));
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _departmentRepository = departmentRepository;
+            _mapper = mapper;
         }
 
         public async Task<GetDepartmentDto> CreateDepartment(Guid hrId, CreateDepartmentDto request)
