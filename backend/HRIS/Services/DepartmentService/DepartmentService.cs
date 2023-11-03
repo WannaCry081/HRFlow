@@ -80,7 +80,7 @@ namespace HRIS.Services.DepartmentService
             var response = await _departmentRepository.UpdateDepartment(department, request);
             if (!response)
             {
-                throw new Exception("Failed to update department information.");
+                throw new DepartmentUpdateFailException("Failed to update department information.");
             }
 
             return response;
@@ -99,7 +99,7 @@ namespace HRIS.Services.DepartmentService
             var isDepartmentUpdated = await _departmentRepository.UpdateDepartments(department, dbDepartment);
             if (!isDepartmentUpdated)
             {
-                throw new Exception("Failed to update department information.");
+                throw new DepartmentUpdateFailException("Failed to update department information.");
             }
 
             return _mapper.Map<GetDepartmentDto>(dbDepartment);
