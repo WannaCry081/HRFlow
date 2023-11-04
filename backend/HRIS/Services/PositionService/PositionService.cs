@@ -53,8 +53,11 @@ namespace HRIS.Services.PositionService
                 throw new UserNotFoundException("Invalid email address. Please try again.");
             var department = await _departmentRepository.GetDepartment(hr, departmentId) ??
                 throw new DepartmentNotFoundException("Department not found. Please try again.");
+            var position = await _positionRepository.GetPosition(hr, department, positionId) ??
+                throw new PositionNotFoundException("Position not found. Please try again.");
 
-            var response = await _positionRepository.DeletePosition(hr, department.Id, positionId);
+
+            var response = await _positionRepository.DeletePosition(position);
             if (!response)
             {
                 throw new Exception("Failed to delete department.");
@@ -69,7 +72,6 @@ namespace HRIS.Services.PositionService
                 throw new UserNotFoundException("Invalid email address. Please try again.");
             var department = await _departmentRepository.GetDepartment(hr, departmentId) ??
                 throw new DepartmentNotFoundException("Department not found. Please try again.");
-
             var position = await _positionRepository.GetPosition(hr, department, positionId);
             return _mapper.Map<GetPositionDto>(position);
         }
