@@ -9,8 +9,6 @@ namespace HRIS.Mappers
         public RecordMapper()
         {
             CreateMap<Record, GetRecordDto>().ReverseMap();
-            CreateMap<Record, CreateRecordDto>().ReverseMap();
-            CreateMap<Record, UpdateRecordDto>().ReverseMap();
         }
     }
 }
