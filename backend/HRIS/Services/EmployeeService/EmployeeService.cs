@@ -62,7 +62,7 @@ namespace HRIS.Services.EmployeeService
             var departments = await _departmentRepository.GetDepartments(hr);
             var selectedDepartment = departments.FirstOrDefault(c => c.Name.Equals(request.Department));
 
-            var positions = await _positionRepository.GetPositions(hr, selectedDepartment.Id);
+            var positions = await _positionRepository.GetPositions(hr, selectedDepartment);
             var selectedPosition = positions.FirstOrDefault(c => c.Title.Equals(request.Position));
 
             char sex = request.Sex;
