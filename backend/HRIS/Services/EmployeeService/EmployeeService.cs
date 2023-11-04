@@ -46,7 +46,7 @@ namespace HRIS.Services.EmployeeService
             return _mapper.Map<ICollection<GetEmployeeRecordDto>>(employees);
         }
 
-        public async Task<GetEmployeeRecordDto> CreateEmployeeRecord(Guid hrId, AddEmployeeRecordDto request)
+        public async Task<GetEmployeeRecordDto> CreateEmployeeRecord(Guid hrId, CreateEmployeeRecordDto request)
         {
             var hr = await _employeeRepository.GetUserById(hrId) ??
                 throw new UserNotFoundException("Invalid email address. Please try again.");

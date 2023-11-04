@@ -1,6 +1,6 @@
 ﻿namespace HRIS.Dtos.ApplicantDto
 {
-    public class GetApplicantDto
+    public class GetApplicantRecordDto
     {
         public Guid Id { get; set; }
         public string FirstName { get; set; } = string.Empty;

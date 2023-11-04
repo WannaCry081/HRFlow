@@ -8,9 +8,9 @@ namespace HRIS.Mappers
     {
         public ApplicantMapper()
         {
-            CreateMap<Applicant, GetApplicantDto>()
+            CreateMap<Applicant, GetApplicantRecordDto>()
                 .ReverseMap();
-            CreateMap<Applicant, CreateApplicantDto>()
+            CreateMap<Applicant, CreateApplicantRecordDto>()
                 .ReverseMap(); 
         }
     }

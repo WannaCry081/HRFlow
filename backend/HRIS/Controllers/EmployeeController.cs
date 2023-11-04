@@ -76,7 +76,7 @@ namespace HRIS.Controllers
         [HttpPost]
         [Consumes("application/json")]
         [Produces("application/json")]
-        public async Task<IActionResult> CreateEmployeeRecord([FromBody] AddEmployeeRecordDto request)
+        public async Task<IActionResult> CreateEmployeeRecord([FromBody] CreateEmployeeRecordDto request)
         {
             try
             {
