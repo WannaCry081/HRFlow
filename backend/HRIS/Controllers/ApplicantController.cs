@@ -85,8 +85,15 @@ namespace HRIS.Controllers
                 var response = await _applicantService.CreateApplicantRecord(hrId, request);
                 return Ok(response);
             } 
+            catch (ApplicantExistsException ex)
+            {
+                _logger.LogError(ex, "An error occurred while attempting to add existing applicant.");
+                return BadRequest(ex.Message);
+
+            }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "An error occurred while attempting to add new applicant.");
                 return Problem(ex.Message);
             }
         }
