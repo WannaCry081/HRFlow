@@ -17,6 +17,9 @@ namespace HRIS.Models
         [StringLength(20)]
         public string Type { get; set; } = string.Empty;
 
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime UpdatedAt { get; set; } = DateTime.Now;
+
         [ForeignKey("DepartmentId")]
         [JsonIgnore]
         public Guid? DepartmentId { get; set; }
