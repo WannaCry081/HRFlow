@@ -1,8 +1,10 @@
 ﻿using HRIS.Dtos.ApplicantDto;
 using HRIS.Exceptions;
+using HRIS.Models;
 using HRIS.Services.ApplicantService;
 using HRIS.Utils;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HRIS.Controllers
@@ -104,9 +106,35 @@ namespace HRIS.Controllers
         }
 
         [HttpPatch("{applicantId}")]
-        public Task<IActionResult> UpdateApplicantRecord([FromRoute] Guid applicantId)
+        public async Task<IActionResult> UpdateApplicantRecord([FromRoute] Guid applicantId, [FromBody] JsonPatchDocument<Applicant> request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var hrId = UserClaim.GetCurrentUser(HttpContext) ??
+                    throw new UserNotFoundException("Invalid user's credential. Please try again.");
+
+                var response = await _applicantService.UpdateApplicantRecord(hrId, applicantId, request);
+                if (!response)
+                {
+                    throw new Exception("Failed to update applicant's record.");
+                }
+                return Ok();
+            }
+            catch (UserNotFoundException ex)
+            {
+                _logger.LogError(ex, "An error occurred while attempting to update user information.");
+                return NotFound(ex.Message);
+            }
+            catch (ApplicantNotFoundException ex)
+            {
+                _logger.LogError(ex, "An error occurred while attempting to update applicant.");
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while attempting to update applicant record.");
+                return Problem(ex.Message);
+            }
         }
 
         [HttpPut("{applicantId}")]
@@ -120,7 +148,7 @@ namespace HRIS.Controllers
                 var response = await _applicantService.UpdateApplicantRecords(hrId, applicantId, request);
                 if (!response)
                 {
-                    throw new Exception();
+                    throw new Exception("Failed to update applicant's record.");
                 }
                 return Ok(response);
             }
