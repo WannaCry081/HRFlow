@@ -1,4 +1,6 @@
-﻿using HRIS.Dtos.ApplicantDto;
+﻿using Microsoft.AspNetCore.JsonPatch;
+using HRIS.Dtos.ApplicantDto;
+using HRIS.Models;
 
 namespace HRIS.Services.ApplicantService
 {
@@ -9,5 +11,6 @@ namespace HRIS.Services.ApplicantService
         Task<GetApplicantRecordDto> CreateApplicantRecord(Guid hrId, CreateApplicantRecordDto request);
         Task<bool> DeleteApplicantRecord(Guid hrId, Guid applicantId);
         Task<bool> UpdateApplicantRecords(Guid hrId, Guid applicantId, UpdateApplicantRecordDto request);
+        Task<bool> UpdateApplicantRecord(Guid hrId, Guid applicantId, JsonPatchDocument<Applicant> request);
     }
 }
