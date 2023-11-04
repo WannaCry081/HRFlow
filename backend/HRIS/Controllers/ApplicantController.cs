@@ -85,6 +85,11 @@ namespace HRIS.Controllers
                 var response = await _applicantService.CreateApplicantRecord(hrId, request);
                 return Ok(response);
             }
+            catch (UserNotFoundException ex)
+            {
+                _logger.LogError(ex, "An error occurred while attempting to get user information.");
+                return NotFound(ex.Message);
+            }
             catch (ApplicantExistsException ex)
             {
                 _logger.LogError(ex, "An error occurred while attempting to add existing applicant.");
@@ -105,9 +110,35 @@ namespace HRIS.Controllers
         }
 
         [HttpPut("{applicantId}")]
-        public Task<IActionResult> UpdateApplicantRecords([FromRoute] Guid applicantId)
+        public async Task<IActionResult> UpdateApplicantRecords([FromRoute] Guid applicantId, [FromBody] UpdateApplicantRecordDto request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var hrId = UserClaim.GetCurrentUser(HttpContext) ??
+                    throw new UserNotFoundException("Invalid user's credential. Please try again.");
+
+                var response = await _applicantService.UpdateApplicantRecords(hrId, applicantId, request);
+                if (!response)
+                {
+                    throw new Exception();
+                }
+                return Ok(response);
+            }
+            catch (UserNotFoundException ex)
+            {
+                _logger.LogError(ex, "An error occurred while attempting to update user information.");
+                return NotFound(ex.Message);
+            }
+            catch (ApplicantNotFoundException ex)
+            {
+                _logger.LogError(ex, "An error occurred while attempting to update applicant.");
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while attempting to update applicant record.");
+                return Problem(ex.Message);
+            }
         }
 
         [HttpDelete("{applicantId}")]
@@ -125,9 +156,14 @@ namespace HRIS.Controllers
                 }
                 return Ok("Successfully delete applicant's record.");
             }
+            catch (UserNotFoundException ex)
+            {
+                _logger.LogError(ex, "An error occurred while attempting to delete user information.");
+                return NotFound(ex.Message);
+            }
             catch (ApplicantNotFoundException ex)
             {
-                _logger.LogError(ex, "An error occurred while attempting to get applicant.");
+                _logger.LogError(ex, "An error occurred while attempting to delete applicant.");
                 return NotFound(ex.Message);
             }
             catch (Exception ex)
