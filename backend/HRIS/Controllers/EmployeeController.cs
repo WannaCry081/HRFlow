@@ -107,6 +107,10 @@ namespace HRIS.Controllers
                  throw new UserNotFoundException("Invalid user's credential. Please try again.");
 
                 var response = await _employeeService.UpdateEmployeeRecord(hrId, employeeId, request);
+                if (!response)
+                {
+                    throw new Exception("Failed to update employee record.");
+                }
                 return Ok("Successfully updated employee's record.");
             }
             catch (UserNotFoundException ex)
