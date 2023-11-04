@@ -6,9 +6,9 @@ namespace HRIS.Services.RecordService
 {
     public interface IRecordService
     {
-        Task<CreateRecordDto> CreateRecord(Guid hrId, CreateRecordDto request);
-        Task<ICollection<GetRecordDto>> GetRecords(Guid hrId);
-        Task<UpdateRecordDto> UpdateRecord(Guid hrId, Guid recordId, JsonPatchDocument<Record> request);
+        Task<ICollection<GetRecordDto>> GetRecords(Guid userId);
+        Task<GetRecordDto> CreateRecord(Guid userId);
+        Task<bool> UpdateRecord(Guid userId, Guid recordId, JsonPatchDocument<Record> request);
 
 
     }

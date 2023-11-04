@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using HRIS.Dtos;
-using HRIS.Dtos.PositionDto;
 using HRIS.Exceptions;
 using HRIS.Models;
 using HRIS.Repositories.RecordRepository;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.JsonPatch;
 
 namespace HRIS.Services.RecordService
@@ -15,60 +15,47 @@ namespace HRIS.Services.RecordService
 
         public RecordService(IRecordRepository recordRepository, IMapper mapper)
         {
-            _recordRepository = recordRepository ?? throw new ArgumentNullException(nameof(recordRepository));
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _recordRepository = recordRepository;
+            _mapper = mapper;
         }
 
-        public async Task<CreateRecordDto> CreateRecord(Guid hrId, CreateRecordDto request)
+        public async Task<GetRecordDto> CreateRecord(Guid userId)
         {
-            var hr = await _recordRepository.GetUserById(hrId) ??
-                throw new UserNotFoundException("User is not found in the database.");
-
-            var existingRecord = await _recordRepository.GetRecordByUserIdAndDate(hrId, request.ClockIn);
-            if (existingRecord != null)
+            DateTime clockIn = DateTime.Now;
+            var existingRecord = await _recordRepository.GetRecordByDate(userId, clockIn);
+            if (existingRecord is not null)
             {
                 throw new RecordExistsException("User has already clocked in for today.");
             }
 
-            var record = _mapper.Map<Record>(request);
-            record.ClockIn = request.ClockIn;
-            record.UserId = hr.Id;
-            record.Day = request.ClockIn.ToString("dddd");
-            record.Month = request.ClockIn.ToString("MMMM");
-            record.Year = request.ClockIn.ToString("yyyy");
+            Record newRecord = new() {
+                ClockIn = clockIn,
+                UserId = userId,
+                Day = clockIn.ToString("dddd"),
+                Month = clockIn.ToString("MMMM"),
+                Year = clockIn.ToString("yyyy")
+            };
 
-            var response = await _recordRepository.CreateRecord(record);
+            var response = await _recordRepository.CreateRecord(newRecord);
             if(!response)
             {
                 throw new RecordExistsException("Failed to add clock in record.");
             }
-            return _mapper.Map<CreateRecordDto>(record);
+            return _mapper.Map<GetRecordDto>(newRecord);
         }
 
-        public async Task<ICollection<GetRecordDto>> GetRecords(Guid hrId)
+        public async Task<ICollection<GetRecordDto>> GetRecords(Guid userId)
         {
-            var hr = await _recordRepository.GetUserById(hrId) ??
-            throw new UserNotFoundException("User is not found in the database.");
-
-            var records = await _recordRepository.GetRecords(hrId);
+            var records = await _recordRepository.GetRecords(userId);
             return _mapper.Map<ICollection<GetRecordDto>>(records);
         }
 
-        public async Task<UpdateRecordDto> UpdateRecord(Guid hrId, Guid recordId, JsonPatchDocument<Record> request)
+        public async Task<bool> UpdateRecord(Guid userId, Guid recordId, JsonPatchDocument<Record> request)
         {
-            var hr = await _recordRepository.GetUserById(hrId) ??
-            throw new UserNotFoundException("User not found");
+            var record = await _recordRepository.GetRecordById(userId, recordId)
+                ?? throw new RecordNotFoundException("Record not found. Please try again later.");
 
-            var record = await _recordRepository.GetUserByRecord(recordId) ??
-            throw new UserNotFoundException("ID not found");
-
-            var isRecordUpdated = await _recordRepository.UpdateRecord(record, request);
-            if (!isRecordUpdated)
-            {
-                throw new Exception("Failed to update information.");
-            }
-
-            return _mapper.Map<UpdateRecordDto>(request);
+            return await _recordRepository.UpdateRecord(record, request);
         }
     }
 }
