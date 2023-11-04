@@ -118,10 +118,10 @@ namespace HRIS.Controllers
                 _logger.LogError("An error occurred while attempting to find employee.", ex);
                 return NotFound(ex.Message);
             }
-            catch (DepartmentUpdateFailException ex)
+            catch (DepartmentNotFoundException ex)
             {
-                _logger.LogError("An error occurred while attempting to update department information.", ex);
-                return BadRequest(ex.Message);
+                _logger.LogError("An error occurred while attempting to find department.", ex);
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {
@@ -148,10 +148,10 @@ namespace HRIS.Controllers
                 _logger.LogError("An error occurred while attempting to find employee.", ex);
                 return NotFound(ex.Message);
             }
-            catch (DepartmentUpdateFailException ex)
+            catch (DepartmentNotFoundException ex)
             {
-                _logger.LogError("An error occurred while attempting to update department information.", ex);
-                return BadRequest(ex.Message);
+                _logger.LogError("An error occurred while attempting to find department.", ex);
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {
