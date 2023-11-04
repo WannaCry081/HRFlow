@@ -1,6 +1,5 @@
 ﻿using HRIS.Context;
 using HRIS.Models;
-using HRIS.Repositories.DepartmentRepository;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,18 +29,12 @@ namespace HRIS.Repositories.PositionRepository
         {
             _context.Positions.Add(position);
             return await _context.SaveChangesAsync() > 0;
-        }   
+        }
 
-        public async Task<bool> DeletePosition(User hr, Guid departmentId, Guid positionId)
+        public async Task<bool> DeletePosition(Position position)
         {
-            var position = await _context.Positions.Where(
-                c => c.Id.Equals(positionId) &&
-                c.DepartmentId.Equals(departmentId)).FirstOrDefaultAsync();
-
             _context.Positions.Remove(position);
-
             return await _context.SaveChangesAsync() > 0;
-
         }
 
         public async Task<Position?> GetPosition(User hr, Department department, Guid positionId)
