@@ -46,7 +46,9 @@ namespace HRIS.Services.DepartmentService
         {
             var hr = await _departmentRepository.GetUserById(hrId) ??
                 throw new UserNotFoundException("Invalid email address. Please try again.");
-            var response = await _departmentRepository.DeleteDepartment(hr, departmentId);
+            var department = await _departmentRepository.GetDepartment(hr, departmentId) ??
+                throw new DepartmentNotFoundException("Department does not exist. Please try again.");
+            var response = await _departmentRepository.DeleteDepartment(department);
             if (!response)
             {
                 throw new Exception("Failed to delete department.");
