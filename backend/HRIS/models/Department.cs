@@ -20,11 +20,14 @@ namespace HRIS.Models
         public string Assistant { get; set; } = string.Empty;
         public ICollection<User> Supervisors { get; set; } = new List<User>();
 
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime UpdatedAt { get; set; } = DateTime.Now;
+
         [ForeignKey("TeamsId")]
         [JsonIgnore]
         public Guid? TeamId { get; set; }
 
-        [JsonIgnore] 
+        [JsonIgnore]
         public Team? Team { get; set; }
 
         [JsonIgnore]

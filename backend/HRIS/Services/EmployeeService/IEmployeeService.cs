@@ -8,7 +8,7 @@ namespace HRIS.Services.EmployeeService
     {
         Task<GetEmployeeRecordDto> GetEmployeeRecord(Guid hrId, Guid employeeId);
         Task<ICollection<GetEmployeeRecordDto>> GetEmployeeRecords(Guid hrId);
-        Task<GetEmployeeRecordDto> CreateEmployeeRecord(Guid hrId, AddEmployeeRecordDto request);
+        Task<GetEmployeeRecordDto> CreateEmployeeRecord(Guid hrId, CreateEmployeeRecordDto request);
         Task<GetEmployeeRecordDto> UpdateEmployeeRecords(Guid hrId, Guid employeeId, UpdateEmployeeRecordDto request);
         Task<GetEmployeeRecordDto> UpdateEmployeePassword(Guid hrId, Guid employeeId, UpdateEmployeePasswordDto request);
         Task<bool> UpdateEmployeeRecord(Guid hrId, Guid employeeId, JsonPatchDocument<User> request);

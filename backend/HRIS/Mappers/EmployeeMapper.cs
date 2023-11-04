@@ -8,7 +8,7 @@ namespace HRIS.Mappers
     {
         public EmployeeMapper()
         {
-            CreateMap<User, AddEmployeeRecordDto>()
+            CreateMap<User, CreateEmployeeRecordDto>()
                 .ReverseMap();
             CreateMap<User, UpdateEmployeeRecordDto>()
                 .ReverseMap();

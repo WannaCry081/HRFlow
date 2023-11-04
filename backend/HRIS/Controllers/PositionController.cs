@@ -125,6 +125,10 @@ namespace HRIS.Controllers
                 var hrId = UserClaim.GetCurrentUser(HttpContext) ??
                     throw new UserNotFoundException("Invalid user's credential. Please try again.");
                 var response = await _positionService.UpdatePosition(hrId, departmentId, positionId, request);
+                if (!response)
+                {
+                    throw new Exception("Failed to update position information.");
+                }
                 return Ok(response);
             }
             catch (UserNotFoundException ex)
