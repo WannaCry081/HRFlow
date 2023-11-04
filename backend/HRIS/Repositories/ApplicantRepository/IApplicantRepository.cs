@@ -10,5 +10,6 @@ namespace HRIS.Repositories.ApplicantRepository
         Task<bool> IsApplicantExists(User user, Applicant applicant);
         Task<bool> CreateApplicationRecord(User user, Applicant applicant);
         Task<bool> DeleteApplicantRecord(Applicant applicant);
+        Task<bool> UpdateApplicantRecords(Applicant applicant, Applicant request);
     }
 }

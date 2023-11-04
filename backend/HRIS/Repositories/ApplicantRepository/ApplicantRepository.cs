@@ -50,5 +50,21 @@ namespace HRIS.Repositories.ApplicantRepository
             _context.Applicants.Remove(applicant);
             return await _context.SaveChangesAsync() > 0;
         }
+
+        public async Task<bool> UpdateApplicantRecords(Applicant applicant, Applicant request)
+        {
+            applicant.FirstName = request.FirstName;
+            applicant.MiddleName = request.MiddleName;
+            applicant.LastName = request.LastName;
+            applicant.Email = request.Email;
+            applicant.Suffix = request.Suffix;
+            applicant.Age = request.Age;
+            applicant.Sex = request.Sex;
+            applicant.MobileNumber = request.MobileNumber;
+            applicant.LandlineNumber = request.LandlineNumber;
+            applicant.BirthDate = request.BirthDate;
+
+            return await _context.SaveChangesAsync() > 0;
+        }
     }
 }
