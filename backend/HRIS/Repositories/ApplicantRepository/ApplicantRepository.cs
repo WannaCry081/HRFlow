@@ -32,5 +32,18 @@ namespace HRIS.Repositories.ApplicantRepository
                 c => c.TeamId.Equals(user.TeamId) && c.Id.Equals(applicantId))
                 .FirstOrDefaultAsync();
         }
+
+        public async Task<bool> IsApplicantExists(User user, Applicant applicant)
+        {
+            return await _context.Applicants.Where(
+                c => user.TeamId.Equals(user.TeamId) && c.Email.Equals(applicant.Email))
+                .AnyAsync();    
+        }
+
+        public async Task<bool> CreateApplicationRecord(User user, Applicant applicant)
+        {
+            _context.Applicants.Add(applicant);
+            return await _context.SaveChangesAsync() > 0;
+        }
     }
 }
