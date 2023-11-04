@@ -46,9 +46,31 @@ namespace HRIS.Controllers
         }
 
         [HttpGet("{applicantId}")]
-        public Task<IActionResult> GetApplicantRecord([FromRoute] Guid applicantId)
+        public async Task<IActionResult> GetApplicantRecord([FromRoute] Guid applicantId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var hrId = UserClaim.GetCurrentUser(HttpContext) ??
+                  throw new UserNotFoundException("Invalid user's credential. Please try again.");
+
+                var response = await _applicantService.GetApplicantRecord(hrId, applicantId);
+                return Ok(response);
+            }
+            catch (UserNotFoundException ex)
+            {
+                _logger.LogError(ex, "An error occurred while attempting to get user information.");
+                return NotFound(ex.Message);
+            }
+            catch (ApplicantNotFoundException ex)
+            {
+                _logger.LogError(ex, "An error occurred while attempting to get applicant.");
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical(ex, "An error occurred while attempting to get applicant records.");
+                return Problem(ex.Message);
+            }
         }
 
         [HttpPost]
