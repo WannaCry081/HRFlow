@@ -67,5 +67,16 @@ namespace HRIS.Services.ApplicantService
             var response = await _applicantRepository.GetApplicantRecords(hr);
             return _mapper.Map<ICollection<GetApplicantRecordDto>>(response);
         }
+
+        public async Task<bool> UpdateApplicantRecords(Guid hrId, Guid applicantId, UpdateApplicantRecordDto request)
+        {
+            var hr = await _applicantRepository.GetUserById(hrId) ??
+                throw new UserNotFoundException("Invalid email address. Please try again.");
+
+            var applicant = await _applicantRepository.GetApplicantRecord(hr, applicantId) ??
+                throw new ApplicantNotFoundException("Invalid applicant credential. Please try again.");
+
+            return await _applicantRepository.UpdateApplicantRecords(applicant, _mapper.Map<Applicant>(request));
+        }
     }
 }
