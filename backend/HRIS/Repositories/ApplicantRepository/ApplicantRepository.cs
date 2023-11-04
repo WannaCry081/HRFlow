@@ -25,5 +25,12 @@ namespace HRIS.Repositories.ApplicantRepository
             return await _context.Applicants.Where(
                 c => c.TeamId.Equals(user.TeamId)).ToListAsync();
         }
+
+        public async Task<Applicant?> GetApplicantRecord(User user, Guid applicantId)
+        {
+            return await _context.Applicants.Where(
+                c => c.TeamId.Equals(user.TeamId) && c.Id.Equals(applicantId))
+                .FirstOrDefaultAsync();
+        }
     }
 }

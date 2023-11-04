@@ -6,5 +6,6 @@ namespace HRIS.Repositories.ApplicantRepository
     {
         Task<User?> GetUserById(Guid userId);
         Task<ICollection<Applicant>> GetApplicantRecords(User user);
+        Task<Applicant?> GetApplicantRecord(User user, Guid applicantId);
     }
 }
