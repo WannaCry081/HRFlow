@@ -1,4 +1,5 @@
-﻿using HRIS.Exceptions;
+﻿using HRIS.Dtos.ApplicantDto;
+using HRIS.Exceptions;
 using HRIS.Services.ApplicantService;
 using HRIS.Utils;
 using Microsoft.AspNetCore.Authorization;
@@ -28,7 +29,7 @@ namespace HRIS.Controllers
             try
             {
                 var hrId = UserClaim.GetCurrentUser(HttpContext) ??
-                  throw new UserNotFoundException("Invalid user's credential. Please try again.");
+                    throw new UserNotFoundException("Invalid user's credential. Please try again.");
 
                 var response = await _applicantService.GetApplicantRecords(hrId);
                 return Ok(response);
@@ -51,7 +52,7 @@ namespace HRIS.Controllers
             try
             {
                 var hrId = UserClaim.GetCurrentUser(HttpContext) ??
-                  throw new UserNotFoundException("Invalid user's credential. Please try again.");
+                    throw new UserNotFoundException("Invalid user's credential. Please try again.");
 
                 var response = await _applicantService.GetApplicantRecord(hrId, applicantId);
                 return Ok(response);
@@ -74,9 +75,20 @@ namespace HRIS.Controllers
         }
 
         [HttpPost]
-        public Task<IActionResult> CreateApplicantRecord()
+        public async Task<IActionResult> CreateApplicantRecord([FromBody] CreateApplicantRecordDto request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var hrId = UserClaim.GetCurrentUser(HttpContext) ?? 
+                    throw new UserNotFoundException("Invalid user's credential. Please try again.");
+
+                var response = await _applicantService.CreateApplicantRecord(hrId, request);
+                return Ok(response);
+            } 
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
         }
 
         [HttpPatch("{applicantId}")]
