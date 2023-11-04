@@ -1,9 +1,7 @@
-﻿using Azure;
-using HRIS.Context;
+﻿using HRIS.Context;
 using HRIS.Models;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.JsonPatch;
-using HRIS.Dtos;
+using Microsoft.EntityFrameworkCore;
 
 namespace HRIS.Repositories.RecordRepository
 {
@@ -13,18 +11,12 @@ namespace HRIS.Repositories.RecordRepository
 
         public RecordRepository(DataContext context)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _context = context;
         }
 
         public async Task<User?> GetUserById(Guid id)
         {
             return await _context.Users.Where(
-                c => c.Id.Equals(id)).FirstOrDefaultAsync();
-        }
-
-        public async Task<Record?> GetUserByRecord(Guid id)
-        {
-            return await _context.Records.Where(
                 c => c.Id.Equals(id)).FirstOrDefaultAsync();
         }
 
@@ -34,27 +26,29 @@ namespace HRIS.Repositories.RecordRepository
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<Record?> GetRecordByUserIdAndDate(Guid userId, DateTime date)
+        public async Task<Record?> GetRecordByDate(Guid userId, DateTime date)
         {
             return await _context.Records
                 .Where(r => r.UserId == userId && r.ClockIn.Date == date.Date)
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<ICollection<Record>> GetRecords(Guid id)
+        public async Task<ICollection<Record>> GetRecords(Guid userId)
         {
             return await _context.Records.Where(
-                c => c.UserId.Equals(id)).ToListAsync();
+                c => c.UserId.Equals(userId)).ToListAsync();
         }
 
         public async Task<bool> UpdateRecord(Record record, JsonPatchDocument<Record> request)
         {
-            record.ClockOut = DateTime.Now;
-            record.Day = DateTime.Now.ToString("dddd");
-            record.Month = DateTime.Now.ToString("MMMM");
-            record.Year = DateTime.Now.ToString("yyyy");
-            record.UpdatedAt = DateTime.Now;
+            request.ApplyTo(record);
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<Record?> GetRecordById(Guid userId, Guid recordId)
+        {
+            return await _context.Records.Where(
+                c => c.UserId.Equals(userId) && c.Id.Equals(recordId)).FirstOrDefaultAsync();
         }
     }
 }
