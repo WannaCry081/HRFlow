@@ -2,6 +2,7 @@
 using HRIS.Exceptions;
 using HRIS.Models;
 using HRIS.Services.RecordService;
+using HRIS.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -24,12 +25,15 @@ namespace HRIS.Controllers
                 throw new ArgumentNullException(nameof(recordService));
         }
 
-        [HttpGet("{userId}")]
+        [HttpGet]
         [Consumes("application/json")]
-        public async Task<IActionResult> GetRecords(Guid userId)
+        public async Task<IActionResult> GetRecords()
         {
             try
             {
+                var userId = UserClaim.GetCurrentUser(HttpContext) ??
+                 throw new UserNotFoundException("Invalid user's credential. Please try again.");
+
                 var response = await _recordService.GetRecords(userId);
                 return Ok(response);
             }
@@ -43,16 +47,18 @@ namespace HRIS.Controllers
                 _logger.LogCritical(ex, "An error occurred while attempting to get the records.");
                 return Problem(ex.Message);
             }
-
         }
 
-        [HttpPost("{userId}")]
+        [HttpPost]
         [Consumes("application/json")]
-        public async Task<IActionResult> CreateRecord([FromRoute] Guid userId, [FromBody] CreateRecordDto request)
+        public async Task<IActionResult> CreateRecord()
         {
             try
             {
-                var response = await _recordService.CreateRecord(userId, request);
+                var userId = UserClaim.GetCurrentUser(HttpContext) ??
+                 throw new UserNotFoundException("Invalid user's credential. Please try again.");
+
+                var response = await _recordService.CreateRecord(userId);
                 return Ok("Record created successfully");
             }
             catch (UserNotFoundException ex)
@@ -74,12 +80,24 @@ namespace HRIS.Controllers
 
         [HttpPatch("{recordId}")]
         [Consumes("application/json")]
-        public async Task<IActionResult> UpdateRecord([FromRoute] Guid hrId, [FromRoute] Guid recordId, [FromBody] JsonPatchDocument<Record> request)
+        public async Task<IActionResult> UpdateRecord([FromRoute] Guid recordId, [FromBody] JsonPatchDocument<Record> request)
         {
             try
             {
-                var response = await _recordService.UpdateRecord(hrId, recordId, request);
-                return Ok(response);
+                var userId = UserClaim.GetCurrentUser(HttpContext) ??
+                 throw new UserNotFoundException("Invalid user's credential. Please try again.");
+
+                var response = await _recordService.UpdateRecord(userId, recordId, request);
+                if (!response)
+                {
+                    throw new Exception("Failed to update information.");
+                }
+                return Ok("Successfully updated user's record.");
+            }
+            catch (RecordNotFoundException ex)
+            {
+                _logger.LogError(ex, "An error occurred while attempting to get user's record"); 
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {
