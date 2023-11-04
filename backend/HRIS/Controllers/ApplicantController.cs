@@ -4,6 +4,7 @@ using HRIS.Services.ApplicantService;
 using HRIS.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq.Expressions;
 
 namespace HRIS.Controllers
 {
@@ -111,9 +112,30 @@ namespace HRIS.Controllers
         }
 
         [HttpDelete("{applicantId}")]
-        public Task<IActionResult> DeleteApplicantRecord([FromRoute] Guid applicantId)
+        public async Task<IActionResult> DeleteApplicantRecord([FromRoute] Guid applicantId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var hrId = UserClaim.GetCurrentUser(HttpContext) ??
+                    throw new UserNotFoundException("Invalid user's credential. Please try again.");
+
+                var response = await _applicantService.DeleteApplicantRecord(hrId, applicantId);
+                if (!response)
+                {
+                    throw new Exception("Failed to delete applicant's record.");
+                }
+                return Ok("Successfully delete applicant's record.");
+            }
+            catch (ApplicantNotFoundException ex)
+            {
+                _logger.LogError(ex, "An error occurred while attempting to get applicant.");
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical(ex, "An error occurred while attempting to delete applicant.");
+                return Problem(ex.Message);
+            }
         }
     }
 }
