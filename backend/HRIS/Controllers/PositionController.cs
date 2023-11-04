@@ -22,7 +22,7 @@ namespace HRIS.Controllers
             _logger = logger ??
                 throw new ArgumentNullException(nameof(logger));
             _positionService = positionService ??
-                throw new ArgumentException(nameof(positionService));
+                throw new ArgumentNullException(nameof(positionService));
         }
 
         [HttpGet]
