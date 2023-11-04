@@ -45,5 +45,11 @@ namespace HRIS.Repositories.ApplicantRepository
             _context.Applicants.Add(applicant);
             return await _context.SaveChangesAsync() > 0;
         }
+
+        public async Task<bool> DeleteApplicantRecord(Applicant applicant)
+        {
+            _context.Applicants.Remove(applicant);
+            return await _context.SaveChangesAsync() > 0;
+        }
     }
 }
