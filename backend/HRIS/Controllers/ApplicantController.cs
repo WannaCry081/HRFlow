@@ -32,9 +32,15 @@ namespace HRIS.Controllers
 
                 var response = await _applicantService.GetApplicantRecords(hrId);
                 return Ok(response);
+            } 
+            catch (UserNotFoundException ex)
+            {
+                _logger.LogError(ex, "An error occurred while attempting to get user information.");
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {
+                _logger.LogCritical(ex, "An error occurred while attempting to get applicant records.");
                 return Problem(ex.Message);
             }
         }
