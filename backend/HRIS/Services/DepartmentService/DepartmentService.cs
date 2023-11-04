@@ -78,13 +78,7 @@ namespace HRIS.Services.DepartmentService
             var department = await _departmentRepository.GetDepartment(hr, departmentId) ?? 
                 throw new DepartmentNotFoundException("Department does not exist. Please try again.");
 
-            var response = await _departmentRepository.UpdateDepartment(department, request);
-            if (!response)
-            {
-                throw new Exception("Failed to update department information.");
-            }
-
-            return response;
+            return await _departmentRepository.UpdateDepartment(department, request);
         }
 
         public async Task<GetDepartmentDto> UpdateDepartments(Guid hrId, Guid departmentId, UpdateDepartmentDto request)

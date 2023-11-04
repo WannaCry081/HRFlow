@@ -94,13 +94,7 @@ namespace HRIS.Services.PositionService
             var position = await _positionRepository.GetPosition(hr, department.Id, positionId) ?? 
                 throw new PositionNotFoundException("Position not found. Please try again.");
 
-            var response = await _positionRepository.UpdatePosition(position, request);
-            if (!response)
-            {
-                throw new Exception("Failed to update position information.");
-            }
-
-            return response;
+            return await _positionRepository.UpdatePosition(position, request);
         }
 
         public async Task<GetPositionDto> UpdatePositions(Guid hrId, Guid departmentId, Guid positionId, UpdatePositionDto request)
