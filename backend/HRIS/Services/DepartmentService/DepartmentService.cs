@@ -75,7 +75,7 @@ namespace HRIS.Services.DepartmentService
         {
             var hr = await _departmentRepository.GetUserById(hrId) ??
                 throw new UserNotFoundException("Invalid email address. Please try again.");
-            var department = await _departmentRepository.GetDepartment(hr, departmentId) ?? 
+            var department = await _departmentRepository.GetDepartment(hr, departmentId) ??
                 throw new DepartmentNotFoundException("Department does not exist. Please try again.");
 
             return await _departmentRepository.UpdateDepartment(department, request);
@@ -85,7 +85,7 @@ namespace HRIS.Services.DepartmentService
         {
             var hr = await _departmentRepository.GetUserById(hrId) ??
                 throw new UserNotFoundException("Invalid email address. Please try again.");
-            var department = await _departmentRepository.GetDepartment(hr, departmentId) ?? 
+            var department = await _departmentRepository.GetDepartment(hr, departmentId) ??
                 throw new DepartmentNotFoundException("Department does not exist. Please try again.");
 
             var dbDepartment = _mapper.Map<Department>(request);

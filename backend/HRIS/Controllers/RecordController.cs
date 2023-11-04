@@ -1,5 +1,4 @@
-﻿using HRIS.Dtos;
-using HRIS.Exceptions;
+﻿using HRIS.Exceptions;
 using HRIS.Models;
 using HRIS.Services.RecordService;
 using HRIS.Utils;
@@ -96,7 +95,7 @@ namespace HRIS.Controllers
             }
             catch (RecordNotFoundException ex)
             {
-                _logger.LogError(ex, "An error occurred while attempting to get user's record"); 
+                _logger.LogError(ex, "An error occurred while attempting to get user's record");
                 return NotFound(ex.Message);
             }
             catch (Exception ex)

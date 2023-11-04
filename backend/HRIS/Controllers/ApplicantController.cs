@@ -4,7 +4,6 @@ using HRIS.Services.ApplicantService;
 using HRIS.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq.Expressions;
 
 namespace HRIS.Controllers
 {
@@ -34,7 +33,7 @@ namespace HRIS.Controllers
 
                 var response = await _applicantService.GetApplicantRecords(hrId);
                 return Ok(response);
-            } 
+            }
             catch (UserNotFoundException ex)
             {
                 _logger.LogError(ex, "An error occurred while attempting to get user information.");
@@ -80,12 +79,12 @@ namespace HRIS.Controllers
         {
             try
             {
-                var hrId = UserClaim.GetCurrentUser(HttpContext) ?? 
+                var hrId = UserClaim.GetCurrentUser(HttpContext) ??
                     throw new UserNotFoundException("Invalid user's credential. Please try again.");
 
                 var response = await _applicantService.CreateApplicantRecord(hrId, request);
                 return Ok(response);
-            } 
+            }
             catch (ApplicantExistsException ex)
             {
                 _logger.LogError(ex, "An error occurred while attempting to add existing applicant.");

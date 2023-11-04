@@ -72,7 +72,7 @@ namespace HRIS.Models
         [JsonIgnore]
         public Guid? TeamId { get; set; }
 
-        [JsonIgnore] 
+        [JsonIgnore]
         public Team? Team { get; set; }
 
         [JsonIgnore]

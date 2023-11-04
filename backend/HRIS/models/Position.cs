@@ -8,7 +8,7 @@ namespace HRIS.Models
     public class Position
     {
         [Key]
-        public Guid Id { get; set; }    
+        public Guid Id { get; set; }
 
         [StringLength(50)]
         public string Title { get; set; } = string.Empty;

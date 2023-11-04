@@ -3,7 +3,6 @@ using HRIS.Dtos;
 using HRIS.Exceptions;
 using HRIS.Models;
 using HRIS.Repositories.RecordRepository;
-using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.JsonPatch;
 
 namespace HRIS.Services.RecordService
@@ -28,7 +27,8 @@ namespace HRIS.Services.RecordService
                 throw new RecordExistsException("User has already clocked in for today.");
             }
 
-            Record newRecord = new() {
+            Record newRecord = new()
+            {
                 ClockIn = clockIn,
                 UserId = userId,
                 Day = clockIn.ToString("dddd"),
@@ -37,7 +37,7 @@ namespace HRIS.Services.RecordService
             };
 
             var response = await _recordRepository.CreateRecord(newRecord);
-            if(!response)
+            if (!response)
             {
                 throw new RecordExistsException("Failed to add clock in record.");
             }

@@ -2,7 +2,6 @@
 using HRIS.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
-using System.Runtime.InteropServices;
 
 namespace HRIS.Repositories.DepartmentRepository
 {

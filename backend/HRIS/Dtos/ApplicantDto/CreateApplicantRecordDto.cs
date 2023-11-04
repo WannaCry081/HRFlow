@@ -26,7 +26,7 @@ namespace HRIS.Dtos.ApplicantDto
         [Range(1, int.MaxValue, ErrorMessage = "Age must be greater than 0")]
         public int Age { get; set; } = 0;
 
-        [Required(ErrorMessage = "Sex is required.")]   
+        [Required(ErrorMessage = "Sex is required.")]
         public char Sex { get; set; } = ' ';
 
         [Required(ErrorMessage = "Mobile Number is required.")]

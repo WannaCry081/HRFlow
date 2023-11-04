@@ -5,7 +5,7 @@ namespace HRIS.Repositories.DepartmentRepository
 {
     public interface IDepartmentRepository
     {
-        Task<bool> IsDepartmentExists(User hr, string title); 
+        Task<bool> IsDepartmentExists(User hr, string title);
         Task<User?> GetUserById(Guid id);
         Task<Department?> GetDepartment(User hr, Guid departmentId);
         Task<ICollection<Department>> GetDepartments(User hr);

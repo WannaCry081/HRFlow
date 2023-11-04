@@ -1,7 +1,6 @@
 ﻿using HRIS.Context;
 using HRIS.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 
 namespace HRIS.Repositories.ApplicantRepository
 {
@@ -11,7 +10,7 @@ namespace HRIS.Repositories.ApplicantRepository
 
         public ApplicantRepository(DataContext context)
         {
-            _context = context;   
+            _context = context;
         }
 
         public async Task<User?> GetUserById(Guid userId)
@@ -37,7 +36,7 @@ namespace HRIS.Repositories.ApplicantRepository
         {
             return await _context.Applicants.Where(
                 c => user.TeamId.Equals(user.TeamId) && c.Email.Equals(applicant.Email))
-                .AnyAsync();    
+                .AnyAsync();
         }
 
         public async Task<bool> CreateApplicationRecord(User user, Applicant applicant)

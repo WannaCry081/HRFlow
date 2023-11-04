@@ -1,5 +1,4 @@
-﻿using HRIS.Dtos;
-using HRIS.Models;
+﻿using HRIS.Models;
 using Microsoft.AspNetCore.JsonPatch;
 
 namespace HRIS.Repositories.RecordRepository

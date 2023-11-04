@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using HRIS.Models;
 using HRIS.Dtos.ApplicantDto;
+using HRIS.Models;
 
 namespace HRIS.Mappers
 {
@@ -11,7 +11,7 @@ namespace HRIS.Mappers
             CreateMap<Applicant, GetApplicantRecordDto>()
                 .ReverseMap();
             CreateMap<Applicant, CreateApplicantRecordDto>()
-                .ReverseMap(); 
+                .ReverseMap();
         }
     }
 }
