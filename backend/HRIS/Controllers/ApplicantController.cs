@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using HRIS.Exceptions;
+using HRIS.Services.ApplicantService;
+using HRIS.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HRIS.Controllers
@@ -9,17 +12,31 @@ namespace HRIS.Controllers
     public class ApplicantController : ControllerBase
     {
         private readonly ILogger<ApplicantController> _logger;
+        private readonly IApplicantService _applicantService;
 
-        public ApplicantController(ILogger<ApplicantController> logger)
+        public ApplicantController(ILogger<ApplicantController> logger, IApplicantService applicantService)
         {
             _logger = logger ??
+                throw new ArgumentNullException(nameof(logger));
+            _applicantService = applicantService ??
                 throw new ArgumentNullException(nameof(logger));
         }
 
         [HttpGet]
-        public Task<IActionResult> GetApplicantRecords()
+        public async Task<IActionResult> GetApplicantRecords()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var hrId = UserClaim.GetCurrentUser(HttpContext) ??
+                  throw new UserNotFoundException("Invalid user's credential. Please try again.");
+
+                var response = await _applicantService.GetApplicantRecords(hrId);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
         }
 
         [HttpGet("{applicantId}")]
