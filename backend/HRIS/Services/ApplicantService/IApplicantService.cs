@@ -4,7 +4,8 @@ namespace HRIS.Services.ApplicantService
 {
     public interface IApplicantService
     {
-        Task<ICollection<GetApplicantDto>> GetApplicantRecords(Guid hrId);
-        Task<GetApplicantDto> GetApplicantRecord(Guid hrId, Guid applicantId);
+        Task<ICollection<GetApplicantRecordDto>> GetApplicantRecords(Guid hrId);
+        Task<GetApplicantRecordDto> GetApplicantRecord(Guid hrId, Guid applicantId);
+        Task<GetApplicantRecordDto> CreateApplicantRecord(Guid hrId, CreateApplicantRecordDto request);
     }
 }

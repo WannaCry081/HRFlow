@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HRIS.Dtos.ApplicantDto;
 using HRIS.Exceptions;
+using HRIS.Models;
 using HRIS.Repositories.ApplicantRepository;
 
 namespace HRIS.Services.ApplicantService
@@ -16,7 +17,27 @@ namespace HRIS.Services.ApplicantService
             _applicantRepository = applicantRepository;
         }
 
-        public async Task<GetApplicantDto> GetApplicantRecord(Guid hrId, Guid applicantId)
+        public async Task<GetApplicantRecordDto> CreateApplicantRecord(Guid hrId, CreateApplicantRecordDto request)
+        {
+            var hr = await _applicantRepository.GetUserById(hrId) ??
+                throw new UserNotFoundException("Invalid email address. Please try again.");
+
+            var applicant = _mapper.Map<Applicant>(request);
+            var isApplicantExists = await _applicantRepository.IsApplicantExists(hr, applicant);
+            if (isApplicantExists)
+            {
+                throw new ApplicantExistsException("Duplicate entry of applicants. Please try again.");
+            }
+
+            var isApplicantAdded = await _applicantRepository.CreateApplicationRecord(hr, applicant);
+            if (!isApplicantAdded)
+            {
+                throw new Exception("Failed to add new applicant.");
+            }
+            return _mapper.Map<GetApplicantRecordDto>(applicant);
+        }
+
+        public async Task<GetApplicantRecordDto> GetApplicantRecord(Guid hrId, Guid applicantId)
         {
             var hr = await _applicantRepository.GetUserById(hrId) ??
                 throw new UserNotFoundException("Invalid email address. Please try again.");
@@ -24,16 +45,16 @@ namespace HRIS.Services.ApplicantService
             var applicant = await _applicantRepository.GetApplicantRecord(hr, applicantId) ??
                 throw new ApplicantNotFoundException("Invalid applicant credential. Please try again.");
 
-            return _mapper.Map<GetApplicantDto>(applicant);
+            return _mapper.Map<GetApplicantRecordDto>(applicant);
         }
 
-        public async Task<ICollection<GetApplicantDto>> GetApplicantRecords(Guid hrId)
+        public async Task<ICollection<GetApplicantRecordDto>> GetApplicantRecords(Guid hrId)
         {
             var hr = await _applicantRepository.GetUserById(hrId) ??
                 throw new UserNotFoundException("Invalid email address. Please try again.");
 
             var response = await _applicantRepository.GetApplicantRecords(hr);
-            return _mapper.Map<ICollection<GetApplicantDto>>(response);
+            return _mapper.Map<ICollection<GetApplicantRecordDto>>(response);
         }
     }
 }
