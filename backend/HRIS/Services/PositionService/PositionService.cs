@@ -70,7 +70,7 @@ namespace HRIS.Services.PositionService
             var department = await _departmentRepository.GetDepartment(hr, departmentId) ??
                 throw new DepartmentNotFoundException("Department not found. Please try again.");
 
-            var position = await _positionRepository.GetPosition(hr, department.Id, positionId);
+            var position = await _positionRepository.GetPosition(hr, department, positionId);
             return _mapper.Map<GetPositionDto>(position);
         }
 
@@ -81,7 +81,7 @@ namespace HRIS.Services.PositionService
             var department = await _departmentRepository.GetDepartment(hr, departmentId) ??
                 throw new DepartmentNotFoundException("Department not found. Please try again.");
 
-            var positions = await _positionRepository.GetPositions(hr, department.Id);
+            var positions = await _positionRepository.GetPositions(hr,department);
             return _mapper.Map<ICollection<GetPositionDto>>(positions);
         }
 
@@ -91,7 +91,7 @@ namespace HRIS.Services.PositionService
                 throw new UserNotFoundException("Invalid email address. Please try again.");
             var department = await _departmentRepository.GetDepartment(hr, departmentId) ??
                 throw new DepartmentNotFoundException("Department not found. Please try again.");
-            var position = await _positionRepository.GetPosition(hr, department.Id, positionId) ??
+            var position = await _positionRepository.GetPosition(hr, department, positionId) ?? 
                 throw new PositionNotFoundException("Position not found. Please try again.");
 
             return await _positionRepository.UpdatePosition(position, request);
@@ -103,7 +103,7 @@ namespace HRIS.Services.PositionService
                throw new UserNotFoundException("Invalid email address. Please try again.");
             var department = await _departmentRepository.GetDepartment(hr, departmentId) ??
                 throw new DepartmentNotFoundException("Department not found. Please try again.");
-            var position = await _positionRepository.GetPosition(hr, department.Id, positionId) ??
+            var position = await _positionRepository.GetPosition(hr, department, positionId) ??
                 throw new PositionNotFoundException("Position not found. Please try again.");
 
             var dbPosition = _mapper.Map<Position>(request);
