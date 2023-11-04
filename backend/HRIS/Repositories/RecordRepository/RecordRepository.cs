@@ -41,6 +41,7 @@ namespace HRIS.Repositories.RecordRepository
 
         public async Task<bool> UpdateRecord(Record record, JsonPatchDocument<Record> request)
         {
+            record.UpdatedAt = DateTime.UtcNow;
             request.ApplyTo(record);
             return await _context.SaveChangesAsync() > 0;
         }

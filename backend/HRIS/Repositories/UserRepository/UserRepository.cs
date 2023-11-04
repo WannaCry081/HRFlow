@@ -23,6 +23,7 @@ namespace HRIS.Repositories.UserRepository
         {
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
+            user.UpdatedAt = DateTime.Now;
             _context.Users.Update(user);
             return await _context.SaveChangesAsync() > 0;
         }
@@ -32,6 +33,7 @@ namespace HRIS.Repositories.UserRepository
             user.MobileNumber = request.MobileNumber;
             user.LandlineNumber = request.LandlineNumber;
             user.PersonalEmail = request.PersonalEmail;
+            user.UpdatedAt = DateTime.Now;
             return 0 < await _context.SaveChangesAsync();
         }
     }

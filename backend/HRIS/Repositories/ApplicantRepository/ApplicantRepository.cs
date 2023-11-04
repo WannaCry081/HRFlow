@@ -64,12 +64,13 @@ namespace HRIS.Repositories.ApplicantRepository
             applicant.MobileNumber = request.MobileNumber;
             applicant.LandlineNumber = request.LandlineNumber;
             applicant.BirthDate = request.BirthDate;
-
+            applicant.UpdatedAt = DateTime.Now;
             return await _context.SaveChangesAsync() > 0;
         }
 
         public async Task<bool> UpdateApplicantRecord(Applicant applicant, JsonPatchDocument<Applicant> request)
         {
+            applicant.UpdatedAt = DateTime.Now;
             request.ApplyTo(applicant);
             return await _context.SaveChangesAsync() > 0;
         }
