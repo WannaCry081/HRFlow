@@ -23,6 +23,7 @@ namespace HRIS.Services.ApplicantService
                 throw new UserNotFoundException("Invalid email address. Please try again.");
 
             var applicant = _mapper.Map<Applicant>(request);
+            applicant.TeamId = hr.TeamId;
             var isApplicantExists = await _applicantRepository.IsApplicantExists(hr, applicant);
             if (isApplicantExists)
             {
@@ -35,6 +36,16 @@ namespace HRIS.Services.ApplicantService
                 throw new Exception("Failed to add new applicant.");
             }
             return _mapper.Map<GetApplicantRecordDto>(applicant);
+        }
+
+        public async Task<bool> DeleteApplicantRecord(Guid hrId, Guid applicantId)
+        {
+            var hr = await _applicantRepository.GetUserById(hrId) ??
+                throw new UserNotFoundException("Invalid email address. Please try again.");
+
+            var applicant = await _applicantRepository.GetApplicantRecord(hr, applicantId) ??
+                throw new ApplicantNotFoundException("Invalid applicant credential. Please try again.");
+            return await _applicantRepository.DeleteApplicantRecord(applicant);
         }
 
         public async Task<GetApplicantRecordDto> GetApplicantRecord(Guid hrId, Guid applicantId)
