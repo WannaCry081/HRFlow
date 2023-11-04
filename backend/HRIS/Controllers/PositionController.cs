@@ -183,7 +183,7 @@ namespace HRIS.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred while attempting to update a position.");
-                return Problem(ex.Message);
+                return Problem("Internal server error.");
             }
         }
 
