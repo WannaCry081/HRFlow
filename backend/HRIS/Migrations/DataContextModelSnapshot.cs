@@ -67,9 +67,6 @@ namespace HRIS.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
-                    b.Property<Guid?>("PositionId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Sex")
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
@@ -84,14 +81,48 @@ namespace HRIS.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
+                    b.Property<Guid?>("TeamId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PositionId");
+                    b.HasIndex("TeamId");
 
                     b.ToTable("Applicants");
+                });
+
+            modelBuilder.Entity("HRIS.Models.Department", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Assistant")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Manager")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<Guid?>("TeamId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TeamId");
+
+                    b.ToTable("Departments");
                 });
 
             modelBuilder.Entity("HRIS.Models.Position", b =>
@@ -118,6 +149,8 @@ namespace HRIS.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
 
                     b.ToTable("Positions");
                 });
@@ -156,7 +189,7 @@ namespace HRIS.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("UsersId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Year")
@@ -166,7 +199,7 @@ namespace HRIS.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UsersId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Records");
                 });
@@ -300,11 +333,6 @@ namespace HRIS.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<string>("TeamCode")
-                        .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)");
-
                     b.Property<Guid?>("TeamId")
                         .HasColumnType("uniqueidentifier");
 
@@ -318,7 +346,7 @@ namespace HRIS.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PositionId");
+                    b.HasIndex("DepartmentId");
 
                     b.HasIndex("TeamId");
 
@@ -327,25 +355,45 @@ namespace HRIS.Migrations
 
             modelBuilder.Entity("HRIS.Models.Applicant", b =>
                 {
-                    b.HasOne("HRIS.Models.Position", null)
+                    b.HasOne("HRIS.Models.Team", "Team")
                         .WithMany("Applicants")
-                        .HasForeignKey("PositionId");
+                        .HasForeignKey("TeamId");
+
+                    b.Navigation("Team");
+                });
+
+            modelBuilder.Entity("HRIS.Models.Department", b =>
+                {
+                    b.HasOne("HRIS.Models.Team", "Team")
+                        .WithMany("Departments")
+                        .HasForeignKey("TeamId");
+
+                    b.Navigation("Team");
+                });
+
+            modelBuilder.Entity("HRIS.Models.Position", b =>
+                {
+                    b.HasOne("HRIS.Models.Department", "Department")
+                        .WithMany("Positions")
+                        .HasForeignKey("DepartmentId");
+
+                    b.Navigation("Department");
                 });
 
             modelBuilder.Entity("HRIS.Models.Record", b =>
                 {
-                    b.HasOne("HRIS.Models.User", "UserId")
+                    b.HasOne("HRIS.Models.User", "User")
                         .WithMany("Records")
-                        .HasForeignKey("UsersId");
+                        .HasForeignKey("UserId");
 
-                    b.Navigation("UserId");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("HRIS.Models.User", b =>
                 {
-                    b.HasOne("HRIS.Models.Position", null)
-                        .WithMany("Users")
-                        .HasForeignKey("PositionId");
+                    b.HasOne("HRIS.Models.Department", null)
+                        .WithMany("Supervisors")
+                        .HasForeignKey("DepartmentId");
 
                     b.HasOne("HRIS.Models.Team", "Team")
                         .WithMany("Users")
@@ -354,15 +402,19 @@ namespace HRIS.Migrations
                     b.Navigation("Team");
                 });
 
-            modelBuilder.Entity("HRIS.Models.Position", b =>
+            modelBuilder.Entity("HRIS.Models.Department", b =>
                 {
-                    b.Navigation("Applicants");
+                    b.Navigation("Positions");
 
-                    b.Navigation("Users");
+                    b.Navigation("Supervisors");
                 });
 
             modelBuilder.Entity("HRIS.Models.Team", b =>
                 {
+                    b.Navigation("Applicants");
+
+                    b.Navigation("Departments");
+
                     b.Navigation("Users");
                 });
 
