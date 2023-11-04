@@ -1,5 +1,6 @@
 ﻿using HRIS.Context;
 using HRIS.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
 
 namespace HRIS.Repositories.ApplicantRepository
@@ -64,6 +65,12 @@ namespace HRIS.Repositories.ApplicantRepository
             applicant.LandlineNumber = request.LandlineNumber;
             applicant.BirthDate = request.BirthDate;
 
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> UpdateApplicantRecord(Applicant applicant, JsonPatchDocument<Applicant> request)
+        {
+            request.ApplyTo(applicant);
             return await _context.SaveChangesAsync() > 0;
         }
     }

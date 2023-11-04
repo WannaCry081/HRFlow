@@ -1,4 +1,5 @@
 ﻿using HRIS.Models;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace HRIS.Repositories.ApplicantRepository
 {
@@ -11,5 +12,6 @@ namespace HRIS.Repositories.ApplicantRepository
         Task<bool> CreateApplicationRecord(User user, Applicant applicant);
         Task<bool> DeleteApplicantRecord(Applicant applicant);
         Task<bool> UpdateApplicantRecords(Applicant applicant, Applicant request);
+        Task<bool> UpdateApplicantRecord(Applicant applicant, JsonPatchDocument<Applicant> request);
     }
 }
