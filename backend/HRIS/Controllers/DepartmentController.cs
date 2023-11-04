@@ -111,11 +111,20 @@ namespace HRIS.Controllers
                 var hrId = UserClaim.GetCurrentUser(HttpContext) ??
                     throw new UserNotFoundException("Invalid user's credential. Please try again.");
                 var response = await _departmentService.UpdateDepartment(hrId, departmentId, request);
+                if (!response)
+                {
+                    throw new Exception("Failed to update department information.");
+                }
                 return Ok("Successfully updated department's information.");
             }
             catch (UserNotFoundException ex)
             {
                 _logger.LogError("An error occurred while attempting to find employee.", ex);
+                return NotFound(ex.Message);
+            }
+            catch (DepartmentNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to find department.", ex);
                 return NotFound(ex.Message);
             }
             catch (Exception ex)
@@ -141,6 +150,11 @@ namespace HRIS.Controllers
             catch (UserNotFoundException ex)
             {
                 _logger.LogError("An error occurred while attempting to find employee.", ex);
+                return NotFound(ex.Message);
+            }
+            catch (DepartmentNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to find department.", ex);
                 return NotFound(ex.Message);
             }
             catch (Exception ex)

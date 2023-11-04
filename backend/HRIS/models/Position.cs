@@ -8,7 +8,7 @@ namespace HRIS.Models
     public class Position
     {
         [Key]
-        public Guid Id { get; set; }    
+        public Guid Id { get; set; }
 
         [StringLength(50)]
         public string Title { get; set; } = string.Empty;
@@ -16,6 +16,9 @@ namespace HRIS.Models
 
         [StringLength(20)]
         public string Type { get; set; } = string.Empty;
+
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
         [ForeignKey("DepartmentId")]
         [JsonIgnore]

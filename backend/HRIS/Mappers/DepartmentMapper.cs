@@ -31,7 +31,7 @@ namespace HRIS.Mappers
             }
 
             string[] text = input.Split(" ");
-            for(int i = 0; i < text.Length; i++)
+            for (int i = 0; i < text.Length; i++)
             {
                 if (!string.IsNullOrEmpty(text[i]))
                 {
@@ -40,6 +40,6 @@ namespace HRIS.Mappers
             }
             return string.Join(" ", text);
 
-        }         
+        }
     }
 }

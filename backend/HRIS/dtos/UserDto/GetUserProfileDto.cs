@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace HRIS.Dtos.UserDto
+﻿namespace HRIS.Dtos.UserDto
 {
     public class GetUserProfileDto
     {

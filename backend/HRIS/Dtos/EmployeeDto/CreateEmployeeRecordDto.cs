@@ -3,18 +3,18 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HRIS.Dtos.EmployeeDto
 {
-    public class AddEmployeeRecordDto
+    public class CreateEmployeeRecordDto
     {
         [Required(ErrorMessage = "First Name is required.")]
         [StringLength(50, ErrorMessage = "First Name must be between {2} and {1} characters long.", MinimumLength = 2)]
         public string FirstName { get; set; } = string.Empty;
-      
+
         public string MiddleName { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Last Name is required.")]
         [StringLength(50, ErrorMessage = "Last Name must be between {2} and {1} characters long.", MinimumLength = 2)]
         public string LastName { get; set; } = string.Empty;
-      
+
         public string Suffix { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Age is required.")]
@@ -30,7 +30,7 @@ namespace HRIS.Dtos.EmployeeDto
         [Required(ErrorMessage = "Mobile Number is required.")]
         [StringLength(15, ErrorMessage = "Mobile Number must be between {2} and {1} characters long.", MinimumLength = 3)]
         public string MobileNumber { get; set; } = string.Empty;
-      
+
         public string LandlineNumber { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Personal Email Address is required.")]
@@ -43,10 +43,8 @@ namespace HRIS.Dtos.EmployeeDto
         [StringLength(100, ErrorMessage = "Company Email Address must be between {2} and {1} characters long.", MinimumLength = 5)]
         public string CompanyEmail { get; set; } = string.Empty;
 
-
         [Required(ErrorMessage = "Department is required.")]
         public string Department { get; set; } = string.Empty;
-
 
         [Required(ErrorMessage = "Position is required.")]
         public string Position { get; set; } = string.Empty;

@@ -46,7 +46,7 @@ namespace HRIS.Services.EmployeeService
             return _mapper.Map<ICollection<GetEmployeeRecordDto>>(employees);
         }
 
-        public async Task<GetEmployeeRecordDto> CreateEmployeeRecord(Guid hrId, AddEmployeeRecordDto request)
+        public async Task<GetEmployeeRecordDto> CreateEmployeeRecord(Guid hrId, CreateEmployeeRecordDto request)
         {
             var hr = await _employeeRepository.GetUserById(hrId) ??
                 throw new UserNotFoundException("Invalid email address. Please try again.");
@@ -62,7 +62,7 @@ namespace HRIS.Services.EmployeeService
             var departments = await _departmentRepository.GetDepartments(hr);
             var selectedDepartment = departments.FirstOrDefault(c => c.Name.Equals(request.Department));
 
-            var positions = await _positionRepository.GetPositions(hr, selectedDepartment.Id);
+            var positions = await _positionRepository.GetPositions(hr, selectedDepartment);
             var selectedPosition = positions.FirstOrDefault(c => c.Title.Equals(request.Position));
 
             char sex = request.Sex;
@@ -97,12 +97,7 @@ namespace HRIS.Services.EmployeeService
             employee.UpdatedBy = hr.FirstName + " " + hr.LastName;
             employee.UpdatedAt = DateTime.Now;
 
-            var response = await _employeeRepository.UpdateEmployeeRecord(employee, request);
-            if (!response)
-            {
-                throw new Exception("Failed to update employee record.");
-            }
-            return response;
+            return await _employeeRepository.UpdateEmployeeRecord(employee, request);
         }
 
         public async Task<GetEmployeeRecordDto> UpdateEmployeeRecords(Guid hrId, Guid employeeId, UpdateEmployeeRecordDto request)
