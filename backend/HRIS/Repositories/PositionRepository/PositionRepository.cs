@@ -9,12 +9,10 @@ namespace HRIS.Repositories.PositionRepository
     public class PositionRepository : IPositionRepository
     {
         private readonly DataContext _context;
-        private readonly IDepartmentRepository _departmentRepository;
 
-        public PositionRepository(DataContext context, IDepartmentRepository departmentRepository)
+        public PositionRepository(DataContext context)
         {
             _context = context;
-            _departmentRepository = departmentRepository;
         }
         public async Task<User?> GetUserById(Guid id)
         {
@@ -32,7 +30,7 @@ namespace HRIS.Repositories.PositionRepository
         {
             _context.Positions.Add(position);
             return await _context.SaveChangesAsync() > 0;
-        }
+        }   
 
         public async Task<bool> DeletePosition(User hr, Guid departmentId, Guid positionId)
         {
@@ -46,17 +44,15 @@ namespace HRIS.Repositories.PositionRepository
 
         }
 
-        public async Task<Position?> GetPosition(User hr, Guid departmentId, Guid positionId)
+        public async Task<Position?> GetPosition(User hr, Department department, Guid positionId)
         {
-            var department = await _departmentRepository.GetDepartment(hr, departmentId);
             return await _context.Positions.Where(
                 c => c.Id.Equals(positionId) &&
                 c.DepartmentId.Equals(department.Id)).FirstOrDefaultAsync();
         }
 
-        public async Task<ICollection<Position>> GetPositions(User hr, Guid departmentId)
+        public async Task<ICollection<Position>> GetPositions(User hr, Department department)
         {
-            var department = await _departmentRepository.GetDepartment(hr, departmentId);
             return await _context.Positions.Where(
                     c => c.DepartmentId.Equals(department.Id)).ToListAsync();
         }
