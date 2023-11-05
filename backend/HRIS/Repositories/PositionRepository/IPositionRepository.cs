@@ -12,6 +12,6 @@ namespace HRIS.Repositories.PositionRepository
         Task<bool> CreatePosition(Position position);
         Task<bool> UpdatePositions(Position position, Position request);
         Task<bool> UpdatePosition(Position position, JsonPatchDocument<Position> request);
-        Task<bool> DeletePosition(User hr, Guid departmentId, Guid positionId);
+        Task<bool> DeletePosition(Position position);
     }
 }

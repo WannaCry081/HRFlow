@@ -61,14 +61,9 @@ namespace HRIS.Repositories.DepartmentRepository
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> DeleteDepartment(User hr, Guid departmentId)
+        public async Task<bool> DeleteDepartment(Department department)
         {
-            var department = await _context.Departments.Where(
-                c => c.Id.Equals(departmentId) &&
-                c.TeamId.Equals(hr.TeamId)).FirstOrDefaultAsync();
-
             _context.Departments.Remove(department);
-
             return await _context.SaveChangesAsync() > 0;
         }
     }
