@@ -18,14 +18,14 @@ const useLogin = () => {
       const response = await LoginUserApi(values);
 
       setTimeout(() => {
-        switch (response) {
+        switch (response.status) {
           case 200:
-            sessionStorage.setItem("token", data);
+            sessionStorage.setItem("token", response.data);
             navigate("/dashboard/home", { replace: true });
             break;
           case 401:
           case 404:
-            formik.setErrors({ password: data });
+            formik.setErrors({ password: response.data });
             break;
           default:
             navigate("/error", { replace: true });
