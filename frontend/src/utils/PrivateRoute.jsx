@@ -7,7 +7,9 @@ const PrivateRoute = ({ element }) => {
 
     useEffect(() => {
         const token = sessionStorage.getItem("token");
-        setIsAuthenticated(!!token);
+        if (token !== null || token !== undefined) {
+            setIsAuthenticated(true);
+        }
     }, []);
 
     return isAuthenticated ? element : <Navigate to="/dashboard/home" />;
