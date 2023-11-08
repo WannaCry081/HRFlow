@@ -31,7 +31,7 @@ const Dashboard = () => {
             <NavBar routes={routes} userData={userData}/>
             <section className="w-full flex flex-col bg-gray-50">
                 <Header />
-                <div className="flex-grow overflow-y-auto">
+                <div className="flex-grow ">
                     <Routes>
                         <Route path="*" element={<Navigate to="/dashboard/home" replace/>} />
                         {routes.map(({ role, layout, pages }) =>
