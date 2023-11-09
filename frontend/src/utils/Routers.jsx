@@ -1,6 +1,5 @@
-import Login from "@Pages/Login";
-import Register from "@Pages/Register";
-import ResetPassword from "@Pages/ResetPassword";
+import { Login, Register } from "@Pages/Auth";
+import Landing from "@Pages/Landing";
 import Home from "@Pages/Home";
 import ApplicantTracking from "@Pages/ApplicantTracking";
 import EmployeeRecord from "@Pages/EmployeeRecord";
@@ -9,7 +8,6 @@ import Notifications from "@Pages/Notifications";
 import TimeClock from "@Pages/TimeClock";
 import Profile from "@Pages/Profile";
 import {
-    BiHomeAlt,
     BiCalendar,
     BiUser, 
     BiNotification,
@@ -19,15 +17,20 @@ import {
     BiPieChartAlt2
 } from "react-icons/bi";
 
-export const routes = [
+export const Routers = [
     { 
         title : "Landing Page",
         layout : "Landing",
         pages : [
             {
-                name : "Landing",
+                name : "Welcome",
                 path : "/", 
-                element : null
+                element : <Landing />
+            },
+            {
+                name : "Welcome",
+                path : "/home", 
+                element : <Landing />
             }
         ] 
     },
@@ -45,11 +48,6 @@ export const routes = [
                 path: "/register",
                 element : <Register />
             },
-            {
-                name: "ResetPassword",
-                path: "/reset-password",
-                element : <ResetPassword />
-            }
         ]
     },
     {
