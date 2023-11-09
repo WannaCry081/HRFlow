@@ -15,8 +15,6 @@ const App = () => {
       <Route path="/dashboard/*" element={
         <PrivateRoute element={<DashboardLayout />} />
       } />
-      
-      <Route path="/error" element={<h1>Internal Server Error</h1>} />
     </Routes>
   );
 };

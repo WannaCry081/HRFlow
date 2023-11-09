@@ -10,7 +10,6 @@ export const ModalBox = (prop) => {
             animate={{ opacity : 1 }}
             className="fixed z-10 h-screen w-screen top-0 left-0 bg-[#20262e80] p-4"
             onClick={prop.onCancel}>
-
             <motion.section 
                 initial={{ translateY : -20 }}
                 animate={{ translateY : 0 }}
