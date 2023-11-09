@@ -1,9 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { TextInput, PasswordInput, SubmitButton } from "@Components/FormInput";
 import { ProgressBar, CircularProgressBar } from "@Components/Loading";
-import Team from "@Pages/Team";
-import useToggle from "@Hooks/useToggle";
-import useRegister from "@Hooks/useRegister";
+import { useRegister, useToggle } from "@Hooks";
+import { Team } from "@Pages/Auth";
 
 const Register = () => {
   const navigate = useNavigate();
