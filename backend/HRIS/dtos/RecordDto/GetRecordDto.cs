@@ -2,6 +2,7 @@
 {
     public class GetRecordDto
     {
+        public Guid Id { get; set; }
         public string Month { get; set; } = string.Empty;
         public string Day { get; set; } = string.Empty;
         public string Year { get; set; } = string.Empty;

@@ -15,6 +15,8 @@
         public string? CompanyEmail { get; set; }
         public string? Status { get; set; }
         public Guid TeamId { get; set; }
+        public Guid? DepartmentId { get; set; }
+        public Guid? PositionId { get; set; }
         public string? CreatedBy { get; set; }
         public string? UpdatedBy { get; set; }
     }

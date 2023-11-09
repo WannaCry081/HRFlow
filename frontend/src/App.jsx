@@ -1,15 +1,20 @@
 import { Route, Routes } from "react-router-dom";
-import Auth from "@Layouts/Auth";
-import Dashboard from "@Layouts/Dashboard";
-import Landing from "@Pages/Landing"; 
+import { AuthLayout, DashboardLayout, LandingLayout } from "@Layouts";
+import PrivateRoute from "@Utils/PrivateRoute";
+import PublicRoute from "@Utils/PublicRoute";
 
 const App = () => {
   return (
     <Routes>
-      <Route path="/" index element={<Landing />} />
-      <Route path="/auth/*" element={<Auth />} /> 
-      <Route path="/dashboard/*" element={<Dashboard />} />
-      <Route path="/error" element={<h1>Internal Server Error</h1>} />
+      <Route path="/*" index element={
+        <PublicRoute element={<LandingLayout />} />
+      } />
+      <Route path="/auth/*" element={
+        <PublicRoute element={<AuthLayout />} />
+      } /> 
+      <Route path="/dashboard/*" element={
+        <PrivateRoute element={<DashboardLayout />} />
+      } />
     </Routes>
   );
 };

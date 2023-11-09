@@ -22,7 +22,7 @@ namespace HRIS.Controllers
             _logger = logger ??
                 throw new ArgumentNullException(nameof(logger));
             _positionService = positionService ??
-                throw new ArgumentException(nameof(positionService));
+                throw new ArgumentNullException(nameof(positionService));
         }
 
         [HttpGet]
@@ -183,7 +183,7 @@ namespace HRIS.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred while attempting to update a position.");
-                return Problem(ex.Message);
+                return Problem("Internal server error.");
             }
         }
 
