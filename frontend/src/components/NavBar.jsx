@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import HRFlowLogoLightSvg from "@Assets/svg/HRFlowLogo_Light.svg"; 
 import useToggle from "@Hooks/useToggle";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 const NavBar = (prop) => {
+    const [item, setItem] = useState(0);
     const [show, onSetShow] = useToggle();
     const userData = prop.userData;
 
@@ -13,19 +15,19 @@ const NavBar = (prop) => {
             <div className="pb-4">
                 <img src={HRFlowLogoLightSvg} className="h-12 sm:h-16" alt="HR Flow Logo" />
             </div>
-            <ul className="flex-grow py-4 line-above">
+            <div className="flex-grow py-4 line-above">
                 {prop.routes.map(({ role, layout, pages }) =>
                     layout === "Dashboard" && 
                     role === userData.role &&
                     pages.map(({ icon, name, path }, key) => (
-                        <li className="rounded-md p-4 hover:bg-primary-pastel transition-in hover:text-primary-light group mb-1" key={key}>
-                            <Link to={`/dashboard${path}`} className="flex items-center gap-4 font-poppins font-medium">
+                        <Link to={`/dashboard${path}`} onClick={() => setItem(key)}>
+                            <span className={`${ (key == item) ? "fill-primary-light bg-primary-pastel text-primary-light" : ""  } flex gap-2 hover:text-primary-light hover:fill-primary-light rounded-md p-4 hover:bg-primary-pastel mb-2 font-medium`}>
                                 {icon} {name}
-                            </Link>
-                        </li>
+                            </span>
+                        </Link>
                     ))
                 )}
-            </ul>
+            </div>
             <div className="flex justify-between items-center pt-6 line-above">
                 <span className="flex gap-2 items-center">
                     <div className="bg-primary-pastel h-12 w-12 rounded-lg text-primary-light flex items-center justify-center font-semibold font-poppins text-xl shadow-inner">
