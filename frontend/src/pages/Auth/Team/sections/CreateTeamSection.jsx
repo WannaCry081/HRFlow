@@ -11,7 +11,7 @@ const CreateTeamSection = () => {
 
   return (
     <motion.div initial={{ translateX: 20 }} animate={{ translateX: 0 }}>
-      <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <TextInput
           nameId="name"
           name="Team Name"

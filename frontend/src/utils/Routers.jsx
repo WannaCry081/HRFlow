@@ -1,149 +1,177 @@
-import { Login, Register } from "@Pages/Auth";
 import Landing from "@Pages/Landing";
-import Home from "@Pages/Home";
-import ApplicantTracking from "@Pages/ApplicantTracking";
-import EmployeeRecord from "@Pages/EmployeeRecord";
-import EmployeeService from "@Pages/EmployeeService";
-import Notifications from "@Pages/Notifications";
-import TimeClock from "@Pages/TimeClock";
-import Profile from "@Pages/Profile";
+import { Login, Register } from "@Pages/Auth";
 import {
-    BiCalendar,
-    BiUser, 
-    BiNotification,
-    BiNotepad,
-    BiTime,
-    BiSitemap,
-    BiPieChartAlt2
+  Home,
+  ApplicantTracking,
+  EmployeeRecord,
+  EmployeeService,
+  Notifications,
+  TimeClock,
+  Profile,
+} from "@Pages/Dashboard";
+import {
+  BiCalendar,
+  BiUser,
+  BiNotification,
+  BiNotepad,
+  BiTime,
+  BiSitemap,
+  BiPieChartAlt2,
 } from "react-icons/bi";
 
 export const Routers = [
-    { 
-        title : "Landing Page",
-        layout : "Landing",
-        pages : [
-            {
-                name : "Welcome",
-                path : "/", 
-                element : <Landing />
-            },
-            {
-                name : "Welcome",
-                path : "/home", 
-                element : <Landing />
-            }
-        ] 
-    },
-    {
-        title: "Auth Page",
-        layout : "Auth",
-        pages : [
-            {   
-                name: "Login",
-                path: "/login",
-                element: <Login />
-            }, 
-            {
-                name: "Register",
-                path: "/register",
-                element : <Register />
-            },
-        ]
-    },
-    {
-        role : "Employee",
-        title: "Dashboard Page",
-        layout : "Dashboard",
-        pages : [
-            {
-                icon: <BiPieChartAlt2 size={24} className="group-hover:fill-primary-light" />,
-                name: "Dashboard",
-                path: "/home",
-                element: <Home />
-            },
-            {
-                icon: <BiTime size={24} className="group-hover:fill-primary-light" />,
-                name: "Time Clock",
-                path: "/time-clock",
-                element: <TimeClock />
-            },
-            {
-                icon: <BiNotification size={24} className="group-hover:fill-primary-light" />,
-                name: "Notifications",
-                path: "/notifications",
-                element: <Notifications />
-            },
-            {
-                icon: <BiUser size={24} className="group-hover:fill-primary-light" />,
-                name: "Profile",
-                path: "/profile",
-                element: <Profile />
-            }
-        ]
-    }, 
-    {
-        role : "Human Resource", 
-        title : "Dashboard Page",
-        layout : "Dashboard",
-        pages : [
-            {
-                icon: <BiPieChartAlt2 size={24} className="group-hover:fill-primary-light" />,
-                name: "Dashboard",
-                path: "/home",
-                element: <Home />
-            },
-            {
-                icon: <BiTime size={24} className="group-hover:fill-primary-light" />,
-                name: "Time Clock",
-                path: "/time-clock",
-                element: <TimeClock />
-            },
-            {
-                icon: <BiCalendar size={24} className="group-hover:fill-primary-light" />,
-                name: "Applicant Tracking",
-                path: "/applicant-tracking",
-                element: <ApplicantTracking />
-            },
-            {
-                icon: <BiNotepad size={24} className="group-hover:fill-primary-light" />,
-                name: "Employee Records",
-                path: "/employee-records",
-                element: <EmployeeRecord />
-            },
-            {
-                icon: <BiSitemap size={24} className="group-hover:fill-primary-light" />,
-                name: "Employee Service",
-                path: "/employee-service",
-                element: <EmployeeService />
-            },
-            {
-                icon: <BiNotification size={24} className="group-hover:fill-primary-light" />,
-                name: "Notifications",
-                path: "/notifications",
-                element: <Notifications />
-            },
-            {
-                icon: <BiUser size={24} className="group-hover:fill-primary-light" />,
-                name: "Profile",
-                path: "/profile",
-                element: <Profile />
-            }
-        ]
-    },
-    {
-        title : "Common Pages",
-        layout : "Common", 
-        pages : [
-            {
-                name : "Help",
-                path : "/help",
-                element : null
-            },
-            {
-                name :  "Settings",
-                path : "/settings",
-                element : null
-            }
-        ]
-    }
+  {
+    title: "Landing Page",
+    layout: "Landing",
+    pages: [
+      {
+        name: "Welcome",
+        path: "/",
+        element: <Landing />,
+      },
+      {
+        name: "Welcome",
+        path: "/home",
+        element: <Landing />,
+      },
+    ],
+  },
+  {
+    title: "Auth Page",
+    layout: "Auth",
+    pages: [
+      {
+        name: "Login",
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        name: "Register",
+        path: "/register",
+        element: <Register />,
+      },
+    ],
+  },
+  {
+    role: "Employee",
+    title: "Dashboard Page",
+    layout: "Dashboard",
+    pages: [
+      {
+        icon: (
+          <BiPieChartAlt2
+            size={24}
+            className="group-hover:fill-primary-light"
+          />
+        ),
+        name: "Dashboard",
+        path: "/home",
+        element: <Home />,
+      },
+      {
+        icon: <BiTime size={24} className="group-hover:fill-primary-light" />,
+        name: "Time Clock",
+        path: "/time-clock",
+        element: <TimeClock />,
+      },
+      {
+        icon: (
+          <BiNotification
+            size={24}
+            className="group-hover:fill-primary-light"
+          />
+        ),
+        name: "Notifications",
+        path: "/notifications",
+        element: <Notifications />,
+      },
+      {
+        icon: <BiUser size={24} className="group-hover:fill-primary-light" />,
+        name: "Profile",
+        path: "/profile",
+        element: <Profile />,
+      },
+    ],
+  },
+  {
+    role: "Human Resource",
+    title: "Dashboard Page",
+    layout: "Dashboard",
+    pages: [
+      {
+        icon: (
+          <BiPieChartAlt2
+            size={24}
+            className="group-hover:fill-primary-light"
+          />
+        ),
+        name: "Dashboard",
+        path: "/home",
+        element: <Home />,
+      },
+      {
+        icon: <BiTime size={24} className="group-hover:fill-primary-light" />,
+        name: "Time Clock",
+        path: "/time-clock",
+        element: <TimeClock />,
+      },
+      {
+        icon: (
+          <BiCalendar size={24} className="group-hover:fill-primary-light" />
+        ),
+        name: "Applicant Tracking",
+        path: "/applicant-tracking",
+        element: <ApplicantTracking />,
+      },
+      {
+        icon: (
+          <BiNotepad size={24} className="group-hover:fill-primary-light" />
+        ),
+        name: "Employee Records",
+        path: "/employee-records",
+        element: <EmployeeRecord />,
+      },
+      {
+        icon: (
+          <BiSitemap size={24} className="group-hover:fill-primary-light" />
+        ),
+        name: "Employee Service",
+        path: "/employee-service",
+        element: <EmployeeService />,
+      },
+      {
+        icon: (
+          <BiNotification
+            size={24}
+            className="group-hover:fill-primary-light"
+          />
+        ),
+        name: "Notifications",
+        path: "/notifications",
+        element: <Notifications />,
+      },
+      {
+        icon: <BiUser size={24} className="group-hover:fill-primary-light" />,
+        name: "Profile",
+        path: "/profile",
+        element: <Profile />,
+      },
+    ],
+  },
+  {
+    title: "Common Pages",
+    layout: "Common",
+    pages: [
+      {
+        name: "Help",
+        path: "/help",
+        element: null,
+      },
+      {
+        name: "Settings",
+        path: "/settings",
+        element: null,
+      },
+    ],
+  },
 ];
