@@ -58,35 +58,25 @@ export const Routers = [
     layout: "Dashboard",
     pages: [
       {
-        icon: (
-          <BiPieChartAlt2
-            size={24}
-            className="group-hover:fill-primary-light"
-          />
-        ),
+        icon: <BiPieChartAlt2 size={24} className="fill-inherit" />,
         name: "Dashboard",
         path: "/home",
         element: <Home />,
       },
       {
-        icon: <BiTime size={24} className="group-hover:fill-primary-light" />,
+        icon: <BiTime size={24} className="fill-inherit" />,
         name: "Time Clock",
         path: "/time-clock",
         element: <TimeClock />,
       },
       {
-        icon: (
-          <BiNotification
-            size={24}
-            className="group-hover:fill-primary-light"
-          />
-        ),
+        icon: <BiNotification size={24} className="fill-inherit" />,
         name: "Notifications",
         path: "/notifications",
         element: <Notifications />,
       },
       {
-        icon: <BiUser size={24} className="group-hover:fill-primary-light" />,
+        icon: <BiUser size={24} className="fill-inherit" />,
         name: "Profile",
         path: "/profile",
         element: <Profile />,
@@ -99,59 +89,43 @@ export const Routers = [
     layout: "Dashboard",
     pages: [
       {
-        icon: (
-          <BiPieChartAlt2
-            size={24}
-            className="group-hover:fill-primary-light"
-          />
-        ),
+        icon: <BiPieChartAlt2 size={24} className="fill-inherit" />,
         name: "Dashboard",
         path: "/home",
         element: <Home />,
       },
       {
-        icon: <BiTime size={24} className="group-hover:fill-primary-light" />,
+        icon: <BiTime size={24} className="fill-inherit" />,
         name: "Time Clock",
         path: "/time-clock",
         element: <TimeClock />,
       },
       {
-        icon: (
-          <BiCalendar size={24} className="group-hover:fill-primary-light" />
-        ),
+        icon: <BiCalendar size={24} className="fill-inherit" />,
         name: "Applicant Tracking",
         path: "/applicant-tracking",
         element: <ApplicantTracking />,
       },
       {
-        icon: (
-          <BiNotepad size={24} className="group-hover:fill-primary-light" />
-        ),
+        icon: <BiNotepad size={24} className="fill-inherit" />,
         name: "Employee Records",
         path: "/employee-records",
         element: <EmployeeRecord />,
       },
       {
-        icon: (
-          <BiSitemap size={24} className="group-hover:fill-primary-light" />
-        ),
+        icon: <BiSitemap size={24} className="fill-inherit" />,
         name: "Employee Service",
         path: "/employee-service",
         element: <EmployeeService />,
       },
       {
-        icon: (
-          <BiNotification
-            size={24}
-            className="group-hover:fill-primary-light"
-          />
-        ),
+        icon: <BiNotification size={24} className="fill-inherit" />,
         name: "Notifications",
         path: "/notifications",
         element: <Notifications />,
       },
       {
-        icon: <BiUser size={24} className="group-hover:fill-primary-light" />,
+        icon: <BiUser size={24} className="fill-inherit" />,
         name: "Profile",
         path: "/profile",
         element: <Profile />,
