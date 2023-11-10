@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import useEmployees from "@Hooks/useEmployees";
 import { motion } from "framer-motion";
 import { LuSearch } from "react-icons/lu";
 import { IoMdAdd } from "react-icons/io";
-import { AiOutlineClose } from "react-icons/ai";
-import { GetEmployeesApi } from "@Services/employeeService";
 import useToggle from "@Hooks/useToggle";
 import AddEmployeeForm from "./Views/AddEmployee";
 import ViewEmployee from "./Views/ViewEmployee";
