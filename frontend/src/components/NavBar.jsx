@@ -20,7 +20,7 @@ const NavBar = (prop) => {
                     layout === "Dashboard" && 
                     role === userData.role &&
                     pages.map(({ icon, name, path }, key) => (
-                        <Link to={`/dashboard${path}`} onClick={() => setItem(key)}>
+                        <Link key={key} to={`/dashboard${path}`} onClick={() => setItem(key)}>
                             <span className={`${ (key == item) ? "fill-primary-light bg-primary-pastel text-primary-light" : ""  } flex gap-2 hover:text-primary-light hover:fill-primary-light rounded-md p-4 hover:bg-primary-pastel mb-2 font-medium`}>
                                 {icon} {name}
                             </span>

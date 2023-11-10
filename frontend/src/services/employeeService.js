@@ -11,7 +11,7 @@ const axiosInstance = (token) => {
     });
 }
 
-export const GetEmployeeApi = async ( token ) => {
+export const GetEmployeesApi = async ( token ) => {
     const instance = axiosInstance(token);
 
     try {

@@ -31,7 +31,7 @@ export default {
         "secondary" : {
           "dark" : "#FF719E",
           "light" : "#FF5B8F",
-          "pastel": "#FCEBF1"
+          "pastel": "#FCF5F5"
         },
         "tertiary"  : {
           "dark" : "#CF89FF",

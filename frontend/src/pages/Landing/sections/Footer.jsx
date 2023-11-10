@@ -3,7 +3,7 @@ import HRFlowLogo_Dark from "@Assets/svg/HRFlowLogo_Light.svg";
 const Footer = () => {
     return (
         <div className="bg-jetblack w-full flex justify-center transition">
-            <div className="w-full max-w-screen-2xl flex items-center justify-between py-5 px-2 xl:px-0">
+            <div className="w-full max-w-screen-2xl flex items-center justify-between py-5 px-4 xl:px-0">
                 <img
                     src={HRFlowLogo_Dark}
                     className="h-12"
