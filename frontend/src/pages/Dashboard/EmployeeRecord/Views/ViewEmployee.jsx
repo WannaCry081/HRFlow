@@ -1,35 +1,43 @@
+import useDepartments from "@Hooks/useDepartments";
+import usePositions from "@Hooks/usePositions";
 import { LiaBirthdayCakeSolid } from "react-icons/lia";
-import { HiOutlineMail } from "react-icons/hi";
-import { BsPerson } from "react-icons/bs";
-import { HiOutlineDevicePhoneMobile } from "react-icons/hi2";
-import { TbDeviceLandlinePhone } from "react-icons/tb";
+import { GoNumber } from "react-icons/go";
+import {
+    FiMail,
+    FiPhone,
+    FiTablet
+} from "react-icons/fi";
 
-const ViewEmployee = ({ selectEmployee }) => {
+const ViewEmployee = (prop) => {
 
-    const birthdate = new Date(selectEmployee.birthdate).toLocaleDateString("en-US", {
+    const departments = useDepartments(prop.submit);
+    const positions = usePositions(prop.submit, prop.selectEmployee.departmentId);
+ 
+    const department =  departments.find((dept) => dept.id === prop.selectEmployee.departmentId);
+    const position = positions.find((pos) => pos.id === prop.selectEmployee.positionId) ;
+    
+    const birthdate = new Date(prop.selectEmployee.birthdate).toLocaleDateString("en-US", {
         year: "numeric",
         month: "short",
         day: "2-digit"
     });
-
+    
     return (
-        <section className="h-full w-full flex flex-col justify-center p-4">
+        <section className="h-full w-full flex flex-col px-4">
             <div className="flex flex-col items-center justify-center">
                 <div className="bg-secondary-pastel font-poppins text-4xl font-medium text-secondary-light rounded-2xl p-7">
-                    {selectEmployee.firstName[0]}{selectEmployee.lastName[0]}
+                    {prop.selectEmployee.firstName[0]}{prop.selectEmployee.lastName[0]}
                 </div>
                 <h1 className="text-2xl font-lato font-semibold text-jetblack pt-3 text-center">
-                    {selectEmployee.firstName} {selectEmployee.middleName} {selectEmployee.lastName} {selectEmployee.suffix}
+                    {prop.selectEmployee.firstName} {prop.selectEmployee.middleName} {prop.selectEmployee.lastName} {prop.selectEmployee.suffix}
                 </h1>
-                <p className="text-sm text-gray-400 font-semibold text-center">
-                    ID:
-                    <span className="font-light text-gray-400 pt-2 text-base pl-1">
-                        {selectEmployee.id}
-                    </span>
-                </p>
+                <h1 className="pt-2 text-gray-400 font-poppins"> 
+                    {(department && position) ? `${department.name} | ${position.title}` : ""}
+                    
+                </h1>
             </div>
             <div className="w-full bg-gray-100 h-0.5 my-4 rounded-full"></div>
-            <h1 className="text-left pb-4 uppercase text-gray-500 text-lg">
+            <h1 className="text-left mt-2 uppercase text-gray-500 text-lg">
                 Employee Information
             </h1>
             <div className="w-full flex overflow-y-auto">
@@ -37,32 +45,32 @@ const ViewEmployee = ({ selectEmployee }) => {
                     <EmployeeDataField
                         icon={<LiaBirthdayCakeSolid size={30} className="fill-primary-light" />}
                         title="Age"
-                        data={selectEmployee.age}
+                        data={prop.selectEmployee.age}
                     />
                     <EmployeeDataField
-                        icon={<BsPerson size={30} className="fill-primary-light" />}
+                        icon={<GoNumber size={30} className="fill-primary-light" />}
                         title="Birthdate"
                         data={birthdate}
                     />
                     <EmployeeDataField
-                        icon={<HiOutlineMail size={30} className="stroke-primary-light" />}
+                        icon={<FiMail size={30} className="stroke-primary-light" />}
                         title="Company Email"
-                        data={selectEmployee.companyEmail}
+                        data={prop.selectEmployee.companyEmail}
                     />
                     <EmployeeDataField
-                        icon={<HiOutlineMail size={30} className="stroke-primary-light" />}
+                        icon={<FiMail size={30} className="stroke-primary-light" />}
                         title="Personal Email"
-                        data={selectEmployee.personalEmail || "N/A"}
+                        data={prop.selectEmployee.personalEmail || "N/A"}
                     />
                     <EmployeeDataField
-                        icon={<HiOutlineDevicePhoneMobile size={30} className="stroke-primary-light" />}
+                        icon={<FiTablet size={30} className="stroke-primary-light" />}
                         title="Mobile Number"
-                        data={selectEmployee.mobileNumber}
+                        data={prop.selectEmployee.mobileNumber || "N/A"}
                     />
                     <EmployeeDataField
-                        icon={<TbDeviceLandlinePhone size={30} className="stroke-primary-light" />}
+                        icon={<FiPhone size={30} className="stroke-primary-light" />}
                         title="Landline Number"
-                        data={selectEmployee.landlineNumber || "N/A"}
+                        data={prop.selectEmployee.landlineNumber || "N/A"}
                     />
                 </div>
             </div>
