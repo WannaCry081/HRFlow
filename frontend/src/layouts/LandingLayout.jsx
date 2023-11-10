@@ -25,7 +25,7 @@ const LandingLayout = () => {
           sectionRefs={sectionRefs}
         />
       </div>
-      <div className="h-screen px-4">
+      <div className="h-screen">
         <Routes>
           <Route path="*" element={<Navigate to="/" />} />
           {Routers.map(
