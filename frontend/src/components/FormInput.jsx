@@ -110,7 +110,32 @@ export const DatePickerInput = (prop) => {
                 selected={prop.selected}
                 onChange={prop.onChange} 
                 showYearDropdown
-                className="max-w-[24.8rem] border border-primary-pastel rounded-md bg-gray-100 p-3 font-lato focus:border focus:outline-primary-light sm:p-3"/>
+                className="w-full border border-primary-pastel rounded-md bg-gray-100 font-lato focus:border focus:outline-primary-light p-4"/>
         </span>
     );
 };
+
+export const DropdownMenu = (prop) => {
+    return (
+        <div className="flex flex-col">
+            <label htmlFor="department" className="pb-2">
+                {prop.label}
+                <span className="text-red-500">*</span>
+            </label>
+            <select
+                id={prop.id}
+                name={prop.name}
+                value={prop.department}
+                onChange={prop.onChange}
+                className="border rounded-md p-4 bg-gray-100 focus:border font-lato focus:outline-primary-light"
+            >
+                <option value="">{prop.defaultOption}</option>
+                {prop.options}
+            </select>
+            <div className="text-sm mt-2 text-start text-red-500 font-semibold">
+                {prop.errors && prop.touched && prop.errors}
+            </div>
+        </div>
+        
+    );
+}
