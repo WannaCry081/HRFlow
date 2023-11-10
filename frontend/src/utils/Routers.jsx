@@ -8,6 +8,7 @@ import {
   Notifications,
   TimeClock,
   Profile,
+  Department
 } from "@Pages/Dashboard";
 import {
   BiCalendar,
@@ -17,6 +18,7 @@ import {
   BiTime,
   BiSitemap,
   BiPieChartAlt2,
+  BiBuildings
 } from "react-icons/bi";
 
 export const Routers = [
@@ -117,6 +119,12 @@ export const Routers = [
         name: "Employee Service",
         path: "/employee-service",
         element: <EmployeeService />,
+      },
+      {
+        icon: <BiBuildings size={24} className="fill-inherit" />,
+        name: "Department",
+        path: "/department",
+        element: <Department />,
       },
       {
         icon: <BiNotification size={24} className="fill-inherit" />,

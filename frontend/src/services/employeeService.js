@@ -32,3 +32,14 @@ export const AddEmployeeApi = async ( token, request ) => {
         return error.response;
     }
 };
+
+export const UpdateEmployeesProperty = async (token, employeeId, request) => {
+    const instance = axiosInstance(token);
+
+    try {
+        const response = await instance.patch(`${employeeId}`, request);
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}
