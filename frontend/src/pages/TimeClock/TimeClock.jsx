@@ -316,12 +316,12 @@ const TimeClock = () => {
                     <tbody className="space-y-4">
                         {records.map((record) => (
                             <tr key={record.id} className="bg-white">
-                                <td className="border px-4 py-2 cursor-pointer hover:text-primary-light active:text-gray-700" onClick={() => setSelectedId(record.id)}>{record.id}</td>
+                                <td className="border px-4 py-2" onClick={() => setSelectedId(record.id)}>{record.id.substring(0, 5)}</td>
                                 <td className="border px-4 py-2">{record.month}</td>
                                 <td className="border px-4 py-2">{record.day}</td>
                                 <td className="border px-4 py-2">{record.year}</td>
-                                <td className="border px-4 py-2">{new Date(record.clockIn).toLocaleTimeString()}</td>
-                                <td className="border px-4 py-2">{new Date(record.clockOut).toLocaleTimeString()}</td>
+                                <td className="border px-4 py-2">{new Date(record.clockIn).toLocaleString()}</td>
+                                <td className="border px-4 py-2">{new Date(record.clockOut).toLocaleString()}</td>
                             </tr>
                         ))}
                     </tbody>
