@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
-import { Routers } from "@Utils/Routers";
-import NavBar from "@Components/NavBar";
-import { GetUserProfileApi } from "@Services/userService.js";
-import Header from "@Components/Header";
+import { routes } from "/src/routes";
+import NavBar from "/src/components/NavBar";
+import { GetUserProfileApi } from "/src/services/userService.js";
+import Header from "/src/components/Header";
 
 const DashboardLayout = () => {
   const [userData, setUserData] = useState({});
@@ -21,7 +21,7 @@ const DashboardLayout = () => {
 
   return (
     <main className="h-screen w-screen flex">
-      <NavBar routes={Routers} userData={userData} />
+      <NavBar routes={routes} userData={userData} />
       <section className="w-full flex flex-col bg-gray-50">
         <Header />
         <div className="flex-grow ">
@@ -30,7 +30,7 @@ const DashboardLayout = () => {
               path="*"
               element={<Navigate to="/dashboard/home" replace />}
             />
-            {Routers.map(
+            {routes.map(
               ({ role, layout, pages }) =>
                 layout === "Dashboard" &&
                 role === userData.role &&
@@ -38,7 +38,7 @@ const DashboardLayout = () => {
                   <Route exact path={path} element={element} />
                 ))
             )}
-            {Routers.map(
+            {routes.map(
               ({ layout, pages }) =>
                 layout === "Common" &&
                 pages.map(({ path, element }) => (

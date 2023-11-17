@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { ModalBox } from "@Components/ModalBox";
+import { ModalBox } from "/src/components/ModalBox";
 import { MdGroups } from "react-icons/md";
-import { useToggle } from "@Hooks";
+import { useToggle } from "/src/hooks";
 import DefaultTeamSection from "./sections/DefaultTeamSection";
 import JoinTeamSection from "./sections/JoinTeamSection";
 import CreateTeamSection from "./sections/CreateTeamSection";

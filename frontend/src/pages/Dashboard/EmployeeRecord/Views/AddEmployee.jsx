@@ -4,15 +4,15 @@ import { useState } from "react";
 import { TextInput, 
         SubmitButton, 
         DatePickerInput, 
-        DropdownMenu } from "@Components/FormInput";
-import { AddEmployeeApi } from "@Services/employeeService";
-import { CircularProgressBar } from "@Components/Loading";
+        DropdownMenu } from "/src/components/FormInput";
+import { AddEmployeeApi } from "/src/services/employeeService";
+import { CircularProgressBar } from "/src/components/Loading";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import useToggle from "@Hooks/useToggle";
-import Toast from "@Components/Toast";
-import useDepartments from "@Hooks/useDepartments";
-import usePositions from "@Hooks/usePositions";
+import useToggle from "/src/hooks/useToggle";
+import Toast from "/src/components/Toast";
+import useDepartments from "/src/hooks/useDepartments";
+import usePositions from "/src/hooks/usePositions";
 
 
 const AddEmployeeForm = (prop) => {

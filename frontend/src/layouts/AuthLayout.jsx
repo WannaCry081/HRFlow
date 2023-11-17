@@ -1,6 +1,6 @@
 import { Routes, Route, Link, Navigate } from "react-router-dom";
-import { Routers } from "@Utils/Routers";
-import HRFlowLogo_Dark from "@Assets/svg/HRFlowLogo_Dark.svg";
+import { routes } from "/src/routes";
+import HRFlowLogo_Dark from "/src/assets/svg/HRFlowLogo_Dark.svg";
 
 const AuthLayout = () => {
   return (
@@ -17,7 +17,7 @@ const AuthLayout = () => {
       <section className="relative px-6">
         <Routes>
           <Route path="*" element={<Navigate to="/auth/login" replace />} />
-          {Routers.map(
+          {routes.map(
             ({ layout, pages }) =>
               layout === "Auth" &&
               pages.map(({ path, element }) => (

@@ -1,12 +1,12 @@
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { AddDepartmentApi, UpdateDepartmentPropertyApi } from "@Services/departmentService";
+import { AddDepartmentApi, UpdateDepartmentPropertyApi } from "/src/services/departmentService";
 import { useNavigate } from "react-router-dom";
-import { ModalBox } from "@Components/ModalBox";
-import { TextInput, SubmitButton } from "@Components/FormInput";
-import { CircularProgressBar } from "@Components/Loading";
-import Toast from "@Components/Toast";
-import useToggle from "@Hooks/useToggle";
+import { ModalBox } from "/src/components/ModalBox";
+import { TextInput, SubmitButton } from "/src/components/FormInput";
+import { CircularProgressBar } from "/src/components/Loading";
+import Toast from "/src/components/Toast";
+import useToggle from "/src/hooks/useToggle";
 
 const CreateDepartment = (prop) => {
     const token = sessionStorage.getItem("token");

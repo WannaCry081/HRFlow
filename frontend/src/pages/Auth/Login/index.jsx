@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { TextInput, PasswordInput, SubmitButton } from "@Components/FormInput";
-import { ProgressBar, CircularProgressBar } from "@Components/Loading";
-import { useLogin, useToggle } from "@Hooks";
-import { ForgotPassword } from "@Pages/Auth";
+import { TextInput, PasswordInput, SubmitButton } from "/src/components/FormInput";
+import { ProgressBar, CircularProgressBar } from "/src/components/Loading";
+import { useLogin, useToggle } from "/src/hooks";
+import { ForgotPassword } from "/src/pages/Auth";
 
 const Login = () => {
   const navigate = useNavigate();

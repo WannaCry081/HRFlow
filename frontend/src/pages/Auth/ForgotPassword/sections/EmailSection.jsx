@@ -1,6 +1,6 @@
 import { LuMessagesSquare } from "react-icons/lu";
-import { TextInput, SubmitButton } from "@Components/FormInput";
-import { CircularProgressBar } from "@Components/Loading";
+import { TextInput, SubmitButton } from "/src/components/FormInput";
+import { CircularProgressBar } from "/src/components/Loading";
 
 const EmailSection = (prop) => {
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =

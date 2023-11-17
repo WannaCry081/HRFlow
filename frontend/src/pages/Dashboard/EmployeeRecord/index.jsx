@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import useEmployees from "@Hooks/useEmployees";
+import useEmployees from "/src/hooks/useEmployees";
 import { motion } from "framer-motion";
 import { LuSearch } from "react-icons/lu";
 import { IoMdAdd } from "react-icons/io";
-import useToggle from "@Hooks/useToggle";
+import useToggle from "/src/hooks/useToggle";
 import AddEmployeeForm from "./Views/AddEmployee";
 import ViewEmployee from "./Views/ViewEmployee";
-import Arrow from "@Assets/svg/Arrow.svg";
+import Arrow from "/src/assets/svg/Arrow.svg";
 
 const EmployeeRecord = () => {
 

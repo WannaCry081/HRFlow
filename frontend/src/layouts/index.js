@@ -1,3 +1,3 @@
-export { default as AuthLayout } from "./AuthLayout";
-export { default as DashboardLayout } from "./DashboardLayout";
-export { default as LandingLayout } from "./LandingLayout";
+export { default as AuthLayout } from "/src/layouts/AuthLayout";
+export { default as DashboardLayout } from "/src/layouts/DashboardLayout";
+export { default as LandingLayout } from "/src/layouts/LandingLayout";

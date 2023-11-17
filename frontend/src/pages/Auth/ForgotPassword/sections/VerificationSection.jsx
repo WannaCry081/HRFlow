@@ -1,6 +1,6 @@
 import { LuMessagesSquare } from "react-icons/lu";
-import { CodeInput, SubmitButton } from "@Components/FormInput";
-import { CircularProgressBar } from "@Components/Loading";
+import { CodeInput, SubmitButton } from "/src/components/FormInput";
+import { CircularProgressBar } from "/src/components/Loading";
 import { motion } from "framer-motion";
 
 const VerficationSection = (prop) => {

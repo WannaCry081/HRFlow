@@ -1,5 +1,5 @@
 import axios from "axios";
-import { EMPLOYEE_URL } from "../utils/constants";
+import { EMPLOYEE_URL } from "/src/lib/constants.js";
 
 const axiosInstance = (token) => {
     return axios.create({

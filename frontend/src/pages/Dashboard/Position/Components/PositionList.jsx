@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { DeletePositionApi } from "@Services/positionService";
-import { UpdateEmployeesProperty } from "@Services/employeeService";
+import { DeletePositionApi } from "/src/services/positionService";
+import { UpdateEmployeesProperty } from "/src/services/employeeService";
 import { PiTrashBold, PiPlusBold } from "react-icons/pi";
 import { FiEdit3 } from "react-icons/fi";
-import useToggle from "@Hooks/useToggle";
-import usePositions from "@Hooks/usePositions";
-import useEmployees from "@Hooks/useEmployees";
-import ConfirmModalBox from "@Components/ConfirmModalBox";
-import Toast from "@Components/Toast";
+import useToggle from "/src/hooks/useToggle";
+import usePositions from "/src/hooks/usePositions";
+import useEmployees from "/src/hooks/useEmployees";
+import ConfirmModalBox from "/src/components/ConfirmModalBox";
+import Toast from "/src/components/Toast";
 import CreatePosition from "./CreatePosition";
 
 const PositionList = (prop) => {

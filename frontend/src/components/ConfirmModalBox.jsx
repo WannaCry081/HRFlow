@@ -1,4 +1,4 @@
-import { ModalBox } from "@Components/ModalBox";
+import { ModalBox } from "/src/components/ModalBox";
 
 const ConfirmModalBox = (prop) => {
     return (

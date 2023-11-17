@@ -1,10 +1,9 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { Routers } from "@Utils/Routers";
+import { routes } from "/src/routes";
 import { useRef } from "react";
-import  Navbar from "@Pages/Landing/components/Navbar";
+import  Navbar from "/src/pages/Landing/components/Navbar";
 
 const LandingLayout = () => {
-  document.title = "HR Flow | Streamline HR tasks";
 
   const sectionRefs = {
     homeRef: useRef(null),
@@ -28,7 +27,7 @@ const LandingLayout = () => {
       <div className="h-screen">
         <Routes>
           <Route path="*" element={<Navigate to="/" />} />
-          {Routers.map(
+          {routes.map(
             ({ layout, pages }) =>
               layout === "Landing" &&
               pages.map(({ path, element }) => (

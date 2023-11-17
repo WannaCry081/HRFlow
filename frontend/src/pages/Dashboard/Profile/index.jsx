@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
-import { GetUserProfileApi } from "@Services/userService.js";
+import { GetUserProfileApi } from "/src/services/userService.js";
 import { BiEditAlt } from "react-icons/bi";
-import useToggle from "@Hooks/useToggle";
-import { ModalBox } from "@Components/ModalBox";
+import useToggle from "/src/hooks/useToggle";
+import { ModalBox } from "/src/components/ModalBox";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { TextInput, SubmitButton } from "@Components/FormInput";
-import { CircularProgressBar } from "@Components/Loading";
-import { UpdateUserProfileApi } from "@Services/userService.js";
+import { TextInput, SubmitButton } from "/src/components/FormInput";
+import { CircularProgressBar } from "/src/components/Loading";
+import { UpdateUserProfileApi } from "/src/services/userService.js";
 
 const Profile = () => {
     const [show, onSetShow] = useToggle();

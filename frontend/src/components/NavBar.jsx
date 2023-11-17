@@ -1,7 +1,7 @@
 import { GoKebabHorizontal } from "react-icons/go";
 import { Link } from "react-router-dom";
-import HRFlowLogoLightSvg from "@Assets/svg/HRFlowLogo_Light.svg"; 
-import useToggle from "@Hooks/useToggle";
+import HRFlowLogoLightSvg from "/src/assets/svg/HRFlowLogo_Light.svg"; 
+import useToggle from "/src/hooks/useToggle";
 import { motion } from "framer-motion";
 import { useState } from "react";
 

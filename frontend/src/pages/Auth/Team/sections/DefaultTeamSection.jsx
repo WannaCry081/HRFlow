@@ -1,5 +1,5 @@
-import CreateTeamSvg from "@Assets/svg/CreateTeam.svg";
-import JoinTeamSvg from "@Assets/svg/JoinTeam.svg";
+import CreateTeamSvg from "/src/assets/svg/CreateTeam.svg";
+import JoinTeamSvg from "/src/assets/svg/JoinTeam.svg";
 
 const DefaultTeamSection = (prop) => {
   return (

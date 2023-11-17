@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FiMenu } from "react-icons/fi";
 import { MdOutlineClose } from "react-icons/md";
-import HRFlowLogo_Dark from "@Assets/svg/HRFlowLogo_Dark.svg";
+import HRFlowLogo_Dark from "/src/assets/svg/HRFlowLogo_Dark.svg";
 
 const Navbar = ( props ) => {
     const { sectionRefs } = props;
