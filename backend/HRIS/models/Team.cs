@@ -25,6 +25,9 @@ namespace HRIS.Models
         [JsonIgnore]
         public ICollection<Applicant> Applicants { get; set; } = new List<Applicant>();
 
+        [JsonIgnore]
+        public ICollection<Notification> Notifications { get; set; } = new List<Notification>();
+
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
     }

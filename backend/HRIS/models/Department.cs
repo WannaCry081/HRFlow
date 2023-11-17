@@ -28,7 +28,7 @@ namespace HRIS.Models
         public Guid? TeamId { get; set; }
 
         [JsonIgnore]
-        public Team? Team { get; set; }
+        public Team Team { get; set; }
 
         [JsonIgnore]
         public ICollection<Position> Positions { get; set; } = new List<Position>();
