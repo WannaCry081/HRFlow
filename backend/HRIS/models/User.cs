@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 
 namespace HRIS.Models
 {
@@ -58,6 +57,7 @@ namespace HRIS.Models
         public string UpdatedBy { get; set; } = string.Empty;
 
         public string Description { get; set; } = string.Empty;
+        public string Profile { get; set; } = string.Empty;
 
         public bool IsDeleted { get; set; } = false;
 
@@ -65,17 +65,18 @@ namespace HRIS.Models
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
-        public Guid? DepartmentId { get; set; }
-        public Guid? PositionId { get; set; }
-
         [ForeignKey("TeamsId")]
-        [JsonIgnore]
-        public Guid? TeamId { get; set; }
-
-        [JsonIgnore]
+        public Guid TeamId { get; set; }
         public Team? Team { get; set; }
 
-        [JsonIgnore]
+        [ForeignKey("DepartmentsId")]
+        public Guid DepartmentId { get; set; }
+        public Department? Department { get; set; }
+
+        [ForeignKey("PositionsId")]
+        public Guid PositionId { get; set; } 
+        public Position? Position { get; set; }
+
         public ICollection<Record> Records { get; set; } = new List<Record>();
     }
 }
