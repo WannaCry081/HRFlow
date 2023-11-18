@@ -1,5 +1,5 @@
 import axios from "axios";
-import { TEAM_URL } from "@Utils/constants.js";
+import { TEAM_URL } from "/src/lib/constants.js";
 
 const axiosInstance = (token) => axios.create({
     baseURL : TEAM_URL,

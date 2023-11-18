@@ -1,5 +1,5 @@
 import axios from "axios";
-import { USER_URL } from "@Utils/constants";
+import { USER_URL } from "/src/lib/constants.js";
 
 const axiosInstance = (token) => axios.create({
     baseURL : USER_URL,
@@ -34,7 +34,7 @@ export const UpdateUserPasswordApi = async (token, request) => {
     const instance = axiosInstance(token);
 
     try {
-        const response = await instance.post("/reset-password", request);
+        const response = await instance.put("/reset-password", request);
         return response;
     } catch (error) {
         return error.response;

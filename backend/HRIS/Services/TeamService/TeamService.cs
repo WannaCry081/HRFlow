@@ -12,8 +12,7 @@ namespace HRIS.Services.TeamService
 
         public TeamService(ITeamRepository teamRepository)
         {
-            _teamRepository = teamRepository ??
-                throw new ArgumentNullException(nameof(teamRepository));
+            _teamRepository = teamRepository;
         }
 
         public async Task<bool> CreateTeam(Guid userId, CreateTeamDto request)

@@ -1,0 +1,9 @@
+export { default as ApplicantTracking } from "/src/pages/Dashboard/ApplicantTracking";
+export { default as EmployeeRecord } from "/src/pages/Dashboard/EmployeeRecord";
+export { default as EmployeeService } from "/src/pages/Dashboard/EmployeeService";
+export { default as Home } from "/src/pages/Dashboard/Home";
+export { default as Notifications } from "/src/pages/Dashboard/Notifications";
+export { default as Profile } from "/src/pages/Dashboard/Profile"; 
+export { default as TimeClock } from "/src/pages/Dashboard/TimeClock";
+export { default as Department } from "/src/pages/Dashboard/Department";
+export { default as Position } from "/src/pages/Dashboard/Position";

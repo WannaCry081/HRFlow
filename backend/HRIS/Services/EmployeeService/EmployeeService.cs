@@ -2,7 +2,10 @@
 using HRIS.Dtos.EmployeeDto;
 using HRIS.Exceptions;
 using HRIS.Models;
+using HRIS.Repositories.DepartmentRepository;
 using HRIS.Repositories.EmployeeRepository;
+using HRIS.Repositories.PositionRepository;
+using HRIS.Utils;
 using Microsoft.AspNetCore.JsonPatch;
 
 namespace HRIS.Services.EmployeeService
@@ -11,13 +14,19 @@ namespace HRIS.Services.EmployeeService
     {
         private readonly IMapper _mapper;
         private readonly IEmployeeRepository _employeeRepository;
+        private readonly IDepartmentRepository _departmentRepository;
+        private readonly IPositionRepository _positionRepository;
 
-        public EmployeeService(IMapper mapper, IEmployeeRepository employeeRepository)
+        public EmployeeService(IMapper mapper, IEmployeeRepository employeeRepository, IDepartmentRepository departmentRepository, IPositionRepository positionRepository)
         {
             _mapper = mapper ??
                 throw new ArgumentNullException(nameof(mapper));
             _employeeRepository = employeeRepository ??
                 throw new ArgumentNullException(nameof(employeeRepository));
+            _departmentRepository = departmentRepository ??
+                throw new ArgumentNullException(nameof(departmentRepository));
+            _positionRepository = positionRepository ??
+                throw new ArgumentNullException(nameof(positionRepository));
         }
 
         public async Task<GetEmployeeRecordDto> GetEmployeeRecord(Guid hrId, Guid employeeId)
@@ -37,7 +46,7 @@ namespace HRIS.Services.EmployeeService
             return _mapper.Map<ICollection<GetEmployeeRecordDto>>(employees);
         }
 
-        public async Task<GetEmployeeRecordDto> CreateEmployeeRecord(Guid hrId, AddEmployeeRecordDto request)
+        public async Task<GetEmployeeRecordDto> CreateEmployeeRecord(Guid hrId, CreateEmployeeRecordDto request)
         {
             var hr = await _employeeRepository.GetUserById(hrId) ??
                 throw new UserNotFoundException("Invalid email address. Please try again.");
@@ -48,12 +57,28 @@ namespace HRIS.Services.EmployeeService
                 throw new UserExistsException("Employee already exists. Please try again.");
             }
 
+            Password.Encrypt(request.Password, out string passwordHash, out string passwordSalt);
+
+            var departments = await _departmentRepository.GetDepartments(hr);
+            var selectedDepartment = departments.FirstOrDefault(c => c.Name.Equals(request.Department)) ??
+               throw new DepartmentNotFoundException("Department does not exist. Please try again.");
+
+            var positions = await _positionRepository.GetPositions(hr, selectedDepartment);
+            var selectedPosition = positions.FirstOrDefault(c => c.Title.Equals(request.Position)) ??
+                throw new PositionNotFoundException("Position not found. Please try again.");
+
+            char sex = request.Sex;
+
             var employee = _mapper.Map<User>(request);
             employee.Role = "Employee";
             employee.Status = "Active";
             employee.CreatedBy = hr.FirstName + " " + hr.LastName;
-            employee.TeamCode = hr.TeamCode;
             employee.TeamId = hr.TeamId;
+            employee.DepartmentId = selectedDepartment.Id;
+            employee.PositionId = selectedPosition.Id;
+            employee.Sex = sex;
+            employee.PasswordHash = passwordHash;
+            employee.PasswordSalt = passwordSalt;
 
             var response = await _employeeRepository.CreateEmployeeRecord(employee);
             if (!response)
@@ -74,12 +99,7 @@ namespace HRIS.Services.EmployeeService
             employee.UpdatedBy = hr.FirstName + " " + hr.LastName;
             employee.UpdatedAt = DateTime.Now;
 
-            var response = await _employeeRepository.UpdateEmployeeRecord(employee, request);
-            if (!response)
-            {
-                throw new Exception("Failed to update employee record.");
-            }
-            return response;
+            return await _employeeRepository.UpdateEmployeeRecord(employee, request);
         }
 
         public async Task<GetEmployeeRecordDto> UpdateEmployeeRecords(Guid hrId, Guid employeeId, UpdateEmployeeRecordDto request)
@@ -100,6 +120,11 @@ namespace HRIS.Services.EmployeeService
             }
 
             return _mapper.Map<GetEmployeeRecordDto>(dbEmployee);
+        }
+
+        public Task<GetEmployeeRecordDto> UpdateEmployeePassword(Guid hrId, Guid employeeId, UpdateEmployeePasswordDto request)
+        {
+            throw new NotImplementedException();
         }
     }
 }
