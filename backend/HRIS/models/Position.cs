@@ -21,10 +21,9 @@ namespace HRIS.Models
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
         [ForeignKey("DepartmentId")]
-        [JsonIgnore]
-        public Guid? DepartmentId { get; set; }
-
-        [JsonIgnore]
+        public Guid DepartmentId { get; set; }
         public Department? Department { get; set; }
+
+        public ICollection<User> Users { get; set; } = new List<User>();
     }
 }

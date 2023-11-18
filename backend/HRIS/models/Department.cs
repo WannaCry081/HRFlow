@@ -24,13 +24,10 @@ namespace HRIS.Models
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
         [ForeignKey("TeamsId")]
-        [JsonIgnore]
-        public Guid? TeamId { get; set; }
+        public Guid TeamId { get; set; }
+        public Team? Team { get; set; }
 
-        [JsonIgnore]
-        public Team Team { get; set; }
-
-        [JsonIgnore]
+        public ICollection<User> Users { get; set; } = new List<User>();
         public ICollection<Position> Positions { get; set; } = new List<Position>();
     }
 }
