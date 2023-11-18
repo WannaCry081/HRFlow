@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { DeleteDepartmentApi } from "@Services/departmentService";
-import useToggle from "@Hooks/useToggle";
+import { DeleteDepartmentApi } from "/src/services/departmentService";
+import useToggle from "/src/hooks/useToggle";
 import Position from "../Position";
 import { PiPlusBold } from "react-icons/pi";
 import TeamsCard from "./Components/TeamsCard";
-import useDepartments from "@Hooks/useDepartments";
-import useEmployees from "@Hooks/useEmployees";
+import useDepartments from "/src/hooks/useDepartments";
+import useEmployees from "/src/hooks/useEmployees";
 import CreateDepartment from "./Components/CreateDepartment";
-import Toast from "@Components/Toast";
-import ConfirmModalBox from "@Components/ConfirmModalBox";
+import Toast from "/src/components/Toast";
+import ConfirmModalBox from "/src/components/ConfirmModalBox";
 
 const Department = () => {
     const token = sessionStorage.getItem("token");

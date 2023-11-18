@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { GetPositionsApi } from "@Services/positionService"
+import { GetPositionsApi } from "/src/services/positionService"
 
 const usePositions = (submit, departmentId) => {
 

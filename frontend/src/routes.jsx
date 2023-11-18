@@ -1,5 +1,5 @@
-import Landing from "@Pages/Landing";
-import { Login, Register } from "@Pages/Auth";
+import Landing from "/src/pages/Landing";
+import { Login, Register } from "/src/pages/Auth";
 import {
   Home,
   ApplicantTracking,
@@ -8,8 +8,8 @@ import {
   Notifications,
   TimeClock,
   Profile,
-  Department
-} from "@Pages/Dashboard";
+  Department,
+} from "/src/pages/Dashboard";
 import {
   BiCalendar,
   BiUser,
@@ -18,10 +18,10 @@ import {
   BiTime,
   BiSitemap,
   BiPieChartAlt2,
-  BiBuildings
+  BiBuildings,
 } from "react-icons/bi";
 
-export const Routers = [
+export const routes = [
   {
     title: "Landing Page",
     layout: "Landing",

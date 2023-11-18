@@ -1,21 +1,17 @@
+import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { AuthLayout, DashboardLayout, LandingLayout } from "@Layouts";
-import PrivateRoute from "@Utils/PrivateRoute";
-import PublicRoute from "@Utils/PublicRoute";
+import { AuthLayout, DashboardLayout, LandingLayout } from "/src/layouts";
+// import { PublicRoute, PrivateRoute } from "/src/hocs";
 
 const App = () => {
   return (
-    <Routes>
-      <Route path="/*" index element={
-        <PublicRoute element={<LandingLayout />} />
-      } />
-      <Route path="/auth/*" element={
-        <PublicRoute element={<AuthLayout />} />
-      } /> 
-      <Route path="/dashboard/*" element={
-        <PrivateRoute element={<DashboardLayout />} />
-      } />
-    </Routes>
+    <React.Suspense fallback={<h1>Loading...</h1>}>
+      <Routes>
+        <Route path="/*" index element={<LandingLayout />} />
+        <Route path="/auth/*" element={<AuthLayout />} /> 
+        <Route path="/dashboard/*" element={<DashboardLayout />} />
+      </Routes>
+    </React.Suspense>
   );
 };
 

@@ -1,10 +1,10 @@
-import { ModalBox } from "@Components/ModalBox";
-import EmailSection from "./sections/EmailSection";
-import VerificationSection from "./sections/VerificationSection";
-import { useForgotPassword } from "@Hooks";
+import { ModalBox } from "/src/components/ModalBox";
+import { useForgotPassword } from "/src/hooks";
 
 const ForgotPassword = (prop) => {
   const [isSubmit, isVerified, formik] = useForgotPassword();
+  const EmailSection = import("./sections/EmailSection");
+  const VerificationSection = import("./sections/VerificationSection");
 
   return (
     <ModalBox onCancel={prop.onCancel}>

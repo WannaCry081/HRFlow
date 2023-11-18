@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import PositionList from "./Components/PositionList";
-import useEmployees from "@Hooks/useEmployees";
+import useEmployees from "/src/hooks/useEmployees";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import useToggle from "@Hooks/useToggle";
+import useToggle from "/src/hooks/useToggle";
 
 const Position = (prop) => {
     const { selectedDepartment } = prop;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { GetDepartmentsApi } from "../services/departmentService";
+import { GetDepartmentsApi } from "/src/services/departmentService";
 
 const useDepartments = ( submit, positionSubmit ) => {
 

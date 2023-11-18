@@ -1,12 +1,12 @@
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { ModalBox } from "@Components/ModalBox";
-import { TextInput, SubmitButton } from "@Components/FormInput";
+import { ModalBox } from "/src/components/ModalBox";
+import { TextInput, SubmitButton } from "/src/components/FormInput";
 import { useNavigate } from "react-router-dom";
-import { CircularProgressBar } from "@Components/Loading";
+import { CircularProgressBar } from "/src/components/Loading";
 import { AddPositionApi, UpdatePositionPropertyApi } from "../../../../services/positionService";
-import Toast from "@Components/Toast";
-import useToggle from "@Hooks/useToggle";
+import Toast from "/src/components/Toast";
+import useToggle from "/src/hooks/useToggle";
 
 const CreatePosition = (prop) => {
     const token = sessionStorage.getItem("token");

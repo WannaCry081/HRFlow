@@ -36,15 +36,14 @@ namespace HRIS.Models
         [StringLength(20)]
         public string Status { get; set; } = string.Empty;
 
+        public string Profile { get; set; } = string.Empty;
+
         public DateTime BirthDate { get; set; } = DateTime.Now;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
         [ForeignKey("TeamsId")]
-        [JsonIgnore]
-        public Guid? TeamId { get; set; }
-
-        [JsonIgnore]
+        public Guid TeamId { get; set; }
         public Team? Team { get; set; }
     }
 }

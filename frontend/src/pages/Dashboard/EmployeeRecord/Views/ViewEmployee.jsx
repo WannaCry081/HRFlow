@@ -1,5 +1,5 @@
-import useDepartments from "@Hooks/useDepartments";
-import usePositions from "@Hooks/usePositions";
+import useDepartments from "/src/hooks/useDepartments";
+import usePositions from "/src/hooks/usePositions";
 import { LiaBirthdayCakeSolid } from "react-icons/lia";
 import { GoNumber } from "react-icons/go";
 import {

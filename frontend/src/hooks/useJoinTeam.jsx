@@ -2,7 +2,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { JoinTeamApi } from "@Services/teamService.js";
+import { JoinTeamApi } from "/src/services/teamService.js";
 
 const useJoinTeam = () => {
   const navigate = useNavigate();

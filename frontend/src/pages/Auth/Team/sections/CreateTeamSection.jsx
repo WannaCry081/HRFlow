@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { TextInput, SubmitButton } from "@Components/FormInput";
-import { CircularProgressBar } from "@Components/Loading";
-import { useCreateTeam } from "@Hooks";
+import { TextInput, SubmitButton } from "/src/components/FormInput";
+import { CircularProgressBar } from "/src/components/Loading";
+import { useCreateTeam } from "/src/hooks";
 
 const CreateTeamSection = () => {
   const [

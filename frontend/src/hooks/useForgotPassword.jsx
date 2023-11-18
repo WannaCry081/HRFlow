@@ -2,7 +2,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { VerifyCodeApi, ForgotPasswordApi } from "@Services/authService.js";
+import { VerifyCodeApi, ForgotPasswordApi } from "/src/services/authService.js";
 
 const useForgotPassword = () => {
   const navigate = useNavigate();
