@@ -1,9 +1,9 @@
 import { forwardRef } from "react";
 import { Link } from "react-router-dom";
-import ComputerChild from "@Assets/svg/ComputerChild.svg";
-import PurpleGradient from "@Assets/svg/Home_purple.svg";
-import SkyblueGradient from "@Assets/svg/Home_skyblue.svg";
-import PinkGradient from "@Assets/svg/Home_pink.svg";
+import ComputerChild from "/src/assets/svg/ComputerChild.svg";
+import PurpleGradient from "/src/assets/svg/Home_purple.svg";
+import SkyblueGradient from "/src/assets/svg/Home_skyblue.svg";
+import PinkGradient from "/src/assets/svg/Home_pink.svg";
 import { motion } from "framer-motion";
 
 const defaultVariant  = {

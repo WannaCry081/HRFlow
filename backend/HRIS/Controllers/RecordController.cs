@@ -58,7 +58,7 @@ namespace HRIS.Controllers
                  throw new UserNotFoundException("Invalid user's credential. Please try again.");
 
                 var response = await _recordService.CreateRecord(userId);
-                return Ok("Record created successfully");
+                return Ok(response);
             }
             catch (UserNotFoundException ex)
             {
