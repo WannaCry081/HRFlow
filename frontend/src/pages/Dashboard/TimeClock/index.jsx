@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { GetRecordApi, CreateRecordApi, UpdateRecordApi } from "@Services/recordService.js";
+import { GetRecordApi, CreateRecordApi, UpdateRecordApi } from "/src/services/recordService.js";
 
 const TimeClock = () => {
     const token = sessionStorage.getItem("token");
