@@ -25,7 +25,6 @@ namespace HRIS.Services.NotificationService
 
             var notification = _mapper.Map<Notification>(request);
             notification.TeamId = hr.TeamId ?? Guid.Empty;
-            notification.IsRead = false;
 
             var response = await _notificationRepository.CreateNotification(notification);
             if (!response)
