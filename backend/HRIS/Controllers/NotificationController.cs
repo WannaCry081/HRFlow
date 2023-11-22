@@ -163,9 +163,30 @@ namespace HRIS.Controllers
         }
 
         [HttpDelete("{notificationId}")]
-        public Task<IResult> DeleteNotification([FromRoute] Guid notificationId)
+        public async Task<IActionResult> DeleteNotification([FromRoute] Guid notificationId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var hrId = UserClaim.GetCurrentUser(HttpContext) ??
+                    throw new UserNotFoundException("Invalid user's credential. Please try again.");
+                var response = await _notificationService.DeleteNotification(hrId, notificationId);
+                return Ok("Successfully deleted notification.");
+            }
+            catch (UserNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to find employee.", ex);
+                return NotFound(ex.Message);
+            }
+            catch (NotificationNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to find notification.", ex);
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while attempting to get positions.");
+                return Problem("Internal server error.");
+            }
         }
     }
 }
