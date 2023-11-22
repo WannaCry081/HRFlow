@@ -39,15 +39,24 @@ namespace HRIS.Repositories.PositionRepository
 
         public async Task<Position?> GetPosition(User hr, Department department, Guid positionId)
         {
-            return await _context.Positions.Where(
-                c => c.Id.Equals(positionId) &&
+            return await _context.Positions
+                .Include(c => c.Users)
+                .Where( c => c.Id.Equals(positionId) &&
+                c.DepartmentId.Equals(department.Id)).FirstOrDefaultAsync();
+        }
+        public async Task<Position?> GetPositionByName(User hr, Department department, string title)
+        {
+            return await _context.Positions
+                .Include(c => c.Users)
+                .Where(c => c.Title.Equals(title) &&
                 c.DepartmentId.Equals(department.Id)).FirstOrDefaultAsync();
         }
 
         public async Task<ICollection<Position>> GetPositions(User hr, Department department)
         {
-            return await _context.Positions.Where(
-                    c => c.DepartmentId.Equals(department.Id)).ToListAsync();
+            return await _context.Positions
+                .Include(c => c.Users)
+                .Where(c => c.DepartmentId.Equals(department.Id)).ToListAsync();
         }
 
         public async Task<bool> UpdatePosition(Position position, JsonPatchDocument<Position> request)
@@ -61,6 +70,7 @@ namespace HRIS.Repositories.PositionRepository
             position.Title = request.Title;
             position.Description = request.Description;
             position.Type = request.Type;
+            position.UpdatedAt = DateTime.Now;
 
             return await _context.SaveChangesAsync() > 0;
         }
