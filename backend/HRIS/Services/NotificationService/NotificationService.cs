@@ -60,9 +60,12 @@ namespace HRIS.Services.NotificationService
             return _mapper.Map<GetNotificationDto>(notification);
         }
 
-        public Task<ICollection<GetNotificationDto>> GetNotifications(Guid hrId)
+        public async Task<ICollection<GetNotificationDto>> GetNotifications(Guid hrId)
         {
-            throw new NotImplementedException();
+            var hr = await _notificationRepository.GetUserById(hrId) ??
+             throw new UserNotFoundException("Invalid email address. Please try again.");
+            var notifications = await _notificationRepository.GetNotifications(hr);
+            return _mapper.Map<ICollection<GetNotificationDto>>(notifications);
         }
 
         public Task<bool> UpdateNotification(Guid hrId, Guid notificationId, JsonPatchDocument<Notification> request)
