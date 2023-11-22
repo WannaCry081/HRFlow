@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using HRIS.Dtos.NotificationDto;
+using HRIS.Exceptions;
+using HRIS.Models;
+using HRIS.Services.NotificationService;
+using HRIS.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HRIS.Controllers
@@ -29,7 +34,7 @@ namespace HRIS.Controllers
                     throw new UserNotFoundException("Invalid user's credential. Please try again.");
                 var response = await _notificationService.GetNotifications(hrId);
                 return Ok(response);
-        }
+            }
             catch (UserNotFoundException ex)
             {
                 _logger.LogError("An error occurred while attempting to find employee.", ex);
@@ -64,7 +69,7 @@ namespace HRIS.Controllers
                 return NotFound(ex.Message);
             }
             catch (Exception ex)
-        {
+            {
                 _logger.LogError(ex, "An error occurred while attempting to get positions.");
                 return Problem("Internal server error.");
             }
@@ -72,9 +77,27 @@ namespace HRIS.Controllers
 
         [Authorize(Roles = "Human Resource")]
         [HttpPost]
-        public Task<IResult> CreateNotification()
+        [Consumes("application/json")]
+        [Produces("application/json")]
+        public async Task<IActionResult> CreateNotification([FromBody] CreateNotificationDto request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var hrId = UserClaim.GetCurrentUser(HttpContext) ??
+                    throw new UserNotFoundException("Invalid user's credential. Please try again.");
+                var response = await _notificationService.CreateNotification(hrId, request);
+                return Ok(response);
+            }
+            catch (UserNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to find employee.", ex);
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while attempting to get positions.");
+                return Problem("Internal server error.");
+            }
         }
 
         [Authorize(Roles = "Human Resource")]
