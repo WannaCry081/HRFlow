@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 
 namespace HRIS.Models
 {
@@ -18,12 +17,14 @@ namespace HRIS.Models
 
         [StringLength(50)]
         public string Assistant { get; set; } = string.Empty;
+
+        [NotMapped]
         public ICollection<User> Supervisors { get; set; } = new List<User>();
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
-        [ForeignKey("TeamsId")]
+        [ForeignKey("TeamId")]
         public Guid TeamId { get; set; }
         public Team? Team { get; set; }
 
