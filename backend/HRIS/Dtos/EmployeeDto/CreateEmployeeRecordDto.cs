@@ -44,10 +44,10 @@ namespace HRIS.Dtos.EmployeeDto
         public string CompanyEmail { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Department is required.")]
-        public string Department { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Position is required.")]
-        public string Position { get; set; } = string.Empty;
+        public string Title { get; set; } = string.Empty;
 
         [PasswordPropertyText]
         [Required(ErrorMessage = "Password is required.")]
