@@ -102,7 +102,7 @@ namespace HRIS.Controllers
         }
 
         [Authorize(Roles = "Human Resource")]
-        [HttpPatch("{notificationId}")]
+        [HttpPut("{notificationId}")]
         [Consumes("application/json")]
         [Produces("application/json")]
 
@@ -113,11 +113,7 @@ namespace HRIS.Controllers
                 var hrId = UserClaim.GetCurrentUser(HttpContext) ??
                     throw new UserNotFoundException("Invalid user's credential. Please try again.");
                 var response = await _notificationService.UpdateNotification(hrId, notificationId, request);
-                if (!response)
-                {
-                    throw new Exception("Failed to update notification information.");
-                }
-                return Ok("Successfully updated notification's information.");
+                return Ok(response);
             }
             catch (UserNotFoundException ex)
             {
