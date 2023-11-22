@@ -28,7 +28,7 @@ namespace HRIS.Models
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
-        [ForeignKey("UsersId")]
+        [ForeignKey("UserId")]
         [JsonIgnore]
         public Guid? UserId { get; set; }
 
