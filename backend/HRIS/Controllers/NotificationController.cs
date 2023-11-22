@@ -132,6 +132,36 @@ namespace HRIS.Controllers
             }
         }
 
+        [Authorize(Roles = "Human Resource")]
+        [HttpPut("{notificationId}")]
+        [Consumes("application/json")]
+        [Produces("application/json")]
+        public async Task<IActionResult> UpdateNotifications([FromRoute] Guid notificationId, [FromBody] UpdateNotificationDto request)
+        {
+            try
+            {
+                var hrId = UserClaim.GetCurrentUser(HttpContext) ??
+                    throw new UserNotFoundException("Invalid user's credential. Please try again.");
+                var response = await _notificationService.UpdateNotifications(hrId, notificationId, request);
+                return Ok(response);
+            }
+            catch (UserNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to find employee.", ex);
+                return NotFound(ex.Message);
+            }
+            catch (NotificationNotFoundException ex)
+            {
+                _logger.LogError("An error occurred while attempting to find notification.", ex);
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while attempting to get positions.");
+                return Problem("Internal server error.");
+            }
+        }
+
         [HttpDelete("{notificationId}")]
         public Task<IResult> DeleteNotification([FromRoute] Guid notificationId)
         {
