@@ -8,6 +8,7 @@ namespace HRIS.Repositories.PositionRepository
         Task<bool> IsPositionExists(Guid departmentId, string title);
         Task<User?> GetUserById(Guid id);
         Task<Position?> GetPosition(User hr, Department department, Guid positionId);
+        Task<Position?> GetPositionByName(User hr, Department department, string title);
         Task<ICollection<Position>> GetPositions(User hr, Department department);
         Task<bool> CreatePosition(Position position);
         Task<bool> UpdatePositions(Position position, Position request);
