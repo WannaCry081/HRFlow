@@ -36,9 +36,19 @@ namespace HRIS.Services.NotificationService
             return _mapper.Map<GetNotificationDto>(notification);
         }
 
-        public Task<bool> DeleteNotification(Guid hrId, Guid notificationId)
+        public async Task<bool> DeleteNotification(Guid hrId, Guid notificationId)
         {
-            throw new NotImplementedException();
+            var hr = await _notificationRepository.GetUserById(hrId) ??
+               throw new UserNotFoundException("Invalid email address. Please try again.");
+            var notification = await _notificationRepository.GetNotification(hr, notificationId) ??
+                throw new NotificationNotFoundException("Notification does not exist. Please try again.");
+            var response = await _notificationRepository.DeleteNotification(notification);
+            if (!response)
+            {
+                throw new Exception("Failed to delete notification.");
+            }
+
+            return response;
         }
 
         public Task<GetNotificationDto> GetNotification(Guid hrId, Guid notificationId)
