@@ -1,5 +1,5 @@
 import axios from "axios";
-import { RECORD_URL } from "@Utils/constants.js";
+import { RECORD_URL } from "/src/lib/constants.js";
 
 const axiosInstance = (token) => axios.create({
   baseURL : RECORD_URL,
