@@ -1,4 +1,6 @@
-﻿namespace HRIS.Dtos.PositionDto
+﻿using HRIS.Dtos.EmployeeDto;
+
+namespace HRIS.Dtos.PositionDto
 {
     public class GetPositionDto
     {
@@ -7,5 +9,6 @@
         public string Title { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public string Type { get; set; } = string.Empty;
+        public List<GetEmployeeRecordDto> Users { get; set; } = new List<GetEmployeeRecordDto>();
     }
 }
