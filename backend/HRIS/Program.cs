@@ -7,6 +7,7 @@ using HRIS.Repositories.ApplicantRepository;
 using HRIS.Repositories.DepartmentRepository;
 using HRIS.Repositories.PositionRepository;
 using HRIS.Repositories.RecordRepository;
+using HRIS.Repositories.NotificationRepository;
 using HRIS.Services.AuthService;
 using HRIS.Services.EmployeeService;
 using HRIS.Services.LandingService;
@@ -16,6 +17,7 @@ using HRIS.Services.ApplicantService;
 using HRIS.Services.DepartmentService;
 using HRIS.Services.PositionService;
 using HRIS.Services.RecordService;
+using HRIS.Services.NotificationService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -91,6 +93,9 @@ builder.Services.AddScoped<IPositionRepository, PositionRepository>();
 
 builder.Services.AddScoped<IRecordService, RecordService>();
 builder.Services.AddScoped<IRecordRepository, RecordRepository>();
+
+builder.Services.AddScoped<INotificationService, NotificationService>();
+builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
 
 var app = builder.Build();
 
