@@ -76,12 +76,28 @@ namespace HRIS.Services.NotificationService
                throw new NotificationNotFoundException("Notification does not exist. Please try again.");
 
             return await _notificationRepository.UpdateNotification(notification, request);
-
         }
 
-        public Task<GetNotificationDto> UpdateNotifications(Guid hrId, Guid notificationId, UpdateNotificationDto request)
+        public async Task<GetNotificationDto> UpdateNotifications(Guid hrId, Guid notificationId, UpdateNotificationDto request)
         {
-            throw new NotImplementedException();
+            var hr = await _notificationRepository.GetUserById(hrId) ??
+            throw new UserNotFoundException("Invalid email address. Please try again.");
+            var notification = await _notificationRepository.GetNotification(hr, notificationId) ??
+               throw new NotificationNotFoundException("Notification does not exist. Please try again.");
+
+            var dbNotification = _mapper.Map<Notification>(request);
+            dbNotification.Id = notificationId;
+            dbNotification.TeamId = hr.TeamId ?? Guid.Empty;
+
+            var isNotificationUpdated = await _notificationRepository.UpdateNotifications(notification, dbNotification);
+            if (!isNotificationUpdated)
+            {
+                throw new Exception("Failed to update notification information.");
+            }
+
+            return _mapper.Map<GetNotificationDto>(dbNotification);
+
+
         }
     }
 }
