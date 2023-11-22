@@ -1,4 +1,6 @@
-﻿namespace HRIS.Dtos
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace HRIS.Dtos
 {
     public class GetRecordDto
     {
