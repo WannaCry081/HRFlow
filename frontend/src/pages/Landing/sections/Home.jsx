@@ -78,12 +78,12 @@ const Home = forwardRef((props, ref) => {
                             </motion.h2>
                             <div 
                                 className="flex gap-4 mt-2 justify-center xl:justify-start">
-                                <Link to="/auth/register" target="_blank" className="bg-primary-light sm:text-lg px-10 md:px-12 py-3.5 text-white font-semibold font-poppins rounded-lg shadow-lg lg:text-2xl xl:text-xl transition hover:bg-primary-dark">
+                                <Link to="/auth/register" target="_blank" className="bg-lilac sm:text-lg px-10 md:px-12 py-3.5 text-white font-semibold font-poppins rounded-lg shadow-lg lg:text-2xl xl:text-xl transition hover:bg-lilac-dark">
                                     Get Started
                                 </Link>
                                 <button 
                                     onClick={() => menuItemClickHandler("servicesRef")}
-                                    className="bg-primary-pastel px-10 md:px-12 py-3.5 sm:text-lg text-primary-light font-semibold font-poppins rounded-lg shadow-lg lg:text-2xl xl:text-xl hov transition hover:bg-tertiary-pastel">
+                                    className="bg-lilac-pastel px-10 md:px-12 py-3.5 sm:text-lg text-lilac font-semibold font-poppins rounded-lg shadow-lg lg:text-2xl xl:text-xl hov transition hover:bg-tertiary-pastel">
                                     Learn More
                                 </button>
                             </div>

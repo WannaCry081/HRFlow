@@ -19,7 +19,7 @@ const About = forwardRef((props, ref) => {
                             About HR Flow
                         </h1>
                         <motion.div 
-                            className="my-2 h-2 bg-primary-light rounded-full"
+                            className="my-2 h-2 bg-lilac rounded-full"
                             initial={{
                                 opacity: 0,
                                 width: "0%"

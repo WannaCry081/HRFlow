@@ -97,7 +97,7 @@ const Contact = forwardRef((props, ref) => {
                             </div>
                             <button
                                 type="submit"
-                                className="bg-secondary-light hover:bg-secondary-dark text-xl px-10 py-3 text-white font-semibold font-poppins rounded-lg shadow-lg">
+                                className="bg-blush hover:bg-blush-dark text-xl px-10 py-3 text-white font-semibold font-poppins rounded-lg shadow-lg">
                                 Submit
                             </button>
                         </form>

@@ -39,24 +39,24 @@ const Navbar = ( props ) => {
                         </div>
                         {/* secondary */}
                         <div className="flex gap-6">
-                            <div className="hidden xs:flex items-center gap-10 text-jetblack">
+                            <div className=" xs:flex items-center gap-10 text-jetblack">
                                 <div className="hidden lg:flex items-center gap-8 2xl:gap-10 font-semibold text-lg 2xl:text-xl transition-all ease-in">
                                     <p
                                         onClick={() => menuItemClickHandler("homeRef")} 
-                                        className="hover:text-primary-dark"
+                                        className="hover:text-lilac-dark cursor-pointer"
                                     >
                                         Home
                                     </p>
-                                    <p onClick={() => menuItemClickHandler("servicesRef")} className="hover:text-primary-dark">
+                                    <p onClick={() => menuItemClickHandler("servicesRef")} className="hover:text-lilac-dark cursor-pointer">
                                         Services
                                     </p>
-                                    <p onClick={() => menuItemClickHandler("aboutRef")} className="hover:text-primary-dark">
+                                    <p onClick={() => menuItemClickHandler("aboutRef")} className="hover:text-lilac-dark cursor-pointer">
                                         About
                                     </p>
-                                    <p onClick={() => menuItemClickHandler("contactRef")} className="hover:text-primary-dark">
+                                    <p onClick={() => menuItemClickHandler("contactRef")} className="hover:text-lilac-dark cursor-pointer">
                                         Contact Us
                                     </p>
-                                    <Link to="/auth/login" target="_blank" className="bg-primary-light px-8 py-1.5 2xl:px-10 2xl:py-2 rounded-full text-white hover:bg-primary-dark">
+                                    <Link to="/auth/login" target="_blank" className="bg-lilac px-8 py-1.5 2xl:px-10 2xl:py-2 rounded-full text-white hover:bg-lilac-dark cursor-pointer">
                                         Sign In
                                     </Link>
                                 </div>
@@ -80,7 +80,7 @@ const Navbar = ( props ) => {
                 </div>
                 {/* mobile navigation */}
                 <div
-                    className={`fixed z-40 w-5/6 bg-primary-pastel shadow-lg text-jetblack font-semibold rounded-3xl overflow-hidden flex flex-col px-6 lg:hidden gap-12 origin-top duration-1200 ${!toggleMenu ? "h-0" : "h-auto"
+                    className={`fixed z-40 w-5/6 bg-lilac-pastel shadow-lg text-jetblack font-semibold rounded-3xl overflow-hidden flex flex-col px-6 lg:hidden gap-12 origin-top duration-1200 ${!toggleMenu ? "h-0" : "h-auto"
                         } left-1/2 transform -translate-x-1/2 mt-2`}
                 >
                     <div className="py-8">
@@ -99,7 +99,7 @@ const Navbar = ( props ) => {
                             <p onClick={() => menuItemClickHandler("contactRef")} className="hover:text-jetblack">
                                 Contact Us
                             </p>
-                            <Link to="/auth/login" target="_blank" className="w-full bg-primary-light rounded-full text-white py-3 hover:bg-primary-dark">
+                            <Link to="/auth/login" target="_blank" className="w-full bg-lilac rounded-full text-white py-3 hover:bg-lilac-dark">
                                 Sign In
                             </Link>
                         </div>
@@ -107,7 +107,7 @@ const Navbar = ( props ) => {
                 </div>
             {/* mobile navigation */}
             <div
-                className={`fixed z-40 w-5/6 bg-primary-pastel shadow-lg text-jetblack font-semibold rounded-3xl overflow-hidden flex flex-col px-6 lg:hidden gap-12 origin-top duration-1200 ${!toggleMenu ? "h-0" : "h-auto"
+                className={`fixed z-40 w-5/6 bg-lilac-pastel shadow-lg text-jetblack font-semibold rounded-3xl overflow-hidden flex flex-col px-6 lg:hidden gap-12 origin-top duration-1200 ${!toggleMenu ? "h-0" : "h-auto"
                     } left-1/2 transform -translate-x-1/2 mt-2`}
             >
                 <div className="py-8">
@@ -126,7 +126,7 @@ const Navbar = ( props ) => {
                         <p onClick={() => menuItemClickHandler("contactRef")} className="hover:text-jetblack">
                             Contact Us
                         </p>
-                        <Link to="/auth/login" target="_blank" className="w-full bg-primary-light rounded-xl text-white py-2">
+                        <Link to="/auth/login" target="_blank" className="w-full bg-lilac rounded-xl text-white py-2">
                             Sign in
                         </Link>
                     </div>
