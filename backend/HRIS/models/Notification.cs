@@ -19,7 +19,7 @@ namespace HRIS.Models
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
-        [ForeignKey("TeamsId")]
+        [ForeignKey("TeamId")]
         [JsonIgnore]
         public Guid TeamId { get; set; }
     }

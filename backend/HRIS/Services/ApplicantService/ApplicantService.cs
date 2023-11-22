@@ -24,7 +24,7 @@ namespace HRIS.Services.ApplicantService
                 throw new UserNotFoundException("Invalid email address. Please try again.");
 
             var applicant = _mapper.Map<Applicant>(request);
-            applicant.TeamId = hr.TeamId;
+            applicant.TeamId = hr.TeamId ?? Guid.Empty;
             var isApplicantExists = await _applicantRepository.IsApplicantExists(hr, applicant);
             if (isApplicantExists)
             {

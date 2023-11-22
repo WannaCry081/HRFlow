@@ -49,7 +49,7 @@ namespace HRIS.Services.EmployeeService
         public async Task<GetEmployeeRecordDto> CreateEmployeeRecord(Guid hrId, CreateEmployeeRecordDto request)
         {
             var hr = await _employeeRepository.GetUserById(hrId) ??
-                throw new UserNotFoundException("Invalid email address. Please try again.");
+                   throw new UserNotFoundException("Invalid email address. Please try again.");
 
             var isEmployeeExists = await _employeeRepository.IsEmailExists(request.CompanyEmail);
             if (isEmployeeExists)
@@ -59,13 +59,10 @@ namespace HRIS.Services.EmployeeService
 
             Password.Encrypt(request.Password, out string passwordHash, out string passwordSalt);
 
-            var departments = await _departmentRepository.GetDepartments(hr);
-            var selectedDepartment = departments.FirstOrDefault(c => c.Name.Equals(request.Department)) ??
-               throw new DepartmentNotFoundException("Department does not exist. Please try again.");
-
-            var positions = await _positionRepository.GetPositions(hr, selectedDepartment);
-            var selectedPosition = positions.FirstOrDefault(c => c.Title.Equals(request.Position)) ??
-                throw new PositionNotFoundException("Position not found. Please try again.");
+            var selectedDepartment = await _departmentRepository.GetDepartmentByName(hr, request.Name.Trim()) ??
+                throw new DepartmentNotFoundException("Department does not exist. Please try again.");
+            var selectedPosition = await _positionRepository.GetPositionByName(hr, selectedDepartment, request.Title.Trim()) ??
+                throw new PositionNotFoundException("Position does not exist. Please try again.");
 
             char sex = request.Sex;
 

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HRIS.Models
@@ -65,16 +66,22 @@ namespace HRIS.Models
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
-        [ForeignKey("TeamsId")]
-        public Guid TeamId { get; set; }
+        [ForeignKey("TeamId")]
+        public Guid? TeamId { get; set; }
+
+        [DeleteBehavior(DeleteBehavior.ClientSetNull)]
         public Team? Team { get; set; }
 
-        [ForeignKey("DepartmentsId")]
-        public Guid DepartmentId { get; set; }
+        [ForeignKey("DepartmentId")]
+        public Guid? DepartmentId { get; set; }
+
+        [DeleteBehavior(DeleteBehavior.ClientSetNull)]
         public Department? Department { get; set; }
 
-        [ForeignKey("PositionsId")]
-        public Guid PositionId { get; set; } 
+        [ForeignKey("PositionId")]
+        public Guid? PositionId { get; set; }
+
+        [DeleteBehavior(DeleteBehavior.ClientSetNull)]
         public Position? Position { get; set; }
 
         public ICollection<Record> Records { get; set; } = new List<Record>();

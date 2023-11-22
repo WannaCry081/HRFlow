@@ -30,7 +30,7 @@ namespace HRIS.Services.DepartmentService
             }
 
             var department = _mapper.Map<Department>(request);
-            department.TeamId = hr.TeamId;
+            department.TeamId = hr.TeamId ?? Guid.Empty;
 
             var response = await _departmentRepository.CreateDepartment(department);
             if (!response)
@@ -92,7 +92,7 @@ namespace HRIS.Services.DepartmentService
 
             var dbDepartment = _mapper.Map<Department>(request);
             dbDepartment.Id = departmentId;
-            dbDepartment.TeamId = hr.TeamId;
+            dbDepartment.TeamId = hr.TeamId ?? Guid.Empty;
 
             var isDepartmentUpdated = await _departmentRepository.UpdateDepartments(department, dbDepartment);
             if (!isDepartmentUpdated)
