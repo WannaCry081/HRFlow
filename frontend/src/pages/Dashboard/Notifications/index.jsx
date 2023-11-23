@@ -57,9 +57,9 @@ const Notifications = () => {
 
     return (
         <div className="flex items-center">
-            <div className="bg-white h-[47rem] rounded shadow p-6 m-4 w-[full] lg:w-3/4 lg:max-w-lg">
+            <div className="bg-white h-[47rem] rounded-md shadow-lg p-6 m-4 w-[full] lg:w-3/4 lg:max-w-lg">
                 <div className="mb-3 border-b border-gray-200 pb-5">
-                    <h1 className="text-gray-900">Notifications</h1>
+                    <h1 className="text-jetblack font-bold">Notifications</h1>
                 </div>
                 <div className="overflow-y-auto h-[40rem]">
                     {notifications.filter(notification => notification.image === 'person').map(notification => (
@@ -74,7 +74,7 @@ const Notifications = () => {
                             </div>
                             <div className="w-96">
                                 <p
-                                    className={`text-gray-800 ${!notification.isRead ? 'text-blue-600 font-bold cursor-pointer' : ''}`}
+                                    className={`text-gray-800 ${!notification.isRead ? ' text-grass font-bold cursor-pointer' : ''}`}
                                     onClick={() => {
                                         readFormik.setFieldValue('notificationId', notification.id);
                                         readFormik.handleSubmit();
@@ -102,9 +102,9 @@ const Notifications = () => {
                 </div>
             </div>
 
-            <div className="bg-white h-[47rem] rounded shadow p-6 m-4 w-[full] lg:w-3/4 lg:max-w-lg">
+            <div className="bg-white h-[47rem] rounded-md shadow-lg p-6 m-4 w-[full] lg:w-3/4 lg:max-w-lg">
                 <div className="mb-3 border-b border-gray-200 pb-5">
-                    <h1 className="text-gray-900">Alerts</h1>
+                    <h1 className="text-jetblack font-bold">Alerts</h1>
                 </div>
                 <div className="overflow-y-auto h-[40rem]">
                     {notifications.filter(notification => notification.image === 'alert').map(notification => (
@@ -119,7 +119,7 @@ const Notifications = () => {
                             </div>
                             <div className="w-96">
                                 <p
-                                    className={`text-gray-800 ${!notification.isRead ? 'text-blue-600 font-bold cursor-pointer' : ''}`}
+                                    className={`text-jetblack ${!notification.isRead ? 'text-lilac-dark font-bold cursor-pointer' : ''}`}
                                     onClick={() => {
                                         readFormik.setFieldValue('notificationId', notification.id);
                                         readFormik.handleSubmit();
