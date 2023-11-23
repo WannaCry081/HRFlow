@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.JsonPatch;
-using HRIS.Dtos.ApplicantDto;
+﻿using HRIS.Dtos.ApplicantDto;
 using HRIS.Models;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace HRIS.Services.ApplicantService
 {
