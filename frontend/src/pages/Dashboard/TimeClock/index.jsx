@@ -135,7 +135,7 @@ const TimeClock = () => {
 
                         <button
                             type="submit"
-                            className="mx-2 bg-primary-light hover:bg-primary-dark text-white text-lg font-bold py-4 px-6 rounded"
+                            className="mx-2 bg-lilac hover:bg-lilac-dark text-white text-lg font-bold py-4 px-6 rounded"
                         >
                             Clock In
                         </button>
@@ -144,7 +144,7 @@ const TimeClock = () => {
                     <form onSubmit={formik2.handleSubmit}>
                         <button
                             type="submit"
-                            className="mx-2 bg-secondary-light hover:bg-secondary-dark text-white text-lg font-bold py-4 px-6 rounded"
+                            className="mx-2 bg-blush hover:bg-blush-dark text-white text-lg font-bold py-4 px-6 rounded"
                         >
                             Clock Out
                         </button>
@@ -178,7 +178,7 @@ const TimeClock = () => {
                                     <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                                         <button
                                             type="button"
-                                            className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary-light text-base font-medium text-white hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
+                                            className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blush hover:bg-blush-dark text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
                                             onClick={() => setClockInModal(false)}
                                         >
                                             Close
@@ -215,7 +215,7 @@ const TimeClock = () => {
                                     <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                                         <button
                                             type="button"
-                                            className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary-light text-base font-medium text-white hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
+                                            className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blush hover:bg-blush-dark text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
                                             onClick={() => setClockInFailModal(false)}
                                         >
                                             Close
@@ -252,7 +252,7 @@ const TimeClock = () => {
                                     <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                                         <button
                                             type="button"
-                                            className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary-light text-base font-medium text-white hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
+                                            className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blush hover:bg-blush-dark text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
                                             onClick={() => { setClockOutModal(false); }}
                                         >
                                             Close
@@ -289,7 +289,7 @@ const TimeClock = () => {
                                     <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                                         <button
                                             type="button"
-                                            className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary-light text-base font-medium text-white hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
+                                            className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blush hover:bg-blush-dark text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
                                             onClick={() => { setClockOutFailModal(false); }}
                                         >
                                             Close
@@ -301,16 +301,16 @@ const TimeClock = () => {
                     )}
                 </div>
             </div>
-            <div className="mt-6 mx-6 h-[24rem] bg-primary-pastel min-w-[24rem] shadow-lg rounded-xl flex flex-col items-center p-6 overflow-y-auto">
+            <div className="mt-6 mx-6 h-[24rem] bg-lilac-pastel min-w-[24rem] shadow-lg rounded-xl flex flex-col items-center p-6 overflow-y-auto">
                 <table className="table-auto font-poppins">
                     <thead>
                         <tr>
-                            <th className="px-4 py-2 text-primary-dark">ID</th>
-                            <th className="px-4 py-2 text-primary-dark">Month</th>
-                            <th className="px-4 py-2 text-primary-dark">Day</th>
-                            <th className="px-4 py-2 text-primary-dark">Year</th>
-                            <th className="px-4 py-2 text-primary-dark">Clock In</th>
-                            <th className="px-4 py-2 text-primary-dark">Clock Out</th>
+                            <th className="px-4 py-2 text-jetblack">ID</th>
+                            <th className="px-4 py-2 text-jetblack">Month</th>
+                            <th className="px-4 py-2 text-jetblack">Day</th>
+                            <th className="px-4 py-2 text-jetblack">Year</th>
+                            <th className="px-4 py-2 text-jetblack">Clock In</th>
+                            <th className="px-4 py-2 text-jetblack">Clock Out</th>
                         </tr>
                     </thead>
                     <tbody className="space-y-4">
