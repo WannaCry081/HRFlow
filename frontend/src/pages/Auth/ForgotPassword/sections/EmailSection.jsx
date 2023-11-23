@@ -10,8 +10,8 @@ const EmailSection = (prop) => {
     <>
       <header className="mb-6">
         <span className="flex items-center gap-2">
-          <LuMessagesSquare size={26} className="stroke-primary-light" />
-          <h1 className="text-2xl sm:text-3xl font-lato font-extrabold text-primary-light ">
+          <LuMessagesSquare size={26} className="stroke-lilac" />
+          <h1 className="text-2xl sm:text-3xl font-lato font-extrabold text-lilac ">
             Forgot your password?
           </h1>
         </span>

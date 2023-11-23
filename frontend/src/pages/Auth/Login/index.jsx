@@ -1,6 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { TextInput, PasswordInput, SubmitButton } from "/src/components/FormInput";
+import {
+  TextInput,
+  PasswordInput,
+  SubmitButton,
+} from "/src/components/FormInput";
 import { ProgressBar, CircularProgressBar } from "/src/components/Loading";
 import { useLogin, useToggle } from "/src/hooks";
 import { ForgotPassword } from "/src/pages/Auth";
@@ -69,7 +73,7 @@ const Login = () => {
 
             <div className="mt-2 text-end float-right">
               <p
-                className="font-poppins text-sm font-semibold text-secondary-light cursor-pointer active-secondary"
+                className="font-poppins text-sm font-semibold text-secondary cursor-pointer active-secondary"
                 onClick={onSetForgotPassword}
               >
                 Forgot Password?
@@ -105,7 +109,7 @@ const Login = () => {
         <p className="mt-4 font-poppins text-sm text-gray-600">
           {"Don't have an account yet? "}
           <span
-            className="font-semibold text-secondary-light active-secondary cursor-pointer"
+            className="font-semibold text-blush active-blush cursor-pointer"
             onClick={onSetLoading}
           >
             Sign Up
