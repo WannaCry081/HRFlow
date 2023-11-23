@@ -23,7 +23,7 @@ const CreatePosition = (prop) => {
         onSubmit: async (values) => {
             prop.onSetSubmit();
 
-            const response = prop.addPosition 
+            const response = prop.addPosition
                 ? await AddPositionApi(token, prop.selectedDepartment.id, values)
                 : await UpdatePositionPropertyApi(
                     token,
@@ -36,23 +36,23 @@ const CreatePosition = (prop) => {
                     }]
                 );
 
-                setTimeout(() => {
-                    if (response.status === 200) {
-                        onSetToast();
-                        setTimeout(() => {
-                            prop.onSetOpenModal();
-                        }, 800);
-                    } else if (response.status === 400) {
-                        formik.setErrors({
-                            title: response.data
-                        });
-                    } else {
-                        navigate("/error");
-                    }
+            setTimeout(() => {
+                if (response.status === 200) {
+                    onSetToast();
+                    setTimeout(() => {
+                        prop.onSetOpenModal();
+                    }, 800);
+                } else if (response.status === 400) {
+                    formik.setErrors({
+                        title: response.data
+                    });
+                } else {
+                    navigate("/error");
+                }
 
-                    prop.onSetPositionSubmit();
-                    prop.onSetSubmit();
-                }, 800);
+                prop.onSetPositionSubmit();
+                prop.onSetSubmit();
+            }, 800);
         },
 
         validationSchema: Yup.object({
@@ -61,18 +61,18 @@ const CreatePosition = (prop) => {
                 .max(50, "Position Title can be at most 50 characters.")
         })
     });
-    
+
     return (
         <ModalBox top="mt-8" onCancel={prop.onCancel}>
             {toast && <Toast message={`Position successfully ${prop.addPosition ? "created!" : "updated!"}`} />}
             <header className="mb-6">
                 <span className="flex items-center gap-2">
-                    <h1 className="text-2xl sm:text-3xl font-lato font-extrabold text-primary-light ">
+                    <h1 className="text-2xl sm:text-3xl font-lato font-bold text-lilac ">
                         {prop.addPosition ? "Add" : "Update"} Position
                     </h1>
                 </span>
             </header>
-            <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4 ">
+            <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4 w-full">
                 <TextInput nameId="title"
                     name="Title"
                     type="text"
@@ -85,7 +85,13 @@ const CreatePosition = (prop) => {
                     onChange={formik.handleChange}
                     value={formik.values.title} />
 
-                <div className="self-end w-full sm:w-44 ">
+                <div className="self-end w-1/2 flex gap-2">
+                    <button className="bg-gray-200 hover:bg-gray-100 rounded-full h-14 font-semibold w-full shadow-lg">
+                        <h1 onClick={prop.onCancel}
+                            className="w-full h-full flex items-center justify-center">
+                            Cancel
+                        </h1>
+                    </button>
                     <SubmitButton>
                         {(prop.submit) ? (
                             <CircularProgressBar>
