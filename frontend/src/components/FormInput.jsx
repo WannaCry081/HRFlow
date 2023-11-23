@@ -20,7 +20,7 @@ export const TextInput = (prop) => {
                     readOnly={prop.readOnly}
                     placeholder={prop.placeholder}
                     onBlur={prop.onBlur}
-                    className="w-full border border-primary-pastel rounded-md bg-gray-100 p-3 font-lato focus:border focus:outline-primary-light sm:p-3 h-12 lg:h-14"/>
+                    className="w-full border border-lilac rounded-md bg-gray-100 p-3 font-lato focus:border focus:outline-lilac sm:p-3 h-12 lg:h-14"/>
 
             <div className="text-sm mt-2 text-start text-red-500 font-semibold">
                 {prop.errors && prop.touched && prop.errors }
@@ -52,7 +52,7 @@ export const PasswordInput = (prop) => {
                     onChange={prop.onChange}
                     placeholder={prop.placeholder}
                     onBlur={prop.onBlur}
-                    className="w-full border border-primary-pastel rounded-md bg-gray-100 py-3 pr-12 pl-3 font-lato focus:border focus:outline-primary-light h-12 lg:h-14" />
+                    className="w-full border border-lilac rounded-md bg-gray-100 py-3 pr-12 pl-3 font-lato focus:border focus:outline-lilac-light h-12 lg:h-14" />
                 <button className="absolute right-4"
                     onClick={onSetShowPassword}>
                     {showPassword ? (
@@ -72,7 +72,7 @@ export const PasswordInput = (prop) => {
     
 export const CodeInput = (prop) => {
     return (
-        <input className="w-full rounded-xl h-12 lg:h-14 sm:h-16 text-center text-xl border border-primary-pastel bg-gray-100 font-poppins font-semibold focus:border focus:outline-primary-light"
+        <input className="w-full rounded-xl h-12 lg:h-14 sm:h-16 text-center text-xl border border-lilac bg-gray-100 font-poppins font-semibold focus:border focus:outline-lilac-light"
             maxLength={prop.maxLength}
             minLength={prop.minLength}
             id={prop.nameId}
@@ -88,7 +88,7 @@ export const CodeInput = (prop) => {
 export const SubmitButton = (prop) => {
     return (
         <button type="submit"
-            className="bg-primary-light rounded-full h-14 font-semibold shadow-primary w-full">
+            className="bg-lilac rounded-full h-14 font-semibold shadow-primary w-full">
             <div className="w-full h-full flex items-center justify-center">
                 {prop.children}
             </div>
@@ -110,7 +110,7 @@ export const DatePickerInput = (prop) => {
                 selected={prop.selected}
                 onChange={prop.onChange} 
                 showYearDropdown
-                className="w-full border border-primary-pastel rounded-md bg-gray-100 font-lato focus:border focus:outline-primary-light p-4"/>
+                className="w-full border border-lilac rounded-md bg-gray-100 font-lato focus:border focus:outline-lilac-light p-4"/>
         </span>
     );
 };
@@ -127,7 +127,7 @@ export const DropdownMenu = (prop) => {
                 name={prop.name}
                 value={prop.department}
                 onChange={prop.onChange}
-                className="border rounded-md p-4 bg-gray-100 focus:border font-lato focus:outline-primary-light"
+                className="border rounded-md p-4 bg-gray-100 focus:border font-lato focus:outline-lilac-light"
             >
                 <option value="">{prop.defaultOption}</option>
                 {prop.options}

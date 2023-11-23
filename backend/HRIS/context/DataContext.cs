@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using HRIS.Models;
+﻿using HRIS.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HRIS.Context
 {
@@ -13,6 +13,7 @@ namespace HRIS.Context
         public DbSet<Department> Departments => Set<Department>();
         public DbSet<Position> Positions => Set<Position>();
         public DbSet<Record> Records => Set<Record>();
+        public DbSet<Notification> Notifications => Set<Notification>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

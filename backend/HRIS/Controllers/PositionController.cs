@@ -129,7 +129,7 @@ namespace HRIS.Controllers
                 {
                     throw new Exception("Failed to update position information.");
                 }
-                return Ok(response);
+                return Ok("Successfully updated position information.");
             }
             catch (UserNotFoundException ex)
             {

@@ -35,13 +35,22 @@ namespace HRIS.Repositories.DepartmentRepository
         public async Task<Department?> GetDepartment(User hr, Guid departmentId)
         {
             return await _context.Departments
+                .Include(c => c.Users)
                 .Include(c => c.Positions)
                 .Where(c => c.Id.Equals(departmentId) && c.TeamId.Equals(hr.TeamId)).FirstOrDefaultAsync();
+        }
+        public async Task<Department?> GetDepartmentByName(User hr, string name)
+        {
+            return await _context.Departments
+                .Include(c => c.Users)
+                .Include(c => c.Positions)
+                .Where(c => c.Name.Equals(name) && c.TeamId.Equals(hr.TeamId)).FirstOrDefaultAsync();
         }
 
         public async Task<ICollection<Department>> GetDepartments(User hr)
         {
             return await _context.Departments
+                .Include(c => c.Users)
                 .Include(c => c.Positions)
                 .Where(c => c.TeamId.Equals(hr.TeamId)).ToListAsync();
         }
@@ -57,6 +66,7 @@ namespace HRIS.Repositories.DepartmentRepository
             department.Name = request.Name;
             department.Manager = request.Manager;
             department.Assistant = request.Assistant;
+            department.UpdatedAt = DateTime.Now;
 
             return await _context.SaveChangesAsync() > 0;
         }
