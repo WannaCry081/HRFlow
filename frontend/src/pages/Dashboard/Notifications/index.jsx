@@ -65,7 +65,7 @@ const Notifications = () => {
                     {notifications.filter(notification => notification.image === 'person').map(notification => (
                         <div
                             key={notification.id}
-                            className="flex mt-4 my-4 hover:bg-gray-200 transition-colors duration-200 relative"
+                            className="flex mt-4 my-4 hover:bg-lilac-pale transition-colors duration-200 relative"
                             onMouseEnter={() => setHoveredNotification(notification.id)}
                             onMouseLeave={() => setHoveredNotification(null)}
                         >
@@ -74,7 +74,7 @@ const Notifications = () => {
                             </div>
                             <div className="w-96">
                                 <p
-                                    className={`text-gray-800 ${!notification.isRead ? ' text-grass font-bold cursor-pointer' : ''}`}
+                                    className={`text-gray-800 ${!notification.isRead ? 'text-lilac font-bold cursor-pointer' : ''}`}
                                     onClick={() => {
                                         readFormik.setFieldValue('notificationId', notification.id);
                                         readFormik.handleSubmit();
@@ -110,7 +110,7 @@ const Notifications = () => {
                     {notifications.filter(notification => notification.image === 'alert').map(notification => (
                         <div
                             key={notification.id}
-                            className="flex mt-4 my-4 hover:bg-gray-200 transition-colors duration-200 relative"
+                            className="flex mt-4 my-4 hover:bg-lilac-pale transition-colors duration-200 relative"
                             onMouseEnter={() => setHoveredNotification(notification.id)}
                             onMouseLeave={() => setHoveredNotification(null)}
                         >
@@ -119,7 +119,7 @@ const Notifications = () => {
                             </div>
                             <div className="w-96">
                                 <p
-                                    className={`text-jetblack ${!notification.isRead ? 'text-lilac-dark font-bold cursor-pointer' : ''}`}
+                                    className={`text-jetblack ${!notification.isRead ? 'text-lilac font-bold cursor-pointer' : ''}`}
                                     onClick={() => {
                                         readFormik.setFieldValue('notificationId', notification.id);
                                         readFormik.handleSubmit();
