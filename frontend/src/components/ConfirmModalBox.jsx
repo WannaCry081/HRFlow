@@ -5,14 +5,14 @@ const ConfirmModalBox = (prop) => {
         <ModalBox top="mt-10" onCancel={prop.onCancel}>
             <header className="mb-6">
                 <span className="flex items-center gap-2">
-                    <h1 className="text-[1.8rem] font-lato font-extrabold text-secondary-light ">
+                    <h1 className="text-[1.8rem] font-lato font-bold text-blush ">
                         {prop.header}
                     </h1>
                 </span>
             </header>
             <p className="font-poppins text-md text-gray-600">
                 Are you sure you want to {prop.operation}
-                <span className="ml-1 text-secondary-light font-semibold">
+                <span className="ml-1 text-blush font-semibold">
                     {prop.title}
                 </span>?
             </p>
@@ -24,7 +24,7 @@ const ConfirmModalBox = (prop) => {
                     </h1>
                 </button>
                 <button onClick={prop.submit}
-                    className="bg-secondary-light hover:bg-secondary-dark shadow-secondary rounded-full h-14 font-semibold w-1/4">
+                    className="bg-blush hover:bg-blush-dark shadow-blush rounded-full h-14 font-semibold w-1/4">
                     <h1 className="w-full h-full flex items-center justify-center text-white">
                         {prop.option}
                     </h1>

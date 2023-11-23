@@ -20,7 +20,7 @@ export const TextInput = (prop) => {
                     readOnly={prop.readOnly}
                     placeholder={prop.placeholder}
                     onBlur={prop.onBlur}
-                    className="w-full border border-lilac rounded-md bg-gray-100 p-3 font-lato focus:border focus:outline-lilac sm:p-3 h-12 lg:h-14"/>
+                    className="w-full border border-gray-200 rounded-md bg-gray-100 p-3 font-lato focus:border focus:outline-lilac sm:p-3 h-12 lg:h-14"/>
 
             <div className="text-sm mt-2 text-start text-red-500 font-semibold">
                 {prop.errors && prop.touched && prop.errors }
@@ -110,7 +110,7 @@ export const DatePickerInput = (prop) => {
                 selected={prop.selected}
                 onChange={prop.onChange} 
                 showYearDropdown
-                className="w-full border border-lilac rounded-md bg-gray-100 font-lato focus:border focus:outline-lilac-light p-4"/>
+                className="w-full border border-gray-200 rounded-md bg-gray-100 font-lato focus:border focus:outline-lilac-light p-4"/>
         </span>
     );
 };

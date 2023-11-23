@@ -129,14 +129,14 @@ const PositionList = (prop) => {
             />}
 
             <div className="w-full flex justify-between items-center pt-6">
-                <h1 className="font-lato font-black text-gray-600 text-3xl">
+                <h1 className="font-lato font-semibold text-gray-500 text-3xl">
                     Positions
                 </h1>
                 <div onClick={() => {
                     onSetOpenModal(true)
                     onSetAddPosition(true)
                 }}
-                    className="w-40 gap-2 bg-primary-light hover:bg-primary-dark flex items-center rounded-lg justify-center hover-bg-primary-dark h-10 cursor-pointer">
+                    className="w-40 gap-2 bg-lilac hover:bg-lilac-dark flex items-center rounded-lg justify-center hover-bg-lilac-dark h-10 cursor-pointer">
                     <PiPlusBold size={24} className="fill-white" />
                     <p className="text-white font-poppins font-semibold cursor-pointer">
                         Add Position
@@ -173,18 +173,18 @@ export default PositionList;
 const PositionItem = (prop) => {
     return (
         <div onClick={prop.onSelect}
-            className={` cursor-pointer hover:bg-purple-200 shadow-md p-4 flex w-full h-full rounded-lg justify-between items-center ${prop.selectedPosition && prop.selectedPosition.id === prop.position.id ? "bg-purple-200" : "bg-primary-pastel"}`} >
+            className={` cursor-pointer hover:bg-purple-200 shadow-md p-4 flex w-full h-full rounded-lg justify-between items-center ${prop.selectedPosition && prop.selectedPosition.id === prop.position.id ? "bg-purple-200" : "bg-lilac-pastel"}`} >
             <h1 className="font-poppins">
                 {prop.title}
             </h1>
             <div className="flex gap-2 items-center">
                 <div onClick={prop.onSetOpenModal}
                     className="rounded-full bg-gray-300 hover:bg-pink-100 group h-full p-2">
-                    <FiEdit3 size={22} className="stroke-gray-600 group-hover:stroke-pink-500" />
+                    <FiEdit3 size={22} className="stroke-gray-500 group-hover:stroke-pink-500" />
                 </div>
                 <div onClick={prop.onSetConfirmModal}
                     className="rounded-full bg-gray-300 hover:bg-red-200 h-full p-2 group">
-                    <PiTrashBold size={22} className="fill-gray-600 group-hover:fill-red-500" />
+                    <PiTrashBold size={22} className="fill-gray-500 group-hover:fill-red-500" />
                 </div>
             </div>
         </div>

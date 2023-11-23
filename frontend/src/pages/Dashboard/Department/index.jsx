@@ -69,7 +69,7 @@ const Department = () => {
     
     return (
         <div className="flex h-full">
-            <section className="w-full h-full bg-primary-palePastel rounded-t-[2.5rem] p-8 flex flex-col">
+            <section className="w-full h-full bg-lilac-pale rounded-t-[2.5rem] p-8 flex flex-col">
                 {toast && <Toast message="Department successfullly deleted!" />}
 
                 {openModal && <CreateDepartment
@@ -110,7 +110,7 @@ const Department = () => {
                                         onSetOpenModal(true);
                                         onSetCreateDepartment(true)
                                 }}
-                                    className="w-1/5 lg:w-56 gap-2 bg-primary-light hover:bg-primary-dark flex items-center rounded-lg justify-center hover-bg-primary-dark h-12 cursor-pointer">
+                                    className="w-1/5 lg:w-56 gap-2 bg-lilac hover:bg-lilac-dark flex items-center rounded-lg justify-center hover-bg-primary-dark h-12 cursor-pointer">
                                     <PiPlusBold size={24} className="fill-white" />
                                     <p className="text-white font-poppins font-semibold cursor-pointer">
                                         Add Department
