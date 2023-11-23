@@ -35,11 +35,11 @@ namespace HRIS.Services.NotificationService
             return _mapper.Map<GetNotificationDto>(notification);
         }
 
-        public async Task<bool> DeleteNotification(Guid hrId, Guid notificationId)
+        public async Task<bool> DeleteNotification(Guid userId, Guid notificationId)
         {
-            var hr = await _notificationRepository.GetUserById(hrId) ??
+            var user = await _notificationRepository.GetUserById(userId) ??
                throw new UserNotFoundException("Invalid email address. Please try again.");
-            var notification = await _notificationRepository.GetNotification(hr, notificationId) ??
+            var notification = await _notificationRepository.GetNotification(user, notificationId) ??
                 throw new NotificationNotFoundException("Notification does not exist. Please try again.");
             var response = await _notificationRepository.DeleteNotification(notification);
             if (!response)
@@ -50,20 +50,20 @@ namespace HRIS.Services.NotificationService
             return response;
         }
 
-        public async Task<GetNotificationDto> GetNotification(Guid hrId, Guid notificationId)
+        public async Task<GetNotificationDto> GetNotification(Guid userId, Guid notificationId)
         {
-            var hr = await _notificationRepository.GetUserById(hrId) ??
+            var user = await _notificationRepository.GetUserById(userId) ??
               throw new UserNotFoundException("Invalid email address. Please try again.");
-            var notification = await _notificationRepository.GetNotification(hr, notificationId) ??
+            var notification = await _notificationRepository.GetNotification(user, notificationId) ??
                 throw new NotificationNotFoundException("Notification does not exist. Please try again.");
             return _mapper.Map<GetNotificationDto>(notification);
         }
 
-        public async Task<ICollection<GetNotificationDto>> GetNotifications(Guid hrId)
+        public async Task<ICollection<GetNotificationDto>> GetNotifications(Guid userId)
         {
-            var hr = await _notificationRepository.GetUserById(hrId) ??
+            var user = await _notificationRepository.GetUserById(userId) ??
              throw new UserNotFoundException("Invalid email address. Please try again.");
-            var notifications = await _notificationRepository.GetNotifications(hr);
+            var notifications = await _notificationRepository.GetNotifications(user);
             return _mapper.Map<ICollection<GetNotificationDto>>(notifications);
         }
 
@@ -95,8 +95,6 @@ namespace HRIS.Services.NotificationService
             }
 
             return _mapper.Map<GetNotificationDto>(dbNotification);
-
-
         }
     }
 }

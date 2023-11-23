@@ -31,9 +31,9 @@ namespace HRIS.Controllers
         {
             try
             {
-                var hrId = UserClaim.GetCurrentUser(HttpContext) ??
+                var userId = UserClaim.GetCurrentUser(HttpContext) ??
                     throw new UserNotFoundException("Invalid user's credential. Please try again.");
-                var response = await _notificationService.GetNotifications(hrId);
+                var response = await _notificationService.GetNotifications(userId);
                 return Ok(response);
             }
             catch (UserNotFoundException ex)
@@ -54,9 +54,9 @@ namespace HRIS.Controllers
         {
             try
             {
-                var hrId = UserClaim.GetCurrentUser(HttpContext) ??
+                var userId = UserClaim.GetCurrentUser(HttpContext) ??
                     throw new UserNotFoundException("Invalid user's credential. Please try again.");
-                var response = await _notificationService.GetNotification(hrId, notificationId);
+                var response = await _notificationService.GetNotification(userId, notificationId);
                 return Ok(response);
             }
             catch (UserNotFoundException ex)
@@ -171,9 +171,9 @@ namespace HRIS.Controllers
         {
             try
             {
-                var hrId = UserClaim.GetCurrentUser(HttpContext) ??
+                var userId = UserClaim.GetCurrentUser(HttpContext) ??
                     throw new UserNotFoundException("Invalid user's credential. Please try again.");
-                var response = await _notificationService.DeleteNotification(hrId, notificationId);
+                var response = await _notificationService.DeleteNotification(userId, notificationId);
                 return Ok("Successfully deleted notification.");
             }
             catch (UserNotFoundException ex)

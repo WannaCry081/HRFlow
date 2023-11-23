@@ -23,7 +23,7 @@ const DefaultTeamSection = (prop) => {
         </GroupContainer>
       </div>
       <button
-        className="bg-primary-light rounded-full self-end h-14 w-full sm:w-44 text-poppins text-white font-semibold shadow-primary"
+        className="bg-lilac rounded-full self-end h-14 w-full sm:w-44 text-poppins text-white font-semibold shadow-lilac"
         onClick={prop.onSetSubmit}
       >
         Proceed
@@ -37,7 +37,7 @@ const GroupContainer = (prop) => {
     <section
       className={`flex-grow w-full border h-56 rounded-lg cursor-pointer ${
         prop.container === prop.activeContainer
-          ? "border-none shadow-primary"
+          ? "border-none shadow-lilac"
           : ""
       } transition-in `}
       onClick={() => prop.onSetContainer(prop.activeContainer)}

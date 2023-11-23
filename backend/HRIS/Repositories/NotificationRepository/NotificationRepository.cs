@@ -32,16 +32,16 @@ namespace HRIS.Repositories.NotificationRepository
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<Notification?> GetNotification(User hr, Guid notificationId)
+        public async Task<Notification?> GetNotification(User user, Guid notificationId)
         {
             return await _context.Notifications
-                .Where(c => c.Id.Equals(notificationId) && c.TeamId.Equals(hr.TeamId)).FirstOrDefaultAsync();
+                .Where(c => c.Id.Equals(notificationId) && c.TeamId.Equals(user.TeamId)).FirstOrDefaultAsync();
         }
 
-        public async Task<ICollection<Notification>> GetNotifications(User hr)
+        public async Task<ICollection<Notification>> GetNotifications(User user)
         {
             return await _context.Notifications
-                .Where(c => c.TeamId.Equals(hr.TeamId)).ToListAsync();
+                .Where(c => c.TeamId.Equals(user.TeamId)).ToListAsync();
         }
 
         public async Task<bool> UpdateNotification(Notification notification, JsonPatchDocument<Notification> request)

@@ -28,6 +28,8 @@
 
   <ItemGroup>
     <Folder Include="Context\" />
+    <Folder Include="Repositories\NotificationRepository\" />
+    <Folder Include="Services\NotificationService\" />
   </ItemGroup>
 
   <ItemGroup>
