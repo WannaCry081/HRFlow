@@ -29,8 +29,8 @@ const VerficationSection = (prop) => {
     <motion.div initial={{ translateX: 20 }} animate={{ translateX: 0 }}>
       <header className="mb-6">
         <span className="flex items-center gap-2">
-          <LuMessagesSquare size={26} className="stroke-primary-light" />
-          <h1 className="text-3xl font-lato font-extrabold text-primary-light ">
+          <LuMessagesSquare size={26} className="stroke-lilac" />
+          <h1 className="text-3xl font-lato font-extrabold text-lilac ">
             Confirm your Email
           </h1>
         </span>

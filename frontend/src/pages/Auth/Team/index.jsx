@@ -27,8 +27,8 @@ const Team = () => {
     >
       <header className="mb-6">
         <span className="flex items-center gap-2">
-          <MdGroups size={30} className="fill-primary-light " />
-          <h1 className="text-2xl font-lato font-extrabold text-primary-light ">
+          <MdGroups size={30} className="fill-lilac " />
+          <h1 className="text-2xl font-lato font-extrabold text-lilac ">
             Join or Create Teams
           </h1>
         </span>

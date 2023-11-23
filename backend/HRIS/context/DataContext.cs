@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using HRIS.Models;
+﻿using HRIS.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HRIS.Context
 {
