@@ -71,7 +71,7 @@ const CreateDepartment = (prop) => {
 
             <header className="mb-6">
                 <span className="flex items-center gap-2">
-                    <h1 className="text-2xl sm:text-3xl font-lato font-extrabold text-primary-light ">
+                    <h1 className="text-2xl sm:text-3xl font-lato font-bold text-lilac ">
                         {prop.addDepartment ? "Add" : "Update"} Department
                     </h1>
                 </span>
@@ -88,8 +88,14 @@ const CreateDepartment = (prop) => {
                     touched={formik.touched.name}
                     onChange={formik.handleChange}
                     value={formik.values.name} />
-
-                <div className="self-end w-full sm:w-44 ">
+                    
+                <div className="self-end w-1/2 flex gap-2">
+                    <button className="bg-gray-200 hover:bg-gray-100 rounded-full h-14 font-semibold w-full shadow-lg">
+                        <h1 onClick={prop.onCancel}
+                            className="w-full h-full flex items-center justify-center">
+                            Cancel
+                        </h1>
+                    </button>
                     <SubmitButton>
                         {(prop.submit) ? (
                             <CircularProgressBar>
