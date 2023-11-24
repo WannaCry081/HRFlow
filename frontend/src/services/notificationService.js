@@ -14,8 +14,19 @@ const axiosInstance = (token) => {
 export const GetNotificationsApi = async (token) => {
     const instance = axiosInstance(token);
 
-    try{
+    try {
         const response = await instance.get("");
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}
+
+export const CreateNotificationApi = async (token, request) => {
+    const instance = axiosInstance(token);
+
+    try {
+        const response = await instance.post("", request);
         return response;
     } catch (error) {
         return error.response;
