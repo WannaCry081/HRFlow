@@ -29,6 +29,19 @@ export const CreateNotificationApi = async (token, request) => {
         const response = await instance.post("", request);
         return response;
     } catch (error) {
+        console.log(error)
         return error.response;
     }
 }
+
+export const UpdateNotificationApi = async (token, notificationId, request) => {
+    const instance = axiosInstance(token);
+
+    try {
+        const response = await instance.patch(`${notificationId}`, request);
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}
+
