@@ -52,7 +52,7 @@ const Position = (prop) => {
                     className="bg-white p-2 rounded-full cursor-pointer hover:bg-gray-50">
                     <AiOutlineArrowLeft size={32} />
                 </div>
-                <h1 className="font-lato font-black text-primary-light text-[2.5rem] lg:text-5xl py-4">
+                <h1 className="font-lato font-bold text-lilac text-[2.5rem] lg:text-5xl py-4">
                     {selectedDepartment.name}
                 </h1>
             </div>
@@ -70,13 +70,13 @@ const Position = (prop) => {
                     <table className="w-full">
                         <thead className="text-left uppercase self-center sticky top-0 bg-white font-lato">
                             <tr>
-                                <th scope="col" className="text-primary-light py-3 px-6 w-[40%] font-black pt-6">
+                                <th scope="col" className="text-lilac py-3 px-6 w-[40%] pt-6">
                                     Name
                                 </th>
-                                <th scope="col" className="text-primary-light py-3 px-6 w-[30%] font-black pt-6">
+                                <th scope="col" className="text-lilac py-3 px-6 w-[30%] pt-6">
                                     Company Email
                                 </th>
-                                <th scope="col" className="text-primary-light py-3 px-6 w-[30%] font-black pt-6">
+                                <th scope="col" className="text-lilac py-3 px-6 w-[30%] pt-6">
                                     Position
                                 </th>
                             </tr>
@@ -92,8 +92,8 @@ const Position = (prop) => {
                                     {groups[initial].map((employee) => (
                                         <tr key={employee.id}>
                                             <td className="px-4 py-2 h-full font-poppins text-gray-600 justify-start  items-center text-ellipsis flex">
-                                                <div className="font-medium h-14 w-14 flex justify-center items-center bg-secondary-pastel mr-6 rounded-xl shadow-md">
-                                                    <div className="text-secondary-light text-xl font-poppins">
+                                                <div className="font-medium h-14 w-14 flex justify-center items-center bg-blush-pastel mr-6 rounded-xl shadow-md">
+                                                    <div className="text-blush text-xl font-poppins">
                                                         {employee.firstName[0]}{employee.lastName[0]}
                                                     </div>
                                                 </div>

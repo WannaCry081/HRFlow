@@ -15,13 +15,13 @@ import useDepartments from "/src/hooks/useDepartments";
 import usePositions from "/src/hooks/usePositions";
 
 
+
 const AddEmployeeForm = (prop) => {
     const token = sessionStorage.getItem("token");
 
     const navigate = useNavigate();
 
     const [date, onSetDate] = useState(null);
-    const [age, onSetAge] = useState(null)
     const [sex, onSetSex] = useState("");
     const [password, onSetPassword] = useState("");
 
@@ -73,7 +73,7 @@ const AddEmployeeForm = (prop) => {
             code += chars.charAt(randomIndex);
         }
 
-        onSetPassword(code);
+        return code;
     };
 
     const calculateAge = (selectedDate) => {
@@ -82,19 +82,19 @@ const AddEmployeeForm = (prop) => {
             const birthdate = new Date(selectedDate);
             const age = today.getFullYear() - birthdate.getFullYear();
             formik.setFieldValue("age", age);
-            onSetAge(age);
         }
     }
 
     const handleDateChange = (selectedDate) => {
         onSetDate(selectedDate);
         calculateAge(selectedDate);
-        formik.setFieldValue("birthdate", date);
+        formik.setFieldValue("birthdate", selectedDate);
     };
 
     const handleGeneratePassword = () => {
-        generatePassword(8);
-        formik.setFieldValue('password', password);
+        const newPassword = generatePassword(8);
+        formik.setFieldValue('password', newPassword);
+        formik.setFieldValue('confirmPassword', newPassword);
     }
 
     const formik = useFormik({
@@ -110,20 +110,19 @@ const AddEmployeeForm = (prop) => {
             companyEmail: "",
             mobileNumber: "",
             landlineNumber: "",
-            department: "",
-            position: "",
+            name: "",
+            title: "",
             password: "",
             confirmPassword: ""
         },
         onSubmit: async (values) => {
             prop.onSetSubmit();
 
-            values.birthdate = date;
-            values.department = department;
-            values.position = position;
-            values.password = password;
-            values.confirmPassword = password;
+            values.name = department;
+            values.title = position;
             values.sex = sex;
+
+            console.log(values);
 
             const { status, data } = await AddEmployeeApi(token, values);
 
@@ -195,13 +194,13 @@ const AddEmployeeForm = (prop) => {
                         <AiOutlineArrowLeft
                             onClick={prop.onSetAddEmployee}
                             size={32} className="fill-gray-500 cursor-pointer" />
-                        <h1 className="text-3xl md:text-4xl font-lato font-black text-primary-light">
+                        <h1 className="text-3xl md:text-4xl font-lato font-bold text-lilac">
                             Add New Employee
                         </h1>
                     </header>
                     <form onSubmit={formik.handleSubmit} className="flex w-full mt-4 gap-8">
                         <div className="w-full">
-                            <h1 className="text-lg font-semibold font-lato text-secondary-light uppercase">Personal Information</h1>
+                            <h1 className="text-lg font-semibold font-lato text-blush uppercase">Personal Information</h1>
                             <div className="flex flex-col mt-3 gap-2 w-full">
                                 <div className="w-full flex gap-3">
                                     <div className="w-full">
@@ -365,7 +364,7 @@ const AddEmployeeForm = (prop) => {
                         </div>
                         <div className="w-full flex flex-col gap-10">
                             <div>
-                                <h1 className="text-lg font-semibold font-lato text-secondary-light uppercase">Company Details</h1>
+                                <h1 className="text-lg font-semibold font-lato text-blush uppercase">Company Details</h1>
                                 <div className="flex flex-col gap-4 mt-2">
                                     {/* Select Department */}
                                     <DropdownMenu
@@ -395,7 +394,7 @@ const AddEmployeeForm = (prop) => {
                                 </div>
                             </div>
                             <div className="w-full">
-                                <h1 className="text-lg font-semibold font-lato text-secondary-light uppercase">Setting up Password</h1>
+                                <h1 className="text-lg font-semibold font-lato text-blush uppercase">Setting up Password</h1>
                                 <div className="flex justify-between gap-3 items-start my-4">
                                     <div className="flex flex-col w-full">
                                         <input
@@ -408,11 +407,9 @@ const AddEmployeeForm = (prop) => {
                                             {formik.errors.password && formik.touched.password && formik.errors.password}
                                         </div>
                                     </div>
-                                    <div onClick={() => {
-                                        generatePassword(8);
-                                        formik.setFieldValue('password', password) }}
+                                    <div onClick={handleGeneratePassword}
 
-                                        className="w-72 gap-2 bg-secondary-light flex items-center rounded-lg justify-center p-4 hover:bg-secondary-dark h-full">
+                                        className="w-72 gap-2 bg-blush flex items-center rounded-lg justify-center p-4 hover:bg-blush-dark h-full">
                                         <p className="hidden lg:block text-white font-poppins font-medium cursor-pointer">
                                             Generate Password
                                         </p>
