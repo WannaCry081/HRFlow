@@ -312,7 +312,6 @@ const TimeClock = () => {
                         <tr>
                             <th className="px-4 py-2 text-primary-dark">Month</th>
                             <th className="px-4 py-2 text-primary-dark">Day</th>
-                            <th className="px-4 py-2 text-primary-dark">Year</th>
                             <th className="px-4 py-2 text-primary-dark">Clock In</th>
                             <th className="px-4 py-2 text-primary-dark">Clock Out</th>
                             <th className="px-4 py-2 text-primary-dark">Hours Worked</th>
@@ -324,7 +323,6 @@ const TimeClock = () => {
                             <tr key={record.id} className="bg-white">
                                 <td className="border px-4 py-2">{record.month}</td>
                                 <td className="border flex justify-center px-4 py-2">{record.day}</td>
-                                <td className="border px-4 py-2">{record.year}</td>
                                 <td className="border px-4 py-2">{new Date(record.clockIn).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })}</td>
                                 <td className="border px-4 py-2">{new Date(record.clockOut).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })}</td>
                                 <td className="border px-4 py-2 flex justify-center bg-grass-dark">
