@@ -9,6 +9,7 @@ const useUpsertDepartment = (selectedDepartment, createDepartment, onCreateDepar
     const navigate = useNavigate();
     const [isLoading, setLoading] = useState(false);
     const [toast, onSetToast] = useToggle();
+
     const formik = useFormik({
         initialValues: {
             name: createDepartment ? "" : selectedDepartment.name
@@ -40,7 +41,7 @@ const useUpsertDepartment = (selectedDepartment, createDepartment, onCreateDepar
                         break;
                     case 404:
                     case 400:
-                        formik.setErrors({ name: response.data });
+                        formik.setErrors({ name: response.data});
                         break;
                     default:
                         navigate("/error");
