@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { GetDepartmentsApi } from "/src/services/departmentService";
 
-const useDepartments = ( submit, positionSubmit ) => {
+const useDepartments = (createDepartment, createPosition) => {
 
     const token = sessionStorage.getItem("token");
     const [departments, setDepartments] = useState([]);
@@ -13,7 +13,7 @@ const useDepartments = ( submit, positionSubmit ) => {
         };
 
         getDepartments();
-    }, [submit, positionSubmit]);
+    }, [createDepartment, createPosition]);
 
     return departments;
 };
