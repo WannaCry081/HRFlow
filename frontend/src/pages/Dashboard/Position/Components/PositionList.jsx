@@ -1,60 +1,23 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { DeletePositionApi } from "/src/services/positionService";
 import { FiEdit3 } from "react-icons/fi";
-import useToggle from "/src/hooks/useToggle";
+import { PiPlusBold, PiTrashBold } from "react-icons/pi";
+import { useDeletePosition } from "/src/hooks";
 import usePositions from "/src/hooks/usePositions";
 import Toast from "/src/components/Toast";
 import CreatePosition from "./CreatePosition";
+import ConfirmModalBox from "/src/components/ConfirmModalBox";
+
 
 const PositionList = (prop) => {
-    const token = sessionStorage.getItem("token");
 
-    const navigate = useNavigate();
-
-    const [toast, onSetToast] = useToggle();
-    const [confirmModal, onSetConfirmModal] = useToggle();
-    
     const [openModal, onSetOpenModal] = useState(false);
-
     const positions = usePositions(prop.createPosition, prop.selectedDepartment.id);
 
-    const deletePosition = async () => {
-        try {
-            const { status, data } = await DeletePositionApi(
-                token,
-                prop.selectedDepartment.id,
-                prop.selectedPosition.id
-            );
-
-            setTimeout(() => {
-                if (status === 200) {
-                    onSetToast();
-                    console.log("Deletion successful!");
-                    setTimeout(() => {
-                        prop.onSetCreatePosition(true);
-                        onSetToast();
-                        onSetConfirmModal();
-                    }, 1200);
-
-                } else if (status === 400) {
-                    formik.setErrors({
-                        title: data
-                    });
-                } else {
-                    navigate("/error");
-                }
-            }, 1200);
-        } catch (error) {
-            console.error(error);
-        }
-    };
+    const [deletePosition, toast, confirmModal, onSetConfirmModal] = useDeletePosition(prop.selectedDepartment, prop.selectedPosition?.id, prop.onSetCreatePosition);
 
     return (
         <div className="h-full w-full">
-
             {toast && <Toast message="Position successfully deleted!" />}
-
             {openModal && <CreatePosition
                 selectedDepartment={prop.selectedDepartment}
                 selectedPosition={prop.selectedPosition}
@@ -63,8 +26,7 @@ const PositionList = (prop) => {
                 onSetOpenModal={onSetOpenModal}
                 onCancel={() => {
                     onSetOpenModal(false);
-                    prop.onSetCreatePosition(false);
-                }}
+                    prop.onSetCreatePosition(false)}}
             />}
 
             {confirmModal && <ConfirmModalBox
@@ -75,8 +37,7 @@ const PositionList = (prop) => {
                 option="Delete"
                 submit={() => {
                     prop.onSetCreatePosition();
-                    deletePosition();
-                }}
+                    deletePosition()}}
             />}
 
             <div className="w-full flex justify-between items-center pt-6">
