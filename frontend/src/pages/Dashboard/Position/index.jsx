@@ -1,16 +1,14 @@
 import React, { useState } from "react";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 import PositionList from "./Components/PositionList";
 import useEmployees from "/src/hooks/useEmployees";
-import { AiOutlineArrowLeft } from "react-icons/ai";
-import useToggle from "/src/hooks/useToggle";
 
 const Position = (prop) => {
     const { selectedDepartment } = prop;
 
+    const [createPosition, onSetCreatePosition] = useState(false);
     const [selectedPosition, setSelectedPosition] = useState(null);
-    const [submit, onSetSubmit] = useToggle();
-
-    const employees = useEmployees(submit);
+    const employees = useEmployees(createPosition);
 
     const employeesInDepartment = (employees, departmentId) => {
         return employees.filter((employee) => employee.departmentId === departmentId);
@@ -22,7 +20,7 @@ const Position = (prop) => {
             : [];
     };
 
-    const allEmployees = employeesInDepartment(employees, selectedDepartment.id);
+    const allEmployees = employeesInDepartment(employees, prop.selectedDepartment.id);
     const positionEmployees = employeesInSelectedPosition(allEmployees, selectedPosition);
 
     const getPositionName = (positionId) => {
@@ -60,9 +58,8 @@ const Position = (prop) => {
                 <div className="bg-white h-full w-2/5 p-4 rounded-xl shadow-lg">
                     <PositionList
                         selectedDepartment={selectedDepartment}
-                        submit={submit}
-                        onSetSubmit={onSetSubmit}
-                        onSetPositionSubmit={prop.onSetPositionSubmit}
+                        createPosition={createPosition}
+                        onSetCreatePosition={onSetCreatePosition}
                         selectedPosition={selectedPosition}
                         onPositionsSelect={(position) => setSelectedPosition(position)} />
                 </div>
