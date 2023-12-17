@@ -16,7 +16,7 @@ const NavBar = (prop) => {
   const userData = prop.userData;
 
   return (
-    <nav className="p-6 w-96 relative flex flex-col shadow-md">
+    <nav className="hidden p-6 w-96 relative md:flex flex-col shadow-md">
       <div className="space-y-4">
         <img
           src={HRFlowLogoLightSvg}
@@ -82,9 +82,6 @@ const NavBar = (prop) => {
             </DropdownMenuItem>
             <DropdownMenuItem className="text-base font-medium">
               Settings
-            </DropdownMenuItem>
-            <DropdownMenuItem className="text-base font-medium">
-              Help
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem className="text-base font-medium text-red-500">
