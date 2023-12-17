@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { DeleteDepartmentApi } from "/src/services/departmentService";
 import { PiPlusBold } from "react-icons/pi";
 import TeamsCard from "../Components/TeamsCard";
 import CreateDepartment from "../Components/CreateDepartment";
@@ -8,62 +6,26 @@ import Toast from "/src/components/Toast";
 import ConfirmModalBox from "/src/components/ConfirmModalBox";
 import { useToggle,
         useDepartments,
+        useDeleteDepartment,
         useEmployees } from "/src/hooks";
 
 const DepartmentListView = (prop) => {
-    const token = sessionStorage.getItem("token");
-    const navigate = useNavigate();
 
     const [createDepartment, onSetCreateDepartment] = useState(false);
-    const [positionSubmit, onSetPositionSubmit] = useToggle();
 
-    const departments = useDepartments(createDepartment, positionSubmit);
+    const departments = useDepartments(createDepartment);
     const employees = useEmployees(createDepartment);
     
     const [openModal, onSetOpenModal] = useToggle();
-    const [confirmModal, onSetConfirmModal] = useToggle();
-    
-    const [toast, onSetToast] = useToggle();
-
-
     const employeesInDepartment = (employees, departmentId) => {
-        return employees.filter((employee) => employee.departmentId === departmentId);
-    }
+        return employees.filter((employee) => employee.departmentId === departmentId)}
 
-    const deleteDepartment = async () => {
-        try {
-            const { status, data } = await DeleteDepartmentApi(
-                token,
-                prop.selectedDepartment.id,
-            );
-
-            setTimeout(() => {
-                if (status === 200) {
-                    onSetToast();
-                    console.log("Deletion successful!");
-                    setTimeout(() => {
-                        onSetToast();
-                    }, 1200);
-                } else if (status === 400) {
-                    formik.setErrors({
-                        title: data
-                    });
-                } else {
-                    navigate("/error");
-                }
-                onSetConfirmModal();
-                onSetCreateDepartment();
-                onSetPositionSubmit();
-            }, 1000);
-        } catch (error) {
-            console.error(error);
-        }
-    };
+    const [deleteDepartment, toast, confirmModal, onSetConfirmModal] = 
+        useDeleteDepartment(prop.selectedDepartment, onSetCreateDepartment);
 
     return(
         <>
             {toast && <Toast message="Department successfullly deleted!" />}
-
             {openModal && <CreateDepartment
                 selectedDepartment={prop.selectedDepartment}
                 createDepartment={createDepartment}
