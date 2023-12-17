@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { GetNotificationsApi } from "/src/services/notificationService";
 
-const useNotifications = () => {
+const useNotifications = (createNotification) => {
     
     const token = sessionStorage.getItem("token");
     const [ notifications, setNotifications ] = useState([]);
@@ -13,7 +13,7 @@ const useNotifications = () => {
         };
 
         getNotifications();
-    }, []);
+    }, [createNotification]);
 
     return notifications;
 }
