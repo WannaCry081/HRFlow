@@ -7,6 +7,7 @@ using HRIS.Repositories.NotificationRepository;
 using HRIS.Repositories.PositionRepository;
 using HRIS.Repositories.RecordRepository;
 using HRIS.Repositories.TeamRepository;
+using HRIS.Repositories.SalaryRepository;
 using HRIS.Repositories.UserRepository;
 using HRIS.Services.ApplicantService;
 using HRIS.Services.AuthService;
@@ -17,6 +18,7 @@ using HRIS.Services.NotificationService;
 using HRIS.Services.PositionService;
 using HRIS.Services.RecordService;
 using HRIS.Services.TeamService;
+using HRIS.Services.SalaryService;
 using HRIS.Services.UserService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -96,6 +98,9 @@ builder.Services.AddScoped<IRecordRepository, RecordRepository>();
 
 builder.Services.AddScoped<INotificationService, NotificationService>();
 builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+
+builder.Services.AddScoped<ISalaryService, SalaryService>();
+builder.Services.AddScoped<ISalaryRepository, SalaryRepository>();
 
 var app = builder.Build();
 
