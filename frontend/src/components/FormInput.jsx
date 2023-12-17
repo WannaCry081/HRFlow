@@ -79,7 +79,7 @@ export const PasswordInput = (prop) => {
                     onChange={prop.onChange}
                     placeholder={prop.placeholder}
                     onBlur={prop.onBlur}
-                    className="w-full border border-lilac rounded-md bg-gray-100 py-3 pr-12 pl-3 font-lato focus:border focus:outline-lilac-light h-12 lg:h-14" />
+                    className="w-full border border-gray-200 rounded-md bg-gray-100 py-3 pr-12 pl-3 font-lato focus:border focus:outline-lilac-light h-12 lg:h-14" />
                 <button className="absolute right-4"
                     onClick={onSetShowPassword}>
                     {showPassword ? (
