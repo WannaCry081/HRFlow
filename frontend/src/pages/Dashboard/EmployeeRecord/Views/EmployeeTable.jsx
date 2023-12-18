@@ -32,7 +32,7 @@ const EmployeeTable = (prop) => {
     return (
         <>
             <section className="w-[75%] bg-lilac-pale rounded-t-[2.5rem] p-8 flex flex-col">
-                <h1 className="text-4xl font-semibold font-lato">Employee Records</h1>
+                <h1 className="text-4xl font-bold font-lato text-lilac mt-4">Employee Records</h1>
                 <div className="flex justify-between w-full items-center my-4">
                     <div className="relative flex items-center w-full">
                         <LuSearch size={24} className="absolute ml-3 stroke-gray-400" />
@@ -52,7 +52,7 @@ const EmployeeTable = (prop) => {
                         </p>
                     </div>
                 </div>
-                <div className="bg-white flex-grow rounded-xl shadow-lg p-1.5">
+                <div className="bg-white h-[30rem] overflow-scroll flex-grow rounded-xl shadow-lg p-1.5">
                     <table className="w-full">
                         <thead className="text-left uppercase self-center sticky top-0 bg-white font-lato">
                             <tr>
@@ -67,7 +67,7 @@ const EmployeeTable = (prop) => {
                                 </th>
                             </tr>
                         </thead>
-                        <tbody className="">
+                        <tbody className="overflow-scroll">
                             {sortedGroupLetters.map((groupLetter) => (
                                 <React.Fragment key={groupLetter}>
                                     <tr className="bg-gray-100 border-none">
