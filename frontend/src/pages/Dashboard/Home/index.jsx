@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Calendar } from "/src/components/ui/calendar";
 import { GetUserProfileApi } from "/src/services/userService.js";
-import { useDepartments, usePositions, useEmployees} from "/src/hooks";
+import { useDepartments, usePositions, useEmployees, useApplicants} from "/src/hooks";
 import { FaUserTie, FaBuilding, FaUsers, FaNetworkWired } from "react-icons/fa6";
 
 const Home = () => {
@@ -11,10 +11,7 @@ const Home = () => {
     const employees = useEmployees();
     const departments = useDepartments();
     const positions = usePositions();
-    // const applicants = useApplicants();
-
-    console.log(positions);
-
+    const applicants = useApplicants();
     
     const [time, setTime] = useState(new Date());
     const [dateTime, setDateTime] = useState("");
@@ -25,9 +22,19 @@ const Home = () => {
             month: 'short',
             day: 'numeric',
         });
-        // setTime(`${formattedTime}`);
         setDateTime(`${formattedDate}`);
     };
+
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setTime(new Date());
+        }, 1000);
+
+        return () => {
+            clearInterval(timer);
+        };
+    }, []);
 
     useEffect(() => {
         const intervalId = setInterval(updateDateTime, 1000);
@@ -60,13 +67,8 @@ const Home = () => {
                         title="Departments"
                     />
                     <StatisticCard 
-                        icon={<FaNetworkWired size={36} className="fill-white" />}
-                        count={positions.length}
-                        title="Positions"
-                    />
-                    <StatisticCard 
                         icon={<FaUsers size={36} className="fill-white" />}
-                        count={0}
+                        count={applicants.length}
                         title="Applicants"
                     />
                 </div>
@@ -75,22 +77,8 @@ const Home = () => {
                         <h1 className="text-3xl font-lato self-start font-bold text-lilac mb-8 ml-8">Time Clock</h1>
                         <h1 className="text-5xl font-poppins font-semibold flex flex-col items-center mb-10">
                             {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true })}
-                            <span className="text-gray-500 font-normal text-2xl">{dateTime}</span>
+                            <span className="text-gray-500 font-normal text-2xl mt-2">{dateTime}</span>
                         </h1>
-                        <div className="flex gap-2">
-                            <div
-                                className="w-1/5 lg:w-56 gap-2 bg-lilac flex items-center rounded-lg justify-center hover:bg-lilac-dark h-full cursor-pointer shadow-md">
-                                <p className="hidden lg:block text-white font-poppins font-semibold text-xl py-3">
-                                    Clock In
-                                </p>
-                            </div>
-                            <div
-                                className="w-1/5 lg:w-56 gap-2 bg-lilac-pastel flex items-center rounded-lg justify-center hover:bg-lilac-pale h-full cursor-pointer shadow-md">
-                                <p className="hidden lg:block text-lilac font-poppins font-semibold text-xl">
-                                    Clock In
-                                </p>
-                            </div>
-                        </div>
                     </div>
                     <div className="w-full flex flex-col bg-white rounded-2xl shadow-lg justify-center items-center py-10">
                         <div className="bg-blush-pastel font-poppins flex text-5xl font-medium text-blush rounded-full h-40 w-40 p-7 items-center justify-center pb-8">
