@@ -169,11 +169,11 @@ const TimeClock = () => {
                                     <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                         <div className="sm:flex sm:items-start">
                                             <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                                <h3 className="text-lg leading-6 font-medium text-green-700" id="modal-title">
+                                                <h3 className="text-2xl leading-6 font-bold text-green-700" id="modal-title">
                                                     Clock In Successful
                                                 </h3>
-                                                <div className="mt-8">
-                                                    <p className="text-sm text-gray-700">
+                                                <div className="mt-4">
+                                                    <p className="text-md text-gray-700">
                                                         You have successfully clocked in.
                                                     </p>
                                                 </div>
@@ -206,11 +206,11 @@ const TimeClock = () => {
                                     <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                         <div className="sm:flex sm:items-start">
                                             <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                                <h3 className="text-lg leading-6 font-medium text-secondary-dark" id="modal-title">
+                                                <h3 className="text-2xl leading-6 font-bold text-blush" id="modal-title">
                                                     Clock In Failed
                                                 </h3>
-                                                <div className="mt-8">
-                                                    <p className="text-sm text-gray-700">
+                                                <div className="mt-4">
+                                                    <p className="text-md text-gray-700">
                                                         You already have clocked in for today. You may come back the next day.
                                                     </p>
                                                 </div>
@@ -243,11 +243,11 @@ const TimeClock = () => {
                                     <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                         <div className="sm:flex sm:items-start">
                                             <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                                <h3 className="text-lg leading-6 font-medium text-green-700" id="modal-title">
+                                                <h3 className="text-2xl leading-6 font-medium text-green-700" id="modal-title">
                                                     Clock Out Successful
                                                 </h3>
-                                                <div className="mt-8">
-                                                    <p className="text-sm text-gray-700">
+                                                <div className="mt-4">
+                                                    <p className="text-md text-gray-700">
                                                         You have successfully clocked out.
                                                     </p>
                                                 </div>
