@@ -20,7 +20,12 @@ const TimeClock = () => {
     const fetchRecords = async () => {
         const response = await GetRecordApi(token);
         if (response.status === 200) {
-            setRecords(response.data);
+            const sortedRecords = response.data.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime));
+            setRecords(sortedRecords);
+
+            if (sortedRecords.length > 0) {
+                setSelectedId(sortedRecords[sortedRecords.length - 1].id);
+            }
         }
     };
 
@@ -135,7 +140,7 @@ const TimeClock = () => {
 
                         <button
                             type="submit"
-                            className="mx-2 bg-primary-light hover:bg-primary-dark text-white text-lg font-bold py-4 px-6 rounded"
+                            className="mx-2 bg-lilac hover:bg-lilac-dark text-white text-lg font-bold py-4 px-6 rounded"
                         >
                             Clock In
                         </button>
@@ -144,7 +149,7 @@ const TimeClock = () => {
                     <form onSubmit={formik2.handleSubmit}>
                         <button
                             type="submit"
-                            className="mx-2 bg-secondary-light hover:bg-secondary-dark text-white text-lg font-bold py-4 px-6 rounded"
+                            className="mx-2 bg-blush hover:bg-blush-dark text-white text-lg font-bold py-4 px-6 rounded"
                         >
                             Clock Out
                         </button>
@@ -178,7 +183,7 @@ const TimeClock = () => {
                                     <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                                         <button
                                             type="button"
-                                            className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary-light text-base font-medium text-white hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
+                                            className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blush text-base font-medium text-white hover:bg-blush-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
                                             onClick={() => setClockInModal(false)}
                                         >
                                             Close
@@ -215,7 +220,7 @@ const TimeClock = () => {
                                     <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                                         <button
                                             type="button"
-                                            className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary-light text-base font-medium text-white hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
+                                            className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blush text-base font-medium text-white hover:bg-blush-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
                                             onClick={() => setClockInFailModal(false)}
                                         >
                                             Close
@@ -252,7 +257,7 @@ const TimeClock = () => {
                                     <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                                         <button
                                             type="button"
-                                            className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary-light text-base font-medium text-white hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
+                                            className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blush text-base font-medium text-white hover:bg-blush-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
                                             onClick={() => { setClockOutModal(false); }}
                                         >
                                             Close
@@ -289,7 +294,7 @@ const TimeClock = () => {
                                     <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                                         <button
                                             type="button"
-                                            className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary-light text-base font-medium text-white hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
+                                            className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blush text-base font-medium text-white hover:bg-blush-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
                                             onClick={() => { setClockOutFailModal(false); }}
                                         >
                                             Close
@@ -305,25 +310,31 @@ const TimeClock = () => {
                 <table className="table-auto font-poppins">
                     <thead>
                         <tr>
-                            <th className="px-4 py-2 text-primary-dark">ID</th>
                             <th className="px-4 py-2 text-primary-dark">Month</th>
                             <th className="px-4 py-2 text-primary-dark">Day</th>
-                            <th className="px-4 py-2 text-primary-dark">Year</th>
                             <th className="px-4 py-2 text-primary-dark">Clock In</th>
                             <th className="px-4 py-2 text-primary-dark">Clock Out</th>
+                            <th className="px-4 py-2 text-primary-dark">Hours Worked</th>
                         </tr>
                     </thead>
                     <tbody className="space-y-4">
-                        {records.map((record) => (
+                        {records.sort((a, b) => new Date(b.clockIn) - new Date(a.clockIn)).map((record) =>
+
                             <tr key={record.id} className="bg-white">
-                                <td className="border px-4 py-2" onClick={() => setSelectedId(record.id)}>{record.id.substring(0, 5)}</td>
                                 <td className="border px-4 py-2">{record.month}</td>
-                                <td className="border px-4 py-2">{record.day}</td>
-                                <td className="border px-4 py-2">{record.year}</td>
-                                <td className="border px-4 py-2">{new Date(record.clockIn).toLocaleString()}</td>
-                                <td className="border px-4 py-2">{new Date(record.clockOut).toLocaleString()}</td>
+                                <td className="border flex justify-center px-4 py-2">{record.day}</td>
+                                <td className="border px-4 py-2">{new Date(record.clockIn).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })}</td>
+                                <td className="border px-4 py-2">{new Date(record.clockOut).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })}</td>
+                                <td className="border px-4 py-2 flex justify-center bg-grass-dark">
+                                    {
+                                        record.clockOut ?
+                                            ((new Date(record.clockOut) - new Date(record.clockIn)) / 1000 / 60 / 60).toFixed(2) + ' hours'
+                                            : '00 hours'
+                                    }
+                                </td>
                             </tr>
-                        ))}
+                        )}
+
                     </tbody>
                 </table>
             </div>
