@@ -14,6 +14,7 @@ namespace HRIS.Context
         public DbSet<Position> Positions => Set<Position>();
         public DbSet<Record> Records => Set<Record>();
         public DbSet<Notification> Notifications => Set<Notification>();
+        public DbSet<Salary> Salary => Set<Salary>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

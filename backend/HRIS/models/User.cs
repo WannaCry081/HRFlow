@@ -85,5 +85,6 @@ namespace HRIS.Models
         public Position? Position { get; set; }
 
         public ICollection<Record> Records { get; set; } = new List<Record>();
+        public ICollection<Salary> Salaries { get; set; } = new List<Salary>();
     }
 }

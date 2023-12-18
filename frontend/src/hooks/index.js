@@ -5,6 +5,7 @@ export { default as useCreateTeam } from "/src/hooks/useCreateTeam";
 export { default as useJoinTeam } from "/src/hooks/useJoinTeam";
 export { default as useForgotPassword } from "/src/hooks/useForgotPassword";
 export { default as useNotifications } from "/src/hooks/useNotifications";
+export { default as useApplicants } from "/src/hooks/useApplicants";
 export { default as useAddEmployee } from "/src/hooks/useAddEmployee";
 export { default as useDepartments } from "/src/hooks/useDepartments";
 export { default as usePositions } from "/src/hooks/usePositions";
