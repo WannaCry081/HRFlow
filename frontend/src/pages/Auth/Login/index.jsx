@@ -73,7 +73,7 @@ const Login = () => {
 
             <div className="mt-2 text-end float-right">
               <p
-                className="font-poppins text-sm font-semibold text-secondary cursor-pointer active-secondary"
+                className="font-poppins text-sm font-semibold text-blush cursor-pointer active-secondary"
                 onClick={onSetForgotPassword}
               >
                 Forgot Password?
