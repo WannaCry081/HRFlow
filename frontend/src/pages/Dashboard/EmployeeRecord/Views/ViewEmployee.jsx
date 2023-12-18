@@ -36,8 +36,8 @@ const ViewEmployee = (prop) => {
                     
                 </h1>
             </div>
-            <div className="w-full bg-gray-200 h-[0.1rem] my-4 rounded-full"></div>
-            <h1 className="text-left mt-2 uppercase text-gray-500 text-lg font-medium">
+            <div className="w-full bg-gray-200 h-[0.1rem] my-2 rounded-full"></div>
+            <h1 className="text-left mt-1 uppercase text-gray-500 text-lg font-medium">
                 Employee Information
             </h1>
             <div className="w-full flex overflow-y-auto">
