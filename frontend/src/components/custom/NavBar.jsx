@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { GoKebabHorizontal } from "react-icons/go";
 import { Separator } from "/src/components/ui/separator";
 import {
@@ -14,6 +14,7 @@ import HRFlowLogoLightSvg from "/src/assets/svg/HRFlowLogo_Light.svg";
 const NavBar = (prop) => {
   const [item, setItem] = useState(0);
   const userData = prop.userData;
+  const navigate  = useNavigate();
 
   return (
     <nav className="p-6 w-96 relative flex flex-col shadow-md">
@@ -37,9 +38,8 @@ const NavBar = (prop) => {
                 onClick={() => setItem(key)}
               >
                 <span
-                  className={`${
-                    key == item ? "fill-lilac bg-lilac-pastel text-lilac" : ""
-                  } flex gap-2 hover:text-lilac hover:fill-lilac rounded-md p-4 hover:bg-primary-pastel mb-2 font-medium`}
+                  className={`${key == item ? "fill-lilac bg-lilac-pastel text-lilac" : ""
+                    } flex gap-2 hover:text-lilac hover:fill-lilac rounded-md p-4 hover:bg-primary-pastel mb-2 font-medium`}
                 >
                   {icon} {name}
                 </span>
@@ -50,7 +50,7 @@ const NavBar = (prop) => {
       <Separator />
       <div className="flex justify-between items-center pt-4">
         <span className="flex gap-2 items-center">
-          <div className="bg-primary-pastel h-12 w-12 rounded-lg text-lilac flex items-center justify-center font-semibold font-poppins text-xl shadow-inner">
+          <div className="bg-lilac-pastel h-12 w-12 rounded-lg text-lilac flex items-center justify-center font-semibold font-poppins text-xl shadow-inner">
             {userData.firstName !== undefined
               ? userData.firstName[0].toUpperCase()
               : ""}
@@ -60,11 +60,10 @@ const NavBar = (prop) => {
           </div>
           <span>
             <h1 className="font-lato font-semibold">
-              {`${userData.lastName}, ${userData.firstName} ${
-                userData.middleName === "" && userData.middleName.length > 0
+              {`${userData.lastName}, ${userData.firstName} ${userData.middleName === "" && userData.middleName.length > 0
                   ? userData.middleName[0].toUpperCase() + "."
                   : ""
-              } ${userData.suffix}`}
+                } ${userData.suffix}`}
             </h1>
             <p className="text-xs font-poppins">{userData.companyEmail}</p>
           </span>
@@ -87,7 +86,12 @@ const NavBar = (prop) => {
               Help
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="text-base font-medium text-red-500">
+            <DropdownMenuItem
+              onClick={() => {
+                sessionStorage.clear("token");
+                navigate("/", { replace: true });
+              }}
+              className="text-base font-medium text-red-500">
               Log Out
             </DropdownMenuItem>
           </DropdownMenuContent>
