@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDeleteNotification, useNotifications } from "/src/hooks";
 import { Separator } from "/src/components/ui/separator"
 import { PiTrashBold } from "react-icons/pi";
@@ -8,15 +8,17 @@ import Toast from "/src/components/Toast";
 import CreateNotification from "./Components/CreateNotification";
 import Arrow from "/src/assets/svg/Arrow.svg";
 import ConfirmModalBox from "/src/components/ConfirmModalBox";
+import { GetUserProfileApi } from "/src/services/userService";
 
 
 const Notifications = () => {
 
     const [createNotification, onSetCreateNotification] = useState(false);
     const notifications = useNotifications(createNotification);
-
+    
     const [openModal, onSetOpenModal] = useState(false);
     const [selectNotification, onSetSelectNotification] = useState(null);
+    const [userData, setUserData] = useState({});
 
     const [deleteNotification, toast, confirmModal, onSetConfirmModal] =
         useDeleteNotification(selectNotification, onSetCreateNotification, onSetSelectNotification);
@@ -32,8 +34,19 @@ const Notifications = () => {
         hour12: true
     });
 
+
+    useEffect(() => {
+        const token = sessionStorage.getItem("token");
+
+        const getUserProfile = async () => {
+            const { status, data } = await GetUserProfileApi(token);
+            setUserData(data);
+        };
+        getUserProfile();
+    }, []);
+
     return (
-        <section className="bg-lilac-pale h-full flex gap-5 p-8">
+        <section className="bg-lilac-pale h-full flex gap-5 p-8 rounded-t-[2.5rem]">
             {toast && <Toast message="Notification successfullly deleted!" />}
             {openModal && <CreateNotification
                 createNotification={createNotification}
@@ -54,21 +67,25 @@ const Notifications = () => {
                 option="Delete"
                 submit={deleteNotification}
             />}
-            <div className="flex flex-col min-w-[30rem] max-w-[30rem]">
+            <div className="flex flex-col min-w-[30rem] max-w-[30rem] py-4">
                 <div className="flex justify-between mb-8">
                     <h1 className="text-4xl font-bold font-lato text-lilac">Notifications</h1>
-                    <div onClick={() => {
-                        onSetOpenModal(true);
-                        onSetCreateNotification(true)
-                    }}
-                        className="px-6 gap-2 bg-lilac flex items-center rounded-lg justify-center py-3 hover:bg-lilac-dark h-full cursor-pointer">
-                        <IoMdAdd size={24} className="fill-white" />
-                        <p className="hidden lg:block text-white font-poppins font-semibold">
-                            Add notification
-                        </p>
-                    </div>
+                    {userData.role === "Human Resource" && (
+                        <div
+                            onClick={() => {
+                                onSetOpenModal(true);
+                                onSetCreateNotification(true);
+                            }}
+                            className="px-6 gap-2 bg-lilac flex items-center rounded-lg justify-center py-3 hover:bg-lilac-dark h-full cursor-pointer"
+                        >
+                            <IoMdAdd size={24} className="fill-white" />
+                            <p className="hidden lg:block text-white font-poppins font-semibold">
+                                Add notification
+                            </p>
+                        </div>
+                    )}
                 </div>
-                <div className="h-[38rem] overflow-scroll">
+                <div className="h-[34rem] overflow-scroll">
                     {notifications.map((notification) => (
                         <NotificationItem
                             key={notification.id}
