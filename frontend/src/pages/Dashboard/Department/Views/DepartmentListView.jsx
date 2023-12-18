@@ -46,7 +46,7 @@ const DepartmentListView = (prop) => {
             />}
 
             <div className="flex justify-between py-4">
-                <h1 className="text-4xl font-semibold font-lato">Department</h1>
+                <h1 className="text-4xl font-bold font-lato text-lilac">Department</h1>
                 <div onClick={() => {
                     onSetOpenModal(true);
                     onSetCreateDepartment(true)
