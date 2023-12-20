@@ -1,5 +1,4 @@
-import useDepartments from "/src/hooks/useDepartments";
-import usePositions from "/src/hooks/usePositions";
+import { useDepartments, usePositions} from "/src/hooks";
 import { LiaBirthdayCakeSolid } from "react-icons/lia";
 import { GoNumber } from "react-icons/go";
 import {
@@ -8,10 +7,11 @@ import {
     FiTablet
 } from "react-icons/fi";
 
+
 const ViewEmployee = (prop) => {
 
-    const departments = useDepartments(prop.submit);
-    const positions = usePositions(prop.submit, prop.selectEmployee.departmentId);
+    const departments = useDepartments();
+    const positions = usePositions(prop.addEmployee,  prop.selectEmployee.departmentId);
  
     const department =  departments.find((dept) => dept.id === prop.selectEmployee.departmentId);
     const position = positions.find((pos) => pos.id === prop.selectEmployee.positionId) ;
@@ -32,12 +32,12 @@ const ViewEmployee = (prop) => {
                     {prop.selectEmployee.firstName} {prop.selectEmployee.middleName} {prop.selectEmployee.lastName} {prop.selectEmployee.suffix}
                 </h1>
                 <h1 className="pt-2 text-gray-400 font-poppins"> 
-                    {(department && position) ? `${department.name} | ${position.title}` : ""}
+                    {(department && position) ? `${department.name} | ${position.title}` : "N / A"}
                     
                 </h1>
             </div>
-            <div className="w-full bg-gray-200 h-[0.1rem] my-4 rounded-full"></div>
-            <h1 className="text-left mt-2 uppercase text-gray-500 text-lg font-medium">
+            <div className="w-full bg-gray-200 h-[0.1rem] my-2 rounded-full"></div>
+            <h1 className="text-left mt-1 uppercase text-gray-500 text-lg font-medium">
                 Employee Information
             </h1>
             <div className="w-full flex overflow-y-auto">
@@ -46,6 +46,11 @@ const ViewEmployee = (prop) => {
                         icon={<LiaBirthdayCakeSolid size={30} className="fill-lilac" />}
                         title="Age"
                         data={prop.selectEmployee.age}
+                    />
+                    <EmployeeDataField
+                        icon={<LiaBirthdayCakeSolid size={30} className="fill-lilac" />}
+                        title="Sex"
+                        data={prop.selectEmployee.sex == "F" ? "Female" : "Male"} 
                     />
                     <EmployeeDataField
                         icon={<GoNumber size={30} className="fill-lilac" />}

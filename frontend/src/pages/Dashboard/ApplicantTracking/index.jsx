@@ -124,10 +124,10 @@ const ApplicantTracking = () => {
                             ? <div className="h-full flex items-center justify-center flex-col">
                                 <img src={Arrow} alt="Arrow" className="h-20" />
                                 <h1 className="pt-4 text-2xl text-center text-rustic font-lato font-semibold">
-                                    No selected employee yet.
+                                    No selected applicant yet.
                                 </h1>
                                 <p className="text-lg font-poppins text-gray-500 text-center">
-                                    Click an employee to view information.
+                                    Click an applicant to view information.
                                 </p>
 
                             </div>

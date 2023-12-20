@@ -3,7 +3,7 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import { routes } from "/src/routes";
 import NavBar from "/src/components/custom/NavBar";
 import { GetUserProfileApi } from "/src/services/userService.js";
-import Header from "/src/components/custom/Header";
+import Header from "../components/Header";
 
 const DashboardLayout = () => {
   const [userData, setUserData] = useState({});

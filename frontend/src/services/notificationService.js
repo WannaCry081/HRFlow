@@ -32,3 +32,26 @@ export const CreateNotificationApi = async (token, request) => {
         return error.response;
     }
 }
+
+export const UpdateNotificationApi = async (token, notificationId, request) => {
+    const instance = axiosInstance(token);
+
+    try {
+        const response = await instance.put(`${notificationId}`, request);
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}
+
+
+export const DeleteNotificationApi = async (token, notificationId) => {
+    const instance = axiosInstance(token);
+
+    try {
+        const response = await instance.delete(`${notificationId}`);
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}

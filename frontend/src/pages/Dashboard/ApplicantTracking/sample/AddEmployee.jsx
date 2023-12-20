@@ -4,7 +4,7 @@ import { useState } from "react";
 import {
   TextInput,
   SubmitButton,
-  DatePickerInput,
+  DatePickerInput
 } from "/src/components/FormInput";
 import { CreateApplicantApi } from "/src/services/applicantService.js";
 import { CircularProgressBar } from "/src/components/Loading";
@@ -237,22 +237,22 @@ const AddEmployeeForm = (prop) => {
                     <div className="flex gap-3 w-full">
                       <div
                         className={`p-4 font-lato rounded-md w-full text-center cursor-pointer 
-                                                ${
-                                                  sex == "M"
-                                                    ? "bg-green-100 border-2 border-green-400 font-semibold"
-                                                    : "bg-gray-100"
-                                                }`}
+                          ${
+                            sex == "M"
+                              ? "bg-green-100 border-2 border-green-400 font-semibold"
+                              : "bg-gray-100"
+                          }`}
                         onClick={() => onSetSex("M")}
                       >
                         Male
                       </div>
                       <div
-                        className={`p-4 font-lato rounded-md w-full text-center cursor-pointer
-                                                ${
-                                                  sex == "F"
-                                                    ? "bg-green-100 border-2 border-green-400 font-semibold"
-                                                    : "bg-gray-100"
-                                                }`}
+                      className={`p-4 font-lato rounded-md w-full text-center cursor-pointer
+                          ${
+                            sex == "F"
+                              ? "bg-green-100 border-2 border-green-400 font-semibold"
+                              : "bg-gray-100"
+                          }`}
                         onClick={() => onSetSex("F")}
                       >
                         Female
@@ -285,7 +285,7 @@ const AddEmployeeForm = (prop) => {
                   </div>
                 </div>
                 {/* Mobile Number and Landline Number */}
-                <div className="flex gap-3">
+                <div className="flex gap-3 mt-2">
                   <div className="w-full">
                     <TextInput
                       nameId="mobileNumber"
@@ -315,8 +315,29 @@ const AddEmployeeForm = (prop) => {
                       value={formik.values.landlineNumber}
                     />
                   </div>
-                  
                 </div>
+                {/* <DropdownMenu
+                  label="Department"
+                  id="department"
+                  name="department"
+                  value={department}
+                  onChange={(event) => {
+                    const selected = departments.find((dept) => dept.name === event.target.value);
+                    if (selected) {
+                      setDepartment(event.target.value);
+                      setSelectedDepartment(selected);
+                      setFieldValue("department", event.target.value);
+                    } else {
+                      setSelectedDepartment(null);
+                    }
+                  }}
+                  defaultOption="Select a department"
+                  options={departments.map((department) => (
+                    <option key={department.id} value={department.name} className="py-2"> {department.name} </option>
+                  ))}
+                  errors={errors.department}
+                  touched={touched.department}
+                /> */}
               </div>
               
               <div className="pt-12 flex gap-2 2xl:self-end w-full justify-center 2xl:w-1/2">

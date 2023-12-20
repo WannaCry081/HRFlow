@@ -33,6 +33,8 @@ namespace HRIS.Repositories.UserRepository
             user.MobileNumber = request.MobileNumber;
             user.LandlineNumber = request.LandlineNumber;
             user.PersonalEmail = request.PersonalEmail;
+            user.MiddleName = request.MiddleName;
+            user.Suffix = request.Suffix;
             user.UpdatedAt = DateTime.Now;
             return 0 < await _context.SaveChangesAsync();
         }

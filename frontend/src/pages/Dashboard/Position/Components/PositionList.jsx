@@ -1,131 +1,43 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { DeletePositionApi } from "/src/services/positionService";
-import { UpdateEmployeesProperty } from "/src/services/employeeService";
-import { PiTrashBold, PiPlusBold } from "react-icons/pi";
 import { FiEdit3 } from "react-icons/fi";
-import useToggle from "/src/hooks/useToggle";
+import { PiPlusBold, PiTrashBold } from "react-icons/pi";
+import { useDeletePosition } from "/src/hooks";
 import usePositions from "/src/hooks/usePositions";
-import useEmployees from "/src/hooks/useEmployees";
-import ConfirmModalBox from "/src/components/ConfirmModalBox";
 import Toast from "/src/components/Toast";
 import CreatePosition from "./CreatePosition";
+import ConfirmModalBox from "/src/components/ConfirmModalBox";
+
 
 const PositionList = (prop) => {
-    const token = sessionStorage.getItem("token");
 
-    const navigate = useNavigate();
-
-    const [toast, onSetToast] = useToggle();
-    const [confirmModal, onSetConfirmModal] = useToggle();
-
-    const employees = useEmployees(prop.submit);
-
-
-    const [addPosition, onSetAddPosition] = useState(false);
     const [openModal, onSetOpenModal] = useState(false);
+    const positions = usePositions(prop.createPosition, prop.selectedDepartment.id);
 
-    const positions = usePositions(prop.submit, prop.selectedDepartment.id);
-
-    const deletePosition = async () => {
-        try {
-            const { status, data } = await DeletePositionApi(
-                token,
-                prop.selectedDepartment.id,
-                prop.selectedPosition.id
-            );
-
-            setTimeout(() => {
-                if (status === 200) {
-                    onSetToast();
-                    console.log("Deletion successful!");
-                    setTimeout(() => {
-                        onSetToast();
-                    }, 1000);
-
-                } else if (status === 400) {
-                    formik.setErrors({
-                        title: data
-                    });
-                } else {
-                    navigate("/error");
-                }
-                onSetConfirmModal();
-                prop.onSetSubmit();
-                prop.onSetPositionSubmit();
-            }, 1000);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    const updateEmployees = async () => {
-        try {
-            const employeesInPosition = employees.filter(employee => employee.positionId === prop.selectedPosition.id);
-            const employeeIds = employeesInPosition.map(employee => employee.id);
-
-            const responses = [];
-
-            for (let i = 0; i < employeeIds.length; i++) {
-                const employeeId = employeeIds[i];
-                const { status, data } = await UpdateEmployeesProperty(
-                    token,
-                    employeeId,
-                    [{
-                        path: "/positionId",
-                        op: "replace",
-                        value: ""
-                    }]);
-                responses.push({ status, data });
-            }
-
-            setTimeout(() => {
-                for (const response of responses) {
-                    if (response.status === 200) {
-                        prop.onSetSubmit();
-                    } else {
-                        navigate("/error");
-                    }
-                }
-                prop.onSetSubmit();
-            }, 1000);
-        } catch (error) {
-            console.error(error);
-        }
-    };
+    const [deletePosition, toast, confirmModal, onSetConfirmModal] = useDeletePosition(prop.selectedDepartment, prop.selectedPosition?.id, prop.onSetCreatePosition);
 
     return (
         <div className="h-full w-full">
-
             {toast && <Toast message="Position successfully deleted!" />}
-
             {openModal && <CreatePosition
-                addPosition={addPosition}
-                selectedPosition={prop.selectedPosition}
-
-                submit={prop.submit}
-                onSetSubmit={prop.onSetSubmit}
-                onSetPositionSubmit={prop.onSetPositionSubmit}
-
                 selectedDepartment={prop.selectedDepartment}
+                selectedPosition={prop.selectedPosition}
+                createPosition={prop.createPosition}
+                onSetCreatePosition={prop.onSetCreatePosition}
                 onSetOpenModal={onSetOpenModal}
-
                 onCancel={() => {
                     onSetOpenModal(false);
-                    onSetAddPosition(false);
-                }}
+                    prop.onSetCreatePosition(false)}}
             />}
 
             {confirmModal && <ConfirmModalBox
                 onCancel={onSetConfirmModal}
                 header="Confirm Delete Position"
                 operation="delete"
-                title={prop.selectedPosition.title}
+                title={prop.selectedPosition?.title || ""}
                 option="Delete"
                 submit={() => {
-                    updateEmployees();
-                    deletePosition();
-                }}
+                    prop.onSetCreatePosition();
+                    deletePosition()}}
             />}
 
             <div className="w-full flex justify-between items-center pt-6">
@@ -133,9 +45,8 @@ const PositionList = (prop) => {
                     Positions
                 </h1>
                 <div onClick={() => {
-                    onSetOpenModal(true)
-                    onSetAddPosition(true)
-                }}
+                        onSetOpenModal(true);
+                        prop.onSetCreatePosition(true); }}
                     className="w-40 gap-2 bg-lilac hover:bg-lilac-dark flex items-center rounded-lg justify-center hover-bg-lilac-dark h-10 cursor-pointer">
                     <PiPlusBold size={24} className="fill-white" />
                     <p className="text-white font-poppins font-semibold cursor-pointer">
@@ -148,18 +59,15 @@ const PositionList = (prop) => {
                     <PositionItem
                         key={position.id}
                         position={position}
+                        title={position.title}
+                        selectedPosition={prop.selectedPosition}
                         onSetConfirmModal={onSetConfirmModal}
                         onSetOpenModal={() => {
                             onSetOpenModal(true);
-                            onSetAddPosition(false);
-                        }}
-                        title={position.title}
-                        selectedPosition={prop.selectedPosition}
+                            prop.onSetCreatePosition(false); }}
                         onSelect={() => {
                             if (prop.onPositionsSelect) {
-                                prop.onPositionsSelect(position);
-                            }
-                        }} />
+                                prop.onPositionsSelect(position)}}} />
                 ))}
             </div>
         </div>

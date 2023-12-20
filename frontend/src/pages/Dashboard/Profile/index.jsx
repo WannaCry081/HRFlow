@@ -30,12 +30,12 @@ const Profile = () => {
         <section className="w-full  flex p-6 gap-6">
             { show && <EditUserProfile onCancel={onSetShow} userData={userData} token={accessToken}/> }
             <div className="bg-white min-w-[24rem] shadow-lg rounded-xl flex flex-col items-center p-6">
-                <div className="relative h-32 w-32 bg-primary-pastel rounded-full my-2 flex items-center justify-center">
-                    <h1 className="font-poppins text-primary-light text-5xl font-semibold">
+                <div className="relative h-32 w-32 bg-lilac-pastel rounded-full my-2 flex items-center justify-center">
+                    <h1 className="font-poppins text-lilac text-5xl font-semibold">
                         {userData.firstName !== undefined ? userData.firstName[0].toUpperCase() : ""}
                         {userData.lastName !== undefined ? userData.lastName[0].toUpperCase() : ""}
                     </h1>
-                    <div className="h-8 w-8 bg-secondary-light rounded-full absolute bottom-0 right-0 flex items-center justify-center cursor-pointer" onClick={onSetShow}>
+                    <div className="h-8 w-8 bg-blush rounded-full absolute bottom-0 right-0 flex items-center justify-center cursor-pointer" onClick={onSetShow}>
                         <BiEditAlt size={18} className="fill-white"/>
                     </div>
                 </div>
@@ -81,7 +81,9 @@ const EditUserProfile = (prop) => {
         initialValues : {
             mobileNumber: prop.userData.mobileNumber,
             landlineNumber: prop.userData.landlineNumber,
-            personalEmail: prop.userData.personalEmail
+            personalEmail: prop.userData.personalEmail,
+            middleName: prop.userData.middleName,
+            suffix: prop.userData.suffix
         },
         onSubmit : async (values) => {
             onSetSubmit();
@@ -111,13 +113,50 @@ const EditUserProfile = (prop) => {
                 .email("Invalid Email Address")
                 .min(5, "Email Address must be at least 5 characters.")
                 .max(150, "Email Address can be at most 150 characters."),
+            middleName : Yup.string().required("Middle Name is required.")
+                .min(2, "Middle Name must be at least 2 characters.")
+                .max(150, "Middle Name can be at most 150 characters."),
+            suffix : Yup.string()
+                .min(2, "Suffix must be at least 2 characters.")
+                .max(150, "Suffix can be at most 150 characters."),
         })
     });
 
     return (
-        <ModalBox onCancel={prop.onCancel}>
+        <ModalBox onCancel={prop.onCancel} top={"-mt-10"}>
             <form onSubmit={formik.handleSubmit}
                 className="w-full flex flex-col gap-4">
+
+                <div className="flex gap-2 w-full">
+                    <div className="w-full">
+                        <TextInput nameId="middleName"
+                            required="required"
+                            name="Middle Name"
+                            type="text"
+                            minLength={5}
+                            maxLength={150}
+                            placeholder="Doe"
+                            errors={formik.errors.middleName}
+                            onBlur={formik.handleBlur}
+                            touched={formik.touched.middleName}
+                            onChange={formik.handleChange}
+                            value={formik.values.middleName} />
+                    </div>
+
+                    <div className="w-full">
+                        <TextInput nameId="suffix"
+                            name="Suffix"
+                            type="text"
+                            minLength={5}
+                            maxLength={150}
+                            placeholder="Jr."
+                            errors={formik.errors.suffix}
+                            onBlur={formik.handleBlur}
+                            touched={formik.touched.suffix}
+                            onChange={formik.handleChange}
+                            value={formik.values.suffix} />
+                    </div>
+                </div>
 
                 <TextInput nameId="personalEmail"
                         required="required"
