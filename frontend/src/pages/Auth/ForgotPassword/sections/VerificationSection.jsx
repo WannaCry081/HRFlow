@@ -4,7 +4,7 @@ import { CircularProgressBar } from "/src/components/Loading";
 import { motion } from "framer-motion";
 
 const VerficationSection = (prop) => {
-  const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
+  const { values, errors, touched, handleSubmit, handleChange, handleBlur, setFieldValue} =
     prop.formik;
 
   const handleCodeChange = (index, value) => {
