@@ -29,9 +29,9 @@ namespace HRIS.Services.RecordService
 
             Record newRecord = new()
             {
-                ClockIn = clockIn,
+                ClockIn = DateTime.Parse(clockIn.ToString("h:mm tt")),
                 UserId = userId,
-                Day = clockIn.ToString("dddd"),
+                Day = clockIn.ToString("dd"),
                 Month = clockIn.ToString("MMMM"),
                 Year = clockIn.ToString("yyyy")
             };
