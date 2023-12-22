@@ -37,7 +37,7 @@ const useForgotPassword = () => {
         setTimeout(() => {
           switch (response.status) {
             case 200:
-              sessionStorage.setItem("token", data);
+              sessionStorage.setItem("token", response.data);
               navigate("/dashboard/home/", { replace: true });
               break;
             case 404:
