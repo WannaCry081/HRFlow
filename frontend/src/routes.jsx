@@ -114,12 +114,12 @@ export const routes = [
         path: "/employee-records",
         element: <EmployeeRecord />,
       },
-      {
-        icon: <BiSitemap size={24} className="fill-inherit" />,
-        name: "Employee Service",
-        path: "/employee-service",
-        element: <EmployeeService />,
-      },
+      // {
+      //   icon: <BiSitemap size={24} className="fill-inherit" />,
+      //   name: "Employee Service",
+      //   path: "/employee-service",
+      //   element: <EmployeeService />,
+      // },
       {
         icon: <BiBuildings size={24} className="fill-inherit" />,
         name: "Department",
