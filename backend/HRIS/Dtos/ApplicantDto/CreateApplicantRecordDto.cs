@@ -35,5 +35,8 @@ namespace HRIS.Dtos.ApplicantDto
         public string LandlineNumber { get; set; } = string.Empty;
 
         public DateTime Birthdate { get; set; }
+
+        [Required(ErrorMessage = "Status is required.")]
+        public string Status { get; set; } = string.Empty;
     }
 }
