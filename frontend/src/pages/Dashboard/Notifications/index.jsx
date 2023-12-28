@@ -34,7 +34,6 @@ const Notifications = () => {
         hour12: true
     });
 
-
     useEffect(() => {
         const token = sessionStorage.getItem("token");
 
@@ -55,7 +54,7 @@ const Notifications = () => {
                 onSetCreateNotification={onSetCreateNotification}
                 onCancel={() => {
                     onSetOpenModal(false);
-                    onSetCreateNotification(false)
+                    onSetCreateNotification(false);
                 }}
             />}
 
@@ -110,7 +109,7 @@ const Notifications = () => {
                                 <div className="flex gap-2">
                                     <div onClick={() => {
                                         onSetOpenModal(true);
-                                        onSetCreateNotification(false)
+                                        onSetCreateNotification(false);
                                     }}
                                         className="rounded-full flex items-center justify-center bg-gray-200 hover:bg-pink-100 group p-3 h-14 w-14 cursor-pointer">
                                         <FiEdit3 size={26} className="stroke-gray-500 group-hover:stroke-pink-500" />

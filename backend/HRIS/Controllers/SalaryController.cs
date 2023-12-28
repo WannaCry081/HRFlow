@@ -14,7 +14,7 @@ namespace HRIS.Controllers
         }
 
         [Authorize(Roles = "Employee")]
-        [HttpGet]
+        [HttpGet("{salaryId}")]
         public Task<IActionResult> GetSalary()
         {
             throw new NotImplementedException();

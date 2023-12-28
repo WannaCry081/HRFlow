@@ -1,20 +1,24 @@
 ﻿using AutoMapper;
+using HRIS.Context;
 using HRIS.Dtos.UserDto;
 using HRIS.Exceptions;
 using HRIS.Models;
 using HRIS.Repositories.UserRepository;
 using HRIS.Utils;
+using Microsoft.EntityFrameworkCore;
 
 namespace HRIS.Services.UserService
 {
     public class UserService : IUserService
     {
         private readonly IMapper _mapper;
+        private readonly DataContext _context;
         private readonly IUserRepository _userRepository;
 
-        public UserService(IMapper mapper, IUserRepository userRepository)
+        public UserService(IMapper mapper, DataContext context, IUserRepository userRepository)
         {
             _mapper = mapper;
+            _context = context;
             _userRepository = userRepository;
         }
 
@@ -23,7 +27,14 @@ namespace HRIS.Services.UserService
             var response = await _userRepository.GetUserById(userId) ??
                 throw new UserNotFoundException("Invalid email address. Please try again.");
 
-            return _mapper.Map<GetUserProfileDto>(response);
+            var team = await _context.Teams
+                        .Where(c => c.Id.Equals(response.TeamId))
+                        .FirstOrDefaultAsync() ?? throw new TeamNotFoundException("Team does not exist");
+
+            var user = _mapper.Map<GetUserProfileDto>(response);
+            user.TeamCode = team.Code;
+
+            return user;
         }
 
         public async Task<GetUserProfileDto> UpdateUserPassword(Guid userId, UpdateUserPasswordDto request)

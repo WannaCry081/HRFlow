@@ -55,23 +55,26 @@ const Home = () => {
     return (    
         <section className="w-full flex gap-4 p-6  h-full">
             <div className="w-4/5 flex flex-col gap-4 px-2">
-                <div className="h-32  flex gap-4">
-                    <StatisticCard 
-                        icon={<FaUserTie size={36} className="fill-white" />}
-                        count={employees.length}
-                        title="Employees"
-                    />
-                    <StatisticCard 
-                        icon={<FaBuilding size={36} className="fill-white" />}
-                        count={departments.length}
-                        title="Departments"
-                    />
-                    <StatisticCard 
-                        icon={<FaUsers size={36} className="fill-white" />}
-                        count={applicants.length}
-                        title="Applicants"
-                    />
-                </div>
+                {userData.role === "Human Resource" && (
+                    <div className="h-32  flex gap-4">
+                        <StatisticCard
+                            icon={<FaUserTie size={36} className="fill-white" />}
+                            count={employees.length}
+                            title="Employees"
+                        />
+                        <StatisticCard
+                            icon={<FaBuilding size={36} className="fill-white" />}
+                            count={departments.length}
+                            title="Departments"
+                        />
+                        <StatisticCard
+                            icon={<FaUsers size={36} className="fill-white" />}
+                            count={applicants.length}
+                            title="Applicants"
+                        />
+                    </div>
+                )}
+                
                 <div className="flex gap-4">
                     <div className="w-full bg-white flex flex-col justify-center items-center rounded-2xl shadow-lg">
                         <h1 className="text-3xl font-lato self-start font-bold text-lilac mb-8 ml-8">Time Clock</h1>

@@ -25,6 +25,13 @@ const NavBar = (prop) => {
           alt="HR Flow Logo"
         />
         <Separator />
+        {userData.role === "Human Resource" && (
+          <div className=" bg-blush-pastel py-5 px-4 rounded-xl flex items-center">
+            <h1 className="font-poppins text-xl">Team Code: </h1>
+            <p className="font-poppins text-xl ml-2 text-blush font-bold font-poppins">{userData.teamCode} </p>
+          </div>
+        )}
+        
       </div>
       <div className="flex-grow py-4">
         {prop.routes.map(

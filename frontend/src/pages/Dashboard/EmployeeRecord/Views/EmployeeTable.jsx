@@ -6,6 +6,7 @@ import Arrow from "/src/assets/svg/Arrow.svg";
 import ViewEmployee from "./ViewEmployee";
 
 
+
 const EmployeeTable = (prop) => {
     const [selectEmployee, setSelectEmployee] = useState(null);
     const [searchQuery, setSearchQuery] = useState("");

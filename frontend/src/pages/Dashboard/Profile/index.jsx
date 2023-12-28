@@ -8,6 +8,7 @@ import { useFormik } from "formik";
 import { TextInput, SubmitButton } from "/src/components/FormInput";
 import { CircularProgressBar } from "/src/components/Loading";
 import { UpdateUserProfileApi } from "/src/services/userService.js";
+import Salary from "./SalaryView";
 
 const Profile = () => {
     const [show, onSetShow] = useToggle();
@@ -25,6 +26,7 @@ const Profile = () => {
 
         getUserProfile();
     }, [show]);
+
 
     return (
         <section className="w-full  flex p-6 gap-6">
@@ -55,7 +57,7 @@ const Profile = () => {
              
             </div>
             <div className="bg-white shadow-lg rounded-xl w-full">
-
+                <Salary />
             </div>
         </section>
     );
@@ -185,7 +187,6 @@ const EditUserProfile = (prop) => {
                         value={formik.values.mobileNumber}/>
 
                 <TextInput nameId="landlineNumber"
-                        required="required"
                         name="Landline No."
                         type="type"
                         minLength={5}

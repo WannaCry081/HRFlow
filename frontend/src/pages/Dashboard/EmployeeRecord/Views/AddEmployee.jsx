@@ -273,7 +273,7 @@ const AddEmployeeForm = (prop) => {
                                         }}
                                         defaultOption="Select a position"
                                         options={positions.map((position) => (
-                                            <option key={position.id} value={position.name} className="py-2"> {position.title} </option>
+                                            <option key={position.id} value={position.title} className="py-2"> {position.title} </option>
                                         ))}
                                         errors={errors.position}
                                         touched={touched.position}

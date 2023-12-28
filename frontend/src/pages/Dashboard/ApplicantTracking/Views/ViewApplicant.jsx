@@ -1,5 +1,3 @@
-import useDepartments from "/src/hooks/useDepartments";
-import usePositions from "/src/hooks/usePositions";
 import { LiaBirthdayCakeSolid } from "react-icons/lia";
 import { GoNumber } from "react-icons/go";
 import {
@@ -7,16 +5,11 @@ import {
     FiPhone,
     FiTablet
 } from "react-icons/fi";
+import { GrStatusUnknown } from "react-icons/gr";
 
-const ViewEmployee = (prop) => {
-
-    const departments = useDepartments(prop.submit);
-    const positions = usePositions(prop.submit, prop.selectEmployee.departmentId);
- 
-    const department =  departments.find((dept) => dept.id === prop.selectEmployee.departmentId);
-    const position = positions.find((pos) => pos.id === prop.selectEmployee.positionId) ;
+const ViewApplicant = (prop) => {
     
-    const birthdate = new Date(prop.selectEmployee.birthdate).toLocaleDateString("en-US", {
+    const birthDate = new Date(prop.selectApplicant.birthDate).toLocaleDateString("en-US", {
         year: "numeric",
         month: "short",
         day: "2-digit"
@@ -26,14 +19,10 @@ const ViewEmployee = (prop) => {
         <section className="h-full w-full flex flex-col px-4">
             <div className="flex flex-col items-center justify-center">
                 <div className="bg-blush-pastel font-poppins text-4xl font-medium text-blush rounded-2xl p-7">
-                    {prop.selectEmployee.firstName[0]}{prop.selectEmployee.lastName[0]}
+                    {prop.selectApplicant.firstName[0]}{prop.selectApplicant.lastName[0]}
                 </div>
                 <h1 className="text-2xl font-lato font-semibold text-jetblack pt-3 text-center">
-                    {prop.selectEmployee.firstName} {prop.selectEmployee.middleName} {prop.selectEmployee.lastName} {prop.selectEmployee.suffix}
-                </h1>
-                <h1 className="pt-2 text-gray-400 font-poppins"> 
-                    {(department && position) ? `${department.name} | ${position.title}` : ""}
-                    
+                    {prop.selectApplicant.firstName} {prop.selectApplicant.middleName} {prop.selectApplicant.lastName} {prop.selectApplicant.suffix}
                 </h1>
             </div>
             <div className="w-full bg-gray-200 h-[0.1rem] my-4 rounded-full"></div>
@@ -43,29 +32,34 @@ const ViewEmployee = (prop) => {
             <div className="w-full flex overflow-y-auto">
                 <div className=" w-full flex flex-col gap-5 overflow-y-auto py-4">
                     <EmployeeDataField
+                        icon={<GrStatusUnknown size={30} className="stroke-lilac" />}
+                        title="Status"
+                        data={prop.selectApplicant.status}
+                    />
+                    <EmployeeDataField
                         icon={<LiaBirthdayCakeSolid size={30} className="fill-lilac" />}
                         title="Age"
-                        data={prop.selectEmployee.age}
+                        data={prop.selectApplicant.age}
                     />
                     <EmployeeDataField
                         icon={<GoNumber size={30} className="fill-lilac" />}
                         title="Birthdate"
-                        data={birthdate}
+                        data={birthDate}
                     />
                     <EmployeeDataField
                         icon={<FiMail size={30} className="stroke-lilac" />}
                         title="Email Address"
-                        data={prop.selectEmployee.email || "N/A"}
+                        data={prop.selectApplicant.email || "N/A"}
                     />
                     <EmployeeDataField
                         icon={<FiTablet size={30} className="stroke-lilac" />}
                         title="Mobile Number"
-                        data={prop.selectEmployee.mobileNumber || "N/A"}
+                        data={prop.selectApplicant.mobileNumber || "N/A"}
                     />
                     <EmployeeDataField
                         icon={<FiPhone size={30} className="stroke-lilac" />}
                         title="Landline Number"
-                        data={prop.selectEmployee.landlineNumber || "N/A"}
+                        data={prop.selectApplicant.landlineNumber || "N/A"}
                     />
                 </div>
             </div>
@@ -73,7 +67,7 @@ const ViewEmployee = (prop) => {
     );
 };
 
-export default ViewEmployee;
+export default ViewApplicant;
 
 const EmployeeDataField = (prop) => {
     return (
