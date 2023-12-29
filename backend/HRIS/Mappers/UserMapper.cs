@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using HRIS.Models;
 using HRIS.Dtos.UserDto;
+using HRIS.Models;
 
 namespace HRIS.Mappers
 {

@@ -11,7 +11,13 @@ namespace HRIS.Dtos.UserDto
         public string LandlineNumber { get; set; } = string.Empty;
 
         [EmailAddress(ErrorMessage = "Please enter a valid personal email address.")]
-        [StringLength(150, ErrorMessage = "Personal Email Address must be {1} characters long.")]
+        [StringLength(100, ErrorMessage = "Personal Email Address must be {1} characters long.")]
         public string PersonalEmail { get; set; } = string.Empty;
+
+        [StringLength(100, ErrorMessage = "Middle Name must be {1} characters long.")]
+        public string MiddleName { get; set; } = string.Empty;
+
+        [StringLength(1, ErrorMessage = "Suffix must be {1} characters long.")]
+        public string Suffix { get; set; } = string.Empty;
     }
 }

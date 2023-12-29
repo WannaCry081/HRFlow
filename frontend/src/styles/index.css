@@ -1,0 +1,123 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 10% 3.9%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    color: #20262e;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #c7c7c7;
+    border-radius: 3px;
+  }
+}
+
+@layer base {
+  .shadow-lilac {
+    @apply shadow-[0_8px_40px_-8px_rgba(110,105,216,.6)];
+  }
+
+  .shadow-blush {
+    @apply shadow-[0_8px_40px_-8px_rgba(255,91,143,.6)];
+  }
+
+  .active-lilac {
+    @apply before:transition-all before:ease-out relative before:absolute before:h-[2px] before:w-full before:left-0 before:bg-lilac before:-bottom-2 before:opacity-0 hover:before:opacity-100 hover:before:-bottom-1;
+  }
+
+  .active-blush {
+    @apply before:transition-all before:ease-out relative before:absolute before:h-[2px] before:w-full before:left-0 before:bg-blush before:-bottom-2 before:opacity-0 hover:before:opacity-100 hover:before:-bottom-1;
+  }
+}
+
+@font-face {
+  font-family: "AssetsLato";
+  src: url("../assets/fonts/Lato.ttf");
+}
+
+@font-face {
+  font-family: "AssetsPoppins";
+  src: url("../assets/fonts/Poppins.ttf");
+}
+
+@font-face {
+  font-family: "AssetOswald";
+  src: url("../assets/fonts/Oswald.ttf");
+}

@@ -76,7 +76,7 @@ namespace HRIS.Controllers
         [HttpPost]
         [Consumes("application/json")]
         [Produces("application/json")]
-        public async Task<IActionResult> CreateEmployeeRecord([FromBody] AddEmployeeRecordDto request)
+        public async Task<IActionResult> CreateEmployeeRecord([FromBody] CreateEmployeeRecordDto request)
         {
             try
             {
@@ -107,6 +107,10 @@ namespace HRIS.Controllers
                  throw new UserNotFoundException("Invalid user's credential. Please try again.");
 
                 var response = await _employeeService.UpdateEmployeeRecord(hrId, employeeId, request);
+                if (!response)
+                {
+                    throw new Exception("Failed to update employee record.");
+                }
                 return Ok("Successfully updated employee's record.");
             }
             catch (UserNotFoundException ex)
@@ -120,6 +124,15 @@ namespace HRIS.Controllers
                 return Problem("Internal server error.");
             }
         }
+
+        [HttpPut("reset-password/{employeeId}")]
+        [Consumes("application/json")]
+        [Produces("application/json")]
+        public Task<IActionResult> UpdateEmployeePassword([FromRoute] Guid employeeId, [FromBody] UpdateEmployeePasswordDto request)
+        {
+            throw new NotImplementedException();
+        }
+
 
         [HttpPut("{employeeId}")]
         [Consumes("application/json")]
@@ -144,7 +157,6 @@ namespace HRIS.Controllers
                 _logger.LogError(ex, "An error occurred while attempting to update employee record.");
                 return Problem("Internal server error.");
             }
-
         }
     }
 }

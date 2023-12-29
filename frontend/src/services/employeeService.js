@@ -1,5 +1,5 @@
 import axios from "axios";
-import { EMPLOYEE_URL } from "../utils/constants";
+import { EMPLOYEE_URL } from "/src/lib/constants.js";
 
 const axiosInstance = (token) => {
     return axios.create({
@@ -11,7 +11,7 @@ const axiosInstance = (token) => {
     });
 }
 
-export const GetEmployeeApi = async ( token ) => {
+export const GetEmployeesApi = async ( token ) => {
     const instance = axiosInstance(token);
 
     try {
@@ -32,3 +32,14 @@ export const AddEmployeeApi = async ( token, request ) => {
         return error.response;
     }
 };
+
+export const UpdateEmployeesProperty = async (token, employeeId, request) => {
+    const instance = axiosInstance(token);
+
+    try {
+        const response = await instance.patch(`${employeeId}`, request);
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}

@@ -15,9 +15,9 @@ namespace HRIS.Services.AuthService
 
         public AuthService(IMapper mapper, IAuthRepository authRepository, IConfiguration configuration)
         {
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            _authRepository = authRepository ?? throw new ArgumentNullException(nameof(authRepository));
-            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            _mapper = mapper;
+            _authRepository = authRepository;
+            _configuration = configuration;
         }
 
         public async Task<string> RegisterUser(RegisterUserDto request)
@@ -34,6 +34,8 @@ namespace HRIS.Services.AuthService
             newUser.PasswordHash = passwordHash;
             newUser.PasswordSalt = passwordSalt;
             newUser.Role = "Human Resource";
+            newUser.Status = "Active";
+            newUser.CreatedBy = request.FirstName + " " + request.LastName;
 
             var isUserAdded = await _authRepository.AddUser(newUser);
             if (!isUserAdded)
@@ -41,11 +43,7 @@ namespace HRIS.Services.AuthService
                 throw new Exception("Failed to save user information to database.");
             }
 
-            return CodeGenerator.Token(
-                _configuration,
-                newUser.Id,
-                "Human Resource",
-                DateTime.Now.AddDays(1));
+            return CodeGenerator.Token(_configuration, newUser.Id, "Human Resource", DateTime.Now.AddDays(1));
         }
 
         public async Task<string> LoginUser(LoginUserDto request)
@@ -58,19 +56,15 @@ namespace HRIS.Services.AuthService
                 throw new UnauthorizedAccessException("Invalid user's credentials. Please try again.");
             }
 
-            return CodeGenerator.Token(
-                _configuration,
-                user.Id,
-                "Human Resource",
-                DateTime.Now.AddDays(1));
+            return CodeGenerator.Token(_configuration, user.Id, "Human Resource", DateTime.Now.AddDays(1));
         }
 
         public async Task<string> ForgotPassword(ForgotPasswordDto request)
         {
+            var code = CodeGenerator.Digit(6);
             var user = await _authRepository.GetUserByEmail(request.Email) ??
                 throw new UserNotFoundException("Invalid email address. Please try again.");
 
-            var code = CodeGenerator.Digit(6);
             var isUserUpdated = await _authRepository.UpdateUserCode(user, code);
             if (!isUserUpdated)
             {
@@ -96,16 +90,7 @@ namespace HRIS.Services.AuthService
                 throw new Exception("An error occurred while verifying OTP code.");
             }
 
-            return CodeGenerator.Token(
-                _configuration,
-                user.Id,
-                "Human Resource",
-            DateTime.Now.AddDays(1));
-        }
-
-        public async Task<string> SendEmailToAdmin(ContactAdminDto request)
-        {
-            return await SMTP.SendEmailToAdmin(_configuration, request.Email, request.Subject, request.Body);
+            return CodeGenerator.Token(_configuration, user.Id, "Human Resource", DateTime.Now.AddDays(1));
         }
     }
 }

@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar"
 import Home from "./sections/Home";
 import Services from "./sections/Services";
 import About from "./sections/About"; 
@@ -22,7 +22,7 @@ const Landing = () => {
 
     return (
         <div className="relative w-screen overflow-x-hidden">
-            <div className="absolute top-0 left-0 right-0 bg-red-100">
+            <div className="absolute top-0 left-0 right-0 ">
                 <Navbar
                     scrollIntoView={menuItemClickHandler}
                     sectionRefs={sectionRefs}

@@ -10,7 +10,7 @@ namespace HRIS.Repositories.UserRepository
 
         public UserRepository(DataContext context)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _context = context;
         }
 
         public async Task<User?> GetUserById(Guid userId)
@@ -23,6 +23,7 @@ namespace HRIS.Repositories.UserRepository
         {
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
+            user.UpdatedAt = DateTime.Now;
             _context.Users.Update(user);
             return await _context.SaveChangesAsync() > 0;
         }
@@ -32,6 +33,9 @@ namespace HRIS.Repositories.UserRepository
             user.MobileNumber = request.MobileNumber;
             user.LandlineNumber = request.LandlineNumber;
             user.PersonalEmail = request.PersonalEmail;
+            user.MiddleName = request.MiddleName;
+            user.Suffix = request.Suffix;
+            user.UpdatedAt = DateTime.Now;
             return 0 < await _context.SaveChangesAsync();
         }
     }
