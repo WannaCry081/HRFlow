@@ -22,7 +22,14 @@ services:
       - "8000:80"
     networks:
       - HRISNetwork
-
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - HRISNetwork
 networks:
   HRISNetwork:
     driver: bridge
